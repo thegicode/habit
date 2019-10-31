@@ -1,0 +1,9 @@
+{
+	"version": 3,
+	"file": "list.css",
+	"sources": [
+		"../sass/list.scss"
+	],
+	"names": [],
+	"mappings": "AAAA,AAAA,EAAE,AAAA,CACE,MAAM,CAAE,IAAI,CACZ,gBAAgB,CAAE,KAAK,CAC1B"
+}
