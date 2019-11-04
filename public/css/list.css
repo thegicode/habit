@@ -1,3 +1,63 @@
-h1{margin:1rem;background-color:green}
+body {
+  margin: 0;
+  padding: 1rem;
+}
+
+h1 {
+  margin: 0 0 1rem 0;
+}
+
+.inputs {
+  display: flex;
+}
+
+.inputs label {
+  flex: auto;
+}
+
+.inputs input {
+  width: 100%;
+  font-size: 1.5rem;
+}
+
+.inputs button {
+  margin-left: 8px;
+}
+
+.list {
+  margin-top: 2rem;
+}
+
+.list h2 {
+  margin: 0;
+}
+
+.list ul {
+  margin: 0;
+  padding: 0;
+}
+
+.list-item {
+  display: flex;
+  padding: 1rem;
+  border-bottom: 1px solid #ddd;
+  align-items: center;
+}
+
+.list-title {
+  flex: auto;
+  font-size: 1.3rem;
+  border: none;
+}
+
+.list-title:focus {
+  outline: none;
+}
+
+.list-button {
+  padding: 0.3rem;
+  font-size: 1rem;
+  border: none 0;
+}
 
 /*# sourceMappingURL=list.css.map */

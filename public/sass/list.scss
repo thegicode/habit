@@ -1,6 +1,56 @@
+
+body{
+    margin: 0;
+    padding: 1rem;
+}
 h1{
-    margin: 1rem;
-    background-color: green;
+    margin: 0 0 1rem 0;
+}
+.inputs {
+    display:flex;
+
+    label{
+        flex: auto;
+    }
+
+    input {
+        width: 100%;
+        font-size: 1.5rem;
+    }
+    
+    button{
+        margin-left: 8px;
+    }
 }
 
 
+.list {
+    margin-top: 2rem;
+    h2{
+        margin: 0;
+    }
+    ul{
+        margin:0;
+        padding: 0;
+    }
+    &-item {
+        display: flex;
+        padding: 1rem;
+        border-bottom: 1px solid #ddd;
+        align-items: center;
+    }
+    &-title{
+        flex: auto;
+        font-size: 1.3rem;
+        border: none;
+        &:focus{
+            outline: none
+        }
+    }
+    &-button{
+        padding: 0.3rem;
+        font-size: 1rem;
+        border: none 0;
+    }
+
+}

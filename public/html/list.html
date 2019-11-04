@@ -7,13 +7,24 @@
   <link rel="stylesheet" type="text/css" href="./css/list.css" />
   <title>List</title>
 </head>
-<body>
+<body class="page-list">
 
-<div class="list">
-  <h1>List</h1>
-  <div class="contents">
-    <p class="__text">Contents</p>
-  </div>
+<div class="wrap">
+    <h1>Habits</h1>
+    <main class="contents">
+
+        <form class="inputs" id="inputForm">
+            <label>
+                <input type="text" name="title" placeholder="Enter habit name">
+            </label>
+            <button type="submit">확인</button>
+        </form>
+
+        <section class="list">
+            <h2>List</h2>
+            <ul id="elHabitList"></ul>
+        </section>
+    </main>
 </div>
 
 <script type="text/javascript" src="./js/list.js"></script>
