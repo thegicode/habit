@@ -42,6 +42,7 @@ h1 {
   padding: 1rem;
   border-bottom: 1px solid #ddd;
   align-items: center;
+  list-style: none;
 }
 
 .list-title {
