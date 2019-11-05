@@ -13,10 +13,6 @@ const template = {
             <button type="button" class="list-button">삭제</button>`
         )
     },
-    actionsEdit: `
-        <button type="button" class="list-button" onclick="handleEditEnd();">완료</button>
-        <button type="button" class="list-button" onclick="habndleEditCancel();">취소</button>`,
-    
     item: function( data, idx ){
         return(
             `<input type="text" value=${data} class="list-title" readOnly></input>
@@ -24,7 +20,10 @@ const template = {
                 ${template.actions(idx)}
             </div>`
         )
-    }
+    },
+    actionsEdit: `
+        <button type="button" class="list-button" onclick="handleEditEnd();">완료</button>
+        <button type="button" class="list-button" onclick="habndleEditCancel();">취소</button>`
 };
 
 let selector = {};
@@ -33,18 +32,17 @@ let selector = {};
 
 // function
 function drawHabitList(){
-    HABIT_LIST.forEach( data => {
-        elHabitList.appendChild( drawHabitItem(data) );
+    HABIT_LIST.forEach( (data, idx) => {
+        drawHabitItem(data, idx);
     });
 }
 
-function drawHabitItem( data ){
-    let idx = HABIT_LIST.indexOf(data);
+function drawHabitItem( data, idx ){
     let el = document.createElement('li');
     el.setAttribute( 'data-index', idx );
     el.className = 'list-item';
     el.innerHTML = template.item(data, idx);
-    return el;
+    elHabitList.appendChild( el );
 }
 
 function handleEdit( idx ){
@@ -110,8 +108,11 @@ inputForm.addEventListener('submit', function(){
     let val = this.title.value;
     if(!val)
         this.focus();
-    else
-        drawHabitItem( val );
+    else{
+        let idx = HABIT_LIST.length;
+        HABIT_LIST.push(val);
+        drawHabitItem( val, idx );
+    }
 });
 
 
