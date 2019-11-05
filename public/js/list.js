@@ -6,24 +6,28 @@ let HABIT_LIST = [
 ];
 
 const template = {
-    actions1: `
-        <button type="button" class="list-button">보기</button>
-        <button type="button" class="list-button" onclick="handleEdit(this);">수정</button>
-        <button type="button" class="list-button">삭제</button>`,
-    actions2: `
-        <button type="button" class="list-button" onclick="handleEditEnd(this);">완료</button>
-        <button type="button" class="list-button" onclick="habndleEditCancel(this);">취소</button>`,
-    item: function( data ){
+    actions: function(idx){
+        return(
+            `<button type="button" class="list-button">보기</button>
+            <button type="button" class="list-button" onclick="handleEdit(${idx});">수정</button>
+            <button type="button" class="list-button">삭제</button>`
+        )
+    },
+    actionsEdit: `
+        <button type="button" class="list-button" onclick="handleEditEnd();">완료</button>
+        <button type="button" class="list-button" onclick="habndleEditCancel();">취소</button>`,
+    
+    item: function( data, idx ){
         return(
             `<input type="text" value=${data} class="list-title" readOnly></input>
             <div class="list-actions">
-                ${template.actions1}
+                ${template.actions(idx)}
             </div>`
         )
     }
-
 };
 
+let selector = {};
 
 
 
@@ -39,49 +43,60 @@ function drawHabitItem( data ){
     let el = document.createElement('li');
     el.setAttribute( 'data-index', idx );
     el.className = 'list-item';
-    el.innerHTML = template.item(data);
+    el.innerHTML = template.item(data, idx);
     return el;
 }
 
-function handleEdit( button ){
-    let elActions = button.parentElement;
-    let elInput = elActions.previousElementSibling;
-    let elItem = elInput.parentElement;
+function handleEdit( idx ){
     let el;
-    elInput.readOnly = false;
-    elInput.focus();
-    elActions.hidden = true;
-    el = document.createElement('li');
-    el.className = 'list-actions';
-    el.innerHTML = template.actions2;
-    elItem.appendChild(el);
+
+    selector.item = elHabitList.querySelector('li[data-index="' + idx + '"]');
+    selector.input = selector.item.querySelector('input');
+    selector.actions = selector.item.querySelector('.list-actions');
+    selector.idx = idx;
+
+    selector.input.readOnly = false;
+    selector.input.focus();
+    selector.actions.hidden = true;
+    el = document.createElement('div');
+    el.className = 'list-actions2';
+    el.innerHTML = template.actionsEdit;
+    selector.item.appendChild(el);
+
+    selector.actionsEdit = el;
 }
 
-function handleEditEnd( button ){
-    let elActions2 = button.parentElement;
-    let elItem = elActions2.parentElement;
-    let idx = elItem.dataset.index;
-    let elInput = elItem.querySelector('input');
-    let val = elInput.value;
-    if( HABIT_LIST.indexOf(val) > -1 ){
-        alert('이미 등록된 이름입니다.')
+function handleEditEnd(){
+    let val = selector.input.value;
+    if( !val ) {
+        alert("타이틀을 입력해주세요.");
+        selector.input.focus();
     } else{
-        HABIT_LIST[idx] = val;
-        elInput.readOnly = true;
-        elActions2.previousElementSibling.hidden = false;
-        elActions2.remove();
+
+        if( HABIT_LIST.indexOf(val) > -1 ){
+            alert('이미 등록된 타이틀입니다.');
+            selector.input.focus();
+        } else{
+            HABIT_LIST[selector.idx] = val;
+            selector.input.readOnly = true;
+            selector.actions.hidden = false;
+            selector.actionsEdit.remove();
+
+            selector = {};
+            // console.log('selector', selector);
+            console.log('HABIT_LIST', HABIT_LIST);
+        }
+       
     }
-    console.log(HABIT_LIST);
 }
 
-function habndleEditCancel( button ){
-    let elActions2 = button.parentElement;
-    let elItem = elActions2.parentElement;
-    let idx = elItem.dataset.index;
-    let elInput = elItem.querySelector('input');
-    elInput.value = HABIT_LIST[idx];
-    elActions2.previousElementSibling.hidden = false;
-    elActions2.remove();
+function habndleEditCancel(){
+    selector.input.value = HABIT_LIST[selector.idx];
+    selector.actions.hidden = false;
+    selector.actionsEdit.remove();
+
+    selector = {};
+    // console.log('selector', selector);
 }
 
 
