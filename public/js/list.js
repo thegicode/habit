@@ -90,6 +90,7 @@ function handleEditEnd(){
 
 function habndleEditCancel(){
     selector.input.value = HABIT_LIST[selector.idx];
+    selector.input.readOnly = true;
     selector.actions.hidden = false;
     selector.actionsEdit.remove();
 
@@ -112,6 +113,7 @@ inputForm.addEventListener('submit', function(){
         let idx = HABIT_LIST.length;
         HABIT_LIST.push(val);
         drawHabitItem( val, idx );
+        console.log('HABIT_LIST', HABIT_LIST);
     }
 });
 
