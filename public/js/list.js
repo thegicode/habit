@@ -24,18 +24,13 @@ let habitList = {
 
 // Template
 const template = {
-    actions: function(idx){
-        return(
-            `<button type="button" class="list-button" onclick="handleView(${idx});">보기</button>
-            <button type="button" class="list-button" onclick="handleDelete(${idx});">삭제</button>`
-        )
-    },
     item: function( data, idx ){
         return(
             `<form class="list-form" onsubmit="return handleItemSubmit(this, ${idx});">
                 <input type="text" name="itemInput" value=${data} class="list-title" onblur="handleItemBlur(this, ${idx})"></input>
                 <div class="list-actions">
-                    ${template.actions(idx)}
+                    <button type="button" class="list-button" onclick="handleView(${idx});">보기</button>
+                    <button type="button" class="list-button" onclick="handleDelete(${idx});">삭제</button>
                 </div>
             </form>`
         )
