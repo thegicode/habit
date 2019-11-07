@@ -10,10 +10,21 @@
 <body class="page-list">
 
 <div class="wrap">
-    <h1>Habits</h1>
+
+    <header>
+        <h1>Habits</h1>
+
+        <form id="formDate">
+            <select name="year" onchange="handleYearChange(this);"></select>
+            <select name="month" onchange="handleMonthChange(this);"></select>
+        </form>
+        <br>
+    </header>
+   
+
     <main class="contents">
 
-        <form class="inputs" id="inputForm" onsubmit="return handleInputSubmit(this);">
+        <form class="inputs" onsubmit="return handleInputSubmit(this);">
             <label>
                 <input type="text" name="title" placeholder="Enter habit name">
             </label>
