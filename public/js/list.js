@@ -61,21 +61,22 @@ function drawHabitItem( data, idx ){
 }
 
 function handleInputSubmit( form ){
-    let val = form.title.value;
+    let elTitle = form.title,
+        val = elTitle.value;
     if(!val)
-        form.title.focus();
+        elTitle.focus();
     else{
-
         let idx = HABIT_LIST.length;
-        if( habitList.include(val)){
+        if( habitList.include(val) ){
             alert('이미 등록된 타이틀입니다.')
-            form.title.value = '';
         } else{
             HABIT_LIST.push(val);
             drawHabitItem( val, idx );
             console.log(HABIT_LIST);
         }
+        elTitle.value = '';
     }
+
     return false;
 }
 
