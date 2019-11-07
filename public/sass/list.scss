@@ -34,11 +34,14 @@ h1{
         padding: 0;
     }
     &-item {
-        display: flex;
         padding: 1rem;
         border-bottom: 1px solid #ddd;
         align-items: center;
         list-style: none;
+    }
+    &-form{
+        display: flex;
+        width: 100%;
     }
     &-title{
         flex: auto;

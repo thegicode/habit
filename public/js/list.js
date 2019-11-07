@@ -5,32 +5,47 @@ let HABIT_LIST = [
     '영어',
 ];
 
+// Habit List Data Control
+let habitList = {
+    add: function( val ){
+        HABIT_LIST.push(val);
+    },
+    update: function( val, idx ){
+        HABIT_LIST[idx] =  val;
+    },
+    delete: function( idx ){
+        HABIT_LIST.splice(idx, 1);
+    },
+    include: function( val ){
+        return HABIT_LIST.indexOf(val) > -1
+    }
+};
+
+
+// Template
 const template = {
     actions: function(idx){
         return(
-            `<button type="button" class="list-button">보기</button>
-            <button type="button" class="list-button" onclick="handleEdit(${idx});">수정</button>
-            <button type="button" class="list-button">삭제</button>`
+            `<button type="button" class="list-button" onclick="handleView(${idx});">보기</button>
+            <button type="button" class="list-button" onclick="handleDelete(${idx});">삭제</button>`
         )
     },
     item: function( data, idx ){
         return(
-            `<input type="text" value=${data} class="list-title" readOnly></input>
-            <div class="list-actions">
-                ${template.actions(idx)}
-            </div>`
+            `<form class="list-form" onsubmit="return handleItemSubmit(this, ${idx});">
+                <input type="text" name="itemInput" value=${data} class="list-title" onblur="handleItemBlur(this, ${idx})"></input>
+                <div class="list-actions">
+                    ${template.actions(idx)}
+                </div>
+            </form>`
         )
-    },
-    actionsEdit: `
-        <button type="button" class="list-button" onclick="handleEditEnd();">완료</button>
-        <button type="button" class="list-button" onclick="habndleEditCancel();">취소</button>`
+    }
 };
-
-let selector = {};
 
 
 
 // function
+
 function drawHabitList(){
     HABIT_LIST.forEach( (data, idx) => {
         drawHabitItem(data, idx);
@@ -45,77 +60,61 @@ function drawHabitItem( data, idx ){
     elHabitList.appendChild( el );
 }
 
-function handleEdit( idx ){
-    let el;
+function handleInputSubmit( form ){
+    let val = form.title.value;
+    if(!val)
+        form.title.focus();
+    else{
 
-    selector.item = elHabitList.querySelector('li[data-index="' + idx + '"]');
-    selector.input = selector.item.querySelector('input');
-    selector.actions = selector.item.querySelector('.list-actions');
-    selector.idx = idx;
-
-    selector.input.readOnly = false;
-    selector.input.focus();
-    selector.actions.hidden = true;
-    el = document.createElement('div');
-    el.className = 'list-actions2';
-    el.innerHTML = template.actionsEdit;
-    selector.item.appendChild(el);
-
-    selector.actionsEdit = el;
-}
-
-function handleEditEnd(){
-    let val = selector.input.value;
-    if( !val ) {
-        alert("타이틀을 입력해주세요.");
-        selector.input.focus();
-    } else{
-
-        if( HABIT_LIST.indexOf(val) > -1 ){
-            alert('이미 등록된 타이틀입니다.');
-            selector.input.focus();
+        let idx = HABIT_LIST.length;
+        if( habitList.include(val)){
+            alert('이미 등록된 타이틀입니다.')
+            form.title.value = '';
         } else{
-            HABIT_LIST[selector.idx] = val;
-            selector.input.readOnly = true;
-            selector.actions.hidden = false;
-            selector.actionsEdit.remove();
-
-            selector = {};
-            // console.log('selector', selector);
-            console.log('HABIT_LIST', HABIT_LIST);
+            HABIT_LIST.push(val);
+            drawHabitItem( val, idx );
+            console.log(HABIT_LIST);
         }
-       
     }
+    return false;
 }
 
-function habndleEditCancel(){
-    selector.input.value = HABIT_LIST[selector.idx];
-    selector.input.readOnly = true;
-    selector.actions.hidden = false;
-    selector.actionsEdit.remove();
+function handleItemSubmit( form, idx ){
+    let val = form.itemInput.value;
+    if( val && val !== HABIT_LIST[idx] ){
+        if( habitList.include(val) ){
+            alert('이미 등록된 타이틀입니다.')
+            form.itemInput.value = HABIT_LIST[idx];
+        } else{
+            habitList.update(val, idx);
+        }
+        console.log(HABIT_LIST);
+    } else if(!val){
+        alert("타이틀을 입력해주세요.")
+    }
+    return false;
+}
 
-    selector = {};
-    // console.log('selector', selector);
+function handleItemBlur( input, idx ){
+    handleItemSubmit( input.parentElement, idx)
+}
+
+function handleView(idx){
+    console.log('handleView', idx);
+}
+
+function handleDelete( idx ){
+    // HABIT_LIST.splice(idx, 1);
+    habitList.delete(idx);
+    let node = elHabitList.querySelector('li[data-index="' + idx + '"]');
+    node.remove();
+    console.log(HABIT_LIST);
 }
 
 
 // draw
 drawHabitList();
 
-
-// event
-inputForm.addEventListener('submit', function(){
-    event.preventDefault();
-    let val = this.title.value;
-    if(!val)
-        this.focus();
-    else{
-        let idx = HABIT_LIST.length;
-        HABIT_LIST.push(val);
-        drawHabitItem( val, idx );
-        console.log('HABIT_LIST', HABIT_LIST);
-    }
-});
 
 
 

@@ -38,11 +38,15 @@ h1 {
 }
 
 .list-item {
-  display: flex;
   padding: 1rem;
   border-bottom: 1px solid #ddd;
   align-items: center;
   list-style: none;
+}
+
+.list-form {
+  display: flex;
+  width: 100%;
 }
 
 .list-title {
