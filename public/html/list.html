@@ -14,9 +14,10 @@
     <header>
         <h1>Habits</h1>
 
-        <form id="formDate">
-            <select name="year" onchange="handleYearChange(this);"></select>
-            <select name="month" onchange="handleMonthChange(this);"></select>
+        <form name="formSelect" onsubmit="return handleSelect(this)">
+            <select name="year"></select>
+            <select name="month"></select>
+            <button type="submit">검색</button>
         </form>
         <br>
     </header>

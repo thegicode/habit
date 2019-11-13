@@ -109,7 +109,8 @@ function setDate(){
 function drawSelect(){
 
     const yearList = DATE_LIST.year,
-        monthList = DATE_LIST.month;
+        monthList = DATE_LIST.month,
+        formSelect = document.formSelect;
    
     let arr = [],
         arr2 = [];
@@ -118,23 +119,13 @@ function drawSelect(){
     arr = yearList.length > 0 && yearList.map( function( year ){
         return template.selectYear(year, GLOBAL.date.year);
     });
-    formDate.year.innerHTML = arr.join('')
+    formSelect.year.innerHTML = arr.join('')
     
     // month
     arr2 = monthList.length > 0 && monthList.map( function( month ){
         return template.selectMonth(month, GLOBAL.date.month);
     });
-    formDate.month.innerHTML = arr2.join('')
-}
-
-function handleYearChange( select ){
-    GLOBAL.date.year = select.value;
-    drawList();
-}
-
-function handleMonthChange( select ){
-    GLOBAL.date.month = select.value;
-    drawList();
+    formSelect.month.innerHTML = arr2.join('')
 }
 
 function drawList(){
@@ -150,6 +141,13 @@ function drawItem( data, idx ){
     el.className = 'list-item';
     el.innerHTML = template.item(data, idx);
     elHabitList.appendChild( el );
+}
+
+function handleSelect( form ){
+    GLOBAL.date.year = form.year.value;
+    GLOBAL.date.month = form.month.value;
+    drawList();
+    return false;
 }
 
 function handleInputSubmit( form ){
