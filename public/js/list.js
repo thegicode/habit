@@ -67,7 +67,9 @@ const template = {
 
 
 /* Global Variable */
-let GLOBAL = {};
+let GLOBAL = {
+    storageName: 'habits'
+};
 
 
 
@@ -156,18 +158,26 @@ let handleHabitList = {
 
 let handleHabitData = {
     getData: function(date){
-        let storage = JSON.parse(localStorage.getItem(date));
-        return storage || [];
+        let storage = JSON.parse( localStorage.getItem(GLOBAL.storageName) );
+        return storage[date] || [];
     },
     add: function( val, date ){
-        let arr = this.getData(date);
+        let arr = this.getData(date),
+            obj = {};
         arr.push(val);
-        localStorage.setItem(date, JSON.stringify(arr));
+        obj[date] = arr;
+        localStorage.setItem(GLOBAL.storageName, JSON.stringify(obj));
         console.log(localStorage);
     },
     include: function( val, date ){
         let arr = this.getData(date);
         return arr.indexOf(val) > -1;
+    },
+    init: function(val, date){
+        let obj = {};
+        obj[date] = [val];
+        localStorage.setItem(GLOBAL.storageName, JSON.stringify(obj));
+        console.log(localStorage);
     }
 }
 
@@ -180,10 +190,14 @@ function handleInput( form ){
         elTitle.focus();
     else{
         let date = GLOBAL.date.fullName();
-        if( handleHabitData.include(val, date) ){
-            alert('이미 등록된 습관입니다.')
-        } else{
-            handleHabitData.add(val, date); 
+        if( !localStorage.getItem(GLOBAL.storageName) ){
+            handleHabitData.init(val, date); 
+        } else {
+            if( handleHabitData.include(val, date) ){
+                alert('이미 등록된 습관입니다.')
+            } else{
+                handleHabitData.add(val, date); 
+            }
         }
         elTitle.value = '';
     }
