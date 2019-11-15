@@ -3,9 +3,17 @@ body{
     margin: 0;
     padding: 1rem;
 }
+
+header{
+    margin-bottom: 1rem;
+}
+
 h1{
     margin: 0 0 1rem 0;
 }
+
+
+
 .inputs {
     display:flex;
 
@@ -20,6 +28,12 @@ h1{
     
     button{
         margin-left: 8px;
+    }
+}
+
+.formSelect{
+    &[aria-hidden="true"]{
+        display: none;
     }
 }
 
@@ -58,3 +72,5 @@ h1{
     }
 
 }
+
+

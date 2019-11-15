@@ -82,7 +82,6 @@ drawList();
 function drawSelect(){
 
     const formSelect = document.formSelect;
-
     let yearList, monthList,
         arrYear = [],
         arrMonth = [];
@@ -109,7 +108,7 @@ function drawSelect(){
 
 function drawList(){
     elHabitList.innerHTML = '';
-    let list = HABIT_LIST[GLOBAL.date.fullName()];
+    let list = HABIT_LIST[GLOBAL.date.full()];
     list && list.length>0 && list.forEach( (data, idx) => {
         drawItem(data, idx);
     });
@@ -131,15 +130,14 @@ function setDate(){
     GLOBAL.date = {
         year: currentDate.getFullYear(),
         month: currentDate.getMonth()+1,
-        fullName: function(){
-            return `d_${this.year}${this.month}`
+        full: function(){
+            return `${this.year}${this.month}`
         }
     };
-    console.log(GLOBAL.date);
 }
 
 let handleHabitList = {
-    list: HABIT_LIST[GLOBAL.date.fullName()],
+    list: HABIT_LIST[GLOBAL.date.full()],
     add: function( val ){
         this.list.push(val);
     },
@@ -150,26 +148,9 @@ let handleHabitList = {
         this.list.splice(idx, 1);
     },
     include: function( val ){
-        return this.list.indexOf(val) > -1;
+        return this.list.indexOf(val) > -1
     }
 };
-
-let handleHabitData = {
-    getData: function(date){
-        let storage = JSON.parse(localStorage.getItem(date));
-        return storage || [];
-    },
-    add: function( val, date ){
-        let arr = this.getData(date);
-        arr.push(val);
-        localStorage.setItem(date, JSON.stringify(arr));
-        console.log(localStorage);
-    },
-    include: function( val, date ){
-        let arr = this.getData(date);
-        return arr.indexOf(val) > -1;
-    }
-}
 
 
 /* Event Function */
@@ -179,14 +160,18 @@ function handleInput( form ){
     if(!val)
         elTitle.focus();
     else{
-        let date = GLOBAL.date.fullName();
-        if( handleHabitData.include(val, date) ){
-            alert('이미 등록된 습관입니다.')
+        let list = HABIT_LIST[GLOBAL.date.full()];
+        let idx = list.length;
+        if( handleHabitList.include(val) ){
+            alert('이미 등록된 타이틀입니다.')
         } else{
-            handleHabitData.add(val, date); 
+            list.push(val);
+            drawItem( val, idx );
+            console.log(list);
         }
         elTitle.value = '';
     }
+
     return false;
 }
 
@@ -199,7 +184,7 @@ function handleSelect( form ){
 
 function handleItemSubmit( form, idx ){
     let val = form.itemInput.value;
-    let list = HABIT_LIST[GLOBAL.date.fullName()];
+    let list = HABIT_LIST[GLOBAL.date.full()];
     if( val && val !== list[idx] ){
         if( handleHabitList.include(val) ){
             alert('이미 등록된 타이틀입니다.')
@@ -228,7 +213,7 @@ function handleDelete( idx ){
     drawList();
     // let node = elHabitList.querySelector('li[data-index="' + idx + '"]');
     // node.remove();
-    console.log(HABIT_LIST[GLOBAL.date.fullName()]);
+    console.log(HABIT_LIST[GLOBAL.date.full()]);
 }
 
 

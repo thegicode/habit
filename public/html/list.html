@@ -14,26 +14,27 @@
     <header>
         <h1>Habits</h1>
 
-        <form name="formSelect" onsubmit="return handleSelect(this)">
-            <select name="year"></select>
-            <select name="month"></select>
-            <button type="submit">검색</button>
+        <form class="inputs" onsubmit="return handleInput(this);">
+            <label>
+                <input type="text" name="title" placeholder="Enter new habit name">
+            </label>
+            <button type="reset">reset</button>
         </form>
-        <br>
+
     </header>
    
 
     <main class="contents">
 
-        <form class="inputs" onsubmit="return handleInputSubmit(this);">
-            <label>
-                <input type="text" name="title" placeholder="Enter habit name">
-            </label>
-            <button type="reset">reset</button>
+        <form name="formSelect" class="formSelect" onsubmit="return handleSelect(this)" aria-hidden="true">
+            <select name="year"></select>
+            <select name="month"></select>
+            <button type="submit">검색</button>
         </form>
 
         <section class="list">
             <h2>List</h2>
+            <h3></h3>
             <ul id="elHabitList"></ul>
         </section>
     </main>
