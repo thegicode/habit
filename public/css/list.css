@@ -11,6 +11,10 @@ h1 {
   margin: 0 0 1rem 0;
 }
 
+.formSelect[aria-hidden="true"] {
+  display: none;
+}
+
 .inputs {
   display: flex;
 }
@@ -26,10 +30,6 @@ h1 {
 
 .inputs button {
   margin-left: 8px;
-}
-
-.formSelect[aria-hidden="true"] {
-  display: none;
 }
 
 .list {

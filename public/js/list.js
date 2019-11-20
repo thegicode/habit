@@ -1,5 +1,7 @@
 "use strict";
 
+console.log('localStorage', localStorage);
+
 
 /* Data */
 let HABIT_LIST = {
@@ -41,11 +43,11 @@ const DATE_LIST = {
 const template = {
     item: function( data, idx ){
         return(
-            `<form class="list-form" onsubmit="return handleItemSubmit(this, ${idx});">
-                <input type="text" name="itemInput" value=${data} class="list-title" onblur="handleItemBlur(this, ${idx})"></input>
+            `<form class='list-form' onsubmit='return handleItemSubmit(this, ${idx});'>
+                <input type='text' name='itemInput' value=${data} class='list-title' onblur='handleItemBlur(this, ${idx})'></input>
                 <div class="list-actions">
-                    <button type="button" class="list-button" onclick="handleView(${idx});">보기</button>
-                    <button type="button" class="list-button" onclick="handleDelete(${idx});">삭제</button>
+                    <button type='button' class='list-button' onclick='handleView(${idx});'>보기</button>
+                    <button type='button' class='list-button' onclick='handleDelete(${idx});'>삭제</button>
                 </div>
             </form>`
         )
@@ -74,11 +76,20 @@ let GLOBAL = {
 
 
 /* Call Function */
+initial();
 setDate();
 drawSelect();
 drawList();
 
 
+/* Initial */
+function initial(){
+    if( !localStorage.getItem(GLOBAL.storageName) ){
+        let obj = {};
+        localStorage.setItem(GLOBAL.storageName, JSON.stringify(obj));
+        console.log('initial', localStorage);
+    }
+}
 
 /* Draw Template */
 function drawSelect(){
@@ -97,12 +108,12 @@ function drawSelect(){
     monthList = DATE_LIST.month;
 
     arrYear = yearList.map( function( year ){
-        return template.selectYear(year, GLOBAL.date.year);
+        return template.selectYear(year, GLOBAL.habitDate.year);
     });
     formSelect.year.innerHTML = arrYear && arrYear.join('');
     
     arrMonth = monthList.map( function( month ){
-        return template.selectMonth(month, GLOBAL.date.month);
+        return template.selectMonth(month, GLOBAL.habitDate.month);
     });
     formSelect.month.innerHTML = arrMonth && arrMonth.join('');
 
@@ -110,10 +121,15 @@ function drawSelect(){
 }
 
 function drawList(){
+    let storage, list;
     elHabitList.innerHTML = '';
-    let list = HABIT_LIST[GLOBAL.date.fullName()];
-    list && list.length>0 && list.forEach( (data, idx) => {
-        drawItem(data, idx);
+    storage = JSON.parse(localStorage.getItem('habits'));
+    if(!storage) return;
+
+    list = storage[GLOBAL.habitDate.fullName()];
+    if(!list || list.length === 0 ) return;
+    list.forEach( function(data, idx){
+        drawItem(data, idx)
     });
 }
 
@@ -123,6 +139,54 @@ function drawItem( data, idx ){
     el.className = 'list-item';
     el.innerHTML = template.item(data, idx);
     elHabitList.appendChild( el );
+}
+
+
+/* Handle Data */
+let handleData = {
+    getData: function(){
+        let storage = JSON.parse( localStorage.getItem(GLOBAL.storageName) );
+        return storage;
+    },
+    getDataOfDate: function(){
+        let storage = JSON.parse( localStorage.getItem(GLOBAL.storageName) );
+        return storage[GLOBAL.habitDate.fullName()] || [];
+    },
+    setDataOfDate: function( arr ){
+        let data = this.getData(), 
+            date = GLOBAL.habitDate.fullName();
+        data[date] = arr;
+        localStorage.setItem(GLOBAL.storageName, JSON.stringify(data));
+    },
+    include: function( val ){
+        let arr = this.getDataOfDate();
+        return arr.indexOf(val) > -1;
+    },
+    add: function( val ){
+        let arr = this.getDataOfDate();
+        arr.push(val);
+
+        this.setDataOfDate(arr);
+
+        console.log('add', localStorage);
+    },
+    delete: function( idx ){
+        let arr = this.getDataOfDate();
+        arr.splice(idx, 1);
+
+        this.setDataOfDate(arr);
+
+        console.log('delete', localStorage);
+    },
+    update: function(val, idx){
+        let arr = this.getDataOfDate();
+        arr[idx] =  val;
+
+        this.setDataOfDate(arr);
+
+        console.log('add', localStorage);
+
+    }
 }
 
 
@@ -137,91 +201,55 @@ function setDate(){
             return `d_${this.year}${this.month}`
         }
     };
-    console.log(GLOBAL.date);
-}
-
-let handleHabitList = {
-    list: HABIT_LIST[GLOBAL.date.fullName()],
-    add: function( val ){
-        this.list.push(val);
-    },
-    update: function( val, idx ){
-        this.list[idx] =  val;
-    },
-    delete: function( idx ){
-        this.list.splice(idx, 1);
-    },
-    include: function( val ){
-        return this.list.indexOf(val) > -1;
-    }
-};
-
-let handleHabitData = {
-    getData: function(date){
-        let storage = JSON.parse( localStorage.getItem(GLOBAL.storageName) );
-        return storage[date] || [];
-    },
-    add: function( val, date ){
-        let arr = this.getData(date),
-            obj = {};
-        arr.push(val);
-        obj[date] = arr;
-        localStorage.setItem(GLOBAL.storageName, JSON.stringify(obj));
-        console.log(localStorage);
-    },
-    include: function( val, date ){
-        let arr = this.getData(date);
-        return arr.indexOf(val) > -1;
-    },
-    init: function(val, date){
-        let obj = {};
-        obj[date] = [val];
-        localStorage.setItem(GLOBAL.storageName, JSON.stringify(obj));
-        console.log(localStorage);
-    }
+    GLOBAL.habitDate = {
+        year: currentDate.getFullYear(),
+        month: currentDate.getMonth()+1,
+        fullName: function(){
+            return `d_${this.year}${this.month}`
+        }
+    };
+    console.log(GLOBAL.habitDate);
 }
 
 
 /* Event Function */
+function handleSelect( form ){
+    GLOBAL.habitDate.year = form.year.value;
+    GLOBAL.habitDate.month = form.month.value;
+    drawList();
+    console.log(GLOBAL.habitDate.fullName())
+    return false;
+}
+
 function handleInput( form ){
     let elTitle = form.title,
         val = elTitle.value;
     if(!val)
         elTitle.focus();
     else{
-        let date = GLOBAL.date.fullName();
-        if( !localStorage.getItem(GLOBAL.storageName) ){
-            handleHabitData.init(val, date); 
-        } else {
-            if( handleHabitData.include(val, date) ){
-                alert('이미 등록된 습관입니다.')
-            } else{
-                handleHabitData.add(val, date); 
-            }
+        if( handleData.include(val) ){
+            alert('이미 등록된 습관입니다.')
+        } else{
+            let idx;
+            handleData.add(val); 
+            idx = handleData.getDataOfDate().length-1 || 0 ;
+            drawItem(val, idx);
         }
         elTitle.value = '';
     }
     return false;
 }
 
-function handleSelect( form ){
-    GLOBAL.date.year = form.year.value;
-    GLOBAL.date.month = form.month.value;
-    drawList();
-    return false;
-}
-
 function handleItemSubmit( form, idx ){
     let val = form.itemInput.value;
-    let list = HABIT_LIST[GLOBAL.date.fullName()];
+    let list = handleData.getDataOfDate();
     if( val && val !== list[idx] ){
-        if( handleHabitList.include(val) ){
+        if( handleData.include(val) ){
             alert('이미 등록된 타이틀입니다.')
             form.itemInput.value = list[idx];
         } else{
-            handleHabitList.update(val, idx);
+            handleData.update(val, idx);
         }
-        console.log(list);
     } else if(!val){
         alert("타이틀을 입력해주세요.")
     }
@@ -238,11 +266,11 @@ function handleView(idx){
 }
 
 function handleDelete( idx ){
-    handleHabitList.delete(idx);
+    handleData.delete(idx);
     drawList();
     // let node = elHabitList.querySelector('li[data-index="' + idx + '"]');
     // node.remove();
-    console.log(HABIT_LIST[GLOBAL.date.fullName()]);
+    // console.log(HABIT_LIST[GLOBAL.habitDate.fullName()]);
 }
 
 

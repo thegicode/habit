@@ -13,6 +13,11 @@ h1{
 }
 
 
+.formSelect{
+    &[aria-hidden="true"]{
+        display: none;
+    }
+}
 
 .inputs {
     display:flex;
@@ -30,13 +35,6 @@ h1{
         margin-left: 8px;
     }
 }
-
-.formSelect{
-    &[aria-hidden="true"]{
-        display: none;
-    }
-}
-
 
 .list {
     margin-top: 2rem;

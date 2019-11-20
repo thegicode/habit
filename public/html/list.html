@@ -14,6 +14,14 @@
     <header>
         <h1>Habits</h1>
 
+         <form name="formSelect" class="formSelect" onsubmit="return handleSelect(this)" aria-hidden="true">
+            <select name="year"></select>
+            <select name="month"></select>
+            <button type="submit">검색</button>
+        </form>
+
+        <br>
+
         <form class="inputs" onsubmit="return handleInput(this);">
             <label>
                 <input type="text" name="title" placeholder="Enter new habit name">
@@ -25,12 +33,6 @@
    
 
     <main class="contents">
-
-        <form name="formSelect" class="formSelect" onsubmit="return handleSelect(this)" aria-hidden="true">
-            <select name="year"></select>
-            <select name="month"></select>
-            <button type="submit">검색</button>
-        </form>
 
         <section class="list">
             <h2>List</h2>
