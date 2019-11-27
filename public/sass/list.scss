@@ -19,7 +19,7 @@ h1{
     }
 }
 
-.inputs {
+.formInput{
     display:flex;
 
     label{
@@ -34,7 +34,11 @@ h1{
     button{
         margin-left: 8px;
     }
+    &[aria-hidden="true"]{
+        display: none;
+    }
 }
+
 
 .list {
     margin-top: 2rem;

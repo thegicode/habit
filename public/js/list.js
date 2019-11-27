@@ -63,6 +63,30 @@ function initial(){
     }
 }
 
+
+
+/* setDate */
+function setDate(){
+    const currentDate = new Date;
+    GLOBAL.date = {
+        year: currentDate.getFullYear(),
+        month: currentDate.getMonth()+1,
+        fullName: function(){
+            return `d_${this.year}${this.month}`
+        }
+    };
+    GLOBAL.habitDate = {
+        year: currentDate.getFullYear(),
+        month: currentDate.getMonth()+1,
+        fullName: function(){
+            return `d_${this.year}${this.month}`
+        }
+    };
+    console.log(GLOBAL.habitDate);
+}
+
+
+
 /* Draw Template */
 function drawSelect(){
 
@@ -95,15 +119,21 @@ function drawSelect(){
 function drawList(){
     let storage, list;
     elHabitList.innerHTML = '';
+
     storage = JSON.parse(localStorage.getItem('habits'));
     if(!storage) return;
 
     list = storage[GLOBAL.habitDate.fullName()];
-    if(!list || list.length === 0 ) return;
-    list.forEach( function(data, idx){
-        drawItem(data, idx)
-    });
+    if(!list || list.length === 0 ) {
+        let tp = '<p>등록한 습관 목록이 없습니다.</p>';
+        elHabitList.innerHTML = tp;
+    } else{
+        list.forEach( function(data, idx){
+            drawItem(data, idx)
+        });
+    }
 }
+
 
 function drawItem( data, idx ){
     let el = document.createElement('li');
@@ -163,33 +193,21 @@ let handleData = {
 
 
 
-/* Function */
-function setDate(){
-    const currentDate = new Date;
-    GLOBAL.date = {
-        year: currentDate.getFullYear(),
-        month: currentDate.getMonth()+1,
-        fullName: function(){
-            return `d_${this.year}${this.month}`
-        }
-    };
-    GLOBAL.habitDate = {
-        year: currentDate.getFullYear(),
-        month: currentDate.getMonth()+1,
-        fullName: function(){
-            return `d_${this.year}${this.month}`
-        }
-    };
-    console.log(GLOBAL.habitDate);
-}
-
-
 /* Event Function */
 function handleSelect( form ){
     GLOBAL.habitDate.year = form.year.value;
     GLOBAL.habitDate.month = form.month.value;
-    drawList();
-    console.log(GLOBAL.habitDate.fullName())
+
+    if( GLOBAL.habitDate.year >= GLOBAL.date.year && GLOBAL.habitDate.month >= GLOBAL.date.month ){
+        formInput.setAttribute('aria-hidden', "false");
+        drawList();
+        console.log(GLOBAL.habitDate.fullName());
+    } else{
+        drawList();
+        formInput.setAttribute('aria-hidden', "true");
+    }
+    
+    
     return false;
 }
 
@@ -199,13 +217,12 @@ function handleInput( form ){
     if(!val)
         elTitle.focus();
     else{
+            
         if( handleData.include(val) ){
             alert('이미 등록된 습관입니다.')
         } else{
-            let idx;
             handleData.add(val); 
-            idx = handleData.getDataOfDate().length-1 || 0 ;
-            drawItem(val, idx);
+            drawList();
         }
         elTitle.value = '';
     }

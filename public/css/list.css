@@ -15,21 +15,25 @@ h1 {
   display: none;
 }
 
-.inputs {
+.formInput {
   display: flex;
 }
 
-.inputs label {
+.formInput label {
   flex: auto;
 }
 
-.inputs input {
+.formInput input {
   width: 100%;
   font-size: 1.5rem;
 }
 
-.inputs button {
+.formInput button {
   margin-left: 8px;
+}
+
+.formInput[aria-hidden="true"] {
+  display: none;
 }
 
 .list {
