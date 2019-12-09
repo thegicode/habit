@@ -9,9 +9,11 @@ const DATE_LIST = {
     month: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 };
 
-const DATE = {
-    // 2019: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-    // 2020: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+
+
+/* Global Variable */
+let Global = {
+    storageName: 'habits'
 };
 
 
@@ -44,12 +46,6 @@ const template = {
 };
 
 
-/* Global Variable */
-let GLOBAL = {
-    storageName: 'habits'
-};
-
-
 
 /* Call Function */
 initial();
@@ -60,13 +56,13 @@ drawList();
 
 /* Initial */
 function initial(){
-    if( !localStorage.getItem( GLOBAL.storageName )){
+    if( !localStorage.getItem( Global.storageName )){
         let obj = {};
-        localStorage.setItem(GLOBAL.storageName, JSON.stringify(obj));
+        localStorage.setItem(Global.storageName, JSON.stringify(obj));
         console.log('initial', localStorage);
     } 
 
-    // let storage = JSON.parse(localStorage.getItem( GLOBAL.storageName ));
+    // let storage = JSON.parse(localStorage.getItem( Global.storageName ));
     // console.log('initial', storage);
     // let obj = {};
     // let arr = [];
@@ -84,21 +80,21 @@ function initial(){
 /* setDate */
 function setDate(){
     const currentDate = new Date;
-    GLOBAL.date = {
+    Global.date = {
         year: currentDate.getFullYear(),
         month: currentDate.getMonth()+1,
         fullName: function(){
             return `d_${this.year}${this.month}`
         }
     };
-    GLOBAL.habitDate = {
+    Global.habitDate = {
         year: currentDate.getFullYear(),
         month: currentDate.getMonth()+1,
         fullName: function(){
             return `d_${this.year}${this.month}`
         }
     };
-    console.log(GLOBAL.habitDate);
+    console.log(Global.habitDate);
 }
 
 
@@ -120,12 +116,12 @@ function drawSelect(){
     monthList = DATE_LIST.month;
 
     arrYear = yearList.map( function( year ){
-        return template.selectYear(year, GLOBAL.habitDate.year);
+        return template.selectYear(year, Global.habitDate.year);
     });
     formSelect.year.innerHTML = arrYear && arrYear.join('');
     
     arrMonth = monthList.map( function( month ){
-        return template.selectMonth(month, GLOBAL.habitDate.month);
+        return template.selectMonth(month, Global.habitDate.month);
     });
     formSelect.month.innerHTML = arrMonth && arrMonth.join('');
 
@@ -139,7 +135,7 @@ function drawList(){
     storage = JSON.parse(localStorage.getItem('habits'));
     if(!storage) return;
 
-    list = storage[GLOBAL.habitDate.fullName()];
+    list = storage[Global.habitDate.fullName()];
     if(!list || list.length === 0 ) {
         let tp = '<p>등록한 습관 목록이 없습니다.</p>';
         elHabitList.innerHTML = tp;
@@ -163,18 +159,18 @@ function drawItem( data, idx ){
 /* Handle Data */
 let handleData = {
     getData: function(){
-        let storage = JSON.parse( localStorage.getItem(GLOBAL.storageName) );
+        let storage = JSON.parse( localStorage.getItem(Global.storageName) );
         return storage;
     },
     getDataOfDate: function(){
-        let storage = JSON.parse( localStorage.getItem(GLOBAL.storageName) );
-        return storage[GLOBAL.habitDate.fullName()] || [];
+        let storage = JSON.parse( localStorage.getItem(Global.storageName) );
+        return storage[Global.habitDate.fullName()] || [];
     },
     setDataOfDate: function( arr ){
         let data = this.getData(), 
-            date = GLOBAL.habitDate.fullName();
+            date = Global.habitDate.fullName();
         data[date] = arr;
-        localStorage.setItem(GLOBAL.storageName, JSON.stringify(data));
+        localStorage.setItem(Global.storageName, JSON.stringify(data));
     },
     include: function( val ){
         let arr = this.getDataOfDate();
@@ -211,15 +207,15 @@ let handleData = {
 
 /* Event Function */
 function handleSelect( form ){
-    GLOBAL.habitDate.year = form.year.value;
-    GLOBAL.habitDate.month = form.month.value;
+    Global.habitDate.year = form.year.value;
+    Global.habitDate.month = form.month.value;
 
-    let isShow = GLOBAL.habitDate.year > GLOBAL.date.year || (GLOBAL.habitDate.year == GLOBAL.date.year && GLOBAL.habitDate.month >= GLOBAL.date.month) 
+    let isShow = Global.habitDate.year > Global.date.year || (Global.habitDate.year == Global.date.year && Global.habitDate.month >= Global.date.month) 
 
     if( isShow ){
         formInput.setAttribute('aria-hidden', "false");
         drawList();
-        console.log(GLOBAL.habitDate.fullName());
+        console.log(Global.habitDate.fullName());
     } else{
         drawList();
         formInput.setAttribute('aria-hidden', "true");
@@ -268,8 +264,7 @@ function handleItemBlur( input, idx ){
 }
 
 function handleView(idx){
-    console.log('handleView', idx);
-    // location.href = '/view?id=idx'
+    location.href = `/view?date=${Global.habitDate.fullName()}&idx=${idx}`;
 }
 
 function handleDelete( idx ){
@@ -277,7 +272,7 @@ function handleDelete( idx ){
     drawList();
     // let node = elHabitList.querySelector('li[data-index="' + idx + '"]');
     // node.remove();
-    // console.log(HABIT_LIST[GLOBAL.habitDate.fullName()]);
+    // console.log(HABIT_LIST[Global.habitDate.fullName()]);
 }
 
 

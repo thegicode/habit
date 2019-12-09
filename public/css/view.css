@@ -1,0 +1,82 @@
+body {
+  margin: 0;
+  padding: 1rem;
+}
+
+header {
+  margin-bottom: 1rem;
+}
+
+h1 {
+  margin: 0 0 1rem 0;
+}
+
+.formSelect[aria-hidden="true"] {
+  display: none;
+}
+
+.formInput {
+  display: flex;
+}
+
+.formInput label {
+  flex: auto;
+}
+
+.formInput input {
+  width: 100%;
+  font-size: 1.5rem;
+}
+
+.formInput button {
+  margin-left: 8px;
+}
+
+.formInput[aria-hidden="true"] {
+  display: none;
+}
+
+.view {
+  margin-top: 2rem;
+}
+
+.view h2 {
+  margin: 0;
+}
+
+.view ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.view li {
+  position: relative;
+  float: left;
+  width: 20%;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.view li .__text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  margin: 0 auto;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+}
+
+.view li input[type="checkbox"] {
+  position: absolute;
+  left: -10000rem;
+}
+
+.view li input[type="checkbox"]:checked + .__text {
+  background-color: #ddd;
+  color: #fff;
+}
+
+/*# sourceMappingURL=view.css.map */
