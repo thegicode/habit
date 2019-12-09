@@ -9,6 +9,11 @@ const DATE_LIST = {
     month: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 };
 
+const DATE = {
+    // 2019: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+    // 2020: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+};
+
 
 
 /* Template */
@@ -39,7 +44,6 @@ const template = {
 };
 
 
-
 /* Global Variable */
 let GLOBAL = {
     storageName: 'habits'
@@ -56,11 +60,23 @@ drawList();
 
 /* Initial */
 function initial(){
-    if( !localStorage.getItem(GLOBAL.storageName) ){
+    if( !localStorage.getItem( GLOBAL.storageName )){
         let obj = {};
         localStorage.setItem(GLOBAL.storageName, JSON.stringify(obj));
         console.log('initial', localStorage);
-    }
+    } 
+
+    // let storage = JSON.parse(localStorage.getItem( GLOBAL.storageName ));
+    // console.log('initial', storage);
+    // let obj = {};
+    // let arr = [];
+    // for(let key in storage){
+    //     let str = key.split('d_')[1];
+    //     let year = str.substring(0, 4),
+    //         month = str.substring(4, 6);
+    //     console.log(year, month);
+    // }
+    // console.log(obj);
 }
 
 
@@ -198,7 +214,9 @@ function handleSelect( form ){
     GLOBAL.habitDate.year = form.year.value;
     GLOBAL.habitDate.month = form.month.value;
 
-    if( GLOBAL.habitDate.year >= GLOBAL.date.year && GLOBAL.habitDate.month >= GLOBAL.date.month ){
+    let isShow = GLOBAL.habitDate.year > GLOBAL.date.year || (GLOBAL.habitDate.year == GLOBAL.date.year && GLOBAL.habitDate.month >= GLOBAL.date.month) 
+
+    if( isShow ){
         formInput.setAttribute('aria-hidden', "false");
         drawList();
         console.log(GLOBAL.habitDate.fullName());
