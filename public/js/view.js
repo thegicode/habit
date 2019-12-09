@@ -19,6 +19,11 @@ const template = {
                 </label>
             </li>`
         )
+    },
+    option: function(idx, name){
+        return(
+            `<option value="${idx}">${name}</option>`
+        )
     }
 };
 
@@ -27,6 +32,7 @@ const template = {
 /* Call Function */
 initial();
 drawTitle();
+drawOptins();
 drawList();
 
 
@@ -46,7 +52,19 @@ function initial(){
 function drawTitle(){
     let habits = JSON.parse(localStorage.getItem('habits'));
     let habitName = habits[Global_view.date][Global_view.idx];
+    let habitDate = Global_view.date.replace('d_','');
+    document.querySelector('.contents h2').innerHTML = `${habitDate.substring(0,4)}.${habitDate.substring(4,6)}`;
     document.querySelector('.contents h3').textContent = habitName;
+}
+
+function drawOptins(){
+    let habits = JSON.parse(localStorage.getItem('habits'));
+    let habitsYear = habits[Global_view.date];
+    console.log(habitsYear);
+    let arr = habitsYear.map(  (item, idx) => {
+        return template.option(idx, item);
+    });
+    document.querySelector('.formSelect select').innerHTML =  arr.join('');
 }
 
 function drawList(){
@@ -60,10 +78,15 @@ function drawList(){
 
 
 /* Event Handle */
-function handleCheck( el ){
-    console.log(el.name);
-    console.log(el.checked);
+function handleSelect( select ){
+    console.log(select.value)
 }
+
+function handleCheck( inut ){
+    console.log(inut.name);
+    console.log(inut.checked);
+}
+
 
 
 
