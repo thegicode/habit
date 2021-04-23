@@ -17,22 +17,20 @@ const template = function(){
         }
     }
 
-    const drawItem = function( el ){
+    const drawHabitItem = function( habits, el ){
         const arr = []
-        const habits = JSON.parse( window.localStorage.getItem('habits') )
-        console.log('habits', habits)
         habits.forEach( item => {
             arr.push( markup.trackerlist(item) )
         })
         el.innerHTML = arr.join('')
     }
 
-    const drawCpnt = function(){
+    const drawCpnt = function( habits ){
         const cpnts = document.querySelectorAll('[data-component]')
         if( !cpnts ) return
         cpnts.forEach( el => {
             if( el.dataset.component === 'trackerlist'){
-                drawItem( el )
+                drawHabitItem( habits, el )
             } else {
                 el.innerHTML = markup[el.dataset.component]()
             }

@@ -1,15 +1,17 @@
 
 const view = function(template){
 
-    const init = function(){
-        const habits = window.localStorage.getItem('habits')
-        if( habits ){
-            template.drawCpnt()
-        }
+    const init = function( habits ){
+        showHabits( habits )
+    }
+
+    const showHabits = function( habits ){
+        template.drawCpnt( habits )
     }
 
     return {
-        init: init
+        init: init,
+        showHabits: showHabits
     }
 
 }

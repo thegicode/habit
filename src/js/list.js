@@ -7,11 +7,18 @@ const model = modelFactory()
 const template = templateFactory()
 const view = viewFactory(template)
 
-model.init()
-view.init()
+function init(){
+    const habits = model.init()
+    if( habits.length > 0 ){
+        view.init( habits )
+    }
+}
+
+init()
 
 const addButton = document.querySelector('[data-button=add')
 addButton.addEventListener('click', function(){
-    model.addItem('운동')
+    const newHabits = model.addHabitItem('coding')
+    view.showHabits( newHabits )
 })
 
