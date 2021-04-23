@@ -1,13 +1,14 @@
-var express = require("express");
-var app = express();
+const express = require("express");
+const app = express();
+const port = 3000
 
-app.use("/", express.static(__dirname + "/public"));
+app.use("/", express.static(__dirname + "/src"));
 
 app.get("/:id", function(req, res) {
-  let fileName = `${__dirname}/public/html/${req.params.id}.html`;
+  const fileName = `${__dirname}/public/html/${req.params.id}.html`;
   res.sendFile( fileName );
 });
 
-app.listen(3000, function() {
-  console.log("Example app listening on port 3000!");
-});
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`)
+})
