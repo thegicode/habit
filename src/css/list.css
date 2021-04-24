@@ -11,7 +11,7 @@ h1 {
   margin: 0 0 1rem 0;
 }
 
-ul {
+ul, p {
   margin: 0;
   padding: 0;
 }
@@ -26,8 +26,23 @@ ul {
 
 .tracker-actions {
   display: flex;
-  justify-content: flex-end;
   margin-top: 10px;
+}
+
+.tracker-actions .input {
+  flex: 1;
+}
+
+.tracker-actions input {
+  width: 100%;
+  height: 30px;
+  box-sizing: border-box;
+  padding: 0 5px;
+  border: 1px solid #ddd;
+}
+
+.tracker-actions .btn {
+  margin-left: auto;
 }
 
 .tracker-list {
@@ -35,24 +50,20 @@ ul {
 }
 
 .tracker-item {
-  display: table;
+  display: flex;
+  align-items: center;
   width: 100%;
-  padding: 7px 0 5px;
+  padding: 10px 0 8px;
   border-bottom: 1px solid #ddd;
   list-style: none;
 }
 
 .tracker-item .name {
-  display: table-cell;
-}
-
-.tracker-item .table {
-  display: table-cell;
+  width: 20%;
 }
 
 .tracker-item .actions {
-  display: table-cell;
-  text-align: right;
+  margin-left: auto;
   white-space: nowrap;
 }
 

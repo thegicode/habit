@@ -16,9 +16,26 @@ function init(){
 
 init()
 
-const addButton = document.querySelector('[data-button=add')
-addButton.addEventListener('click', function(){
-    const newHabits = model.addHabitItem('coding')
-    view.showHabits( newHabits )
-})
 
+const addButton = document.querySelector('[data-button=add]'),
+    inputName = document.querySelector('[data-input=name]')
+const handleInputName = function(){
+    const inputValue = inputName.value
+    if( inputValue.length === 0 ){
+        window.alert('습관명을 입력하세요.')
+        inputName.focus()
+        return;
+    }
+    const newHabits = model.addHabitItem(inputValue)
+    view.showHabits( newHabits )
+    inputName.value = ''
+    inputName.focus()
+}
+addButton.addEventListener('click', function(){
+    handleInputName()
+})
+inputName.addEventListener('keyup', function(e){
+    if( e.type === 'enter' || e.keyCode === 13 ){
+        handleInputName()
+    }
+})
