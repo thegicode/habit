@@ -5,7 +5,7 @@ import modelFactory from './module/model.js'
 
 const model = modelFactory()
 const template = templateFactory()
-const view = viewFactory(template)
+const view = viewFactory(model, template)
 
 function init(){
     const habits = model.init()
@@ -17,25 +17,13 @@ function init(){
 init()
 
 
-const addButton = document.querySelector('[data-button=add]'),
-    inputName = document.querySelector('[data-input=name]')
-const handleInputName = function(){
-    const inputValue = inputName.value
-    if( inputValue.length === 0 ){
-        window.alert('습관명을 입력하세요.')
-        inputName.focus()
-        return;
-    }
-    const newHabits = model.addHabitItem(inputValue)
-    view.showHabits( newHabits )
-    inputName.value = ''
-    inputName.focus()
-}
-addButton.addEventListener('click', function(){
-    handleInputName()
+const $buttonAdd = document.querySelector('[data-button=add]'),
+    $inputName = document.querySelector('[data-input=name]')
+$buttonAdd.addEventListener('click', function(){
+    view.handleInputName($inputName)
 })
-inputName.addEventListener('keyup', function(e){
+$inputName.addEventListener('keyup', function(e){
     if( e.type === 'enter' || e.keyCode === 13 ){
-        handleInputName()
+        view.handleInputName(this)
     }
 })
