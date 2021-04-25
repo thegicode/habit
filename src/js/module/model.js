@@ -1,41 +1,38 @@
 
 const model = function(){
 
-    const storeName = 'habits'
-
-    const init = function(){
-        return getStorage()
-    }
+    const storageName = 'habits'
 
     const getStorage = function(){
-        const habits = JSON.parse(window.localStorage.getItem(storeName)) || []
-        return habits
+        const temp = '[{"name":"a"},{"name":"b"}]'
+        return JSON.parse( window.localStorage.getItem(storageName) || temp )
     }
 
     const addStorageItem = function( habits, name ){
         const newHabits = [
             ...habits, 
             {
-                name: name 
+                name: name
             }
         ]
         return newHabits;
     }
 
-    const setStorage = function( newHabits ){
-        window.localStorage.setItem(storeName, JSON.stringify(newHabits))
-        console.log('newHabits', newHabits)
+    const setStore = function( newHabits ){
+        // const habits = JSON.stringify(newHabits)
+        window.localStorage.setItem(storageName, JSON.stringify(newHabits))
+        window.state.habits = newHabits
     }
 
     const addHabitItem = function( name ){
         const habits = getStorage()
         const newHabits = addStorageItem(habits, name)
-        setStorage(newHabits)
-        return newHabits;
+        setStore(newHabits)
+        return newHabits
     }
 
     return {
-        init: init,
+        getStorage: getStorage,
         addHabitItem: addHabitItem
     }
 }

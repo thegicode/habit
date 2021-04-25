@@ -1,10 +1,10 @@
 
 const template = function(){
 
-    const trackerlist = function( item ){
+    const trackerlist = function( name ){
        return `
         <li class="tracker-item">
-            <p class="name">${item.name}</p>
+            <p class="name">${name}</p>
             <div class="table">
                 check table
             </div>

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" type="text/css" href="../css/list.css" />
-    <title>List</title>
+    <title>Habits | List</title>
 </head>
 <body class="page-list">
 
@@ -14,48 +14,17 @@
 
     <main class="contents">
 
-        <section class="tracker">
+        <section class="tracker" id="tracker">
             <!-- <h2 class="tracker-title">목록</h2> -->
             <div class="tracker-actions">
-                <label class="input"><input type="text" name="inputName" data-input="name"></label>
-                <button type="button" class="btn" data-button="add">습관 추가</button>
+                <label class="input"><input type="text" name="name"></label>
+                <button type="button" class="btn" id="button-add">습관 추가</button>
             </div>
-            <ul class="tracker-list" data-component="trackerlist">
-                <!-- <li class="tracker-item">
-                    <p class="name">운동</p>
-                    <div class="table">
-                        check table
-                    </div>
-                    <div class="actions">
-                        <button type="button" class="btn" data-button="edit">수정</button>
-                        <button type="button" class="btn" data-button="delete">삭제</button>
-                    </div>
-                </li> -->
-            </ul>
+            <ul class="tracker-list" data-component="trackerlist"></ul>
         </section>
 
     </main>
 
-
-
-   <!--  <header>
-
-         <form name="formSelect" class="formSelect" onsubmit="return handleSelect(this)" aria-hidden="true">
-            <select name="year"></select>
-            <select name="month"></select>
-            <button type="submit">검색</button>
-        </form>
-
-        <br>
-
-        <form name="formInput" class="formInput" onsubmit="return handleInput(this);" aria-hidden="false">
-            <label>
-                <input type="text" name="title" placeholder="Enter new habit name">
-            </label>
-            <button type="reset">reset</button>
-        </form>
-
-    </header> -->
 </div>
 
 <script type="module" src="../js/list.js"></script>

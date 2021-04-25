@@ -7,23 +7,25 @@ const model = modelFactory()
 const template = templateFactory()
 const view = viewFactory(model, template)
 
-function init(){
-    const habits = model.init()
-    if( habits.length > 0 ){
-        view.init( habits )
-    }
+window.state = {
+    habits: model.getStorage(),
+    other: false
 }
 
-init()
+const main = document.querySelector('#tracker')
+window.requestAnimationFrame(() => {
+    const newMain = view.showHabits(main)
+    main.replaceWith(newMain)
+})
 
 
-const $buttonAdd = document.querySelector('[data-button=add]'),
-    $inputName = document.querySelector('[data-input=name]')
-$buttonAdd.addEventListener('click', function(){
-    view.handleInputName($inputName)
-})
-$inputName.addEventListener('keyup', function(e){
-    if( e.type === 'enter' || e.keyCode === 13 ){
-        view.handleInputName(this)
-    }
-})
+ /*const $buttonAdd = newMain.querySelector('#button-add'),
+    $input = newMain.querySelector('input[name=name]')
+    $buttonAdd.addEventListener('click', function(){
+        view.handleInputName(newMain, $input)
+    })
+    $input.addEventListener('keyup', function(e){
+        if( e.type === 'enter' || e.keyCode === 13 ){
+            view.handleInputName(newMain, this)
+        }
+    })*/
