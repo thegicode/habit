@@ -15,19 +15,14 @@ const model = function(){
                 name: name
             }
         ]
-        return newHabits;
-    }
-
-    const setStore = function( newHabits ){
-        // const habits = JSON.stringify(newHabits)
         window.localStorage.setItem(storageName, JSON.stringify(newHabits))
-        window.state.habits = newHabits
+        return newHabits;
     }
 
     const addHabitItem = function( name ){
         const habits = getStorage()
         const newHabits = addStorageItem(habits, name)
-        setStore(newHabits)
+        window.state.habits = newHabits
         return newHabits
     }
 
