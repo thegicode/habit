@@ -1,7 +1,7 @@
 
-const trackerlist = function( name ){
+const habitslist = function( name ){
    return `
-    <li class="tracker-item">
+    <li class="habits-item">
         <p class="name">${name}</p>
         <div class="table">
             check table
@@ -14,5 +14,5 @@ const trackerlist = function( name ){
 }
 
 export default {
-    trackerlist
+    habitslist
 }

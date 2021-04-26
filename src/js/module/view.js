@@ -2,12 +2,12 @@ import template from './template.js'
 
 const getHabitElement = function( habit ){
     const { name } = habit
-    return template.trackerlist(name)
+    return template.habitslist(name)
 }
 
 const showHabits = function( targetElement, habits ){
         const element = targetElement.cloneNode(true)
-        const list = element.querySelector('[data-component=trackerlist')
+        const list = element.querySelector('[data-component=habitslist')
         list.innerHTML = habits.map(getHabitElement).join('')
         return element
 }

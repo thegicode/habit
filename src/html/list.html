@@ -9,19 +9,31 @@
 </head>
 <body class="page-list">
 
+<template id="habits-item">
+    <li class="habits-item">
+        <p class="name"></p>
+        <div class="table">
+            check table
+        </div>
+        <div class="actions">
+            <button type="button" class="btn" data-button="edit">수정</button>
+            <button type="button" class="btn" data-button="delete">삭제</button>
+        </div>
+    </li>
+</template>
 
 <div class="root">
     <h1>Habits</h1>
 
     <main class="contents">
 
-        <section class="tracker" id="tracker">
-            <!-- <h2 class="tracker-title">목록</h2> -->
-            <div class="tracker-actions">
+        <section class="habits" id="habits">
+            <!-- <h2 class="habits-title">목록</h2> -->
+            <div class="habits-actions">
                 <label class="input"><input type="text" name="name"></label>
                 <button type="button" class="btn" id="button-add">습관 추가</button>
             </div>
-            <ul class="tracker-list" data-component="trackerlist"></ul>
+            <ul class="habits-list" data-component="habitslist"></ul>
         </section>
 
     </main>

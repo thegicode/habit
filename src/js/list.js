@@ -6,7 +6,7 @@ let state = {
     other: false
 }
 
-const main = document.querySelector('#tracker')
+const main = document.querySelector('#habits')
 window.requestAnimationFrame(() => {
     const newMain = view.showHabits(main, state.habits)
     main.replaceWith(newMain)
