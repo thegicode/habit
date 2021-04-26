@@ -13,7 +13,7 @@ const renderWrapper = component => {
             if (!child) {
                 return
             }
-            
+
             target.replaceWith(child(target, state, events))
         })
         return element

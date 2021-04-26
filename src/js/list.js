@@ -14,8 +14,14 @@ const events = {
     addItem: () => {
         console.log('addItem')
     },
-    deleteItem: () => {
-        console.log('deleteItem')
+    deleteItem: index => {
+        state.habits.splice(index, 1)
+        model.setStorageHabit(state.habits)
+        render()
+    },
+    updateItem: (index, newName) => {
+        state.habits[index].name = newName
+        model.setStorageHabit(state.habits)
     }
 }
 
