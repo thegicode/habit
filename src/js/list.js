@@ -1,8 +1,10 @@
 import habitsView from './view/habits.js'
 import view from './module/view.js'
 import model from './module/model.js'
+import applyDiff from './applyDiff.js'
+import registry from './registry.js'
 
-
+registry.add('habitslist', habitsView)
 
 let state = {
     habits: model.getStorage(),
@@ -15,15 +17,17 @@ const events = {
     }
 }
 
+const render = () => {
+    window.requestAnimationFrame(() => {
+        const main = document.querySelector('#habits')
+        const newMain = registry.renderRoot( main, state, events )
+        applyDiff(document.body, main, newMain)
+    })
+}
+
+render()
 
 
-const main = document.querySelector('#habits')
-window.requestAnimationFrame(() => {
-    const newMain = view.showHabits(main, state.habits)
-    main.replaceWith(newMain)
-})
-
-habitsView(main, state, events)
 
 
 
