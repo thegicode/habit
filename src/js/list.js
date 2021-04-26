@@ -1,6 +1,5 @@
 import habitsView from './view/habits.js'
-import view from './module/view.js'
-import model from './module/model.js'
+import model from './model.js'
 import applyDiff from './applyDiff.js'
 import registry from './registry.js'
 
@@ -12,8 +11,11 @@ let state = {
 }
 
 const events = {
-    addItem: function(){
+    addItem: () => {
         console.log('addItem')
+    },
+    deleteItem: () => {
+        console.log('deleteItem')
     }
 }
 

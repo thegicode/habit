@@ -13,11 +13,10 @@ const createNewNode = () => {
 
 const getHabitElement = (habit, index, event) => {
     const { name } = habit
+    const { deleteItem } = event
 
     const element = createNewNode()
     element.querySelector('[data-select=name]').textContent = name
-
-    // attachEventsToHabitElement(element, index, events)
 
     return element
 }
@@ -33,6 +32,7 @@ export default (targetElement, state, events) => {
         .forEach( element => {
             newHabitList.appendChild(element)
         })
+
 
     return newHabitList
 }
