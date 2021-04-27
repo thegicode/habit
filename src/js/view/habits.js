@@ -10,8 +10,8 @@ const getTemplate = () => {
         .cloneNode(true)
 }
 
-const isNotEmpty = (nameText, inputElement) => {
-    if (nameText.length === 0) {
+const isNotEmpty = inputElement => {
+    if (inputElement.value.length === 0) {
         window.alert('습관명을 입력하세요.')
         inputElement.focus()
         return true
@@ -19,7 +19,8 @@ const isNotEmpty = (nameText, inputElement) => {
     return false
 }
 
-const isIncludes = (habits, nameText, inputElement) => {
+const isIncludes = (habits, inputElement) => {
+    const nameText = inputElement.value
     const isIncludes = habits.some( item => {
         return item.name === nameText
     })
@@ -36,31 +37,27 @@ const addEvents = (newHabit, state, events) => {
     const { addItem } = events
     const { habits } = state
 
+    const form = newHabit.querySelector('form')
     const input = newHabit.querySelector('input[name=input-name]')
     const button = newHabit.querySelector('[data-button=input]')
 
     const listenr = function (inputElement) {
         const nameText = inputElement.value
         
-        if (isNotEmpty(nameText, inputElement)) {
+        if (isNotEmpty(inputElement)) {
             return 
         }
 
-        if (isIncludes(habits, nameText, inputElement)) {
+        if (isIncludes(habits, inputElement)) {
             return
         }
 
         addItem(nameText)
         inputElement.value = ''
     }
-
-    input.addEventListener('keyup', function(e) {
-        if( e.key === 'Enter' ){
-            listenr(this)
-            // this.disabled = 'disabled'
-            // this.removeAttribute('disabled')
-            this.focus()
-        }
+    form.addEventListener('submit', function(e){
+        e.preventDefault()
+        listenr(input)
     })
     button.addEventListener('click', function(e) {
         listenr(input)

@@ -1,10 +1,10 @@
-import habits from './view/habits.js'
+import habitsView from './view/habits.js'
 import habitsListView from './view/habits-list.js'
 import model from './model.js'
 import applyDiff from './applyDiff.js'
 import registry from './registry.js'
 
-registry.add('habits', habits)
+registry.add('habits', habitsView)
 registry.add('habitslist', habitsListView)
 
 let state = {
@@ -28,7 +28,6 @@ const events = {
     updateItem: (index, newName) => {
         state.habits[index].name = newName
         model.setStorageHabit(state.habits)
-        // render()
     }
 }
 
@@ -41,19 +40,3 @@ const render = () => {
 }
 
 render()
-
-
-
-
-
-
- // const $buttonAdd = newMain.querySelector('#button-add'),
- //    $input = newMain.querySelector('input[name=name]')
- //    $buttonAdd.addEventListener('click', function(){
- //        const newHabits = view.handleInputName(newMain, $input)
- //    })
- //    $input.addEventListener('keyup', function(e){
- //        if( e.type === 'enter' || e.keyCode === 13 ){
- //            const newHabits = view.handleInputName(newMain, this)
- //        }
- //    })

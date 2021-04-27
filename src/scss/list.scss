@@ -29,18 +29,12 @@ input:focus{
     &-actions{
         display: flex;
         margin-top: 10px;
-        .input{
-            flex: 1;
-        }
         input[name="input-name"]{
-            width: 100%;
+            flex: 1;
             height: 30px;
             box-sizing: border-box;
             padding: 0 5px;
             border: 1px solid #ddd;
-        }
-        .btn{
-            margin-left: auto;
         }
 
     }
@@ -48,12 +42,13 @@ input:focus{
         margin-top: 1rem;
     }
     &-item {
-        display: flex;
-        align-items: center;
-        width: 100%;
         padding: 10px 0 8px;
         border-bottom: 1px solid #ddd;
         list-style: none;
+        form{
+            display: flex;
+            align-items: center;
+        }
         input[name="name"]{
             width: 20%;
             box-sizing: border-box;

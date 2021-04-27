@@ -33,20 +33,12 @@ input:focus {
   margin-top: 10px;
 }
 
-.habits-actions .input {
-  flex: 1;
-}
-
 .habits-actions input[name="input-name"] {
-  width: 100%;
+  flex: 1;
   height: 30px;
   box-sizing: border-box;
   padding: 0 5px;
   border: 1px solid #ddd;
-}
-
-.habits-actions .btn {
-  margin-left: auto;
 }
 
 .habits-list {
@@ -54,12 +46,14 @@ input:focus {
 }
 
 .habits-item {
-  display: flex;
-  align-items: center;
-  width: 100%;
   padding: 10px 0 8px;
   border-bottom: 1px solid #ddd;
   list-style: none;
+}
+
+.habits-item form {
+  display: flex;
+  align-items: center;
 }
 
 .habits-item input[name="name"] {

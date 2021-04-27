@@ -1,16 +1,9 @@
 
-const initialState = '[{"name":"운동"},{"name":"코딩"}]'
-
 const STORAGE_NAME = 'habits'
 
 const getStorage = function(){
-    let data = initialState
-    const storageHabits = window.localStorage.getItem(STORAGE_NAME)
-    if( storageHabits && JSON.parse(storageHabits).length > 0  ){
-        data = storageHabits
-    }
-    window.localStorage.setItem(STORAGE_NAME, data)
-    return JSON.parse(data)
+    const getItem = window.localStorage.getItem(STORAGE_NAME)
+    return JSON.parse(getItem) || []
 }
 
 const setStorageHabit = function (habits) {

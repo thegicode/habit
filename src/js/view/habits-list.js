@@ -11,46 +11,76 @@ const createNewNode = () => {
         .cloneNode(true)
 }
 
+const isNotEmpty = inputElement => {
+    if (inputElement.value.length === 0) {
+        window.alert('습관명을 입력하세요.')
+        inputElement.focus()
+        return true
+    }
+    return false
+}
+
+const isIncludes = (habits, inputElement, id) => {
+    const nameText = inputElement.value
+    const isIncludes = habits.some( (item, index) => {
+        if (id === index) return
+        return item.name === nameText
+    })
+    if (isIncludes) {
+        window.alert('이미 있는 습관명입니다.')
+        inputElement.focus()
+        inputElement.value = ''
+        return true
+    }
+    return false
+}
 
 const getHabitElement = (habits, habit, index, events) => {
     const { name } = habit
     const { updateItem, deleteItem } = events
 
     const el = createNewNode()
-    const buttnEdit = el.querySelector('[data-button=edit')
-    const buttnConfirm = el.querySelector('[data-button=confirm')
-    const buttnDelete = el.querySelector('[data-button=delete')
-    const inputName = el.querySelector('input[name=name]')
+    const form = el.querySelector('form')
+    const editButton = el.querySelector('[data-button=edit]')
+    const confirmButton = el.querySelector('[data-button=confirm]')
+    const deleteButton = el.querySelector('[data-button=delete]')
+    const inputElement = el.querySelector('input[name=name]')
 
     el.dataset.index = index
-    inputName.value = name
-    inputName.dataset.value = name
-    inputName.setAttribute('readonly', 'readonly')
+    inputElement.value = name
+    inputElement.setAttribute('readonly', 'readonly')
 
-    const editInputName = value => {
+    const listener = value => {
+
+        if (isNotEmpty(inputElement)) {
+            return 
+        }
+
+        if (isIncludes(habits, inputElement, index)) {
+            return
+        }
+
         updateItem(index, value)
-        buttnConfirm.dataset.hidden = true
-        buttnEdit.dataset.hidden = false
-        inputName.setAttribute('readonly', 'readonly')
+        confirmButton.dataset.hidden = true
+        editButton.dataset.hidden = false
+        inputElement.setAttribute('readonly', 'readonly')
     }
 
-    buttnEdit
+    editButton
         .addEventListener('click', function(e){
-            inputName.removeAttribute('readonly')
+            inputElement.removeAttribute('readonly')
             this.dataset.hidden = true
-            buttnConfirm.dataset.hidden = false
+            confirmButton.dataset.hidden = false
         })
-    buttnConfirm
+    confirmButton
         .addEventListener('click', function(e){
-            editInputName(inputName.value)
+            listener(inputElement.value)
         })
-    inputName
-        .addEventListener('keyup', function(e){
-            if (e.type === 'enter' || e.keyCode === 13){
-                editInputName(this.value)
-            }
-        })
-    buttnDelete
+    form.addEventListener('submit', function(e){
+        e.preventDefault()
+        listener(inputElement.value)
+    })
+    deleteButton
         .addEventListener('click', e => {
             deleteItem(index)
         })
