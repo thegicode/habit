@@ -11,28 +11,68 @@ const createNewNode = () => {
         .cloneNode(true)
 }
 
-const isNotEmpty = inputElement => {
-    if (inputElement.value.length === 0) {
-        window.alert('습관명을 입력하세요.')
-        inputElement.focus()
-        return true
+class HandleEvent {
+    constructor(e, habits, index, events){
+        this.e = e
+        this.habits = habits
+        this.index = index
+        this.events = events
     }
-    return false
-}
 
-const isIncludes = (habits, inputElement, id) => {
-    const nameText = inputElement.value
-    const isIncludes = habits.some( (item, index) => {
-        if (id === index) return
-        return item.name === nameText
-    })
-    if (isIncludes) {
-        window.alert('이미 있는 습관명입니다.')
-        inputElement.focus()
-        inputElement.value = ''
-        return true
+    isNotEmpty(inputEl){
+        if (inputEl.value.length === 0) {
+            window.alert('습관명을 입력하세요.')
+            inputEl.focus()
+            return true
+        }
+        return false
     }
-    return false
+
+    isIncludes(inputEl){
+        const nameText = inputEl.value
+        const isIncludes = this.habits.some( (item, index) => {
+            if (this.index === index) return
+            return item.name === nameText
+        })
+        if (isIncludes) {
+            window.alert('이미 있는 습관명입니다.')
+            inputEl.focus()
+            inputEl.value = ''
+            return true
+        }
+        return false
+    }
+
+    edit(){
+        const targetEl = this.e.target
+        const el = targetEl.closest('.habits-item')
+        const inputEl = el.querySelector('input')
+        inputEl.removeAttribute('readonly')
+        inputEl.focus()
+        targetEl.dataset.hidden = true
+        el.querySelector('[data-button=confirm]').dataset.hidden = false
+    }
+
+    confirm(){
+        const targetEl = this.e.target
+        const el = targetEl.closest('.habits-item')
+        const inputEl = el.querySelector('input')
+        if (this.isNotEmpty(inputEl)) {
+            return 
+        }
+        if (this.isIncludes(inputEl)) {
+            return
+        }
+        this.events.updateItem(this.index, inputEl.value)
+        el.querySelector('[data-button=confirm]').dataset.hidden = true
+        el.querySelector('[data-button=edit]').dataset.hidden = false
+        inputEl.setAttribute('readonly', 'readonly')
+    }
+
+    delete(){
+        this.events.deleteItem(this.index)
+    }
+
 }
 
 const getHabitElement = (habits, habit, index, events) => {
@@ -40,49 +80,33 @@ const getHabitElement = (habits, habit, index, events) => {
     const { updateItem, deleteItem } = events
 
     const el = createNewNode()
-    const form = el.querySelector('form')
-    const editButton = el.querySelector('[data-button=edit]')
-    const confirmButton = el.querySelector('[data-button=confirm]')
-    const deleteButton = el.querySelector('[data-button=delete]')
-    const inputElement = el.querySelector('input[name=name]')
+    const inputEl = el.querySelector('input[name=name]')
 
     el.dataset.index = index
-    inputElement.value = name
-    inputElement.setAttribute('readonly', 'readonly')
-
-    const listener = value => {
-
-        if (isNotEmpty(inputElement)) {
-            return 
-        }
-
-        if (isIncludes(habits, inputElement, index)) {
-            return
-        }
-
-        updateItem(index, value)
-        confirmButton.dataset.hidden = true
-        editButton.dataset.hidden = false
-        inputElement.setAttribute('readonly', 'readonly')
-    }
-
-    editButton
-        .addEventListener('click', function(e){
-            inputElement.removeAttribute('readonly')
-            this.dataset.hidden = true
-            confirmButton.dataset.hidden = false
-        })
-    confirmButton
-        .addEventListener('click', function(e){
-            listener(inputElement.value)
-        })
-    form.addEventListener('submit', function(e){
-        e.preventDefault()
-        listener(inputElement.value)
-    })
-    deleteButton
+    inputEl.value = name
+    inputEl.dataset.value = name
+    inputEl.setAttribute('readonly', 'readonly')
+ 
+    el.querySelector('[data-button=edit]')
         .addEventListener('click', e => {
-            deleteItem(index)
+            const instance = new HandleEvent(e, habits, index, events)
+            instance.edit()
+        })
+    el.querySelector('[data-button=confirm]')
+        .addEventListener('click', e => {
+            const instance = new HandleEvent(e, habits, index, events)
+            instance.confirm()
+        })
+    el.querySelector('form')
+        .addEventListener('submit', e => {
+            e.preventDefault()
+            const instance = new HandleEvent(e, habits, index, events)
+            instance.confirm()
+        })
+    el.querySelector('[data-button=delete]')
+        .addEventListener('click', e => {
+            const instance = new HandleEvent(e, habits, index, events)
+            instance.delete()
         })
 
     return el
@@ -90,13 +114,14 @@ const getHabitElement = (habits, habit, index, events) => {
 
 export default (targetElement, state, events) => {
     const { habits } = state
+    const { deleteItem } = events
     const newHabitList = targetElement.cloneNode(true)
 
     newHabitList.innerHTML = ''
 
-    const list = habits.map( (habit, index) => getHabitElement(habits, habit, index, events))
-
-    list.forEach( element => {
+    habits
+        .map( (habit, index) => getHabitElement(habits, habit, index, events))
+        .forEach( element => {
             newHabitList.appendChild(element)
         })
 

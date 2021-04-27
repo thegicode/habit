@@ -28,6 +28,7 @@ const events = {
     updateItem: (index, newName) => {
         state.habits[index].name = newName
         model.setStorageHabit(state.habits)
+        // render()
     }
 }
 
