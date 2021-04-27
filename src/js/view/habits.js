@@ -1,74 +1,78 @@
-let template
+let tempalte
 
-const createNewNode = () => {
-    if( !template ){
-        template = document.getElementById('habits-item')
+const getTemplate = () => {
+    if (!tempalte) {
+        tempalte = document.querySelector('[data-template=habits')
     }
-
-    return template
+    return tempalte
         .content
         .firstElementChild
         .cloneNode(true)
 }
 
+const isNotEmpty = (nameText, inputElement) => {
+    if (nameText.length === 0) {
+        window.alert('습관명을 입력하세요.')
+        inputElement.focus()
+        return true
+    }
+    return false
+}
 
+const isIncludes = (habits, nameText, inputElement) => {
+    const isIncludes = habits.some( item => {
+        return item.name === nameText
+    })
+    if (isIncludes) {
+        window.alert('이미 있는 습관명입니다.')
+        inputElement.focus()
+        inputElement.value = ''
+        return true
+    }
+    return false
+}
 
-const getHabitElement = (habit, index, events) => {
-    const { name, readonly } = habit
-    const { updateItem, deleteItem } = events
+const addEvents = (newHabit, state, events) => {
+    const { addItem } = events
+    const { habits } = state
 
-    const el = createNewNode()
-    el.dataset.index = index
-    el.querySelector('input[name=name]').value = name
+    const input = newHabit.querySelector('input[name=input-name]')
+    const button = newHabit.querySelector('[data-button=input]')
 
-    const buttnEdit = el.querySelector('[data-button=edit')
-    const buttnConfirm = el.querySelector('[data-button=confirm')
-    const buttnDelete = el.querySelector('[data-button=delete')
-    const inputName = el.querySelector('input')
-
-    const editInputName = value => {
-        inputName.setAttribute('readonly', 'readonly')
-        buttnConfirm.dataset.hidden = true
-        buttnEdit.dataset.hidden = false
-        if (name !== value){
-            updateItem(index, value)
+    const listenr = function (inputElement) {
+        const nameText = inputElement.value
+        
+        if (isNotEmpty(nameText, inputElement)) {
+            return 
         }
+
+        if (isIncludes(habits, nameText, inputElement)) {
+            return
+        }
+
+        addItem(nameText)
+        inputElement.value = ''
     }
 
-    buttnEdit
-        .addEventListener('click', function(e){
-            inputName.removeAttribute('readonly')
-            this.dataset.hidden = true
-            buttnConfirm.dataset.hidden = false
-        })
-    buttnConfirm
-        .addEventListener('click', function(e){
-            editInputName(inputName.value)
-        })
-    inputName.addEventListener('keyup', function(e){
-        if (e.type === 'enter' || e.keyCode === 13){
-            editInputName(this.value)
+    input.addEventListener('keyup', function(e) {
+        if( e.key === 'Enter' ){
+            listenr(this)
+            // this.disabled = 'disabled'
+            // this.removeAttribute('disabled')
+            this.focus()
         }
     })
-    buttnDelete
-        .addEventListener('click', e => {
-            deleteItem(index)
-        })
-    return el
+    button.addEventListener('click', function(e) {
+        listenr(input)
+        input.focus()
+    })
 }
 
 export default (targetElement, state, events) => {
-    const { habits } = state
-    const newHabitList = targetElement.cloneNode(true)
+    const newHabit = targetElement.cloneNode(true)
+    newHabit.innerHTML = ''
+    newHabit.appendChild(getTemplate())
+    addEvents(newHabit, state, events)
 
-    newHabitList.innerHTML = ''
-
-    habits
-        .map( (habit, index) => getHabitElement(habit, index, events))
-        .forEach( element => {
-            newHabitList.appendChild(element)
-        })
-
-
-    return newHabitList
+    return newHabit
 }

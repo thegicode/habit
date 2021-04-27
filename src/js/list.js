@@ -1,9 +1,11 @@
-import habitsView from './view/habits.js'
+import habits from './view/habits.js'
+import habitsListView from './view/habits-list.js'
 import model from './model.js'
 import applyDiff from './applyDiff.js'
 import registry from './registry.js'
 
-registry.add('habitslist', habitsView)
+registry.add('habits', habits)
+registry.add('habitslist', habitsListView)
 
 let state = {
     habits: model.getStorage(),
@@ -11,8 +13,12 @@ let state = {
 }
 
 const events = {
-    addItem: () => {
-        console.log('addItem')
+    addItem: value => {
+        state.habits.push({
+            name: value
+        })
+        model.setStorageHabit(state.habits)
+        render()
     },
     deleteItem: index => {
         state.habits.splice(index, 1)
@@ -22,12 +28,13 @@ const events = {
     updateItem: (index, newName) => {
         state.habits[index].name = newName
         model.setStorageHabit(state.habits)
+        // render()
     }
 }
 
 const render = () => {
     window.requestAnimationFrame(() => {
-        const main = document.querySelector('#habits')
+        const main = document.querySelector('#root')
         const newMain = registry.renderRoot( main, state, events )
         applyDiff(document.body, main, newMain)
     })

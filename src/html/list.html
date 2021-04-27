@@ -7,11 +7,23 @@
     <link rel="stylesheet" type="text/css" href="../css/list.css" />
     <title>Habits | List</title>
 </head>
-<body class="page-list">
+<body>
 
-<template id="habits-item">
+<template data-template="habits">
+    <section class="habits">
+        <div class="habits-actions">
+            <label class="input">
+                <input type="text" name="input-name" placeholder="습관명을 입력하세요." autofocus>
+            </label>
+            <button type="button" class="btn" data-button="input">입력</button>
+        </div>
+        <ul class="habits-list" data-component="habitslist"></ul>
+    </section>
+</template>
+
+<template data-template="habits-item">
     <li class="habits-item">
-        <input type="text" name="name" readonly="readonly"></input>
+        <input type="text" name="name"></input>
         <div class="table">
             check table
         </div>
@@ -23,21 +35,10 @@
     </li>
 </template>
 
-<div class="root">
+<div class="root" id="root">
     <h1>Habits</h1>
-
-    <main class="contents">
-
-        <section class="habits" id="habits">
-            <div class="habits-actions">
-                <label class="input"><input type="text" name="input-name"></label>
-                <button type="button" class="btn" id="button-add">습관 추가</button>
-            </div>
-            <ul class="habits-list" data-component="habitslist"></ul>
-        </section>
-
+    <main class="contents" data-component="habits">
     </main>
-
 </div>
 
 <script type="module" src="../js/list.js"></script>

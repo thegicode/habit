@@ -8,12 +8,10 @@ const renderWrapper = component => {
         .from(childComponent)
         .forEach( target => {
             const name = target.dataset.component
-
             const child = registry[name]
             if (!child) {
                 return
             }
-
             target.replaceWith(child(target, state, events))
         })
         return element

@@ -12,7 +12,7 @@ const isNodeChanged = (node1, node2)=> {
             const { name } = attribute
             const attribute1 = node1.getAttribute(name)
             const attribute2 = node2.getAttribute(name)
-            return attribute1 !== attribute1
+            return attribute1 !== attribute2
         })
     if (differentAttribute) {
         return true
@@ -36,6 +36,7 @@ const applyDiff = (parentNode, realNode, virtualNode)=> {
         parentNode.appendChild(virtualNode)
         return
     }
+   
 
     if (isNodeChanged(virtualNode, realNode)) {
         realNode.replaceWith(virtualNode)
