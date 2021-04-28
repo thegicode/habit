@@ -16,6 +16,16 @@ const {
     ...events
     } = model
 
+const render = state => {
+    window.requestAnimationFrame(() => {
+        const cpnt = document.querySelector('#root')
+        const newCpnt = registry.renderRoot( cpnt, state, events )
+        applyDiff(document.body, cpnt, newCpnt)
+    })
+}
+
+addChangeListener(render)
+
 /*const events = {
     getState: () => {
         return model.getState()
@@ -34,15 +44,7 @@ const {
     }
 }
 */
-const render = state => {
-    window.requestAnimationFrame(() => {
-        const cpnt = document.querySelector('#root')
-        const newCpnt = registry.renderRoot( cpnt, state, events )
-        applyDiff(document.body, cpnt, newCpnt)
-    })
-}
 
-addChangeListener(render)
 
 // render(model.getState())
 
