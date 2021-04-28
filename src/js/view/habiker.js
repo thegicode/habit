@@ -19,12 +19,11 @@ const isNotEmpty = inputElement => {
     return false
 }
 
-const isIncludes = (habits, inputElement) => {
-    const nameText = inputElement.value
-    const isIncludes = habits.some( item => {
-        return item.name === nameText
-    })
-    if (isIncludes) {
+const isIncludes = (events, inputElement) => {
+    const { isIncludes } = events
+    const text = inputElement.value
+
+    if (isIncludes(text)) {
         window.alert('이미 있는 습관명입니다.')
         inputElement.focus()
         inputElement.value = ''
@@ -41,12 +40,11 @@ const addEvents = (newCpnt, events) => {
 
     const listenr = function (inputEl) {
         const nameText = inputEl.value
-        const habits = getState().habits
         
         if (isNotEmpty(inputEl)) {
             return 
         }
-        if (isIncludes(habits, inputEl)) {
+        if (isIncludes(events, inputEl)) {
             return
         }
 
@@ -62,7 +60,6 @@ const addEvents = (newCpnt, events) => {
     })
 
     button.addEventListener('click', function(e) {
-
         listenr(inputEl)
     })
 }

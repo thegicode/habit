@@ -16,7 +16,6 @@ class Handler {
         this.e = e
         this.index = index
         this.events = events
-        this.habits = events.getState().habits
     }
 
     isNotEmpty (inputElement) {
@@ -31,13 +30,7 @@ class Handler {
 
     isIncludes (inputElement) {
         const nameText = inputElement.value
-
-        const isIncludes = this.habits.some( (item, idx) => {
-            if (this.index === idx) {
-               return
-            }
-            return item.name === nameText
-        })
+        const isIncludes = this.events.isIncludes( nameText, this.index)
 
         if (isIncludes) {
             window.alert('이미 있는 습관명입니다.')
@@ -127,15 +120,15 @@ const getHabitElement = (habit, index, events) => {
 export default (targetElement, state, events) => {
     const { habits } = state
     const { deleteItem } = events
-    const newHabikers = targetElement.cloneNode(true)
+    const newHabikerList = targetElement.cloneNode(true)
 
-    newHabikers.innerHTML = ''
+    newHabikerList.innerHTML = ''
 
     habits
         .map( (habit, index) => getHabitElement(habit, index, events))
         .forEach( element => {
-            newHabikers.appendChild(element)
+            newHabikerList.appendChild(element)
         })
 
-    return newHabikers
+    return newHabikerList
 }

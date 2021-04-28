@@ -2,16 +2,30 @@ const cloneDeep = x => {
     return JSON.parse(JSON.stringify(x))
 }
 
-const initialState = {
+const freeze = x => Object.freeze(cloneDeep(x))
+
+const INITIAL_STATE = {
     habits: [],
     other: false
 }
 
-export default () => {
+export default (initialState = INITIAL_STATE) => {
     const state = cloneDeep(initialState)
+    let listeners = []
 
-    const getState = () => {
-        return Object.freeze(cloneDeep(state))
+    const addChangeListener = listener => {
+        listeners.push(listener)
+
+        listener(freeze(state))
+
+        return () => {
+            listeners = listeners.filter(l => l !== listener)
+        }
+    }
+
+    const invokeListeners = () => {
+        const data = freeze(state)
+        listeners.forEach(l => l(data))
     }
 
     const addItem = text => {
@@ -22,6 +36,8 @@ export default () => {
         state.habits.push({ 
             name: text
         })
+
+        invokeListeners()
     }
 
     const updateItem = (index, text) => {
@@ -38,6 +54,8 @@ export default () => {
         }
 
         state.habits[index].name = text
+
+        invokeListeners()
     }
 
     const deleteItem = index => {
@@ -50,12 +68,29 @@ export default () => {
         }
 
         state.habits.splice(index, 1)
+
+        invokeListeners()
+    }
+
+    const isIncludes = (text, index) => {
+        if (!text) {
+            return
+        }
+        const is = state.habits
+                    .some( (item, idx) => {
+                        if( idx === index ){
+                            return
+                        }
+                        return item.name === text
+                    })
+        return is
     }
 
     return {
-        getState,
+        addChangeListener,
         addItem,
         updateItem,
-        deleteItem
+        deleteItem,
+        isIncludes
     }
 }
