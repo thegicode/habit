@@ -2,7 +2,7 @@ let tempalte
 
 const getTemplate = () => {
     if (!tempalte) {
-        tempalte = document.querySelector('[data-template=habits')
+        tempalte = document.querySelector('[data-template=habiker-app')
     }
     return tempalte
         .content
@@ -33,43 +33,43 @@ const isIncludes = (habits, inputElement) => {
     return false
 }
 
-const addEvents = (newHabit, state, events) => {
+const addEvents = (newMain, state, events) => {
     const { addItem } = events
     const { habits } = state
 
-    const form = newHabit.querySelector('form')
-    const input = newHabit.querySelector('input[name=input-name]')
-    const button = newHabit.querySelector('[data-button=input]')
+    const inputEl = newMain.querySelector('input[name=input-name]')
+    const button = newMain.querySelector('[data-button=input]')
 
-    const listenr = function (inputElement) {
-        const nameText = inputElement.value
+    const listenr = function (inputEl) {
+        const nameText = inputEl.value
         
-        if (isNotEmpty(inputElement)) {
+        if (isNotEmpty(inputEl)) {
             return 
         }
 
-        if (isIncludes(habits, inputElement)) {
+        if (isIncludes(habits, inputEl)) {
             return
         }
 
         addItem(nameText)
-        inputElement.value = ''
+        inputEl.value = ''
+        inputEl.focus()
     }
-    form.addEventListener('submit', function(e){
-        e.preventDefault()
-        listenr(input)
+    inputEl.addEventListener('keypress', function(e){
+        if (e.key === 'Enter') {
+            listenr(inputEl)
+        }
     })
     button.addEventListener('click', function(e) {
-        listenr(input)
-        input.focus()
+        listenr(inputEl)
     })
 }
 
 export default (targetElement, state, events) => {
-    const newHabit = targetElement.cloneNode(true)
-    newHabit.innerHTML = ''
-    newHabit.appendChild(getTemplate())
-    addEvents(newHabit, state, events)
+    const newCpnt = targetElement.cloneNode(true)
+    newCpnt.innerHTML = ''
+    newCpnt.appendChild(getTemplate())
+    addEvents(newCpnt, state, events)
 
-    return newHabit
+    return newCpnt
 }

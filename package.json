@@ -22,7 +22,7 @@
   },
   "scripts": {
     "start": "node app",
-    "watch:sass": "node-sass --watch --output-style expanded ./src/scss --output ./src/css --source-map true ",
+    "watch:css": "node-sass --watch --output-style expanded ./src/scss --output ./src/css --source-map true ",
     "eslint": "eslint src/js/**",
     "test": "echo \"Error: no test specified\" && exit 1"
   }

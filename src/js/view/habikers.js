@@ -2,7 +2,7 @@ let template
 
 const createNewNode = () => {
     if( !template ){
-        template = document.querySelector('[data-template=habits-item]')
+        template = document.querySelector('[data-template=habiker-item]')
     }
 
     return template
@@ -84,7 +84,7 @@ const getHabitElement = (habits, habit, index, events) => {
 
     el.dataset.index = index
     inputEl.value = name
-    inputEl.dataset.value = name
+    inputEl.dataset.value = name // For applyDiff
     inputEl.setAttribute('readonly', 'readonly')
  
     el.querySelector('[data-button=edit]')
@@ -97,11 +97,12 @@ const getHabitElement = (habits, habit, index, events) => {
             const instance = new HandleEvent(e, habits, index, events)
             instance.confirm()
         })
-    el.querySelector('form')
-        .addEventListener('submit', e => {
-            e.preventDefault()
-            const instance = new HandleEvent(e, habits, index, events)
-            instance.confirm()
+    inputEl
+        .addEventListener('keypress', e => {
+            if (e.key === 'Enter') {
+                const instance = new HandleEvent(e, habits, index, events)
+                instance.confirm()
+            }
         })
     el.querySelector('[data-button=delete]')
         .addEventListener('click', e => {
@@ -115,15 +116,15 @@ const getHabitElement = (habits, habit, index, events) => {
 export default (targetElement, state, events) => {
     const { habits } = state
     const { deleteItem } = events
-    const newHabitList = targetElement.cloneNode(true)
+    const newCpnt = targetElement.cloneNode(true)
 
-    newHabitList.innerHTML = ''
+    newCpnt.innerHTML = ''
 
     habits
         .map( (habit, index) => getHabitElement(habits, habit, index, events))
         .forEach( element => {
-            newHabitList.appendChild(element)
+            newCpnt.appendChild(element)
         })
 
-    return newHabitList
+    return newCpnt
 }
