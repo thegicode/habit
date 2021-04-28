@@ -11,62 +11,68 @@ const createNewNode = () => {
         .cloneNode(true)
 }
 
-class HandleEvent {
-    constructor(e, habits, index, events){
+class Handler {
+    constructor (e, index, events) {
         this.e = e
-        this.habits = habits
         this.index = index
         this.events = events
+        this.habits = events.getState().habits
     }
 
-    isNotEmpty(inputEl){
-        if (inputEl.value.length === 0) {
+    isNotEmpty (inputElement) {
+        if (inputElement.value.length === 0) {
             window.alert('습관명을 입력하세요.')
-            inputEl.focus()
+            inputElement.focus()
             return true
         }
+
         return false
     }
 
-    isIncludes(inputEl){
-        const nameText = inputEl.value
-        const isIncludes = this.habits.some( (item, index) => {
-            if (this.index === index) return
+    isIncludes (inputElement) {
+        const nameText = inputElement.value
+
+        const isIncludes = this.habits.some( (item, idx) => {
+            if (this.index === idx) {
+               return
+            }
             return item.name === nameText
         })
+
         if (isIncludes) {
             window.alert('이미 있는 습관명입니다.')
-            inputEl.focus()
-            inputEl.value = ''
+            inputElement.focus()
+            inputElement.value = ''
             return true
         }
+
         return false
     }
 
-    edit(){
+    edit () {
         const targetEl = this.e.target
         const el = targetEl.closest('.habits-item')
-        const inputEl = el.querySelector('input')
-        inputEl.removeAttribute('readonly')
-        inputEl.focus()
+        const inputElement = el.querySelector('input')
+        inputElement.removeAttribute('readonly')
+        inputElement.focus()
         targetEl.dataset.hidden = true
         el.querySelector('[data-button=confirm]').dataset.hidden = false
     }
 
-    confirm(){
+    confirm () {
         const targetEl = this.e.target
         const el = targetEl.closest('.habits-item')
-        const inputEl = el.querySelector('input')
-        if (this.isNotEmpty(inputEl)) {
+        const inputElement = el.querySelector('input')
+        if (this.isNotEmpty(inputElement)) {
             return 
         }
-        if (this.isIncludes(inputEl)) {
+        if (this.isIncludes(inputElement)) {
             return
         }
-        this.events.updateItem(this.index, inputEl.value)
+        this.events.updateItem(this.index, inputElement.value)
         el.querySelector('[data-button=confirm]').dataset.hidden = true
         el.querySelector('[data-button=edit]').dataset.hidden = false
-        inputEl.setAttribute('readonly', 'readonly')
+        inputElement.setAttribute('readonly', 'readonly')
     }
 
     delete(){
@@ -75,56 +81,61 @@ class HandleEvent {
 
 }
 
-const getHabitElement = (habits, habit, index, events) => {
-    const { name } = habit
-    const { updateItem, deleteItem } = events
-
-    const el = createNewNode()
-    const inputEl = el.querySelector('input[name=name]')
-
-    el.dataset.index = index
-    inputEl.value = name
-    inputEl.dataset.value = name // For applyDiff
-    inputEl.setAttribute('readonly', 'readonly')
- 
-    el.querySelector('[data-button=edit]')
+const addEventsToHabitElement = (element, index, events) => {
+    element
+        .querySelector('[data-button=edit]')
         .addEventListener('click', e => {
-            const instance = new HandleEvent(e, habits, index, events)
-            instance.edit()
+            const handler = new Handler(e, index, events)
+            handler.edit()
         })
-    el.querySelector('[data-button=confirm]')
+    element
+        .querySelector('[data-button=confirm]')
         .addEventListener('click', e => {
-            const instance = new HandleEvent(e, habits, index, events)
-            instance.confirm()
+            const handler = new Handler(e, index, events)
+            handler.confirm()
         })
-    inputEl
+    element.querySelector('input[name=name]')
         .addEventListener('keypress', e => {
             if (e.key === 'Enter') {
-                const instance = new HandleEvent(e, habits, index, events)
-                instance.confirm()
+                const handler = new Handler(e, index, events)
+                handler.confirm()
             }
         })
-    el.querySelector('[data-button=delete]')
+    element
+        .querySelector('[data-button=delete]')
         .addEventListener('click', e => {
-            const instance = new HandleEvent(e, habits, index, events)
-            instance.delete()
+            const handler = new Handler(e, index, events)
+            handler.delete()
         })
+}
 
-    return el
+const getHabitElement = (habit, index, events) => {
+    const { name } = habit
+
+    const element = createNewNode()
+    const inputElement = element.querySelector('input[name=name]')
+
+    element.dataset.index = index
+    inputElement.value = name
+    inputElement.setAttribute('readonly', 'readonly')
+     
+    addEventsToHabitElement(element, index, events)
+
+    return element
 }
 
 export default (targetElement, state, events) => {
     const { habits } = state
     const { deleteItem } = events
-    const newCpnt = targetElement.cloneNode(true)
+    const newHabikers = targetElement.cloneNode(true)
 
-    newCpnt.innerHTML = ''
+    newHabikers.innerHTML = ''
 
     habits
-        .map( (habit, index) => getHabitElement(habits, habit, index, events))
+        .map( (habit, index) => getHabitElement(habit, index, events))
         .forEach( element => {
-            newCpnt.appendChild(element)
+            newHabikers.appendChild(element)
         })
 
-    return newCpnt
+    return newHabikers
 }

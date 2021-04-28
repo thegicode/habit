@@ -1,4 +1,16 @@
 
+const diffrentValue = (node1, node2) => {
+    if (node1.value !== node2.value) {
+        return true
+    }
+
+    if (node1.checked !==  node2.checked) {
+        return true
+    }
+
+    return false
+}
+
 const isNodeChanged = (node1, node2)=> {
     const n1Attribute = node1.attributes
     const n2Attribute = node2.attributes
@@ -14,7 +26,12 @@ const isNodeChanged = (node1, node2)=> {
             const attribute2 = node2.getAttribute(name)
             return attribute1 !== attribute2
         })
+
     if (differentAttribute) {
+        return true
+    }
+
+    if (diffrentValue(node1, node2)) {
         return true
     }
 
@@ -36,7 +53,6 @@ const applyDiff = (parentNode, realNode, virtualNode)=> {
         parentNode.appendChild(virtualNode)
         return
     }
-   
 
     if (isNodeChanged(virtualNode, realNode)) {
         realNode.replaceWith(virtualNode)
@@ -46,7 +62,10 @@ const applyDiff = (parentNode, realNode, virtualNode)=> {
     const realChildren = Array.from(realNode.children)
     const virtualChildren = Array.from(virtualNode.children)
 
-    const max = Math.max( realChildren.length, virtualChildren.length)
+    const max = Math.max( 
+        realChildren.length, 
+        virtualChildren.length
+    )
 
     for(let i = 0 ; i < max ; i++) {
         applyDiff(

@@ -33,20 +33,19 @@ const isIncludes = (habits, inputElement) => {
     return false
 }
 
-const addEvents = (newMain, state, events) => {
-    const { addItem } = events
-    const { habits } = state
+const addEvents = (newCpnt, events) => {
+    const { getState, addItem } = events
 
-    const inputEl = newMain.querySelector('input[name=input-name]')
-    const button = newMain.querySelector('[data-button=input]')
+    const inputEl = newCpnt.querySelector('input[name=input-name]')
+    const button = newCpnt.querySelector('[data-button=input]')
 
     const listenr = function (inputEl) {
         const nameText = inputEl.value
+        const habits = getState().habits
         
         if (isNotEmpty(inputEl)) {
             return 
         }
-
         if (isIncludes(habits, inputEl)) {
             return
         }
@@ -55,21 +54,27 @@ const addEvents = (newMain, state, events) => {
         inputEl.value = ''
         inputEl.focus()
     }
+
     inputEl.addEventListener('keypress', function(e){
         if (e.key === 'Enter') {
             listenr(inputEl)
         }
     })
+
     button.addEventListener('click', function(e) {
+
         listenr(inputEl)
     })
 }
 
 export default (targetElement, state, events) => {
-    const newCpnt = targetElement.cloneNode(true)
-    newCpnt.innerHTML = ''
-    newCpnt.appendChild(getTemplate())
-    addEvents(newCpnt, state, events)
+    const newApp = targetElement.cloneNode(true)
 
-    return newCpnt
+    newApp.innerHTML = ''
+    newApp.appendChild(getTemplate())
+
+    addEvents(newApp, events)
+
+    return newApp
 }
+

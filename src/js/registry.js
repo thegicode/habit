@@ -3,7 +3,7 @@ const registry = {}
 const renderWrapper = component => {
     return (targetElement, state, events) => {
         const element = component(targetElement, state, events)
-        const childComponent = element.querySelectorAll('[data-component]')
+        const childComponent = element.querySelectorAll('[data-component]') 
         Array
         .from(childComponent)
         .forEach( target => {
