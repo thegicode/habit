@@ -21,7 +21,7 @@
     "node-sass": "^4.13.0"
   },
   "scripts": {
-    "start": "node app",
+    "start": "node server",
     "watch:css": "node-sass --watch --output-style expanded ./src/scss --output ./src/css --source-map true ",
     "eslint": "eslint src/js/**",
     "test": "echo \"Error: no test specified\" && exit 1"
