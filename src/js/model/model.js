@@ -1,8 +1,8 @@
+import observableFactory from './observable.js'
+
 const cloneDeep = x => {
     return JSON.parse(JSON.stringify(x))
 }
-
-const freeze = x => Object.freeze(cloneDeep(x))
 
 const INITIAL_STATE = {
     habits: [],
@@ -13,21 +13,6 @@ export default (initialState = INITIAL_STATE) => {
     const state = cloneDeep(initialState)
     let listeners = []
 
-    const addChangeListener = listener => {
-        listeners.push(listener)
-
-        listener(freeze(state))
-
-        return () => {
-            listeners = listeners.filter(l => l !== listener)
-        }
-    }
-
-    const invokeListeners = () => {
-        const data = freeze(state)
-        listeners.forEach(l => l(data))
-    }
-
     const addItem = text => {
         if (!text) {
             return
@@ -36,8 +21,6 @@ export default (initialState = INITIAL_STATE) => {
         state.habits.push({ 
             name: text
         })
-
-        invokeListeners()
     }
 
     const updateItem = (index, text) => {
@@ -54,8 +37,6 @@ export default (initialState = INITIAL_STATE) => {
         }
 
         state.habits[index].name = text
-
-        invokeListeners()
     }
 
     const deleteItem = index => {
@@ -68,8 +49,6 @@ export default (initialState = INITIAL_STATE) => {
         }
 
         state.habits.splice(index, 1)
-
-        invokeListeners()
     }
 
     const isIncludes = (text, index) => {
@@ -86,11 +65,12 @@ export default (initialState = INITIAL_STATE) => {
         return is
     }
 
-    return {
-        addChangeListener,
+    const model = {
         addItem,
         updateItem,
         deleteItem,
         isIncludes
     }
+
+    return observableFactory(model, () => state)
 }

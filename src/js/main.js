@@ -25,26 +25,3 @@ const render = state => {
 }
 
 addChangeListener(render)
-
-/*const events = {
-    getState: () => {
-        return model.getState()
-    },
-    addItem: text => {
-        model.addItem(text)
-        render(model.getState())
-    },
-    updateItem: (index, text) => {
-        model.updateItem(index, text)
-        render(model.getState())
-    },
-    deleteItem: index => {
-        model.deleteItem(index)
-        render(model.getState())
-    }
-}
-*/
-
-
-// render(model.getState())
-
