@@ -4,17 +4,29 @@ import appView from './view/habiker.js'
 import applyDiff from './applyDiff.js'
 
 import registry from './registry.js'
-import modelFactory from './model/model.js'
+import stateFactory from './model/state.js'
 
 registry.add('app', appView)
 registry.add('habikers', habikersView)
 
-const model = modelFactory()
+const loadState = () => {
+    const serialized = window
+        .localStorage
+        .getItem('state')
+
+    if (!serialized) {
+        return
+    }
+
+    return JSON.parse(serialized)
+}
+
+const state = stateFactory(loadState())
 
 const {
     addChangeListener,
     ...events
-    } = model
+} = state
 
 const render = state => {
     window.requestAnimationFrame(() => {
@@ -24,27 +36,46 @@ const render = state => {
     })
 }
 
+const setStorage = state => {
+    Promise.resolve().then( () => {
+        window
+            .localStorage
+            .setItem('state', JSON.stringify(state))
+    })
+}
+
+const getStateTime = state => {
+    console.log(
+       `Current State (${new Date().getTime()})`,
+       state
+    )
+}
+
 addChangeListener(render)
 
-/*const events = {
-    getState: () => {
-        return model.getState()
-    },
-    addItem: text => {
-        model.addItem(text)
-        render(model.getState())
-    },
-    updateItem: (index, text) => {
-        model.updateItem(index, text)
-        render(model.getState())
-    },
-    deleteItem: index => {
-        model.deleteItem(index)
-        render(model.getState())
-    }
-}
+addChangeListener(setStorage)
+
+addChangeListener(getStateTime)
+
+/*addChangeListener(state => {
+    Promise.resolve().then( () => {
+        window
+            .localStorage
+            .setItem('state', JSON.stringify(state))
+    })
+})
+
+addChangeListener(state => {
+    console.log(
+       `Current State (${new Date().getTime()})`,
+       state
+    )
+})
+
 */
 
 
-// render(model.getState())
+
+
+
 
