@@ -1,75 +1,102 @@
-import observableFactory from './observable.js'
+const cloneDeep = x => {
+    return JSON.parse(JSON.stringify(x))
+}
 
 const INITIAL_STATE = {
     habits: [],
     other: false
 }
 
-export default (initialState = INITIAL_STATE) => {
-    const state = observableFactory(initialState)
 
-    const addItem = text => {
-        if (!text) {
-            return
-        }
-
-        state.habits = [ ...state.habits, {
+const addItem = (state, event) => {
+    const text = event.payload
+    if (!text) {
+        return state
+    }
+    return {
+        ...state,
+        habits: [...state.habits, {
             name: text
         }]
     }
+}
 
-    const updateItem = (index, text) => {
-        if (!text) {
-            return
-        }
+const updateItem = (state, event) => {
+    const {index, text} = event.payload
+    if (!text) {
+        return state
+    }
 
-        if (index < 0) {
-            return
-        }
+    if (index < 0) {
+        return state
+    }
 
-        if (!state.habits[index]) {
-            return
-        }
+    if (!state.habits[index]) {
+        return state
+    }
 
-        state.habits = state.habits.map( (habit, i) => {
+    return {
+        ...state,
+        habits: state.habits.map( (habit, i) => {
             if (i === index) {
                 habit.name = text
             }
             return habit
         })
     }
+}
 
-    const deleteItem = index => {
-        if (index < 0) {
-            return
-        }
-
-        if (!state.habits[index]) {
-            return
-        }
-
-        state.habits = state.habits.filter( (habit, i) => i !== index )
+const deleteItem = (state, event) => {
+    const index = event.payload
+    if (index < 0) {
+        return state
     }
 
-    const isIncludes = (text, index) => {
-        if (!text) {
-            return
-        }
-        const is = state.habits
-                    .some( (item, idx) => {
-                        if( idx === index ){
-                            return
-                        }
-                        return item.name === text
-                    })
-        return is
+    if (!state.habits[index]) {
+        return state
     }
 
     return {
-        addChangeListener: state.addChangeListener,
-        addItem,
-        updateItem,
-        deleteItem,
-        isIncludes
+        ...state,
+        habits: state.habits.filter( (habit, i) => i !== index )
     }
 }
+
+const isIncludes = (state, event) => {
+    const {text, index} = event.payload
+    if (!text) {
+        return
+    }
+    const is = state.habits
+                .some( (item, i) => {
+                    if( i === index ){
+                        return
+                    }
+                    return item.name === text
+                })
+    return is
+}
+
+const methods = {
+    ITEM_ADDED: addItem,
+    ITEM_UPDATED: updateItem,
+    ITEM_DELETED: deleteItem,
+    INCLUDES: isIncludes
+}
+
+export default (initialState = INITIAL_STATE) => {
+    return (prevState, event) => {
+        if (!prevState) {
+            return cloneDeep(initialState)
+        }
+
+        const currentModifier = methods[event.type]
+
+        if (!currentModifier) {
+            return prevState
+        }
+
+        return currentModifier(prevState, event)
+    }
+}
+

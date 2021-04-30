@@ -1,3 +1,5 @@
+import eventCreators from '../model/eventcreators.js'
+
 let tempalte
 
 const getTemplate = () => {
@@ -19,43 +21,36 @@ const isNotEmpty = inputElement => {
     return false
 }
 
-const isIncludes = (events, inputElement) => {
-    const { isIncludes } = events
-    const text = inputElement.value
-
-    if (isIncludes(text)) {
+const isIncludes = (el, dispatch) => {
+    if (dispatch(eventCreators.isIncludes(el.value))) {
         window.alert('이미 있는 습관명입니다.')
-        inputElement.focus()
-        inputElement.value = ''
+        el.focus()
+        el.value = ''
         return true
     }
     return false
 }
 
-const addEvents = (newCpnt, events) => {
-    const { getState, addItem } = events
+const addEvents = (newCpnt, dispatch) => {
 
     const inputEl = newCpnt.querySelector('input[name=input-name]')
     const button = newCpnt.querySelector('[data-button=input]')
 
-    const listenr = function (inputEl) {
-        const nameText = inputEl.value
-        
-        if (isNotEmpty(inputEl)) {
+    const listenr = function (el) {
+        if (isNotEmpty(el)) {
             return 
         }
-        if (isIncludes(events, inputEl)) {
+        if (isIncludes(el, dispatch)) {
             return
         }
-
-        addItem(nameText)
-        inputEl.value = ''
-        inputEl.focus()
+        dispatch(eventCreators.addItem(el.value))
+        el.value = ''
+        el.focus()
     }
 
     inputEl.addEventListener('keypress', function(e){
         if (e.key === 'Enter') {
-            listenr(inputEl)
+            listenr(this)
         }
     })
 
@@ -64,13 +59,13 @@ const addEvents = (newCpnt, events) => {
     })
 }
 
-export default (targetElement, state, events) => {
+export default (targetElement, state, dispatch) => {
     const newApp = targetElement.cloneNode(true)
 
     newApp.innerHTML = ''
     newApp.appendChild(getTemplate())
 
-    addEvents(newApp, events)
+    addEvents(newApp, dispatch)
 
     return newApp
 }

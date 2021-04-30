@@ -1,3 +1,5 @@
+import eventCreators from '../model/eventcreators.js'
+
 let template
 
 const createNewNode = () => {
@@ -12,10 +14,10 @@ const createNewNode = () => {
 }
 
 class Handler {
-    constructor (e, index, events) {
+    constructor (e, index, dispatch) {
         this.e = e
         this.index = index
-        this.events = events
+        this.dispatch = dispatch
     }
 
     isNotEmpty (inputElement) {
@@ -29,16 +31,13 @@ class Handler {
     }
 
     isIncludes (inputElement) {
-        const nameText = inputElement.value
-        const isIncludes = this.events.isIncludes( nameText, this.index)
-
-        if (isIncludes) {
+        const is = this.dispatch(eventCreators.isIncludes(inputElement.value, this.index))
+        if (is) {
             window.alert('이미 있는 습관명입니다.')
             inputElement.focus()
             inputElement.value = ''
             return true
         }
-
         return false
     }
 
@@ -62,47 +61,47 @@ class Handler {
         if (this.isIncludes(inputElement)) {
             return
         }
-        this.events.updateItem(this.index, inputElement.value)
+        this.dispatch(eventCreators.updateItem(this.index, inputElement.value))
         el.querySelector('[data-button=confirm]').dataset.hidden = true
         el.querySelector('[data-button=edit]').dataset.hidden = false
         inputElement.setAttribute('readonly', 'readonly')
     }
 
     delete(){
-        this.events.deleteItem(this.index)
+        this.dispatch(eventCreators.deleteItem(this.index))
     }
 
 }
 
-const addEventsToHabitElement = (element, index, events) => {
+const addEventsToHabitElement = (element, index, dispatch) => {
     element
         .querySelector('[data-button=edit]')
         .addEventListener('click', e => {
-            const handler = new Handler(e, index, events)
+            const handler = new Handler(e, index, dispatch)
             handler.edit()
         })
     element
         .querySelector('[data-button=confirm]')
         .addEventListener('click', e => {
-            const handler = new Handler(e, index, events)
+            const handler = new Handler(e, index, dispatch)
             handler.confirm()
         })
     element.querySelector('input[name=name]')
         .addEventListener('keypress', e => {
             if (e.key === 'Enter') {
-                const handler = new Handler(e, index, events)
+                const handler = new Handler(e, index, dispatch)
                 handler.confirm()
             }
         })
     element
         .querySelector('[data-button=delete]')
         .addEventListener('click', e => {
-            const handler = new Handler(e, index, events)
+            const handler = new Handler(e, index, dispatch)
             handler.delete()
         })
 }
 
-const getHabitElement = (habit, index, events) => {
+const getHabitElement = (habit, index, dispatch) => {
     const { name } = habit
 
     const element = createNewNode()
@@ -112,20 +111,19 @@ const getHabitElement = (habit, index, events) => {
     inputElement.value = name
     inputElement.setAttribute('readonly', 'readonly')
      
-    addEventsToHabitElement(element, index, events)
+    addEventsToHabitElement(element, index, dispatch)
 
     return element
 }
 
-export default (targetElement, state, events) => {
+export default (targetElement, state, dispatch) => {
     const { habits } = state
-    const { deleteItem } = events
     const newHabikerList = targetElement.cloneNode(true)
 
     newHabikerList.innerHTML = ''
 
     habits
-        .map( (habit, index) => getHabitElement(habit, index, events))
+        .map( (habit, index) => getHabitElement(habit, index, dispatch))
         .forEach( element => {
             newHabikerList.appendChild(element)
         })
