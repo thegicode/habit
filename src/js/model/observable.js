@@ -3,51 +3,28 @@ const cloneDeep = x => {
     return JSON.parse(JSON.stringify(x))
 }
 
-const freeze = x => Object.freeze(cloneDeep(x))
+const freeze = state => Object.freeze(cloneDeep(state))
 
-export default (model, stateGetter) => {
+export default (initialState) => {
+
     let listeners = []
 
-    const addChangeListener = cb => {
-        listeners.push(cb)
-        cb(freeze(stateGetter()))
+    const proxy = new Proxy (cloneDeep(initialState), {
+        set: (target, name, value) => {
+            target[name] = value
+            listeners.forEach( l => l(freeze(proxy)))
+            return true
+        }
+    })
 
+    proxy.addChangeListener = cb => {
+        listeners.push(cb)
+        cb(freeze(proxy))
         return () => {
             listeners = listeners
-                .filter(element => element !== cb)
+                .filter(l => l !== cb)
         }
     }
 
-    const invokeListeners = () => {
-        const data = freeze(stateGetter())
-        listeners.forEach(l => l(data))
-    }
-
-    const wrapAction = originalAction => {
-        return (...args) => {
-            const value = originalAction(...args)
-            if( originalAction.name !== 'isIncludes'){
-                invokeListeners()
-            }
-            return value
-        }
-    }
-
-    const baseProxy = {
-        addChangeListener
-    }
-
-    return Object
-        .keys(model)
-        .filter(key => {
-            return typeof model[key] === 'function'
-        })
-        .reduce( (proxy, key) => {
-            const action = model[key]
-            return {
-                ...proxy,
-                [key]: wrapAction(action)
-            }
-        }, baseProxy)
-
+    return proxy
 }

@@ -18,15 +18,15 @@ const renderWrapper = component => {
     }
 }
 
+const add = (name, component) => {
+    registry[name] = renderWrapper(component)
+}
+
 const renderRoot = (root, state, events) => {
     const cloneComponent = root => {
         return root.cloneNode(true)
     }
     return renderWrapper(cloneComponent)(root, state, events)
-}
-
-const add = (name, component) => {
-    registry[name] = renderWrapper(component)
 }
 
 export default {
