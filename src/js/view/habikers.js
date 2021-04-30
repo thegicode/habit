@@ -31,8 +31,8 @@ class Handler {
     }
 
     isIncludes (inputElement) {
-        const is = this.dispatch(eventCreators.isIncludes(inputElement.value, this.index))
-        if (is) {
+        const event = eventCreators.isIncludes(inputElement.value, this.index)
+        if (this.dispatch(event)) {
             window.alert('이미 있는 습관명입니다.')
             inputElement.focus()
             inputElement.value = ''
@@ -61,7 +61,8 @@ class Handler {
         if (this.isIncludes(inputElement)) {
             return
         }
-        this.dispatch(eventCreators.updateItem(this.index, inputElement.value))
+        const event = eventCreators.updateItem(this.index, inputElement.value)
+        this.dispatch(event)
         el.querySelector('[data-button=confirm]').dataset.hidden = true
         el.querySelector('[data-button=edit]').dataset.hidden = false
         inputElement.setAttribute('readonly', 'readonly')
