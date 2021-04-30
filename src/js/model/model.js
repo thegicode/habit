@@ -11,7 +11,6 @@ const INITIAL_STATE = {
 
 export default (initialState = INITIAL_STATE) => {
     const state = cloneDeep(initialState)
-    let listeners = []
 
     const addItem = text => {
         if (!text) {
