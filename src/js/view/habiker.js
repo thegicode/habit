@@ -43,7 +43,8 @@ const addEvents = (newCpnt, dispatch) => {
         if (isIncludes(el, dispatch)) {
             return
         }
-        dispatch(eventCreators.addItem(el.value))
+        const event = eventCreators.addItem(el.value)
+        dispatch(event)
         el.value = ''
         el.focus()
     }
