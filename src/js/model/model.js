@@ -72,7 +72,7 @@ export default (initialState = INITIAL_STATE) => {
         invokeListeners()
     }
 
-    const isIncludes = (text, index) => {
+    const includes = (text, index) => {
         if (!text) {
             return
         }
@@ -91,6 +91,6 @@ export default (initialState = INITIAL_STATE) => {
         addItem,
         updateItem,
         deleteItem,
-        isIncludes
+        includes
     }
 }

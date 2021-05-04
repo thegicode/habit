@@ -28,11 +28,11 @@ class Handler {
         return false
     }
 
-    isIncludes (inputElement) {
+    includes (inputElement) {
         const nameText = inputElement.value
-        const isIncludes = this.events.isIncludes( nameText, this.index)
+        const includes = this.events.includes( nameText, this.index)
 
-        if (isIncludes) {
+        if (includes) {
             window.alert('이미 있는 습관명입니다.')
             inputElement.focus()
             inputElement.value = ''
@@ -59,7 +59,7 @@ class Handler {
         if (this.isNotEmpty(inputElement)) {
             return 
         }
-        if (this.isIncludes(inputElement)) {
+        if (this.includes(inputElement)) {
             return
         }
         this.events.updateItem(this.index, inputElement.value)
