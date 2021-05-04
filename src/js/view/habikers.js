@@ -76,7 +76,7 @@ class Handler {
         inputElement.setAttribute('readonly', 'readonly')
     }
 
-    delete(){
+    delete() {
         this.dispatch(actionCreators.deleteItem(this.index))
     }
 
