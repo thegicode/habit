@@ -22,7 +22,7 @@ export default {
         type: EVENT_TYPES.ITEM_DELETED,
         payload: index
     }),
-    isIncludes: (text, index) => ({
+    includes: (text, index) => ({
         type: EVENT_TYPES.INCLUDES,
         payload: {
             text, 

@@ -7,7 +7,6 @@ const INITIAL_STATE = {
     other: false
 }
 
-
 const addItem = (state, event) => {
     const text = event.payload
     if (!text) {
@@ -62,7 +61,7 @@ const deleteItem = (state, event) => {
     }
 }
 
-const isIncludes = (state, event) => {
+const includes = (state, event) => {
     const {text, index} = event.payload
     if (!text) {
         return
@@ -81,7 +80,7 @@ const methods = {
     ITEM_ADDED: addItem,
     ITEM_UPDATED: updateItem,
     ITEM_DELETED: deleteItem,
-    INCLUDES: isIncludes
+    INCLUDES: includes
 }
 
 export default (initialState = INITIAL_STATE) => {

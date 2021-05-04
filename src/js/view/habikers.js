@@ -30,8 +30,8 @@ class Handler {
         return false
     }
 
-    isIncludes (inputElement) {
-        const event = eventCreators.isIncludes(inputElement.value, this.index)
+    includes (inputElement) {
+        const event = eventCreators.includes(inputElement.value, this.index)
         if (this.dispatch(event)) {
             window.alert('이미 있는 습관명입니다.')
             inputElement.focus()
@@ -58,7 +58,7 @@ class Handler {
         if (this.isNotEmpty(inputElement)) {
             return 
         }
-        if (this.isIncludes(inputElement)) {
+        if (this.includes(inputElement)) {
             return
         }
         const event = eventCreators.updateItem(this.index, inputElement.value)

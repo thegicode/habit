@@ -21,8 +21,8 @@ const isNotEmpty = inputElement => {
     return false
 }
 
-const isIncludes = (el, dispatch) => {
-    if (dispatch(eventCreators.isIncludes(el.value))) {
+const includes = (el, dispatch) => {
+    if (dispatch(eventCreators.includes(el.value))) {
         window.alert('이미 있는 습관명입니다.')
         el.focus()
         el.value = ''
@@ -40,7 +40,7 @@ const addEvents = (newCpnt, dispatch) => {
         if (isNotEmpty(el)) {
             return 
         }
-        if (isIncludes(el, dispatch)) {
+        if (includes(el, dispatch)) {
             return
         }
         const event = eventCreators.addItem(el.value)
