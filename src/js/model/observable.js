@@ -6,6 +6,7 @@ const cloneDeep = x => {
 const freeze = x => Object.freeze(cloneDeep(x))
 
 export default (model, stateGetter) => {
+
     let listeners = []
 
     const addChangeListener = cb => {

@@ -33,7 +33,7 @@ const isIncludes = (events, inputElement) => {
 }
 
 const addEvents = (newCpnt, events) => {
-    const { getState, addItem } = events
+    const { addItem } = events
 
     const inputEl = newCpnt.querySelector('input[name=input-name]')
     const button = newCpnt.querySelector('[data-button=input]')
@@ -74,4 +74,3 @@ export default (targetElement, state, events) => {
 
     return newApp
 }
-
