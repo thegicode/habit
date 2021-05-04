@@ -27,7 +27,7 @@ export default (model, stateGetter) => {
     const wrapAction = originalAction => {
         return (...args) => {
             const value = originalAction(...args)
-            if( originalAction.name !== 'isIncludes'){
+            if( originalAction.name !== 'includes'){
                 invokeListeners()
             }
             return value

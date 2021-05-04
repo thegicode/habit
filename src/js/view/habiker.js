@@ -19,11 +19,11 @@ const isNotEmpty = inputElement => {
     return false
 }
 
-const isIncludes = (events, inputElement) => {
-    const { isIncludes } = events
+const includes = (events, inputElement) => {
+    const { includes } = events
     const text = inputElement.value
 
-    if (isIncludes(text)) {
+    if (includes(text)) {
         window.alert('이미 있는 습관명입니다.')
         inputElement.focus()
         inputElement.value = ''
@@ -44,7 +44,7 @@ const addEvents = (newCpnt, events) => {
         if (isNotEmpty(inputEl)) {
             return 
         }
-        if (isIncludes(events, inputEl)) {
+        if (includes(events, inputEl)) {
             return
         }
 

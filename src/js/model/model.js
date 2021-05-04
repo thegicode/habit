@@ -50,7 +50,7 @@ export default (initialState = INITIAL_STATE) => {
         state.habits.splice(index, 1)
     }
 
-    const isIncludes = (text, index) => {
+    const includes = (text, index) => {
         if (!text) {
             return
         }
@@ -68,7 +68,7 @@ export default (initialState = INITIAL_STATE) => {
         addItem,
         updateItem,
         deleteItem,
-        isIncludes
+        includes
     }
 
     return observableFactory(model, () => state)
