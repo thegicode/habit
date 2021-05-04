@@ -1,4 +1,4 @@
-import eventCreators from '../model/eventcreators.js'
+import actionCreators from '../model/actionCreators.js'
 
 let template
 
@@ -14,31 +14,39 @@ const createNewNode = () => {
 }
 
 class Handler {
-    constructor (e, index, dispatch) {
+    constructor (e, store, index) {
         this.e = e
+        this.store = store
+        this.dispatch = store.dispatch
         this.index = index
-        this.dispatch = dispatch
+
     }
 
-    isNotEmpty (inputElement) {
-        if (inputElement.value.length === 0) {
+    isNotEmpty (el) {
+        if (el.value.length === 0) {
             window.alert('습관명을 입력하세요.')
-            inputElement.focus()
+            el.focus()
             return true
         }
-
         return false
     }
 
-    isIncludes (inputElement) {
-        const event = eventCreators.isIncludes(inputElement.value, this.index)
-        if (this.dispatch(event)) {
-            window.alert('이미 있는 습관명입니다.')
-            inputElement.focus()
-            inputElement.value = ''
-            return true
-        }
-        return false
+    isIncludes (el, index) {
+        const state = this.store.getState()
+        const is = state.habits
+            .some( (item, idx) => {
+                if( idx === index ){
+                    return
+                }
+                if (item.name === el.value) {
+                    window.alert('이미 있는 습관명입니다.')
+                    el.focus()
+                    el.value = ''
+                    return true
+                }
+                return false
+            })
+        return is
     }
 
     edit () {
@@ -58,10 +66,11 @@ class Handler {
         if (this.isNotEmpty(inputElement)) {
             return 
         }
-        if (this.isIncludes(inputElement)) {
+
+        if (this.isIncludes(inputElement, this.index) === true) {
             return
         }
-        const event = eventCreators.updateItem(this.index, inputElement.value)
+        const event = actionCreators.updateItem(this.index, inputElement.value)
         this.dispatch(event)
         el.querySelector('[data-button=confirm]').dataset.hidden = true
         el.querySelector('[data-button=edit]').dataset.hidden = false
@@ -69,40 +78,42 @@ class Handler {
     }
 
     delete(){
-        this.dispatch(eventCreators.deleteItem(this.index))
+        this.dispatch(actionCreators.deleteItem(this.index))
     }
 
 }
 
-const addEventsToHabitElement = (element, index, dispatch) => {
+const addEventsToHabitElement = (store, element, index) => {
+    const dispatch = store.dispatch
     element
         .querySelector('[data-button=edit]')
         .addEventListener('click', e => {
-            const handler = new Handler(e, index, dispatch)
+            const handler = new Handler(e, store, index)
             handler.edit()
         })
     element
         .querySelector('[data-button=confirm]')
         .addEventListener('click', e => {
-            const handler = new Handler(e, index, dispatch)
+            const handler = new Handler(e, store, index)
             handler.confirm()
         })
     element.querySelector('input[name=name]')
         .addEventListener('keypress', e => {
             if (e.key === 'Enter') {
-                const handler = new Handler(e, index, dispatch)
+                const handler = new Handler(e, store, index)
                 handler.confirm()
             }
         })
     element
         .querySelector('[data-button=delete]')
         .addEventListener('click', e => {
-            const handler = new Handler(e, index, dispatch)
+            const handler = new Handler(e, store, index)
             handler.delete()
         })
 }
 
-const getHabitElement = (habit, index, dispatch) => {
+const getHabitElement = (store, habit, index) => {
+    const dispatch = store.dispatch
     const { name } = habit
 
     const element = createNewNode()
@@ -112,19 +123,22 @@ const getHabitElement = (habit, index, dispatch) => {
     inputElement.value = name
     inputElement.setAttribute('readonly', 'readonly')
      
-    addEventsToHabitElement(element, index, dispatch)
+    addEventsToHabitElement(store, element, index)
 
     return element
 }
 
-export default (targetElement, state, dispatch) => {
+export default (targetElement, store) => {
+    const state = store.getState()
+    const dispatch = store.dispatch
+
     const { habits } = state
     const newHabikerList = targetElement.cloneNode(true)
 
     newHabikerList.innerHTML = ''
 
     habits
-        .map( (habit, index) => getHabitElement(habit, index, dispatch))
+        .map( (habit, index) => getHabitElement(store, habit, index))
         .forEach( element => {
             newHabikerList.appendChild(element)
         })
