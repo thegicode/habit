@@ -19,7 +19,6 @@ class Handler {
         this.store = store
         this.dispatch = store.dispatch
         this.index = index
-
     }
 
     isNotEmpty (el) {
@@ -83,7 +82,7 @@ class Handler {
 
 }
 
-const addEventsToHabitElement = (store, element, index) => {
+const attachEvents = (store, element, index) => {
     const dispatch = store.dispatch
     element
         .querySelector('[data-button=edit]')
@@ -123,7 +122,7 @@ const getHabitElement = (store, habit, index) => {
     inputElement.value = name
     inputElement.setAttribute('readonly', 'readonly')
      
-    addEventsToHabitElement(store, element, index)
+    attachEvents(store, element, index)
 
     return element
 }
