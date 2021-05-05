@@ -22,6 +22,7 @@ const store = Redux.createStore(
 )
 
 const render = () => {
+    console.log('render')
     window.requestAnimationFrame(() => {
         const main = document.querySelector('#root')
         const newMain = registry.renderRoot( 
