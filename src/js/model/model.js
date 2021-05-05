@@ -51,25 +51,10 @@ export default (initialState = INITIAL_STATE) => {
         state.habits = state.habits.filter( (habit, i) => i !== index )
     }
 
-    const isIncludes = (text, index) => {
-        if (!text) {
-            return
-        }
-        const is = state.habits
-                    .some( (item, idx) => {
-                        if( idx === index ){
-                            return
-                        }
-                        return item.name === text
-                    })
-        return is
-    }
-
     return {
         addChangeListener: state.addChangeListener,
         addItem,
         updateItem,
-        deleteItem,
-        isIncludes
+        deleteItem
     }
 }

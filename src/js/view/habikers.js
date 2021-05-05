@@ -1,4 +1,5 @@
 let template
+let thisState = {}
 
 const createNewNode = () => {
     if( !template ){
@@ -18,36 +19,38 @@ class Handler {
         this.events = events
     }
 
-    isNotEmpty (inputElement) {
-        if (inputElement.value.length === 0) {
+    isNotEmpty (inputEl) {
+        if (inputEl.value.length === 0) {
             window.alert('습관명을 입력하세요.')
-            inputElement.focus()
+            inputEl.focus()
             return true
         }
 
         return false
     }
 
-    isIncludes (inputElement) {
-        const nameText = inputElement.value
-        const isIncludes = this.events.isIncludes( nameText, this.index)
-
-        if (isIncludes) {
+    includes (inputEl) {
+        const is = thisState.habits
+            .some( (item, i) => {
+                if( i === this.index ){
+                    return
+                }
+                return item.name === inputEl.value
+            })
+        if (is) {
             window.alert('이미 있는 습관명입니다.')
-            inputElement.focus()
-            inputElement.value = ''
-            return true
+            inputEl.focus()
+            inputEl.value = ''
         }
-
-        return false
+        return is
     }
 
     edit () {
         const targetEl = this.e.target
         const el = targetEl.closest('.habits-item')
-        const inputElement = el.querySelector('input')
-        inputElement.removeAttribute('readonly')
-        inputElement.focus()
+        const inputEl = el.querySelector('input')
+        inputEl.removeAttribute('readonly')
+        inputEl.focus()
         targetEl.dataset.hidden = true
         el.querySelector('[data-button=confirm]').dataset.hidden = false
     }
@@ -55,17 +58,17 @@ class Handler {
     confirm () {
         const targetEl = this.e.target
         const el = targetEl.closest('.habits-item')
-        const inputElement = el.querySelector('input')
-        if (this.isNotEmpty(inputElement)) {
+        const inputEl = el.querySelector('input')
+        if (this.isNotEmpty(inputEl)) {
             return 
         }
-        if (this.isIncludes(inputElement)) {
+        if (this.includes(inputEl)) {
             return
         }
-        this.events.updateItem(this.index, inputElement.value)
+        this.events.updateItem(this.index, inputEl.value)
         el.querySelector('[data-button=confirm]').dataset.hidden = true
         el.querySelector('[data-button=edit]').dataset.hidden = false
-        inputElement.setAttribute('readonly', 'readonly')
+        inputEl.setAttribute('readonly', 'readonly')
     }
 
     delete(){
@@ -106,11 +109,11 @@ const getHabitElement = (habit, index, events) => {
     const { name } = habit
 
     const element = createNewNode()
-    const inputElement = element.querySelector('input[name=name]')
+    const inputEl = element.querySelector('input[name=name]')
 
     element.dataset.index = index
-    inputElement.value = name
-    inputElement.setAttribute('readonly', 'readonly')
+    inputEl.value = name
+    inputEl.setAttribute('readonly', 'readonly')
      
     addEventsToHabitElement(element, index, events)
 
@@ -123,6 +126,8 @@ export default (targetElement, state, events) => {
     const newHabikerList = targetElement.cloneNode(true)
 
     newHabikerList.innerHTML = ''
+
+    thisState = state
 
     habits
         .map( (habit, index) => getHabitElement(habit, index, events))

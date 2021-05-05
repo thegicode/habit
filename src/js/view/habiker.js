@@ -1,4 +1,5 @@
 let tempalte
+let thisState = {}
 
 const getTemplate = () => {
     if (!tempalte) {
@@ -19,17 +20,17 @@ const isNotEmpty = inputElement => {
     return false
 }
 
-const isIncludes = (events, inputElement) => {
-    const { isIncludes } = events
-    const text = inputElement.value
-
-    if (isIncludes(text)) {
+const includes = el => {
+    const is = thisState.habits
+        .some( item => {
+            return item.name === el.value
+        })
+    if ( is ) {
         window.alert('이미 있는 습관명입니다.')
-        inputElement.focus()
-        inputElement.value = ''
-        return true
+        el.focus()
+        el.value = ''
     }
-    return false
+    return is
 }
 
 const addEvents = (newCpnt, events) => {
@@ -44,7 +45,7 @@ const addEvents = (newCpnt, events) => {
         if (isNotEmpty(inputEl)) {
             return 
         }
-        if (isIncludes(events, inputEl)) {
+        if (includes(inputEl)) {
             return
         }
 
@@ -69,6 +70,8 @@ export default (targetElement, state, events) => {
 
     newApp.innerHTML = ''
     newApp.appendChild(getTemplate())
+
+    thisState = state
 
     addEvents(newApp, events)
 
