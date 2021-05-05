@@ -57,24 +57,6 @@ addChangeListener(setStorage)
 
 addChangeListener(getStateTime)
 
-/*addChangeListener(state => {
-    Promise.resolve().then( () => {
-        window
-            .localStorage
-            .setItem('state', JSON.stringify(state))
-    })
-})
-
-addChangeListener(state => {
-    console.log(
-       `Current State (${new Date().getTime()})`,
-       state
-    )
-})
-
-*/
-
-
 
 
 
