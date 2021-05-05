@@ -10,30 +10,30 @@ const getTemplate = () => {
         .cloneNode(true)
 }
 
-const isNotEmpty = inputElement => {
-    if (inputElement.value.length === 0) {
+const isNotEmpty = inputEl => {
+    if (inputEl.value.length === 0) {
         window.alert('습관명을 입력하세요.')
-        inputElement.focus()
+        inputEl.focus()
         return true
     }
     return false
 }
 
-const includes = (events, inputElement) => {
+const includes = (events, inputEl) => {
     const { includes } = events
-    const text = inputElement.value
+    const text = inputEl.value
 
     if (includes(text)) {
         window.alert('이미 있는 습관명입니다.')
-        inputElement.focus()
-        inputElement.value = ''
+        inputEl.focus()
+        inputEl.value = ''
         return true
     }
     return false
 }
 
 const addEvents = (newCpnt, events) => {
-    const { getState, addItem } = events
+    const { addItem } = events
 
     const inputEl = newCpnt.querySelector('input[name=input-name]')
     const button = newCpnt.querySelector('[data-button=input]')
