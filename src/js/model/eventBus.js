@@ -24,10 +24,6 @@ export default (model) => {
     const dispatch = event => {
         const newState = model(state, event)
 
-        if (event.type == 'INCLUDES'){
-            return newState
-        }
-
         if (!newState) {
             throw new Error(`model should always return a value`)
         }

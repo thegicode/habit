@@ -1,6 +1,7 @@
 import eventCreators from '../model/eventcreators.js'
 
 let tempalte
+let thisState = {}
 
 const getTemplate = () => {
     if (!tempalte) {
@@ -21,17 +22,20 @@ const isNotEmpty = inputElement => {
     return false
 }
 
-const includes = (el, dispatch) => {
-    if (dispatch(eventCreators.includes(el.value))) {
+const includes = (el, state) => {
+    const is = state.habits
+        .some( item => {
+            return item.name === el.value
+        })
+    if ( is ) {
         window.alert('이미 있는 습관명입니다.')
         el.focus()
         el.value = ''
-        return true
     }
-    return false
+    return is
 }
 
-const addEvents = (newCpnt, dispatch) => {
+const addEvents = (newCpnt, state, dispatch) => {
 
     const inputEl = newCpnt.querySelector('input[name=input-name]')
     const button = newCpnt.querySelector('[data-button=input]')
@@ -40,7 +44,7 @@ const addEvents = (newCpnt, dispatch) => {
         if (isNotEmpty(el)) {
             return 
         }
-        if (includes(el, dispatch)) {
+        if (includes(el, thisState)) {
             return
         }
         const event = eventCreators.addItem(el.value)
@@ -61,12 +65,15 @@ const addEvents = (newCpnt, dispatch) => {
 }
 
 export default (targetElement, state, dispatch) => {
+
     const newApp = targetElement.cloneNode(true)
 
     newApp.innerHTML = ''
     newApp.appendChild(getTemplate())
 
-    addEvents(newApp, dispatch)
+    thisState = state
+
+    addEvents(newApp, state, dispatch)
 
     return newApp
 }

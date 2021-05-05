@@ -12,6 +12,7 @@ const addItem = (state, event) => {
     if (!text) {
         return state
     }
+
     return {
         ...state,
         habits: [...state.habits, {
@@ -61,26 +62,10 @@ const deleteItem = (state, event) => {
     }
 }
 
-const includes = (state, event) => {
-    const {text, index} = event.payload
-    if (!text) {
-        return
-    }
-    const is = state.habits
-                .some( (item, i) => {
-                    if( i === index ){
-                        return
-                    }
-                    return item.name === text
-                })
-    return is
-}
-
 const methods = {
     ITEM_ADDED: addItem,
     ITEM_UPDATED: updateItem,
-    ITEM_DELETED: deleteItem,
-    INCLUDES: includes
+    ITEM_DELETED: deleteItem
 }
 
 export default (initialState = INITIAL_STATE) => {
