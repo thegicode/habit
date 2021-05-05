@@ -1,6 +1,7 @@
 import actionCreators from '../model/actionCreators.js'
 
 let tempalte
+let thisState = {}
 
 const getTemplate = () => {
     if (!tempalte) {
@@ -21,31 +22,28 @@ const isNotEmpty = inputElement => {
     return false
 }
 
-const isIncludes = (state, el) => {
-    const is = state.habits
+const includes = el => {
+    const is = thisState.habits
         .some( item => {
-            if (item.name === el.value) {
-                window.alert('이미 있는 습관명입니다.')
-                el.focus()
-                el.value = ''
-                return true
-            }
-            return false
+            return item.name === el.value
         })
+    if ( is ) {
+        window.alert('이미 있는 습관명입니다.')
+        el.focus()
+        el.value = ''
+    }
     return is
 }
 
-const addEvents = (store, newCpnt) => {
-    const dispatch = store.dispatch
-    const inputEl = newCpnt.querySelector('input[name=input-name]')
-    const button = newCpnt.querySelector('[data-button=input]')
+const addEvents = (targetElement, dispatch) => {
+    const inputEl = targetElement.querySelector('input[name=input-name]')
+    const button = targetElement.querySelector('[data-button=input]')
 
-    const listener = function (el, store) {
-        const state = store.getState()
+    const listener = function (el) {
         if (isNotEmpty(el)) {
             return 
         }
-        if (isIncludes(state, el)) {
+        if (includes(el)) {
             return
         }
         const event = actionCreators.addItem(el.value)
@@ -56,25 +54,24 @@ const addEvents = (store, newCpnt) => {
 
     inputEl.addEventListener('keypress', function(e){
         if (e.key === 'Enter') {
-            listener(this, store)
+            listener(this)
         }
     })
 
     button.addEventListener('click', (e) => {
-        listener(inputEl, store)
+        listener(inputEl)
     })
 }
 
-export default (targetElement, store) => {
-    const state = store.getState()
-    const dispatch = store.dispatch
-
+export default (targetElement, state, dispatch) => {
     const newApp = targetElement.cloneNode(true)
 
     newApp.innerHTML = ''
     newApp.appendChild(getTemplate())
 
-    addEvents(store, newApp)
+    thisState = state
+
+    addEvents(newApp, dispatch)
 
     return newApp
 }

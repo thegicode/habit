@@ -1,6 +1,7 @@
 import actionCreators from '../model/actionCreators.js'
 
 let template
+let thisState = {}
 
 const createNewNode = () => {
     if( !template ){
@@ -14,10 +15,9 @@ const createNewNode = () => {
 }
 
 class Handler {
-    constructor (e, store, index) {
+    constructor (e, index, dispatch) {
         this.e = e
-        this.store = store
-        this.dispatch = store.dispatch
+        this.dispatch = dispatch
         this.index = index
     }
 
@@ -30,21 +30,19 @@ class Handler {
         return false
     }
 
-    isIncludes (el, index) {
-        const state = this.store.getState()
-        const is = state.habits
-            .some( (item, idx) => {
-                if( idx === index ){
+    includes (el) {
+        const is = thisState.habits
+            .some( (item, i) => {
+                if( i === this.index ){
                     return
                 }
-                if (item.name === el.value) {
-                    window.alert('이미 있는 습관명입니다.')
-                    el.focus()
-                    el.value = ''
-                    return true
-                }
-                return false
+                return item.name === el.value
             })
+        if (is) {
+            window.alert('이미 있는 습관명입니다.')
+            el.focus()
+            el.value = ''
+        }
         return is
     }
 
@@ -66,7 +64,7 @@ class Handler {
             return 
         }
 
-        if (this.isIncludes(inputElement, this.index) === true) {
+        if (this.includes(inputElement, this.index) === true) {
             return
         }
         const event = actionCreators.updateItem(this.index, inputElement.value)
@@ -82,37 +80,35 @@ class Handler {
 
 }
 
-const attachEvents = (store, element, index) => {
-    const dispatch = store.dispatch
+const attachEvents = (element, index, dispatch) => {
     element
         .querySelector('[data-button=edit]')
         .addEventListener('click', e => {
-            const handler = new Handler(e, store, index)
+            const handler = new Handler(e, index, dispatch)
             handler.edit()
         })
     element
         .querySelector('[data-button=confirm]')
         .addEventListener('click', e => {
-            const handler = new Handler(e, store, index)
+            const handler = new Handler(e, index, dispatch)
             handler.confirm()
         })
     element.querySelector('input[name=name]')
         .addEventListener('keypress', e => {
             if (e.key === 'Enter') {
-                const handler = new Handler(e, store, index)
+                const handler = new Handler(e, index, dispatch)
                 handler.confirm()
             }
         })
     element
         .querySelector('[data-button=delete]')
         .addEventListener('click', e => {
-            const handler = new Handler(e, store, index)
+            const handler = new Handler(e, index, dispatch)
             handler.delete()
         })
 }
 
-const getHabitElement = (store, habit, index) => {
-    const dispatch = store.dispatch
+const getHabitElement = (habit, index, dispatch) => {
     const { name } = habit
 
     const element = createNewNode()
@@ -122,22 +118,21 @@ const getHabitElement = (store, habit, index) => {
     inputElement.value = name
     inputElement.setAttribute('readonly', 'readonly')
      
-    attachEvents(store, element, index)
+    attachEvents(element, index, dispatch)
 
     return element
 }
 
-export default (targetElement, store) => {
-    const state = store.getState()
-    const dispatch = store.dispatch
-
+export default (targetElement, state, dispatch) => {
     const { habits } = state
     const newHabikerList = targetElement.cloneNode(true)
 
     newHabikerList.innerHTML = ''
 
+    thisState = state
+
     habits
-        .map( (habit, index) => getHabitElement(store, habit, index))
+        .map( (habit, index) => getHabitElement(habit, index, dispatch))
         .forEach( element => {
             newHabikerList.appendChild(element)
         })
