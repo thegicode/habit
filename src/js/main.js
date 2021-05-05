@@ -4,7 +4,7 @@ import appView from './view/habiker.js'
 import applyDiff from './applyDiff.js'
 
 import registry from './registry.js'
-import stateFactory from './model/state.js'
+import modelFactory from './model/model.js'
 
 registry.add('app', appView)
 registry.add('habikers', habikersView)
@@ -21,18 +21,19 @@ const loadState = () => {
     return JSON.parse(serialized)
 }
 
-const state = stateFactory(loadState())
+const model = modelFactory(loadState())
 
 const {
     addChangeListener,
     ...events
-} = state
+} = model
 
-const render = state => {
+const render = (state, cpnt, parent) => {
+    cpnt = cpnt  || document.querySelector('#root')
+    parent = parent || document.body
     window.requestAnimationFrame(() => {
-        const cpnt = document.querySelector('#root')
         const newCpnt = registry.renderRoot( cpnt, state, events )
-        applyDiff(document.body, cpnt, newCpnt)
+        applyDiff(parent, cpnt, newCpnt)
     })
 }
 
@@ -51,7 +52,7 @@ const getStateTime = state => {
     )
 }
 
-addChangeListener(render)
+addChangeListener(render) 
 
 addChangeListener(setStorage)
 
