@@ -22,8 +22,8 @@ const isNotEmpty = inputElement => {
     return false
 }
 
-const includes = (el, state) => {
-    const is = state.habits
+const includes = el => {
+    const is = thisState.habits
         .some( item => {
             return item.name === el.value
         })
@@ -44,7 +44,7 @@ const addEvents = (newCpnt, state, dispatch) => {
         if (isNotEmpty(el)) {
             return 
         }
-        if (includes(el, thisState)) {
+        if (includes(el)) {
             return
         }
         const event = eventCreators.addItem(el.value)
