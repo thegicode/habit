@@ -1,3 +1,13 @@
+let db
+let request = indexedDB.open("stateHabits")
+request.onerror = function(event) {
+    alert("Database error: " + event.target.errorCode)
+};
+request.onsuccess = function(event) {
+    db = request.result
+    console.log('db', db)
+};
+
 const cloneDeep = x => {
     return JSON.parse(JSON.stringify(x))
 }
