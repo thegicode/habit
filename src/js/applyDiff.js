@@ -44,6 +44,7 @@ const isNodeChanged = (node1, node2)=> {
 }
 
 const applyDiff = (parentNode, realNode, virtualNode)=> {
+    // console.log('applyDiff', parentNode)
     if (realNode && !virtualNode) {
         realNode.remove()
         return

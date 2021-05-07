@@ -5,7 +5,16 @@ const cloneDeep = x => {
 const freeze = x => Object.freeze(cloneDeep(x))
 
 const INITIAL_STATE = {
-    habits: [],
+    habits: [
+        {
+            name: 'Coding',
+            checked: [1, 3, 5, 7, 9]
+        },
+        {
+            name: 'Book',
+            checked: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 23]
+        }
+    ],
     other: false
 }
 
@@ -25,7 +34,10 @@ export default (initialState = INITIAL_STATE) => {
 
     const invokeListeners = () => {
         const data = freeze(state)
-        listeners.forEach(l => l(data))
+
+        listeners.forEach(l => {
+            l(data, false)
+         })
     }
 
     const addItem = text => {
@@ -34,7 +46,8 @@ export default (initialState = INITIAL_STATE) => {
         }
 
         state.habits.push({ 
-            name: text
+            name: text,
+            checked: []
         })
 
         invokeListeners()
@@ -86,11 +99,30 @@ export default (initialState = INITIAL_STATE) => {
         return is
     }
 
+    const updateChecked = (date, checked, index) => {
+        if ( !date ) {
+            return
+        }
+
+        const data = state.habits[index].checked
+        if (checked === true) {
+            data.push(date)
+        } else {
+            const idx = data.indexOf(date)
+            data.splice(idx, 1)
+        }
+
+        // console.log(state.habits[index].checked)
+
+        invokeListeners()
+    }
+
     return {
         addChangeListener,
         addItem,
         updateItem,
         deleteItem,
-        includes
+        includes,
+        updateChecked
     }
 }

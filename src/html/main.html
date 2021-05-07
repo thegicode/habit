@@ -12,7 +12,7 @@
 <template data-template="habiker-app">
     <section class="habits">
         <div class="habits-actions">
-            <input type="text" name="input-name" placeholder="습관명을 입력하세요." title="습관명 입력" autofocus>
+            <input type="text" name="name" placeholder="습관명을 입력하세요." title="습관명 입력" autofocus>
             <button type="button" class="btn" data-button="input">입력</button>
         </div>
         <ul class="habits-list" data-component="habikers"></ul>
@@ -22,14 +22,24 @@
 <template data-template="habiker-item">
     <li class="habits-item">
         <input type="text" name="name" title="습관명"></input>
-        <div class="table">
-            check table
+        <div class="trackers">
+            <ul class="trackers-list" data-component="trackers">
+            </ul>
         </div>
         <div class="actions">
             <button type="button" class="btn" data-button="edit">수정</button>
             <button type="button" class="btn" data-button="confirm" data-hidden="true">완료</button>
             <button type="button" class="btn" data-button="delete">삭제</button>
         </div>
+    </li>
+</template>
+
+<template data-template="tracker-item">
+    <li>
+        <label>
+            <input type="checkbox" name="check">
+            <span class="__text"></span>
+        </label>
     </li>
 </template>
 

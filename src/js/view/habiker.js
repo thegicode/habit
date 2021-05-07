@@ -35,7 +35,7 @@ const includes = (events, inputEl) => {
 const addEvents = (newCpnt, events) => {
     const { addItem } = events
 
-    const inputEl = newCpnt.querySelector('input[name=input-name]')
+    const inputEl = newCpnt.querySelector('input[name=name]')
     const button = newCpnt.querySelector('[data-button=input]')
 
     const listenr = function (inputEl) {

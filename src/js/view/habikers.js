@@ -107,10 +107,12 @@ const getHabitElement = (habit, index, events) => {
 
     const element = createNewNode()
     const inputElement = element.querySelector('input[name=name]')
+    const trackersEl = element.querySelector('.trackers-list')
 
     element.dataset.index = index
     inputElement.value = name
     inputElement.setAttribute('readonly', 'readonly')
+    trackersEl.dataset.index = index
      
     addEventsToHabitElement(element, index, events)
 
