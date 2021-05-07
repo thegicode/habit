@@ -69,6 +69,8 @@ class Handler {
     }
 
     delete(){
+        const parent = document.querySelector('.habits')
+        const child = document.querySelector('.habits-list')
         this.events.deleteItem(this.index)
     }
 
@@ -119,7 +121,6 @@ const getHabitElement = (habit, index, events) => {
 
 export default (targetElement, state, events) => {
     const { habits } = state
-    const { deleteItem } = events
     const newHabikerList = targetElement.cloneNode(true)
 
     newHabikerList.innerHTML = ''
