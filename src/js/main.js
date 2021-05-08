@@ -9,7 +9,7 @@ import modelFactory from './model/model.js'
 
 registry.add('app', appView)
 registry.add('habikers', habikersView)
-// registry.add('trackers', trackersView)
+registry.add('trackers', trackersView)
 
 const model = modelFactory()
 
@@ -18,7 +18,7 @@ const {
     ...events
     } = model
 
-const render = (state) => {
+const render = state => {
     window.requestAnimationFrame(() => {
         const cpnt = document.querySelector('#root')
         const newCpnt = registry.renderRoot( cpnt, state, events)

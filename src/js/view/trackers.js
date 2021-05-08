@@ -11,25 +11,32 @@ const createNewNode = () => {
         .cloneNode(true)
 }
 
-const getHabitElement = (date, index, habits, updateChecked) => {
-    const element = createNewNode()
-    const inputEl = element.querySelector('input[name=check]')
-    const textEl = element.querySelector('.__text')
+const getElements = (checkedDate, index, updateChecked) => {
+    let elements = []
 
-    const checkedDays = habits[index].checked
-
-
-    if (checkedDays.includes(date)) {
-        inputEl.checked = true
+    const date = new Date(),
+        fullDay = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate()
+    let days = []
+    for(let i = 0 ; i < fullDay ; i++){
+        days.push(i+1)
     }
-    textEl.textContent = date
 
-    inputEl
-        .addEventListener('change', function(e) {
-            updateChecked(date, this.checked, index)
-        })
+    elements = days.map( date => {
+        const el = createNewNode()
+        const inputEl = el.querySelector('input[name=check]')
+        if (checkedDate.includes(date)) {
+            inputEl.checked = true
+        }
+        el.querySelector('.__text').textContent = date
 
-    return element
+        inputEl
+            .addEventListener('change', function(e) {
+                updateChecked(date, this.checked, index)
+            })
+        return el
+    })
+
+    return elements
 }
 
 export default (targetElement, state, events) => {
@@ -40,20 +47,16 @@ export default (targetElement, state, events) => {
     newTrackerList.innerHTML = ''
 
     const index = targetElement.dataset.index
-
-    const date = new Date(),
-        fullDay = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate()
-
-    let days = []
-    for(let i = 0 ; i < fullDay ; i++){
-        days.push(i+1)
+    if( !habits[index] ) {
+        return targetElement
     }
 
-    days
-        .map( date => getHabitElement(date, index, habits, updateChecked))
-        .forEach( element => {
-            newTrackerList.appendChild(element)
-        })
+    const habit = habits[index]
+    const checkedDate = habit.checked
+    const elements = getElements(checkedDate, index, updateChecked)
+    elements.forEach( el => {
+         newTrackerList.appendChild(el)
+    })
 
     return newTrackerList
 }
