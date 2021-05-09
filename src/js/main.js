@@ -18,11 +18,12 @@ const {
     ...events
     } = model
 
-const render = state => {
+const render = (state, cpnt, parent) => {
     window.requestAnimationFrame(() => {
-        const cpnt = document.querySelector('#root')
+        cpnt = cpnt || document.querySelector('#root')
+        parent = parent || document.body
         const newCpnt = registry.renderRoot( cpnt, state, events)
-        applyDiff(document.body, cpnt, newCpnt)
+        applyDiff(parent, cpnt, newCpnt)
     })
 }
 

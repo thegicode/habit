@@ -69,7 +69,9 @@ class Handler {
     }
 
     delete(){
-        this.events.deleteItem(this.index)
+        const cpnt = document.querySelector('.habits')
+        const parent = document.querySelector('[data-component=app]')
+        this.events.deleteItem(this.index, cpnt, parent)
     }
 
 }

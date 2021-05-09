@@ -32,11 +32,11 @@ export default (initialState = INITIAL_STATE) => {
         }
     }
 
-    const invokeListeners = () => {
+    const invokeListeners = (cpnt, parent) => {
         const data = freeze(state)
 
         listeners.forEach(l => {
-            l(data, false)
+            l(data, cpnt, parent)
          })
     }
 
@@ -71,7 +71,7 @@ export default (initialState = INITIAL_STATE) => {
         invokeListeners()
     }
 
-    const deleteItem = index => {
+    const deleteItem = (index, cpnt, parent) => {
         if (index < 0) {
             return
         }
@@ -82,7 +82,7 @@ export default (initialState = INITIAL_STATE) => {
 
         state.habits.splice(index, 1)
 
-        invokeListeners()
+        invokeListeners(cpnt, parent)
     }
 
     const includes = (text, index) => {
