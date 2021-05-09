@@ -39,7 +39,32 @@ input:focus{
             padding: 0 5px;
             border: 1px solid #ddd;
         }
-
+    }
+    &-options {
+        margin-top: 1rem;
+        nav {
+            text-align: right;
+        }
+        label {
+            position: relative;
+            margin: 0 3px;
+            padding: 3px 5px;
+            border-radius: 5px;
+            border: 1px solid green;
+            background-color: rgba(0, 128, 0, 0.5);
+            text-align: center;
+            cursor: pointer;
+            &:active{
+                background-color: rgba(0, 128, 0, 0.3);
+            }
+        }
+        input[type=radio]{
+            position: absolute;
+            top: -200000rem;
+        }
+        .__text{
+            font-size: 14px;
+        }
     }
     &-list{
         margin-top: 1rem;

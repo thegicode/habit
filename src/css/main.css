@@ -45,6 +45,38 @@ input:focus {
   border: 1px solid #ddd;
 }
 
+.habits-options {
+  margin-top: 1rem;
+}
+
+.habits-options nav {
+  text-align: right;
+}
+
+.habits-options label {
+  position: relative;
+  margin: 0 3px;
+  padding: 3px 5px;
+  border-radius: 5px;
+  border: 1px solid green;
+  background-color: rgba(0, 128, 0, 0.5);
+  text-align: center;
+  cursor: pointer;
+}
+
+.habits-options label:active {
+  background-color: rgba(0, 128, 0, 0.3);
+}
+
+.habits-options input[type=radio] {
+  position: absolute;
+  top: -200000rem;
+}
+
+.habits-options .__text {
+  font-size: 14px;
+}
+
 .habits-list {
   margin-top: 1rem;
 }

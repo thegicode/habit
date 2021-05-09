@@ -1,20 +1,26 @@
 const registry = {}
 
-const renderWrapper = component => {
+let rootChildrenLen = 0
+
+const renderWrapper = getComponent => {
     return (targetElement, state, events) => {
-        const element = component(targetElement, state, events)
-        const childComponent = element.querySelectorAll('[data-component]')
+        const component = getComponent(targetElement, state, events)
+        const children = component.querySelectorAll('[data-component]')
+
         Array
-        .from(childComponent)
+        .from(children)
         .forEach( target => {
             const name = target.dataset.component
-            const child = registry[name]
-            if (!child) {
+            const getChild = registry[name]
+            if (!getChild) {
                 return
             }
-            target.replaceWith(child(target, state, events))
+            const childCpnt = getChild(target, state, events)
+            target.replaceWith(childCpnt)
+
         })
-        return element
+
+        return component
     }
 }
 
