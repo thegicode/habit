@@ -1,15 +1,16 @@
 import appView from './view/habiker.js'
-import habikersView from './view/habikers.js'
-import trackersView from './view/trackers.js'
+// import habikersView from './view/habikers.js'
+// import trackersView from './view/trackers.js'
 
-import applyDiff from './applyDiff.js'
+// import applyDiff from './applyDiff.js'
 
 import registry from './registry.js'
 import modelFactory from './model/model.js'
 
 registry.add('app', appView)
-registry.add('habikers', habikersView)
-registry.add('trackers', trackersView)
+
+// registry.add('habikers', habikersView)
+// registry.add('trackers', trackersView)
 
 const model = modelFactory()
 
@@ -18,12 +19,12 @@ const {
     ...events
     } = model
 
-const render = (state, cpnt, parent) => {
+const render = (state) => {
     window.requestAnimationFrame(() => {
-        cpnt = cpnt || document.querySelector('#root')
-        parent = parent || document.body
-        const newCpnt = registry.renderRoot( cpnt, state, events)
-        applyDiff(parent, cpnt, newCpnt)
+        const rootNode = document.querySelector('#root')
+        const newRootNode = registry.renderRoot( rootNode, state, events)
+        document.body.appendChild(newRootNode)
+        // applyDiff(parent, cpnt, newCpnt)
     })
 }
 
