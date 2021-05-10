@@ -11,118 +11,118 @@ const createNewNode = () => {
         .cloneNode(true)
 }
 
-// class Handler {
-//     constructor (e, index, events, oldName) {
-//         this.e = e
-//         this.index = index
-//         this.events = events
-//         this.oldName = oldName
-//         this.param = {
-//             cpnt: document.querySelector('[data-component=habikers').parentElement,
-//             parent: document.querySelector('[data-component=app]')
-//         }
-//     }
+class Handler {
+    constructor (e, index, events, oldName) {
+        this.e = e
+        this.index = index
+        this.events = events
+        this.oldName = oldName
+        this.param = {
+            cpnt: document.querySelector('[data-component=habikers').parentElement,
+            parent: document.querySelector('[data-component=app]')
+        }
+    }
 
-//     isNotEmpty (inputElement) {
-//         if (inputElement.value.length === 0) {
-//             window.alert('습관명을 입력하세요.')
-//             inputElement.focus()
-//             return true
-//         }
+    isNotEmpty (inputElement) {
+        if (inputElement.value.length === 0) {
+            window.alert('습관명을 입력하세요.')
+            inputElement.focus()
+            return true
+        }
 
-//         return false
-//     }
+        return false
+    }
 
-//     includes (inputElement) {
-//         const nameText = inputElement.value
-//         const includes = this.events.includes(nameText, this.index)
+    includes (inputElement) {
+        const nameText = inputElement.value
+        const includes = this.events.includes(nameText, this.index)
 
-//         if (includes) {
-//             window.alert('이미 있는 습관명입니다.')
-//             inputElement.focus()
-//             inputElement.value = ''
-//             return true
-//         }
+        if (includes) {
+            window.alert('이미 있는 습관명입니다.')
+            inputElement.focus()
+            inputElement.value = ''
+            return true
+        }
 
-//         return false
-//     }
+        return false
+    }
 
-//     edit () {
-//         const targetEl = this.e.target
-//         const el = targetEl.closest('.habits-item')
-//         const inputElement = el.querySelector('input')
-//         inputElement.removeAttribute('readonly')
-//         inputElement.focus()
-//         targetEl.dataset.hidden = true
-//         el.querySelector('[data-button=confirm]').dataset.hidden = false
-//     }
+    edit () {
+        const targetEl = this.e.target
+        const el = targetEl.closest('.habits-item')
+        const inputElement = el.querySelector('input')
+        inputElement.removeAttribute('readonly')
+        inputElement.focus()
+        targetEl.dataset.hidden = true
+        el.querySelector('[data-button=confirm]').dataset.hidden = false
+    }
 
-//     confirm () {
-//         const targetEl = this.e.target
-//         const el = targetEl.closest('.habits-item')
-//         const inputElement = el.querySelector('input')
+    confirm () {
+        const targetEl = this.e.target
+        const el = targetEl.closest('.habits-item')
+        const inputElement = el.querySelector('input')
 
-//         if (this.isNotEmpty(inputElement)) {
-//             return 
-//         }
-//         if (this.includes(inputElement)) {
-//             return
-//         }
+        if (this.isNotEmpty(inputElement)) {
+            return 
+        }
+        if (this.includes(inputElement)) {
+            return
+        }
 
-//         const result = this.events.updateItemName(
-//                             this.index, 
-//                             inputElement.value, 
-//                             this.param.cpnt, 
-//                             this.param.parent)
+        const result = this.events.updateItemName(
+                            this.index, 
+                            inputElement.value, 
+                            this.param.cpnt, 
+                            this.param.parent)
 
-//         if (!result) {
-//             inputElement.value = this.oldName
-//             console.log('이름이 변경되지 않았습니다.')
-//         } 
+        if (!result) {
+            inputElement.value = this.oldName
+            console.log('이름이 변경되지 않았습니다.')
+        } 
 
-//         el.querySelector('[data-button=confirm]').dataset.hidden = true
-//         el.querySelector('[data-button=edit]').dataset.hidden = false
-//         inputElement.setAttribute('readonly', 'readonly')
-//     }
+        el.querySelector('[data-button=confirm]').dataset.hidden = true
+        el.querySelector('[data-button=edit]').dataset.hidden = false
+        inputElement.setAttribute('readonly', 'readonly')
+    }
 
-//     delete(){
-//         this.events.deleteItem(
-//             this.index, 
-//             this.param.cpnt, 
-//             this.param.parent)
-//     }
+    delete(){
+        this.events.deleteItem(
+            this.index, 
+            this.param.cpnt, 
+            this.param.parent)
+    }
 
-// }
+}
 
-// const addEvents = (element, index, events) => {
-//     const oldName = element.querySelector('input[name=name]').value
-//     element
-//         .querySelector('[data-button=edit]')
-//         .addEventListener('click', e => {
-//             const handler = new Handler(e, index, events)
-//             handler.edit()
-//         })
-//     element
-//         .querySelector('[data-button=confirm]')
-//         .addEventListener('click', e => {
-//             const handler = new Handler(e, index, events)
-//             handler.confirm()
-//         })
+const addEvents = (element, index, events) => {
+    const oldName = element.querySelector('input[name=name]').value
+    element
+        .querySelector('[data-button=edit]')
+        .addEventListener('click', e => {
+            const handler = new Handler(e, index, events)
+            handler.edit()
+        })
+    element
+        .querySelector('[data-button=confirm]')
+        .addEventListener('click', e => {
+            const handler = new Handler(e, index, events)
+            handler.confirm()
+        })
     
-//     element.querySelector('input[name=name]')
-//         .addEventListener('keypress', e => {
-//             if (e.key === 'Enter') {
-//                 const handler = new Handler(e, index, events, oldName)
-//                 handler.confirm()
-//             }
-//         })
-//     element
-//         .querySelector('[data-button=delete]')
-//         .addEventListener('click', e => {
-//             const handler = new Handler(e, index, events)
-//             handler.delete()
-//         })
-// }
+    element.querySelector('input[name=name]')
+        .addEventListener('keypress', e => {
+            if (e.key === 'Enter') {
+                const handler = new Handler(e, index, events, oldName)
+                handler.confirm()
+            }
+        })
+    element
+        .querySelector('[data-button=delete]')
+        .addEventListener('click', e => {
+            const handler = new Handler(e, index, events)
+            handler.delete()
+        })
+}
 
 const getHabitElement = (habit, index, events) => {
     const { name } = habit

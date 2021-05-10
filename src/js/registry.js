@@ -3,20 +3,18 @@ const registry = {}
 const renderWrapper = component => {
     return (targetElement, state, events) => {
         const element = component(targetElement, state, events)
-        console.log('element', element)
         const children = element.querySelectorAll('[data-component]')
-        // Array
-        // .from(children)
-        // .forEach( target => {
-        //     const name = target.dataset.component
-        //     const child = registry[name]
-        //     if (!child) {
-        //         return
-        //     }
-        //     const childElement = child(target, state, events)
-        //     target.replaceWith(childElement)
-
-        // })
+        Array
+        .from(children)
+        .forEach( target => {
+            const name = target.dataset.component
+            const child = registry[name]
+            if (!child) {
+                return
+            }
+            const childElement = child(target, state, events)
+            target.replaceWith(childElement)
+        })
         return element
     }
 }
@@ -29,7 +27,6 @@ const renderRoot = (root, state, events) => {
 }
 
 const add = (name, component) => {
-    // registry[name] = component
     registry[name] = renderWrapper(component)
 }
 
