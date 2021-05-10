@@ -21,10 +21,10 @@
                     <input type="radio" name="period" value="month" checked>
                     <span class="__text">월간</span>
                 </label>
-                <!-- <label>
+                <label>
                     <input type="radio" name="period" value="week">
                     <span class="__text">주간</span>
-                </label> -->
+                </label>
             </nav>
         </div>
         <ul class="habits-list" data-component="habikers"></ul>
@@ -34,10 +34,7 @@
 <template data-template="habiker-item">
     <li class="habits-item">
         <input type="text" name="name" title="습관명"></input>
-        <div class="trackers">
-            <ul class="trackers-list" data-component="trackers">
-            </ul>
-        </div>
+        <div class="trackers" data-component="trackers"></div>
         <div class="actions">
             <button type="button" class="btn" data-button="edit">수정</button>
             <button type="button" class="btn" data-button="confirm" data-hidden="true">완료</button>
@@ -47,12 +44,10 @@
 </template>
 
 <template data-template="tracker-item">
-    <li>
-        <label>
-            <input type="checkbox" name="check">
-            <span class="__text"></span>
-        </label>
-    </li>
+    <label class="trackers-item">
+        <input type="checkbox" name="check">
+        <span class="__text"></span>
+    </label>
 </template>
 
 <div class="root" id="root">

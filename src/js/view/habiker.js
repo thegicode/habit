@@ -48,7 +48,9 @@ const addEvents = (newCpnt, events) => {
             return
         }
 
-        addItem(nameText)
+        const cpnt = document.querySelector['[data-component=habikers]']
+        const parent = document.querySelector['[data-component=app]']
+        addItem(nameText, cpnt, parent)
         inputEl.value = ''
         inputEl.focus()
     }

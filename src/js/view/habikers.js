@@ -12,10 +12,15 @@ const createNewNode = () => {
 }
 
 class Handler {
-    constructor (e, index, events) {
+    constructor (e, index, events, oldName) {
         this.e = e
         this.index = index
         this.events = events
+        this.oldName = oldName
+        this.param = {
+            cpnt: document.querySelector('[data-component=habikers').parentElement,
+            parent: document.querySelector('[data-component=app]')
+        }
     }
 
     isNotEmpty (inputElement) {
@@ -30,7 +35,7 @@ class Handler {
 
     includes (inputElement) {
         const nameText = inputElement.value
-        const includes = this.events.includes( nameText, this.index)
+        const includes = this.events.includes(nameText, this.index)
 
         if (includes) {
             window.alert('이미 있는 습관명입니다.')
@@ -62,21 +67,32 @@ class Handler {
         if (this.includes(inputElement)) {
             return
         }
-        this.events.updateItem(this.index, inputElement.value)
+        const result = this.events.updateItemName(
+                            this.index, 
+                            inputElement.value, 
+                            this.param.cpnt, 
+                            this.param.parent)
+        if (!result) {
+            inputElement.value = this.oldName
+            console.log('이름이 변경되지 않았습니다.')
+        } 
+
         el.querySelector('[data-button=confirm]').dataset.hidden = true
         el.querySelector('[data-button=edit]').dataset.hidden = false
         inputElement.setAttribute('readonly', 'readonly')
     }
 
     delete(){
-        const cpnt = document.querySelector('.habits')
-        const parent = document.querySelector('[data-component=app]')
-        this.events.deleteItem(this.index, cpnt, parent)
+        this.events.deleteItem(
+            this.index, 
+            this.param.cpnt, 
+            this.param.parent)
     }
 
 }
 
-const addEventsToHabitElement = (element, index, events) => {
+const addEvents = (element, index, events) => {
+    const oldName = element.querySelector('input[name=name]').value
     element
         .querySelector('[data-button=edit]')
         .addEventListener('click', e => {
@@ -92,7 +108,7 @@ const addEventsToHabitElement = (element, index, events) => {
     element.querySelector('input[name=name]')
         .addEventListener('keypress', e => {
             if (e.key === 'Enter') {
-                const handler = new Handler(e, index, events)
+                const handler = new Handler(e, index, events, oldName)
                 handler.confirm()
             }
         })
@@ -108,15 +124,15 @@ const getHabitElement = (habit, index, events) => {
     const { name } = habit
 
     const element = createNewNode()
-    const inputElement = element.querySelector('input[name=name]')
-    const trackersEl = element.querySelector('.trackers-list')
+    const inputEl = element.querySelector('input[name=name]')
+    const trackersEl = element.querySelector('.trackers')
 
     element.dataset.index = index
-    inputElement.value = name
-    inputElement.setAttribute('readonly', 'readonly')
+    inputEl.value = name
+    inputEl.setAttribute('readonly', 'readonly')
     trackersEl.dataset.index = index
      
-    addEventsToHabitElement(element, index, events)
+    addEvents(element, index, events)
 
     return element
 }

@@ -25,17 +25,24 @@ const getElements = (checkedDate, index, updateChecked) => {
     elements = days.map( date => {
         const el = createNewNode()
         const inputEl = el.querySelector('input[name=check]')
+        const textEl = el.querySelector('.__text')
+        
         if (checkedDate.includes(date)) {
             inputEl.checked = true
         }
         if (date > today) {
             inputEl.disabled = true
         }
-        el.querySelector('.__text').textContent = date
+        textEl.textContent = date
 
+        const oldChecked = inputEl.checked
         inputEl
             .addEventListener('change', function(e) {
-                updateChecked(date, this.checked, index)
+                const isUpdated = updateChecked(date, this.checked, index)
+                if (!isUpdated) {
+                    console.log('Not changed')
+                    this.checked = oldChecked
+                }
             })
         return el
     })

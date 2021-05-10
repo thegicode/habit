@@ -40,7 +40,7 @@ export default (initialState = INITIAL_STATE) => {
          })
     }
 
-    const addItem = text => {
+    const addItem = (text, cpnt, parent) => {
         if (!text) {
             return
         }
@@ -53,7 +53,7 @@ export default (initialState = INITIAL_STATE) => {
         invokeListeners()
     }
 
-    const updateItem = (index, text) => {
+    const updateItemName = (index, text, cpnt, parent) => {
         if (!text) {
             return
         }
@@ -68,7 +68,7 @@ export default (initialState = INITIAL_STATE) => {
 
         state.habits[index].name = text
 
-        invokeListeners()
+        return true
     }
 
     const deleteItem = (index, cpnt, parent) => {
@@ -101,26 +101,28 @@ export default (initialState = INITIAL_STATE) => {
 
     const updateChecked = (date, checked, index) => {
         if ( !date ) {
-            return
+            return false
         }
 
         const data = state.habits[index].checked
         if (checked === true) {
             data.push(date)
+            data.sort( (a, b) => {
+                return a - b
+            })
         } else {
             const idx = data.indexOf(date)
             data.splice(idx, 1)
         }
+        console.log(data)
 
-        // console.log(state.habits[index].checked)
-
-        invokeListeners()
+        return true
     }
 
     return {
         addChangeListener,
         addItem,
-        updateItem,
+        updateItemName,
         deleteItem,
         includes,
         updateChecked
