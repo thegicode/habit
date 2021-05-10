@@ -85,13 +85,14 @@ input:focus{
             padding: 5px;
             border-radius: 3px;
             border: none;
-            background-color: rgba(0, 128, 0, 0.2);
+            // background-color: rgba(0, 128, 0, 0.2);
             &[readonly="readonly"]{
                 pointer-events: none;
-                background: none
+                // background: none
             }
             &:focus:not([readonly="readonly"]){
-                border: 1px solid rgba(0, 128, 0, 0.7);
+                // border: 1px solid rgba(0, 128, 0, 0.7);
+                background-color: rgba(0, 128, 0, 0.2);
             }
         }
         .table{

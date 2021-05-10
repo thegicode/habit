@@ -99,16 +99,14 @@ input:focus {
   padding: 5px;
   border-radius: 3px;
   border: none;
-  background-color: rgba(0, 128, 0, 0.2);
 }
 
 .habits-item input[name="name"][readonly="readonly"] {
   pointer-events: none;
-  background: none;
 }
 
 .habits-item input[name="name"]:focus:not([readonly="readonly"]) {
-  border: 1px solid rgba(0, 128, 0, 0.7);
+  background-color: rgba(0, 128, 0, 0.2);
 }
 
 .habits-item .actions {

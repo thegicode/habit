@@ -61,17 +61,20 @@ class Handler {
         const targetEl = this.e.target
         const el = targetEl.closest('.habits-item')
         const inputElement = el.querySelector('input')
+
         if (this.isNotEmpty(inputElement)) {
             return 
         }
         if (this.includes(inputElement)) {
             return
         }
+
         const result = this.events.updateItemName(
                             this.index, 
                             inputElement.value, 
                             this.param.cpnt, 
                             this.param.parent)
+
         if (!result) {
             inputElement.value = this.oldName
             console.log('이름이 변경되지 않았습니다.')
@@ -105,6 +108,7 @@ const addEvents = (element, index, events) => {
             const handler = new Handler(e, index, events)
             handler.confirm()
         })
+    
     element.querySelector('input[name=name]')
         .addEventListener('keypress', e => {
             if (e.key === 'Enter') {
