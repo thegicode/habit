@@ -19,6 +19,8 @@ const renderWrapper = component => {
     }
 }
 
+
+
 const renderRoot = (root, state, events) => {
     const cloneComponent = root => {
         return root.cloneNode(true) 

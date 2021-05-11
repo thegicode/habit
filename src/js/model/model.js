@@ -50,10 +50,10 @@ export default (initialState = INITIAL_STATE) => {
             checked: []
         })
 
-        invokeListeners()
+        invokeListeners(cpnt, parent)
     }
 
-    const updateItemName = (index, text, cpnt, parent) => {
+    const updateItemName = (index, text) => {
         if (!text) {
             return
         }

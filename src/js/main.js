@@ -19,12 +19,12 @@ const {
     } = model
 
 const render = (state) => {
-    window.requestAnimationFrame(() => {
+    // window.requestAnimationFrame(() => {
         const rootNode = document.querySelector('#root')
         const newRootNode = registry.renderRoot( rootNode, state, events)
         rootNode.replaceWith(newRootNode)
         // applyDiff(parent, cpnt, newCpnt)
-    })
+    // })
 }
 
 addChangeListener(render)

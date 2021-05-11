@@ -1,4 +1,5 @@
 let tempalte
+let thisState = {}
 
 const getTemplate = () => {
     if (!tempalte) {
@@ -50,9 +51,10 @@ const addEvents = (newCpnt, events) => {
 
         const cpnt = document.querySelector['[data-component=habikers]']
         const parent = document.querySelector['[data-component=app]']
-        addItem(nameText, cpnt, parent)
+        const result = addItem(nameText, cpnt, parent)
         inputEl.value = ''
         inputEl.focus()
+
     }
 
     inputEl.addEventListener('keypress', function(e){
@@ -71,6 +73,8 @@ export default (targetElement, state, events) => {
 
     newApp.innerHTML = ''
     newApp.appendChild(getTemplate())
+
+    thisState = state
 
     addEvents(newApp, events)
 
