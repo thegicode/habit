@@ -1,15 +1,6 @@
-let template
+import { createNewNode } from './_helpers.js'
 
-const createNewNode = () => {
-    if( !template ){
-        template = document.querySelector('[data-template=habiker-item]')
-    }
-
-    return template
-        .content
-        .firstElementChild
-        .cloneNode(true)
-}
+const template = document.querySelector('[data-template=habiker-item]')
 
 class Handler {
     constructor (e, index, events, oldName) {
@@ -124,8 +115,7 @@ const addEvents = (element, index, events) => {
 
 const getHabitElement = (habit, index, events) => {
     const { name } = habit
-
-    const element = createNewNode()
+    const element = createNewNode(template)
     const inputEl = element.querySelector('input[name=name]')
     const trackersEl = element.querySelector('.trackers')
 

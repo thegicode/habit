@@ -1,15 +1,6 @@
-let template
+import { createNewNode } from './_helpers.js'
 
-const createNewNode = () => {
-    if( !template ){
-        template = document.querySelector('[data-template=tracker-item]')
-    }
-
-    return template
-        .content
-        .firstElementChild
-        .cloneNode(true)
-}
+const template = document.querySelector('[data-template=tracker-item]')
 
 const getElements = (checkedDate, index, updateItemChecked) => {
     let elements = []
@@ -23,7 +14,7 @@ const getElements = (checkedDate, index, updateItemChecked) => {
 
     const today = new Date().getDate()
     elements = days.map( date => {
-        const el = createNewNode()
+        const el = createNewNode(template)
         const inputEl = el.querySelector('input[name=check]')
         const textEl = el.querySelector('.__text')
         

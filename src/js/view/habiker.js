@@ -1,14 +1,6 @@
-let tempalte
+import { createNewNode } from './_helpers.js'
 
-const createNewNode = () => {
-    if (!tempalte) {
-        tempalte = document.querySelector('[data-template=habiker-app')
-    }
-    return tempalte
-        .content
-        .firstElementChild
-        .cloneNode(true)
-}
+const template = document.querySelector('[data-template=habiker-app')
 
 const isNotEmpty = inputEl => {
     if (inputEl.value.length === 0) {
@@ -82,10 +74,9 @@ export default (targetElement, state, events) => {
     const newApp = targetElement.cloneNode(true)
 
     newApp.innerHTML = ''
-    newApp.appendChild(createNewNode())
+    newApp.appendChild(createNewNode(template))
 
     addOptions(newApp)
-
     addEvents(newApp, events)
 
     return newApp
