@@ -31,6 +31,19 @@ const checkIncludes = (includes, inputEl) => {
     return false
 }
 
+const addOptions = (newCpnt) => {
+    const date = new Date()
+    const getMonth = () => {
+        let month = date.getMonth() + 1
+        if(parseInt(month) < 10) {
+            month =  `0${month}`
+        }
+        return month
+    }
+    newCpnt.querySelector('[data-text=option-title]')
+        .textContent = `${date.getFullYear()}.${getMonth()}`
+}
+
 const addEvents = (newCpnt, events) => {
     const { addItem, includes } = events
 
@@ -63,20 +76,6 @@ const addEvents = (newCpnt, events) => {
     button.addEventListener('click', function(e) {
         listener(inputEl)
     })
-}
-
-const addOptions = (newCpnt) => {
-    const date = new Date()
-    const year = date.getFullYear()
-    const getMonth = () => {
-        let month = date.getMonth() + 1
-        if(parseInt(month) < 10) {
-            month =  `0${month}`
-        }
-        return month
-    }
-    newCpnt.querySelector('[data-text=option-title]')
-        .textContent = `${year}.${getMonth()}`
 }
 
 export default (targetElement, state, events) => {
