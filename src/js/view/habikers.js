@@ -71,9 +71,7 @@ class Handler {
 
         const result = this.events.updateItemName(
                             this.index, 
-                            inputElement.value, 
-                            this.param.cpnt, 
-                            this.param.parent)
+                            inputElement.value)
 
         if (!result) {
             inputElement.value = this.oldName

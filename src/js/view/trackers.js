@@ -11,7 +11,7 @@ const createNewNode = () => {
         .cloneNode(true)
 }
 
-const getElements = (checkedDate, index, updateChecked) => {
+const getElements = (checkedDate, index, updateItemChecked) => {
     let elements = []
 
     const date = new Date(),
@@ -38,7 +38,7 @@ const getElements = (checkedDate, index, updateChecked) => {
         const oldChecked = inputEl.checked
         inputEl
             .addEventListener('change', function(e) {
-                const isUpdated = updateChecked(date, this.checked, index)
+                const isUpdated = updateItemChecked(date, this.checked, index)
                 if (!isUpdated) {
                     console.log('Not changed')
                     this.checked = oldChecked
@@ -52,7 +52,7 @@ const getElements = (checkedDate, index, updateChecked) => {
 
 export default (targetElement, state, events) => {
     const { habits } = state
-    const { updateChecked } = events
+    const { updateItemChecked } = events
     const newTrackerList = targetElement.cloneNode(true)
 
     newTrackerList.innerHTML = ''
@@ -64,7 +64,7 @@ export default (targetElement, state, events) => {
 
     const habit = habits[index]
     const checkedDate = habit.checked
-    const elements = getElements(checkedDate, index, updateChecked)
+    const elements = getElements(checkedDate, index, updateItemChecked)
     elements.forEach( el => {
          newTrackerList.appendChild(el)
     })
