@@ -11,7 +11,16 @@ registry.add('app', appView)
 registry.add('habikers', habikersView)
 registry.add('trackers', trackersView)
 
-const model = modelFactory()
+
+const getStorage = () => {
+    const storage = window.localStorage.getItem('HABITS')
+    if( !storage ) {
+        return
+    }
+    return JSON.parse( storage )
+}
+
+const model = modelFactory( getStorage() )
 
 const {
     addChangeListener,

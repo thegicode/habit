@@ -5,16 +5,7 @@ const cloneDeep = x => {
 const freeze = x => Object.freeze(cloneDeep(x))
 
 const INITIAL_STATE = {
-    habits: [
-        {
-            name: 'Coding',
-            checked: [1, 3, 5, 7, 9]
-        },
-        {
-            name: 'Book',
-            checked: [1, 2, 3, 4, 5, 6, 7, 8, 9]
-        }
-    ],
+    habits: [],
     other: false
 }
 
@@ -40,6 +31,10 @@ export default (initialState = INITIAL_STATE) => {
          })
     }
 
+    const updateStorage = () => {
+        window.localStorage.setItem('HABITS', JSON.stringify(state))
+    }
+
     const addItem = (text, cpnt, parent) => {
         if (!text) {
             return
@@ -51,6 +46,7 @@ export default (initialState = INITIAL_STATE) => {
         })
 
         invokeListeners()
+        updateStorage()
     }
 
     const updateItemName = (index, text) => {
@@ -67,6 +63,8 @@ export default (initialState = INITIAL_STATE) => {
         }
 
         state.habits[index].name = text
+
+        updateStorage()
 
         return true
     }
@@ -86,7 +84,8 @@ export default (initialState = INITIAL_STATE) => {
             const idx = data.indexOf(date)
             data.splice(idx, 1)
         }
-        // console.log(data)
+
+        updateStorage()
 
         return true
     }
@@ -103,6 +102,7 @@ export default (initialState = INITIAL_STATE) => {
         state.habits.splice(index, 1)
 
         invokeListeners(cpnt, parent)
+        updateStorage()
     }
 
     const includes = (text, index) => {
