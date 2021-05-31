@@ -45,7 +45,7 @@ export default (initialState = INITIAL_STATE) => {
             checked: []
         })
 
-        invokeListeners()
+        invokeListeners(cpnt, parent)
         updateStorage()
     }
 

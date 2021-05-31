@@ -11,7 +11,6 @@ registry.add('app', appView)
 registry.add('habikers', habikersView)
 registry.add('trackers', trackersView)
 
-
 const getStorage = () => {
     const storage = window.localStorage.getItem('HABITS')
     if( !storage ) {

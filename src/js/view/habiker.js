@@ -1,6 +1,6 @@
 let tempalte
 
-const getTemplate = () => {
+const createNewNode = () => {
     if (!tempalte) {
         tempalte = document.querySelector('[data-template=habiker-app')
     }
@@ -19,8 +19,7 @@ const isNotEmpty = inputEl => {
     return false
 }
 
-const includes = (events, inputEl) => {
-    const { includes } = events
+const checkIncludes = (includes, inputEl) => {
     const text = inputEl.value
 
     if (includes(text)) {
@@ -33,18 +32,18 @@ const includes = (events, inputEl) => {
 }
 
 const addEvents = (newCpnt, events) => {
-    const { addItem } = events
+    const { addItem, includes } = events
 
     const inputEl = newCpnt.querySelector('input[name=name]')
     const button = newCpnt.querySelector('[data-button=input]')
 
-    const listenr = function (inputEl) {
+    const listener = function (inputEl) {
         const nameText = inputEl.value
         
         if (isNotEmpty(inputEl)) {
             return 
         }
-        if (includes(events, inputEl)) {
+        if (checkIncludes(includes, inputEl)) {
             return
         }
 
@@ -57,20 +56,36 @@ const addEvents = (newCpnt, events) => {
 
     inputEl.addEventListener('keypress', function(e){
         if (e.key === 'Enter') {
-            listenr(inputEl)
+            listener(inputEl)
         }
     })
 
     button.addEventListener('click', function(e) {
-        listenr(inputEl)
+        listener(inputEl)
     })
+}
+
+const addOptions = (newCpnt) => {
+    const date = new Date()
+    const year = date.getFullYear()
+    const getMonth = () => {
+        let month = date.getMonth() + 1
+        if(parseInt(month) < 10) {
+            month =  `0${month}`
+        }
+        return month
+    }
+    newCpnt.querySelector('[data-text=option-title]')
+        .textContent = `${year}.${getMonth()}`
 }
 
 export default (targetElement, state, events) => {
     const newApp = targetElement.cloneNode(true)
 
     newApp.innerHTML = ''
-    newApp.appendChild(getTemplate())
+    newApp.appendChild(createNewNode())
+
+    addOptions(newApp)
 
     addEvents(newApp, events)
 

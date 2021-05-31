@@ -64,13 +64,13 @@ input:focus {
   top: -200000rem;
 }
 
-.habits-options input[type=radio]:checked + .__text {
+.habits-options input[type=radio]:checked + .__label {
   border-color: rgba(0, 128, 0, 0.4);
   background-color: rgba(0, 128, 0, 0.4);
   color: rgba(0, 0, 0, 0.5);
 }
 
-.habits-options .__text {
+.habits-options .__label {
   padding: 3px 7px;
   border-radius: 5px;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -78,6 +78,16 @@ input:focus {
   text-align: center;
   font-size: 13px;
   color: rgba(0, 0, 0, 0.3);
+}
+
+.habits-options .titles {
+  margin-top: 20px;
+  padding-bottom: 5px;
+  border-bottom: dashed 1px #ddd;
+}
+
+.habits-options .titles .__title {
+  color: #333;
 }
 
 .habits-list {
