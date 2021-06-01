@@ -29,7 +29,8 @@ const getElements = (checkedDate, index, updateItemChecked) => {
         const oldChecked = inputEl.checked
         inputEl
             .addEventListener('change', function(e) {
-                const isUpdated = updateItemChecked(date, this.checked, index)
+                const day = document.querySelector('[data-text=habits-day]').textContent
+                const isUpdated = updateItemChecked(day, date, this.checked, index)
                 if (!isUpdated) {
                     console.log('Not changed')
                     this.checked = oldChecked
@@ -42,12 +43,13 @@ const getElements = (checkedDate, index, updateItemChecked) => {
 }
 
 export default (targetElement, state, events) => {
-    const { habits } = state
+    let { habits } = state
     const { updateItemChecked } = events
     const newTrackerList = targetElement.cloneNode(true)
 
     newTrackerList.innerHTML = ''
 
+    habits = habits[Object.keys(habits)[0]]
     const index = targetElement.dataset.index
     if( !habits[index] ) {
         return targetElement

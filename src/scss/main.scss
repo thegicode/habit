@@ -41,40 +41,60 @@ input:focus{
         }
     }
     &-options {
-        margin-top: 1rem;
-        nav {
-            display: flex;
-            justify-content: flex-end;
-        }
-        label {
-            position: relative;
-            margin: 0 2px;
-        }
-        input[type=radio]{
-            position: absolute;
-            top: -200000rem;
-            &:checked + .__label {
-                border-color: rgba(0, 128, 0, 0.4);
-                background-color: rgba(0, 128, 0, 0.4);
-                color: rgba(0, 0, 0, 0.5);
-            }
-        }
-        .__label{
-            padding: 3px 7px;
-            border-radius: 5px;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            background-color: rgba(0, 0, 0, 0.1);
+        margin-top: 1.5rem;
+        // nav {
+        //     display: flex;
+        //     justify-content: flex-end;
+        // }
+        // label {
+        //     position: relative;
+        //     margin: 0 2px;
+        // }
+        // input[type=radio]{
+        //     position: absolute;
+        //     top: -200000rem;
+        //     &:checked + .__label {
+        //         border-color: rgba(0, 128, 0, 0.4);
+        //         background-color: rgba(0, 128, 0, 0.4);
+        //         color: rgba(0, 0, 0, 0.5);
+        //     }
+        // }
+        // .__label{
+        //     padding: 3px 7px;
+        //     border-radius: 5px;
+        //     border: 1px solid rgba(0, 0, 0, 0.1);
+        //     background-color: rgba(0, 0, 0, 0.1);
+        //     text-align: center;
+        //     font-size: 13px;
+        //     color: rgba(0, 0, 0, 0.3);
+        // }
+        // .titles{
+        //     margin-top: 20px;
+        //     padding-bottom: 5px;
+        //     border-bottom: dashed 1px #ddd;
+        //     .__title{
+        //         color: #333;
+        //     }
+        // }
+    }
+    .options-actions{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .__btn{
+            padding: 1px 5px;
+            border-radius: 3px;
+            border: 1px solid rgba(0, 128, 0, 0.1);
+            background-color: transparent;
             text-align: center;
-            font-size: 13px;
-            color: rgba(0, 0, 0, 0.3);
-        }
-        .titles{
-            margin-top: 20px;
-            padding-bottom: 5px;
-            border-bottom: dashed 1px #ddd;
-            .__title{
-                color: #333;
+            font-size: 12px;
+            color: rgba(0, 0, 0, 0.5);
+            &:active{
+                background-color: rgba(0, 128, 0, 0.1);
             }
+        }
+        .__title{
+            margin: 0 10px;
         }
     }
     &-list{

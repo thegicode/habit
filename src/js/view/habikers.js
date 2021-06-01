@@ -14,6 +14,10 @@ class Handler {
         }
     }
 
+    getDay () {
+        return document.querySelector('[data-text=habits-day]').textContent
+    }
+
     isNotEmpty (inputElement) {
         if (inputElement.value.length === 0) {
             window.alert('습관명을 입력하세요.')
@@ -26,7 +30,7 @@ class Handler {
 
     includes (inputElement) {
         const nameText = inputElement.value
-        const includes = this.events.includes(nameText, this.index)
+        const includes = this.events.includes(nameText, this.getDay(), this.index)
 
         if (includes) {
             window.alert('이미 있는 습관명입니다.')
@@ -61,6 +65,7 @@ class Handler {
         }
 
         const result = this.events.updateItemName(
+                            this.getDay(),
                             this.index, 
                             inputElement.value)
 
@@ -76,6 +81,7 @@ class Handler {
 
     delete(){
         this.events.deleteItem(
+            this.getDay(),
             this.index, 
             this.param.cpnt, 
             this.param.parent)
@@ -136,7 +142,7 @@ export default (targetElement, state, events) => {
 
     newHabikerList.innerHTML = ''
 
-    habits
+    habits[Object.keys(habits)[0]]
         .map( (habit, index) => getHabitElement(habit, index, events))
         .forEach( element => {
             newHabikerList.appendChild(element)

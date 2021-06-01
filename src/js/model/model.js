@@ -5,7 +5,24 @@ const cloneDeep = x => {
 const freeze = x => Object.freeze(cloneDeep(x))
 
 const INITIAL_STATE = {
-    habits: [],
+    habits: {
+        '2021.06': [
+            {
+                name: 'Coding',
+                checked: [1]
+            }
+        ],
+        '2021.05': [
+            {
+                name: 'Coding',
+                checked: [1, 2, 3, 4, 5, 10]
+            },
+            {
+                name: 'Book',
+                checked: [20, 30]
+            }
+        ],
+    },
     other: false
 }
 
@@ -35,12 +52,12 @@ export default (initialState = INITIAL_STATE) => {
         window.localStorage.setItem('HABITS', JSON.stringify(state))
     }
 
-    const addItem = (text, cpnt, parent) => {
-        if (!text) {
+    const addItem = (day, text, cpnt, parent) => {
+        if (!day || !text) {
             return
         }
 
-        state.habits.push({ 
+        state.habits[day].push({ 
             name: text,
             checked: []
         })
@@ -49,40 +66,38 @@ export default (initialState = INITIAL_STATE) => {
         updateStorage()
     }
 
-    const updateItemName = (index, text) => {
-        if (!text) {
+    const updateItemName = (day, index, text) => {
+        if (!day || !text || index < 0) {
             return
         }
 
-        if (index < 0) {
+        const _habits = state.habits[day]
+
+        if (!_habits[index]) {
             return
         }
 
-        if (!state.habits[index]) {
-            return
-        }
-
-        state.habits[index].name = text
+        _habits[index].name = text
 
         updateStorage()
 
         return true
     }
 
-    const updateItemChecked = (date, checked, index) => {
-        if ( !date ) {
+    const updateItemChecked = (day, date, checked, index) => {
+        if ( !day || !date  || index < 0 ) {
             return false
         }
 
-        const data = state.habits[index].checked
+        const _arr = state.habits[day][index].checked
         if (checked === true) {
-            data.push(date)
-            data.sort( (a, b) => {
+            _arr.push(date)
+            _arr.sort( (a, b) => {
                 return a - b
             })
         } else {
-            const idx = data.indexOf(date)
-            data.splice(idx, 1)
+            const idx = _arr.indexOf(date)
+            _arr.splice(idx, 1)
         }
 
         updateStorage()
@@ -90,26 +105,28 @@ export default (initialState = INITIAL_STATE) => {
         return true
     }
 
-    const deleteItem = (index, cpnt, parent) => {
-        if (index < 0) {
+    const deleteItem = (day, index, cpnt, parent) => {
+        if (!day || index < 0) {
             return
         }
 
-        if (!state.habits[index]) {
+        const _habits = state.habits[day]
+
+        if (!_habits[index]) {
             return
         }
 
-        state.habits.splice(index, 1)
+        _habits.splice(index, 1)
 
         invokeListeners(cpnt, parent)
         updateStorage()
     }
 
-    const includes = (text, index) => {
+    const includes = (text, day, index) => {
         if (!text) {
             return
         }
-        const is = state.habits
+        const is = state.habits[day]
                     .some( (item, idx) => {
                         if( idx === index ){
                             return

@@ -14,7 +14,7 @@ const isNotEmpty = inputEl => {
 const checkIncludes = (includes, inputEl) => {
     const text = inputEl.value
 
-    if (includes(text)) {
+    if (includes(text, '2021.06')) {
         window.alert('이미 있는 습관명입니다.')
         inputEl.focus()
         inputEl.value = ''
@@ -32,7 +32,7 @@ const addOptions = (newCpnt) => {
         }
         return month
     }
-    newCpnt.querySelector('[data-text=option-title]')
+    newCpnt.querySelector('[data-text=habits-day]')
         .textContent = `${date.getFullYear()}.${getMonth()}`
 }
 
@@ -54,7 +54,8 @@ const addEvents = (newCpnt, events) => {
 
         const cpnt = document.querySelector['[data-component=habikers]']
         const parent = document.querySelector['[data-component=app]']
-        addItem(nameText, cpnt, parent)
+        const day = document.querySelector('[data-text=habits-day]').textContent
+        addItem(day, nameText, cpnt, parent)
         inputEl.value = ''
         inputEl.focus()
     }
