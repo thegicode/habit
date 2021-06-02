@@ -4,29 +4,29 @@ const template = document.querySelector('[data-template=tracker-item]')
 
 const getElements = (checkedDate, index, events) => {
     const { activeMonth, updateItemChecked } = events
-    let elements = []
 
     const newDate = new Date(),
         getFullYear = newDate.getFullYear(),
-        getMonth = newDate.getMonth() + 1,
-        fullDay = new Date(getFullYear, getMonth, 0).getDate()
-    let days = []
-    for(let i = 0 ; i < fullDay ; i++){
-        days.push(i+1)
-    }
+        getMonth = newDate.getMonth() + 1;
 
-    elements = days.map( date => {
+    const arr = activeMonth.value.split('.'),
+        year = Number(arr[0]),
+        month = Number(arr[1]),
+        fullDay = new Date(year, month, 0).getDate()
+
+    let elements = []
+    
+    for(let i = 0 ; i < fullDay ; i++){
+        const date = i+1
         const el = createNewNode(template)
         const inputEl = el.querySelector('input[name=check]')
         const textEl = el.querySelector('.__text')
+        const oldChecked = inputEl.checked
         
         if (checkedDate.includes(date)) {
             inputEl.checked = true
         }
 
-        const arr = activeMonth.value.split('.')
-        const year = Number(arr[0])
-        const month = Number(arr[1])
         if( year >= getFullYear ){
             if (month === getMonth && date > newDate.getDate()) {
                 inputEl.disabled = true
@@ -38,7 +38,6 @@ const getElements = (checkedDate, index, events) => {
 
         textEl.textContent = date
 
-        const oldChecked = inputEl.checked
         inputEl
             .addEventListener('change', function() {
                 const isUpdated = updateItemChecked(date, this.checked, index)
@@ -47,8 +46,9 @@ const getElements = (checkedDate, index, events) => {
                     this.checked = oldChecked
                 }
             })
-        return el
-    })
+
+        elements.push(el)
+    }
 
     return elements
 }
