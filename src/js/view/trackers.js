@@ -29,8 +29,7 @@ const getElements = (checkedDate, index, updateItemChecked) => {
         const oldChecked = inputEl.checked
         inputEl
             .addEventListener('change', function(e) {
-                const day = document.querySelector('[data-text=habits-day]').textContent
-                const isUpdated = updateItemChecked(day, date, this.checked, index)
+                const isUpdated = updateItemChecked(date, this.checked, index)
                 if (!isUpdated) {
                     console.log('Not changed')
                     this.checked = oldChecked

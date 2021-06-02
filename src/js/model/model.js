@@ -6,23 +6,24 @@ const freeze = x => Object.freeze(cloneDeep(x))
 
 const INITIAL_STATE = {
     habits: {
-        '2021.06': [
-            {
-                name: 'Coding',
-                checked: [1]
-            }
-        ],
-        '2021.05': [
-            {
-                name: 'Coding',
-                checked: [1, 2, 3, 4, 5, 10]
-            },
-            {
-                name: 'Book',
-                checked: [20, 30]
-            }
-        ],
+        // '2021.06': [
+        //     {
+        //         name: 'Coding',
+        //         checked: [1]
+        //     }
+        // ],
+        // '2021.05': [
+        //     {
+        //         name: 'Coding',
+        //         checked: [1, 2, 3, 4, 5, 10]
+        //     },
+        //     {
+        //         name: 'Book',
+        //         checked: [20, 30]
+        //     }
+        // ],
     },
+    activeMonth: '',
     other: false
 }
 
@@ -52,12 +53,17 @@ export default (initialState = INITIAL_STATE) => {
         window.localStorage.setItem('HABITS', JSON.stringify(state))
     }
 
-    const addItem = (day, text, cpnt, parent) => {
-        if (!day || !text) {
-            return
+    const addItem = (text, cpnt, parent) => {
+        if (!text) {
+            return 
         }
 
-        state.habits[day].push({ 
+        const month = activeMonth.value
+        if (!state.habits[month]) {
+            state.habits[month] = []
+        }
+
+        state.habits[month].push({ 
             name: text,
             checked: []
         })
@@ -66,15 +72,15 @@ export default (initialState = INITIAL_STATE) => {
         updateStorage()
     }
 
-    const updateItemName = (day, index, text) => {
-        if (!day || !text || index < 0) {
-            return
+    const updateItemName = (index, text) => {
+        if ( !text || index < 0) {
+            return false
         }
 
-        const _habits = state.habits[day]
+        const _habits = state.habits[activeMonth.value]
 
         if (!_habits[index]) {
-            return
+            return false
         }
 
         _habits[index].name = text
@@ -84,12 +90,34 @@ export default (initialState = INITIAL_STATE) => {
         return true
     }
 
-    const updateItemChecked = (day, date, checked, index) => {
-        if ( !day || !date  || index < 0 ) {
+    const deleteItem = (index, cpnt, parent) => {
+        if ( index < 0) {
+            return
+        }
+
+        const _habits = state.habits[activeMonth.value]
+
+        if (!_habits[index]) {
+            return
+        }
+
+        _habits.splice(index, 1)
+
+        invokeListeners(cpnt, parent)
+        updateStorage()
+    }
+
+    const updateItemChecked = (date, checked, index) => {
+        if ( !date || index < 0 ) {
             return false
         }
 
-        const _arr = state.habits[day][index].checked
+        const _habits = state.habits[activeMonth.value]
+        if (!_habits[index]) {
+            return false
+        }
+
+        const _arr = _habits[index].checked
         if (checked === true) {
             _arr.push(date)
             _arr.sort( (a, b) => {
@@ -105,28 +133,16 @@ export default (initialState = INITIAL_STATE) => {
         return true
     }
 
-    const deleteItem = (day, index, cpnt, parent) => {
-        if (!day || index < 0) {
-            return
-        }
-
-        const _habits = state.habits[day]
-
-        if (!_habits[index]) {
-            return
-        }
-
-        _habits.splice(index, 1)
-
-        invokeListeners(cpnt, parent)
-        updateStorage()
-    }
-
-    const includes = (text, day, index) => {
+    const includes = (text, index) => {
         if (!text) {
             return
         }
-        const is = state.habits[day]
+        const _habits = state.habits
+        if (Object.keys(_habits).length < 1) {
+            return
+        }
+
+        const is = _habits[activeMonth.value]
                     .some( (item, idx) => {
                         if( idx === index ){
                             return
@@ -136,12 +152,26 @@ export default (initialState = INITIAL_STATE) => {
         return is
     }
 
+    const activeMonth = {
+        get value() {
+            return state.activeMonth
+        },
+        set value(day) {
+            if (!day) {
+                return
+            }
+            state.activeMonth = day
+            updateStorage()
+        }
+    }
+
     return {
         addChangeListener,
         addItem,
         updateItemName,
-        updateItemChecked,
         deleteItem,
-        includes
+        updateItemChecked,
+        includes,
+        activeMonth
     }
 }

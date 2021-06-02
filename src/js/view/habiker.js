@@ -23,7 +23,8 @@ const checkIncludes = (includes, inputEl) => {
     return false
 }
 
-const addOptions = (newCpnt) => {
+const addDay = (newCpnt, events) => {
+    const { activeMonth } = events
     const date = new Date()
     const getMonth = () => {
         let month = date.getMonth() + 1
@@ -32,8 +33,11 @@ const addOptions = (newCpnt) => {
         }
         return month
     }
-    newCpnt.querySelector('[data-text=habits-day]')
-        .textContent = `${date.getFullYear()}.${getMonth()}`
+    const yearMonth = `${date.getFullYear()}.${getMonth()}`
+    newCpnt
+        .querySelector('[data-text=habits-day]')
+        .textContent = yearMonth
+    activeMonth.value = yearMonth
 }
 
 const addEvents = (newCpnt, events) => {
@@ -54,8 +58,7 @@ const addEvents = (newCpnt, events) => {
 
         const cpnt = document.querySelector['[data-component=habikers]']
         const parent = document.querySelector['[data-component=app]']
-        const day = document.querySelector('[data-text=habits-day]').textContent
-        addItem(day, nameText, cpnt, parent)
+        addItem(nameText, cpnt, parent)
         inputEl.value = ''
         inputEl.focus()
     }
@@ -77,7 +80,7 @@ export default (targetElement, state, events) => {
     newApp.innerHTML = ''
     newApp.appendChild(createNewNode(template))
 
-    addOptions(newApp)
+    addDay(newApp, events)
     addEvents(newApp, events)
 
     return newApp
