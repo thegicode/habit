@@ -7,7 +7,9 @@ const getElements = (checkedDate, index, events) => {
     let elements = []
 
     const newDate = new Date(),
-        fullDay = new Date(newDate.getFullYear(), newDate.getMonth() + 1, 0).getDate()
+        getFullYear = newDate.getFullYear(),
+        getMonth = newDate.getMonth() + 1,
+        fullDay = new Date(getFullYear, getMonth, 0).getDate()
     let days = []
     for(let i = 0 ; i < fullDay ; i++){
         days.push(i+1)
@@ -25,8 +27,7 @@ const getElements = (checkedDate, index, events) => {
         const arr = activeMonth.value.split('.')
         const year = Number(arr[0])
         const month = Number(arr[1])
-        if( year >= newDate.getFullYear() ){
-            const getMonth = newDate.getMonth() + 1
+        if( year >= getFullYear ){
             if (month === getMonth && date > newDate.getDate()) {
                 inputEl.disabled = true
             }
@@ -39,7 +40,7 @@ const getElements = (checkedDate, index, events) => {
 
         const oldChecked = inputEl.checked
         inputEl
-            .addEventListener('change', function(e) {
+            .addEventListener('change', function() {
                 const isUpdated = updateItemChecked(date, this.checked, index)
                 if (!isUpdated) {
                     console.log('Not changed')
