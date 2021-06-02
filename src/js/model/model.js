@@ -142,6 +142,10 @@ export default (initialState = INITIAL_STATE) => {
             return
         }
 
+        if( !_habits[activeMonth.value] ) {
+            return
+        }
+
         const is = _habits[activeMonth.value]
                     .some( (item, idx) => {
                         if( idx === index ){
@@ -162,6 +166,7 @@ export default (initialState = INITIAL_STATE) => {
             }
             state.activeMonth = day
             updateStorage()
+            invokeListeners()
         }
     }
 

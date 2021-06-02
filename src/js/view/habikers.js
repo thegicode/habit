@@ -131,14 +131,14 @@ const getHabitElement = (habit, index, events) => {
 
 export default (targetElement, state, events) => {
     const { habits } = state
-    const { deleteItem } = events
+    const { activeMonth, deleteItem } = events
     const newHabikerList = targetElement.cloneNode(true)
 
     newHabikerList.innerHTML = ''
 
-    const habitsKeys = Object.keys(habits)
+    const activeHabits = habits[activeMonth.value]
 
-    habitsKeys.length > 0 && habits[habitsKeys[0]]
+    activeHabits && activeHabits.length > 0 && activeHabits
         .map( (habit, index) => getHabitElement(habit, index, events))
         .forEach( element => {
             newHabikerList.appendChild(element)

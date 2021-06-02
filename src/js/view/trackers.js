@@ -2,17 +2,17 @@ import { createNewNode } from './_helpers.js'
 
 const template = document.querySelector('[data-template=tracker-item]')
 
-const getElements = (checkedDate, index, updateItemChecked) => {
+const getElements = (checkedDate, index, events) => {
+    const { activeMonth, updateItemChecked } = events
     let elements = []
 
-    const date = new Date(),
-        fullDay = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate()
+    const newDate = new Date(),
+        fullDay = new Date(newDate.getFullYear(), newDate.getMonth() + 1, 0).getDate()
     let days = []
     for(let i = 0 ; i < fullDay ; i++){
         days.push(i+1)
     }
 
-    const today = new Date().getDate()
     elements = days.map( date => {
         const el = createNewNode(template)
         const inputEl = el.querySelector('input[name=check]')
@@ -21,9 +21,16 @@ const getElements = (checkedDate, index, updateItemChecked) => {
         if (checkedDate.includes(date)) {
             inputEl.checked = true
         }
-        if (date > today) {
+
+        const arr = activeMonth.value.split('.')
+        const year = Number(arr[0])
+        const month = Number(arr[1])
+        if( year >= newDate.getFullYear() 
+            && month >= newDate.getMonth() + 1 
+            && date > newDate.getDate() ){
             inputEl.disabled = true
         }
+
         textEl.textContent = date
 
         const oldChecked = inputEl.checked
@@ -42,21 +49,24 @@ const getElements = (checkedDate, index, updateItemChecked) => {
 }
 
 export default (targetElement, state, events) => {
-    let { habits } = state
-    const { updateItemChecked } = events
+    const { habits } = state
+    const { activeMonth, updateItemChecked } = events
     const newTrackerList = targetElement.cloneNode(true)
 
     newTrackerList.innerHTML = ''
 
-    habits = habits[Object.keys(habits)[0]]
-    const index = targetElement.dataset.index
-    if( !habits[index] ) {
+    let activeHabits = habits[activeMonth.value]
+    if( !activeHabits  || activeHabits.length < 1 ) {
         return targetElement
     }
 
-    const habit = habits[index]
-    const checkedDate = habit.checked
-    const elements = getElements(checkedDate, index, updateItemChecked)
+    const index = targetElement.dataset.index
+    if( !activeHabits[index] ) {
+        return targetElement
+    }
+
+    const checkedDate = activeHabits[index].checked
+    const elements = getElements(checkedDate, index, events)
     elements.forEach( el => {
          newTrackerList.appendChild(el)
     })

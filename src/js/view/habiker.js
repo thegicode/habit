@@ -23,21 +23,63 @@ const checkIncludes = (includes, inputEl) => {
     return false
 }
 
-const addDay = (newCpnt, events) => {
+const addDate = (newCpnt, events) => {
     const { activeMonth } = events
-    const date = new Date()
-    const getMonth = () => {
-        let month = date.getMonth() + 1
-        if(parseInt(month) < 10) {
-            month =  `0${month}`
+
+    if (!activeMonth.value) {
+        const date = new Date()
+        const getMonth = () => {
+            let month = date.getMonth() + 1
+            if(parseInt(month) < 10) {
+                month =  `0${month}`
+            }
+            return month
         }
-        return month
+        const yearMonth = `${date.getFullYear()}.${getMonth()}`
+        activeMonth.value = yearMonth
     }
-    const yearMonth = `${date.getFullYear()}.${getMonth()}`
-    newCpnt
-        .querySelector('[data-text=habits-day]')
-        .textContent = yearMonth
-    activeMonth.value = yearMonth
+    
+    const monthEl = newCpnt.querySelector('[data-text=month]')
+    monthEl.textContent = activeMonth.value
+
+    addEventsDate(newCpnt, activeMonth, monthEl)
+}
+
+const addEventsDate = (newCpnt, activeMonth, monthEl) => {
+    let year, month
+    const getMonth = function(){
+        const arr = activeMonth.value.split('.')
+        year = Number(arr[0])
+        month = Number(arr[1])
+    }
+    const setActiveMonth = function(){
+        if( month < 10 ) {
+            month = `0${month}`
+        }
+        const str = `${year}.${month}`
+        activeMonth.value = str
+        monthEl.textContent = str
+    }
+    newCpnt.querySelector('[data-btn=month-prev]')
+        .addEventListener('click', function(){
+            getMonth()
+            month = month - 1
+            if( month === 0 ) {
+                month = 12
+                year = year - 1
+            }
+            setActiveMonth()
+        })
+    newCpnt.querySelector('[data-btn=month-next]')
+        .addEventListener('click', function(){
+            getMonth()
+            month = month + 1
+            if( month === 13 ) {
+                month = 1
+                year = year + 1
+            }
+            setActiveMonth()
+        })
 }
 
 const addEvents = (newCpnt, events) => {
@@ -80,7 +122,7 @@ export default (targetElement, state, events) => {
     newApp.innerHTML = ''
     newApp.appendChild(createNewNode(template))
 
-    addDay(newApp, events)
+    addDate(newApp, events)
     addEvents(newApp, events)
 
     return newApp
