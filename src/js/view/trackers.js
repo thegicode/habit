@@ -25,10 +25,14 @@ const getElements = (checkedDate, index, events) => {
         const arr = activeMonth.value.split('.')
         const year = Number(arr[0])
         const month = Number(arr[1])
-        if( year >= newDate.getFullYear() 
-            && month >= newDate.getMonth() + 1 
-            && date > newDate.getDate() ){
-            inputEl.disabled = true
+        if( year >= newDate.getFullYear() ){
+            const getMonth = newDate.getMonth() + 1
+            if (month === getMonth && date > newDate.getDate()) {
+                inputEl.disabled = true
+            }
+            if (month > getMonth ) {
+               inputEl.disabled = true 
+            }
         }
 
         textEl.textContent = date
