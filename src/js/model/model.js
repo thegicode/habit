@@ -24,6 +24,7 @@ const INITIAL_STATE = {
         // ],
     },
     activeMonth: '',
+    fold: false,
     other: false
 }
 
@@ -170,6 +171,16 @@ export default (initialState = INITIAL_STATE) => {
         }
     }
 
+    const fold = {
+        get value() {
+            return state.fold
+        },
+        set value(boolean) {
+            state.fold = boolean
+            updateStorage()
+        }
+    }
+
     return {
         addChangeListener,
         addItem,
@@ -177,6 +188,7 @@ export default (initialState = INITIAL_STATE) => {
         deleteItem,
         updateItemChecked,
         includes,
-        activeMonth
+        activeMonth,
+        fold
     }
 }

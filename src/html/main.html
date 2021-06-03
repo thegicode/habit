@@ -31,21 +31,28 @@
                 <p class="__title" data-text="month"></p>
                 <button type="button" class="__btn" data-btn="month-next" title="다음">></button>
             </div>
+            <div class="options-actions2">
+                <label>
+                    <input type="checkbox" data-checkbox="fold">
+                    <span class="__text">습관 트래커</span>
+                </label>
+            </div>
         </div>
-        <ul class="habits-list" data-component="habikers"></ul>
+        <ul class="habits-list" data-component="habikers" data-fold=""></ul>
     </section>
 </template>
 
 <template data-template="habiker-item">
     <li class="habits-item">
-        <input type="text" name="name" title="습관명"></input>
+        <header class="habits-item-header">
+            <input type="text" name="name" title="습관명"></input>
+            <div class="actions">
+                <button type="button" class="btn" data-button="delete">삭제</button>
+            </div>
+        </header>
         <!-- <div role="textbox" contenteditable="true" spellcheck="true" aria-multiline="false" aria-required="true" aria-readonly="true" class="name"></div> -->
         <div class="trackers" data-component="trackers"></div>
-        <div class="actions">
-            <button type="button" class="btn" data-button="edit">수정</button>
-            <button type="button" class="btn" data-button="confirm" data-hidden="true">완료</button>
-            <button type="button" class="btn" data-button="delete">삭제</button>
-        </div>
+        
     </li>
 </template>
 

@@ -23,8 +23,8 @@ const checkIncludes = (includes, inputEl) => {
     return false
 }
 
-const addDate = (newCpnt, events) => {
-    const { activeMonth } = events
+const addContents = (newCpnt, events) => {
+    const { activeMonth, fold } = events
 
     if (!activeMonth.value) {
         const date = new Date()
@@ -43,6 +43,12 @@ const addDate = (newCpnt, events) => {
     monthEl.textContent = activeMonth.value
 
     addEventsDate(newCpnt, activeMonth, monthEl)
+
+    newCpnt.querySelector('[data-checkbox=fold]')
+        .checked = fold.value
+    newCpnt.querySelector('[data-component=habikers]')
+        .dataset.fold = fold.value
+
 }
 
 const addEventsDate = (newCpnt, activeMonth, monthEl) => {
@@ -83,7 +89,7 @@ const addEventsDate = (newCpnt, activeMonth, monthEl) => {
 }
 
 const addEvents = (newCpnt, events) => {
-    const { addItem, includes } = events
+    const { addItem, includes, fold } = events
 
     const inputEl = newCpnt.querySelector('input[name=name]')
     const button = newCpnt.querySelector('[data-button=input]')
@@ -114,6 +120,13 @@ const addEvents = (newCpnt, events) => {
     button.addEventListener('click', function(e) {
         listener(inputEl)
     })
+
+    newCpnt.querySelector('[data-checkbox=fold]')
+        .addEventListener('change', function(){
+            document.querySelector('[data-component=habikers]')
+                .dataset.fold = this.checked
+            fold.value = Boolean(this.checked)
+        })
 }
 
 export default (targetElement, state, events) => {
@@ -122,7 +135,7 @@ export default (targetElement, state, events) => {
     newApp.innerHTML = ''
     newApp.appendChild(createNewNode(template))
 
-    addDate(newApp, events)
+    addContents(newApp, events)
     addEvents(newApp, events)
 
     return newApp

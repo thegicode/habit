@@ -42,10 +42,10 @@ class Handler {
         const targetEl = this.e.target
         const el = targetEl.closest('.habits-item')
         const inputElement = el.querySelector('input')
-        inputElement.removeAttribute('readonly')
+        // inputElement.removeAttribute('readonly')
         inputElement.focus()
         targetEl.dataset.hidden = true
-        el.querySelector('[data-button=confirm]').dataset.hidden = false
+        // el.querySelector('[data-button=confirm]').dataset.hidden = false
     }
 
     confirm () {
@@ -69,9 +69,10 @@ class Handler {
             console.log('이름이 변경되지 않았습니다.')
         } 
 
-        el.querySelector('[data-button=confirm]').dataset.hidden = true
-        el.querySelector('[data-button=edit]').dataset.hidden = false
-        inputElement.setAttribute('readonly', 'readonly')
+        // el.querySelector('[data-button=confirm]').dataset.hidden = true
+        // el.querySelector('[data-button=edit]').dataset.hidden = false
+        inputElement.blur()
+        // inputElement.setAttribute('readonly', 'readonly')
     }
 
     delete(){
@@ -84,30 +85,30 @@ class Handler {
 }
 
 const addEvents = (element, index, events) => {
-    const oldName = element.querySelector('input[name=name]').value
-    element
-        .querySelector('[data-button=edit]')
-        .addEventListener('click', e => {
-            const handler = new Handler(e, index, events)
-            handler.edit()
-        })
-    element
-        .querySelector('[data-button=confirm]')
-        .addEventListener('click', e => {
-            const handler = new Handler(e, index, events)
-            handler.confirm()
-        })
+    // element
+    //     .querySelector('[data-button=edit]')
+    //     .addEventListener('click', function(e) {
+    //         const handler = new Handler(e, index, events)
+    //         handler.edit()
+    //     })
+    // element
+    //     .querySelector('[data-button=confirm]')
+    //     .addEventListener('click', function(e) {
+    //         const handler = new Handler(e, index, events)
+    //         handler.confirm()
+    //     })
     
-    element.querySelector('input[name=name]')
-        .addEventListener('keypress', e => {
+    element
+        .querySelector('input[name=name]')
+        .addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
-                const handler = new Handler(e, index, events, oldName)
+                const handler = new Handler(e, index, events, this.value)
                 handler.confirm()
             }
         })
     element
         .querySelector('[data-button=delete]')
-        .addEventListener('click', e => {
+        .addEventListener('click', function(e) {
             const handler = new Handler(e, index, events)
             handler.delete()
         })
@@ -121,7 +122,7 @@ const getHabitElement = (habit, index, events) => {
 
     element.dataset.index = index
     inputEl.value = name
-    inputEl.setAttribute('readonly', 'readonly')
+    // inputEl.setAttribute('readonly', 'readonly')
     trackersEl.dataset.index = index
      
     addEvents(element, index, events)
