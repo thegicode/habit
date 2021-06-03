@@ -134,10 +134,11 @@ input:focus{
             margin-bottom: 10px;
         }
         input[name="name"]{
-            // width: 100%;
+            flex: 1;
             box-sizing: border-box;
+            margin-right: 5px;
             padding: 5px;
-            // border-radius: 3px;
+            border-radius: 3px;
             border: none;
             text-overflow: ellipsis;
             font-size: 1rem;
