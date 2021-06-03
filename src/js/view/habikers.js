@@ -1,4 +1,4 @@
-import { createNewNode } from './_helpers.js'
+import { createNewNode } from './helpers.js'
 
 const template = document.querySelector('[data-template=habiker-item]')
 
