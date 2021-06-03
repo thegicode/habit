@@ -11,11 +11,11 @@
 
 <template data-template="habiker-app">
     <section class="habits">
-        <div class="habits-actions">
+        <div class="habits-inputs">
             <input type="text" name="name" placeholder="습관명을 입력하세요." title="습관명 입력" autofocus>
             <button type="button" class="btn" data-button="input">입력</button>
         </div>
-        <div class="habits-options">
+        <div class="habits-actions">
             <!-- <nav>
                 <label>
                     <input type="radio" name="period" value="month" checked>
@@ -26,15 +26,15 @@
                     <span class="__label">주간</span>
                 </label>
             </nav> -->
-            <div class="options-actions">
-                <button type="button" class="__btn" data-btn="month-prev" title="이전"><</button>
+            <div class="habits-dates">
+                <button type="button" class="__btn" data-button="month-prev" title="이전"><</button>
                 <p class="__title" data-text="month"></p>
-                <button type="button" class="__btn" data-btn="month-next" title="다음">></button>
+                <button type="button" class="__btn" data-button="month-next" title="다음">></button>
             </div>
-            <div class="options-actions2">
+            <div class="habits-options">
                 <label>
                     <input type="checkbox" data-checkbox="fold">
-                    <span class="__text">습관 트래커</span>
+                    <span class="__text" data-text="fold">습관 트래커</span>
                 </label>
             </div>
         </div>
@@ -46,9 +46,9 @@
     <li class="habits-item">
         <header class="habits-item-header">
             <input type="text" name="name" title="습관명"></input>
-            <div class="actions">
+            <!-- <div class="actions"> -->
                 <button type="button" class="btn" data-button="delete">삭제</button>
-            </div>
+            <!-- </div> -->
         </header>
         <!-- <div role="textbox" contenteditable="true" spellcheck="true" aria-multiline="false" aria-required="true" aria-readonly="true" class="name"></div> -->
         <div class="trackers" data-component="trackers"></div>
@@ -59,7 +59,7 @@
 <template data-template="tracker-item">
     <label class="trackers-item">
         <input type="checkbox" name="check">
-        <span class="__text"></span>
+        <span class="__date" data-text="date"></span>
     </label>
 </template>
 

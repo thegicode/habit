@@ -28,69 +28,72 @@ input:focus {
   margin: 0;
 }
 
-.habits-actions {
+.habits-inputs {
   display: flex;
   margin-top: 10px;
 }
 
-.habits-actions input[name="name"] {
+.habits-inputs input[name="name"] {
   flex: 1;
-  height: 30px;
+  height: 48px;
   box-sizing: border-box;
-  padding: 0 5px;
+  padding: 0 10px;
   border: 1px solid #ddd;
+  font-size: 1.2rem;
 }
 
-.habits-options {
+.habits-actions {
   margin-top: 1.5rem;
 }
 
-.habits .options-actions {
+.habits-dates {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.habits .options-actions .__btn {
-  padding: 1px 5px;
+.habits-dates .__btn {
+  width: 48px;
+  height: 20px;
   border-radius: 3px;
   border: 1px solid rgba(0, 128, 0, 0.1);
   background-color: transparent;
   text-align: center;
-  font-size: 12px;
+  font-size: 1rem;
   color: rgba(0, 0, 0, 0.5);
 }
 
-.habits .options-actions .__btn:active {
+.habits-dates .__btn:active {
   background-color: rgba(0, 128, 0, 0.1);
 }
 
-.habits .options-actions .__title {
+.habits-dates .__title {
   margin: 0 10px;
+  font-size: 1.5rem;
 }
 
-.habits .options-actions2 {
+.habits-options {
   display: flex;
   justify-content: flex-end;
   margin-top: 10px;
 }
 
-.habits .options-actions2 label {
+.habits-options label {
   position: relative;
 }
 
-.habits .options-actions2 input[type="checkbox"] {
+.habits-options input[type="checkbox"] {
   position: absolute;
   top: -20000rem;
 }
 
-.habits .options-actions2 input[type="checkbox"]:checked + .__text {
+.habits-options input[type="checkbox"]:checked + .__text {
   border-color: rgba(0, 125, 0, 0.1);
   background-color: rgba(0, 125, 0, 0.3);
   color: #222;
 }
 
-.habits .options-actions2 .__text {
+.habits-options .__text {
   display: inline-block;
   padding: 5px 7px;
   border-radius: 7px;
@@ -102,6 +105,7 @@ input:focus {
 
 .habits-list {
   margin-top: 1rem;
+  border-top: 1px solid #ddd;
 }
 
 .habits-item {
@@ -113,39 +117,34 @@ input:focus {
 .habits-item-header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
 }
 
 .habits-item input[name="name"] {
-  flex: 1;
   box-sizing: border-box;
+  width: 80%;
   margin-right: 5px;
   padding: 5px;
   border-radius: 3px;
   border: none;
   text-overflow: ellipsis;
-  font-size: 1rem;
+  font-size: 1.5rem;
 }
 
 .habits-item input[name="name"]:focus {
   background-color: rgba(0, 128, 0, 0.1);
 }
 
-.habits-item .actions {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 5px;
-  white-space: nowrap;
-}
-
 .habits .btn {
+  box-sizing: border-box;
+  width: 48px;
   margin: 0 2px;
   padding: 0.3rem;
   font-size: 1rem;
   border: 1px solid #ddd;
   border-radius: 3px;
   background-color: transparent;
-  font-size: 12px;
+  font-size: 1rem;
+  white-space: nowrap;
 }
 
 .habits .btn[data-hidden=true] {
@@ -155,29 +154,29 @@ input:focus {
 .trackers {
   display: flex;
   flex-flow: row wrap;
+  margin-top: 5px;
 }
 
 .trackers-item {
-  position: relative;
   margin: 2px;
 }
 
 .trackers-item input[type=checkbox] {
-  position: absolute;
+  position: fixed;
   top: -20000rem;
 }
 
-.trackers-item input[type=checkbox]:checked + .__text {
+.trackers-item input[type=checkbox]:checked + .__date {
   border-color: rgba(0, 128, 0, 0.2);
   background-color: rgba(0, 128, 0, 0.3);
   color: rgba(100, 123, 101, 0.9);
 }
 
-.trackers-item .__text {
+.trackers-item .__date {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
+  width: 48px;
   height: 30px;
   border-radius: 7px;
   border: 1px solid rgba(117, 117, 117, 0.1);

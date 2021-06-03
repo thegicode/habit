@@ -20,7 +20,7 @@ const getElements = (checkedDate, index, events) => {
         const date = i+1
         const el = createNewNode(template)
         const inputEl = el.querySelector('input[name=check]')
-        const textEl = el.querySelector('.__text')
+        const textEl = el.querySelector('[data-text=date]')
         const oldChecked = inputEl.checked
         
         if (checkedDate.includes(date)) {

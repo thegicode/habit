@@ -66,7 +66,7 @@ const addEventsDate = (newCpnt, activeMonth, monthEl) => {
         activeMonth.value = str
         monthEl.textContent = str
     }
-    newCpnt.querySelector('[data-btn=month-prev]')
+    newCpnt.querySelector('[data-button=month-prev]')
         .addEventListener('click', function(){
             getMonth()
             month = month - 1
@@ -76,7 +76,7 @@ const addEventsDate = (newCpnt, activeMonth, monthEl) => {
             }
             setActiveMonth()
         })
-    newCpnt.querySelector('[data-btn=month-next]')
+    newCpnt.querySelector('[data-button=month-next]')
         .addEventListener('click', function(){
             getMonth()
             month = month + 1
