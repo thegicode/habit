@@ -143,6 +143,7 @@ input:focus {
 .habiker-header .__button {
   box-sizing: border-box;
   width: 48px;
+  margin-left: 2px;
   padding: 0.3rem;
   font-size: 1rem;
   border: 1px solid #ddd;

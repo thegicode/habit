@@ -20,7 +20,6 @@ class Handler {
             inputElement.focus()
             return true
         }
-
         return false
     }
 
@@ -34,7 +33,6 @@ class Handler {
             inputElement.value = ''
             return true
         }
-
         return false
     }
 
@@ -112,9 +110,19 @@ const addEvents = (element, index, events) => {
             const handler = new Handler(e, index, events)
             handler.delete()
         })
+
+    const dragButton = element.querySelector('[data-button=drag]')
+    dragButton
+        .addEventListener('dragstart', function(e) {
+            // console.log(e)
+        })
+    dragButton
+        .addEventListener('dragend', function(e) {
+            // console.log(e)
+        })
 }
 
-const getHabitElement = (habit, index, events) => {
+const getElements = (habit, index, events) => {
     const { name } = habit
     const element = createNewNode(template)
     const inputEl = element.querySelector('input[name=name]')
@@ -140,7 +148,7 @@ export default (targetElement, state, events) => {
     const activeHabits = habits[activeMonth.value]
 
     activeHabits && activeHabits.length > 0 && activeHabits
-        .map( (habit, index) => getHabitElement(habit, index, events))
+        .map( (habit, index) => getElements(habit, index, events))
         .forEach( element => {
             newHabikerList.appendChild(element)
         })

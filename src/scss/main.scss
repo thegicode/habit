@@ -3,11 +3,9 @@ body{
     margin: 0;
     padding: 1rem;
 }
-
 h1{
     margin: 0 0 1rem 0;
 }
-
 ul, p{
     margin: 0;
     padding: 0;
@@ -15,7 +13,6 @@ ul, p{
 li{
     list-style: none
 }
-
 input:focus{
     outline: none;
 }
@@ -128,10 +125,6 @@ input:focus{
             color: #999;
         }
     }
-    
-
-    
-   
 }
 
 .habikers{
@@ -163,7 +156,7 @@ input:focus{
         .__button{
             box-sizing: border-box;
             width: 48px;
-            // height: 38px;
+            margin-left: 2px;
             padding: 0.3rem;
             font-size: 1rem;
             border: 1px solid #ddd;
@@ -171,12 +164,9 @@ input:focus{
             background-color: transparent;
             font-size: 1rem;
             white-space: nowrap;
-
         }
     }
-
 }
-
 
 .trackers{
     display: flex;
@@ -187,6 +177,7 @@ input:focus{
         display: none;
     }
 }
+
 .tracker{
     margin: 2px;
     input[type=checkbox]{

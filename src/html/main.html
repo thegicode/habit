@@ -9,6 +9,12 @@
 </head>
 <body>
 
+<div class="root" id="root">
+    <h1>Habits</h1>
+    <main class="contents" data-component="app">
+    </main>
+</div>
+
 <template data-template="app">
     <section class="habits">
         <div class="habits-inputs">
@@ -34,7 +40,7 @@
             <div class="habits-options">
                 <label>
                     <input type="checkbox" data-checkbox="fold">
-                    <span class="__text" data-text="fold">습관 트래커</span>
+                    <span class="__text" data-text="fold">트래커 보이기</span>
                 </label>
             </div>
         </div>
@@ -47,6 +53,7 @@
         <header class="habiker-header">
             <input type="text" name="name" title="습관명"></input>
             <button type="button" class="__button" data-button="delete">삭제</button>
+            <button type="button" class="__button" data-button="drag" draggable="true" title="Drag and drop">=</button>
         </header>
         <div class="trackers" data-component="trackers"></div>
 
@@ -60,13 +67,6 @@
         <span class="__date" data-text="date"></span>
     </label>
 </template>
-
-<div class="root" id="root">
-    <h1>Habits</h1>
-    <main class="contents" data-component="app">
-    </main>
-</div>
-
 <script type="module" src="../js/main.js"></script>
 
 </body>
