@@ -110,24 +110,24 @@ input:focus {
   color: #999;
 }
 
-.habits-list {
+.habikers {
   margin-top: 1rem;
   border-top: 1px solid #ddd;
 }
 
-.habits-item {
+.habiker {
   padding: 10px 0;
   border-bottom: 1px solid #ddd;
   list-style: none;
 }
 
-.habits-item-header {
+.habiker-header {
   display: flex;
-  justify-content: space-between;
 }
 
-.habits-item input[name="name"] {
+.habiker-header input[name="name"] {
   flex: auto;
+  min-width: 50%;
   margin-right: 5px;
   padding: 5px;
   border-radius: 3px;
@@ -136,11 +136,11 @@ input:focus {
   font-size: 1.5rem;
 }
 
-.habits-item input[name="name"]:focus {
+.habiker-header input[name="name"]:focus {
   background-color: rgba(0, 128, 0, 0.1);
 }
 
-.habits-item .__button {
+.habiker-header .__button {
   box-sizing: border-box;
   width: 48px;
   padding: 0.3rem;
@@ -158,22 +158,26 @@ input:focus {
   margin-top: 5px;
 }
 
-.trackers-item {
+.habikers[data-fold="false"] .trackers {
+  display: none;
+}
+
+.tracker {
   margin: 2px;
 }
 
-.trackers-item input[type=checkbox] {
+.tracker input[type=checkbox] {
   position: fixed;
   top: -20000rem;
 }
 
-.trackers-item input[type=checkbox]:checked + .__date {
+.tracker input[type=checkbox]:checked + .__date {
   border-color: rgba(0, 128, 0, 0.2);
   background-color: rgba(0, 128, 0, 0.3);
   color: rgba(100, 123, 101, 0.9);
 }
 
-.trackers-item .__date {
+.tracker .__date {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -184,10 +188,6 @@ input:focus {
   background-color: rgba(117, 117, 117, 0.1);
   font-size: 1rem;
   color: rgba(117, 117, 117, 0.3);
-}
-
-.habits-list[data-fold="false"] .trackers {
-  display: none;
 }
 
 /*# sourceMappingURL=main.css.map */

@@ -1,6 +1,6 @@
 import { createNewNode } from './helpers.js'
 
-const template = document.querySelector('[data-template=tracker-item]')
+const template = document.querySelector('[data-template=tracker]')
 
 const getElements = (checkedDate, index, events) => {
     const { activeMonth, updateItemChecked } = events

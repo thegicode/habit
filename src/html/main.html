@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<template data-template="habiker-app">
+<template data-template="app">
     <section class="habits">
         <div class="habits-inputs">
             <input type="text" name="name" placeholder="습관명을 입력하세요." title="습관명 입력" autofocus>
@@ -38,26 +38,24 @@
                 </label>
             </div>
         </div>
-        <ul class="habits-list" data-component="habikers" data-fold=""></ul>
+        <ul class="habikers" data-component="habikers" data-fold=""></ul>
     </section>
 </template>
 
-<template data-template="habiker-item">
-    <li class="habits-item">
-        <header class="habits-item-header">
+<template data-template="habiker">
+    <li class="habiker">
+        <header class="habiker-header">
             <input type="text" name="name" title="습관명"></input>
-            <div class="actions">
-                <button type="button" class="__button" data-button="delete">삭제</button>
-            </div>
+            <button type="button" class="__button" data-button="delete">삭제</button>
         </header>
-        <!-- <div role="textbox" contenteditable="true" spellcheck="true" aria-multiline="false" aria-required="true" aria-readonly="true" class="name"></div> -->
         <div class="trackers" data-component="trackers"></div>
-        
+
+        <!-- <div role="textbox" contenteditable="true" spellcheck="true" aria-multiline="false" aria-required="true" aria-readonly="true" class="name"></div> -->
     </li>
 </template>
 
-<template data-template="tracker-item">
-    <label class="trackers-item">
+<template data-template="tracker">
+    <label class="tracker">
         <input type="checkbox" name="check">
         <span class="__date" data-text="date"></span>
     </label>

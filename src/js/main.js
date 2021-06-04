@@ -1,4 +1,4 @@
-import appView from './view/habiker.js'
+import appView from './view/app.js'
 import habikersView from './view/habikers.js'
 import trackersView from './view/trackers.js'
 

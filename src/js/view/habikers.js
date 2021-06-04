@@ -1,6 +1,6 @@
 import { createNewNode } from './helpers.js'
 
-const template = document.querySelector('[data-template=habiker-item]')
+const template = document.querySelector('[data-template=habiker]')
 
 class Handler {
     constructor (e, index, events, oldName) {

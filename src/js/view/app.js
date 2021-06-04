@@ -1,6 +1,6 @@
 import { createNewNode } from './helpers.js'
 
-const template = document.querySelector('[data-template=habiker-app')
+const template = document.querySelector('[data-template=app')
 
 const isNotEmpty = inputEl => {
     if (inputEl.value.length === 0) {
