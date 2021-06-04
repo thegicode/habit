@@ -13,7 +13,7 @@
     <section class="habits">
         <div class="habits-inputs">
             <input type="text" name="name" placeholder="습관명을 입력하세요." title="습관명 입력" autofocus>
-            <button type="button" class="btn" data-button="input">입력</button>
+            <button type="button" class="__button" data-button="input">입력</button>
         </div>
         <div class="habits-actions">
             <!-- <nav>
@@ -27,9 +27,9 @@
                 </label>
             </nav> -->
             <div class="habits-dates">
-                <button type="button" class="__btn" data-button="month-prev" title="이전"><</button>
+                <button type="button" class="__button" data-button="month-prev" title="이전"><</button>
                 <p class="__title" data-text="month"></p>
-                <button type="button" class="__btn" data-button="month-next" title="다음">></button>
+                <button type="button" class="__button" data-button="month-next" title="다음">></button>
             </div>
             <div class="habits-options">
                 <label>
@@ -46,9 +46,9 @@
     <li class="habits-item">
         <header class="habits-item-header">
             <input type="text" name="name" title="습관명"></input>
-            <!-- <div class="actions"> -->
-                <button type="button" class="btn" data-button="delete">삭제</button>
-            <!-- </div> -->
+            <div class="actions">
+                <button type="button" class="__button" data-button="delete">삭제</button>
+            </div>
         </header>
         <!-- <div role="textbox" contenteditable="true" spellcheck="true" aria-multiline="false" aria-required="true" aria-readonly="true" class="name"></div> -->
         <div class="trackers" data-component="trackers"></div>

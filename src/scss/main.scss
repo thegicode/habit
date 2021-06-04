@@ -22,19 +22,26 @@ input:focus{
 
 .habits {
     margin-top: 2rem;
-    &-title{
-        margin: 0;
-    }
     &-inputs{
         display: flex;
         margin-top: 10px;
         input[name="name"]{
-            flex: 1;
+            flex: auto;
             height: 48px;
             box-sizing: border-box;
             padding: 0 10px;
             border: 1px solid #ddd;
             font-size: 1.2rem;
+        }
+        .__button{
+            box-sizing: border-box;
+            width: 48px;
+            margin-left: 5px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            background-color: transparent;
+            font-size: 1rem;
+            white-space: nowrap;
         }
     }
     &-actions {
@@ -78,8 +85,8 @@ input:focus{
         display: flex;
         justify-content: center;
         align-items: center;
-        .__btn{
-            width: 48px; height: 20px;
+        .__button{
+            width: 48px; height: 30px;
             border-radius: 3px;
             border: 1px solid rgba(0, 128, 0, 0.1);
             background-color: transparent;
@@ -125,6 +132,7 @@ input:focus{
         margin-top: 1rem;
         border-top: 1px solid #ddd;
     }
+
     &-item {
         padding: 10px 0;
         border-bottom: 1px solid #ddd;
@@ -134,8 +142,7 @@ input:focus{
             justify-content: space-between;
         }
         input[name="name"]{
-            box-sizing: border-box;
-            width: 80%;
+            flex: auto;
             margin-right: 5px;
             padding: 5px;
             border-radius: 3px;
@@ -156,26 +163,23 @@ input:focus{
         //     margin-top: 5px;
         //     white-space: nowrap;
         // }
-    }
+        .__button{
+            box-sizing: border-box;
+            width: 48px;
+            padding: 0.3rem;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            background-color: transparent;
+            font-size: 1rem;
+            white-space: nowrap;
 
-
-    .btn{
-        box-sizing: border-box;
-        width: 48px;
-        margin: 0 2px;
-        padding: 0.3rem;
-        font-size: 1rem;
-        border: 1px solid #ddd;
-        border-radius: 3px;
-        background-color: transparent;
-        font-size: 1rem;
-        white-space: nowrap;
-        &[data-hidden=true]{
-            display: none;
         }
-
     }
+   
 }
+
+
 
 .trackers{
     display: flex;
@@ -202,7 +206,7 @@ input:focus{
             border: 1px solid rgba(117, 117, 117, 0.1);
             background-color: rgba(117, 117, 117, 0.1);
             font-size: 1rem;
-            color: rgba(117, 117, 117, 0.3);;
+            color: rgba(117, 117, 117, 0.3);
         }
     }
 }
