@@ -10,7 +10,12 @@
 <body>
 
 <div class="root" id="root">
-    <h1>Habits</h1>
+    <header>
+        <h1>Habits</h1>
+        <button type="button" data-button="saveStorage">Save LocalStorage</button>
+        <button type="button" data-button="sendStorage">Send LocalStorage</button>
+        <button type="button" data-button="setStorage">Set LocalStorage</button>
+    </header>
     <main class="contents" data-component="app">
     </main>
 </div>
@@ -33,7 +38,7 @@
                 </label>
             </nav> -->
             <div class="habits-dates">
-                <button type="button" class="__button" data-button="month-prev" title="이전"><</button>
+                <button type="button" class="__button" data-button="month-prev" title="이전">&lt;</button>
                 <p class="__title" data-text="month"></p>
                 <button type="button" class="__button" data-button="month-next" title="다음">></button>
             </div>
@@ -51,7 +56,7 @@
 <template data-template="habiker">
     <li class="habiker">
         <header class="habiker-header">
-            <input type="text" name="name" title="습관명"></input>
+            <input type="text" name="name" title="습관명">
             <button type="button" class="__button" data-button="delete">삭제</button>
             <button type="button" class="__button" data-button="drag" draggable="true" title="Drag and drop">=</button>
         </header>

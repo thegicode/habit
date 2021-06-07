@@ -38,7 +38,7 @@ class Handler {
 
     edit () {
         const targetEl = this.e.target
-        const el = targetEl.closest('.habits-item')
+        const el = targetEl.closest('.habiker')
         const inputElement = el.querySelector('input')
         // inputElement.removeAttribute('readonly')
         inputElement.focus()
@@ -47,9 +47,10 @@ class Handler {
     }
 
     confirm () {
-        const targetEl = this.e.target
-        const el = targetEl.closest('.habits-item')
-        const inputElement = el.querySelector('input')
+        // const targetEl = this.e.target
+        // const el = targetEl.closest('.habiker')
+        // const inputElement = el.querySelector('[data-input=name]')
+        const inputElement = this.e.target
 
         if (this.isNotEmpty(inputElement)) {
             return 

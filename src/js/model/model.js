@@ -29,7 +29,7 @@ const INITIAL_STATE = {
 }
 
 export default (initialState = INITIAL_STATE) => {
-    const state = cloneDeep(initialState)
+    let state = cloneDeep(initialState)
     let listeners = []
 
     const addChangeListener = listener => {
@@ -50,8 +50,12 @@ export default (initialState = INITIAL_STATE) => {
          })
     }
 
-    const updateStorage = () => {
-        window.localStorage.setItem('HABITS', JSON.stringify(state))
+    const updateStorage = (str) => {
+        window.localStorage.setItem('HABITS', str || JSON.stringify(state))
+        if(str) {
+            state = JSON.parse(str)
+            invokeListeners()
+        }
     }
 
     const addItem = (text, cpnt, parent) => {
@@ -183,6 +187,7 @@ export default (initialState = INITIAL_STATE) => {
 
     return {
         addChangeListener,
+        updateStorage,
         addItem,
         updateItemName,
         deleteItem,
