@@ -10,14 +10,24 @@
 <body>
 
 <div class="root" id="root">
-    <header>
+    <header class="header">
         <h1>Habits</h1>
-        <button type="button" data-button="saveStorage">Save LocalStorage</button>
-        <button type="button" data-button="sendStorage">Send LocalStorage</button>
-        <button type="button" data-button="setStorage">Set LocalStorage</button>
+        <button type="button" class="setLocalStorage" data-button="setLocalStorage">Set LocalStorage</button>
     </header>
     <main class="contents" data-component="app">
     </main>
+
+    <div class="dimmed" data-component="dimmed" data-hidden="true"></div>
+
+    <div class="localStorage" data-component="localStorage" data-hidden="true">
+        <div class="localStorage-actions">
+            <button type="button" class="__closeButton" data-button="closeLocalStorage">Close</button>
+            <button type="button" class="__button" data-button="saveStorage">Save LocalStorage</button>
+            <button type="button" class="__button" data-button="sendStorage">Send LocalStorage</button>
+            <button type="button" class="__button" data-button="setStorage">Set LocalStorage</button>
+        </div>
+    </div>
+
 </div>
 
 <template data-template="app">

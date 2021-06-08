@@ -1,10 +1,61 @@
+.localStorage {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.localStorage[data-hidden=true] {
+  display: none;
+}
+
+.localStorage-actions {
+  position: relative;
+  width: 80%;
+  margin: 0 auto;
+  padding: 3rem 2rem 2rem;
+  border-radius: 5px;
+  background: #fff;
+  box-shadow: 7px 10px 20px -5px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+}
+
+.localStorage .__button {
+  box-sizing: border-box;
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 7px;
+  border: 1px solid rgba(0, 128, 0, 0.05);
+  background-color: rgba(0, 128, 0, 0.05);
+}
+
+.localStorage .__button:focus {
+  outline-color: rgba(0, 128, 0, 0.5);
+  background-color: rgba(0, 128, 0, 0.1);
+}
+
+.localStorage .__button:hover {
+  background-color: rgba(0, 128, 0, 0.1);
+}
+
+.localStorage .__button:active {
+  background-color: rgba(0, 128, 0, 0.2);
+}
+
+.localStorage .__closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
 body {
   margin: 0;
   padding: 1rem;
-}
-
-h1 {
-  margin: 0 0 1rem 0;
 }
 
 ul, p {
@@ -18,6 +69,37 @@ li {
 
 input:focus {
   outline: none;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h1 {
+  margin: 0;
+}
+
+.header .setLocalStorage {
+  flex: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  background: #fff;
+}
+
+.header .setLocalStorage:focus {
+  outline-color: rgba(0, 128, 0, 0.5);
+  background-color: rgba(0, 128, 0, 0.1);
+}
+
+.header .setLocalStorage:hover {
+  background-color: rgba(0, 128, 0, 0.1);
+}
+
+.header .setLocalStorage:active {
+  background-color: rgba(0, 128, 0, 0.2);
 }
 
 .habits {
@@ -34,19 +116,37 @@ input:focus {
   height: 48px;
   box-sizing: border-box;
   padding: 0 10px;
-  border: 1px solid #ddd;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
   font-size: 1.2rem;
+}
+
+.habits-inputs input[name="name"]:focus {
+  background-color: rgba(0, 128, 0, 0.1);
 }
 
 .habits-inputs .__button {
   box-sizing: border-box;
   width: 48px;
   margin-left: 5px;
-  border: 1px solid #ddd;
-  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
   background-color: transparent;
   font-size: 1rem;
   white-space: nowrap;
+}
+
+.habits-inputs .__button:focus {
+  outline-color: rgba(0, 128, 0, 0.5);
+  background-color: rgba(0, 128, 0, 0.1);
+}
+
+.habits-inputs .__button:hover {
+  background-color: rgba(0, 128, 0, 0.1);
+}
+
+.habits-inputs .__button:active {
+  background-color: rgba(0, 128, 0, 0.2);
 }
 
 .habits-actions {
@@ -63,15 +163,24 @@ input:focus {
   width: 48px;
   height: 30px;
   border-radius: 3px;
-  border: 1px solid rgba(0, 128, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   background-color: transparent;
   text-align: center;
   font-size: 1rem;
   color: rgba(0, 0, 0, 0.5);
 }
 
-.habits-dates .__button:active {
+.habits-dates .__button:focus {
+  outline-color: rgba(0, 128, 0, 0.5);
   background-color: rgba(0, 128, 0, 0.1);
+}
+
+.habits-dates .__button:hover {
+  background-color: rgba(0, 128, 0, 0.1);
+}
+
+.habits-dates .__button:active {
+  background-color: rgba(0, 128, 0, 0.2);
 }
 
 .habits-dates .__title {
@@ -94,20 +203,28 @@ input:focus {
   top: -20000rem;
 }
 
+.habits-options .__text {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.05);
+  font-size: 13px;
+  color: #999;
+}
+
+.habits-options input[type="checkbox"]:focus + .__text {
+  border-color: rgba(0, 0, 0, 0.3);
+}
+
 .habits-options input[type="checkbox"]:checked + .__text {
   border-color: rgba(0, 125, 0, 0.1);
   background-color: rgba(0, 125, 0, 0.3);
   color: #222;
 }
 
-.habits-options .__text {
-  display: inline-block;
-  padding: 5px 7px;
-  border-radius: 7px;
-  border: 1px solid #ddd;
-  background-color: rgba(0, 0, 0, 0.1);
-  font-size: 13px;
-  color: #999;
+.habits-options input[type="checkbox"]:checked:focus + .__text {
+  border-color: rgba(0, 125, 0, 0.5);
 }
 
 .habikers {
@@ -129,8 +246,8 @@ input:focus {
   flex: auto;
   min-width: 50%;
   margin-right: 5px;
-  padding: 5px;
-  border-radius: 3px;
+  padding: 7px 10px;
+  border-radius: 5px;
   border: none;
   text-overflow: ellipsis;
   font-size: 1.5rem;
@@ -145,12 +262,24 @@ input:focus {
   width: 48px;
   margin-left: 2px;
   padding: 0.3rem;
-  font-size: 1rem;
-  border: 1px solid #ddd;
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 3px;
   background-color: transparent;
   font-size: 1rem;
   white-space: nowrap;
+}
+
+.habiker-header .__button:focus {
+  outline-color: rgba(0, 128, 0, 0.5);
+  background-color: rgba(0, 128, 0, 0.1);
+}
+
+.habiker-header .__button:hover {
+  background-color: rgba(0, 128, 0, 0.1);
+}
+
+.habiker-header .__button:active {
+  background-color: rgba(0, 128, 0, 0.2);
 }
 
 .trackers {
@@ -172,12 +301,6 @@ input:focus {
   top: -20000rem;
 }
 
-.tracker input[type=checkbox]:checked + .__date {
-  border-color: rgba(0, 128, 0, 0.2);
-  background-color: rgba(0, 128, 0, 0.3);
-  color: rgba(100, 123, 101, 0.9);
-}
-
 .tracker .__date {
   display: flex;
   align-items: center;
@@ -189,6 +312,34 @@ input:focus {
   background-color: rgba(117, 117, 117, 0.1);
   font-size: 1rem;
   color: rgba(117, 117, 117, 0.3);
+}
+
+.tracker input[type=checkbox]:focus + .__date {
+  border-color: rgba(117, 117, 117, 0.5);
+}
+
+.tracker input[type=checkbox]:checked + .__date {
+  border-color: rgba(0, 128, 0, 0.2);
+  background-color: rgba(0, 128, 0, 0.3);
+  color: rgba(100, 123, 101, 0.9);
+}
+
+.tracker input[type=checkbox]:checked:focus + .__date {
+  border-color: rgba(0, 128, 0, 0.5);
+}
+
+.dimmed {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(12, 53, 12, 0.9);
+  pointer-events: none;
+}
+
+.dimmed[data-hidden=true] {
+  display: none;
 }
 
 /*# sourceMappingURL=main.css.map */

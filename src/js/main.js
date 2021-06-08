@@ -7,6 +7,8 @@ import applyDiff from './applyDiff.js'
 import registry from './registry.js'
 import modelFactory from './model/model.js'
 
+import controlLocalStorage from './control/localStorage.js'
+
 registry.add('app', appView)
 registry.add('habikers', habikersView)
 registry.add('trackers', trackersView)
@@ -37,27 +39,7 @@ const render = (state, cpnt, parent) => {
 
 addChangeListener(render)
 
-document.querySelector('[data-button=saveStorage]')
-    .addEventListener('click', function(e){
-        const storage = JSON.stringify( getStorage() )
-        const file = new Blob([storage], {type: 'text/plain'})
-        let a = document.createElement("a")
-        a.href = URL.createObjectURL(file)
-        a.download = 'habits.txt'
-        a.click()
-    })
-
-document.querySelector('[data-button=sendStorage]')
-    .addEventListener('click', function(e){
-        const storage = JSON.stringify( getStorage() )
-        window.location.href = `mailto:thegicode@gmail.com?subject=Habits Get LocalStorage&body=${storage}`
-    })
-
-document.querySelector('[data-button=setStorage]')
-    .addEventListener('click', function(){
-        const str = window.prompt('Local Storage를 입력하세요.')
-        events.updateStorage(str)
-    })
+controlLocalStorage(getStorage, events)
 
 
 

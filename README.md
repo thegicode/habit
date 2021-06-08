@@ -16,16 +16,19 @@ tarckers : trackers items
 - [data-text="value"] : Select text element 
 
 
+
 # CSS Naming Rule
+
 ## List and Item
 - list, item의 의미를 각자의 고유명으로 지정한다.
 - ex) tracker-list => trackers, trackers-item => tracker
+
 ## __name
-- 자주 사용하는 네이밍을
+- 현재 블럭 내에서만 사용한다는 의미
+- 자주 사용하는 네이밍인 경우가 있다.
 - 매번 새로운 이름으로 지정하는 피로도를 없애기 위해 
-- 현재 블럭 내에서만 사용
 - ex) __button, __link, __text
 
 
-
-
+# To Do
+- scss 정리
