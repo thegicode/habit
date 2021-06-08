@@ -23,13 +23,14 @@
 ## CSS Naming Rule
 
 ### List and Item
-- list, item의 의미를 각자의 고유명으로 지정한다.
+- list, item의 의미를 가진 고유명으로 지정한다.
 - ex) tracker-list => trackers, trackers-item => tracker
 
 ### "__name"
-- 현재 블럭 내에서만 사용한다는 의미
-- 자주 사용하는 네이밍인 경우가 있다.
+- 블럭 내에서만 사용한다는 의미
+- 블록의 마지막 자식 요소인 경우가 많다.
 - 매번 새로운 이름으로 지정하는 피로도를 없애기 위해 
+- 자주 사용하는 네이밍인 경우가 있다.
 - ex) __button, __link, __text
 
 
