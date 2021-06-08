@@ -3,16 +3,16 @@
 # Constructure
 - Habiker 
     - template: app
-    - Habit and tracker
+    - habit and tracker
 - Habikers 
-    - template:h abiker
-    - Habikers items
+    - template: habiker
+    - habikers items
 - trackers 
     - template: tracker
     - trackers items
 
 
-# [data-attribute]
+# Selector [data-attribute]
 - [data-template="value"] : Select template element
 - [data-componet="value"] : Select comonent
 - [data-button="value"] : Select button element 
@@ -26,7 +26,7 @@
 - list, item의 의미를 각자의 고유명으로 지정한다.
 - ex) tracker-list => trackers, trackers-item => tracker
 
-## __name
+## "__name"
 - 현재 블럭 내에서만 사용한다는 의미
 - 자주 사용하는 네이밍인 경우가 있다.
 - 매번 새로운 이름으로 지정하는 피로도를 없애기 위해 
