@@ -30,8 +30,9 @@ input:focus {
   flex: none;
   padding: 5px 10px;
   border-radius: 5px;
-  border: 1px solid #ddd;
+  border: 1px solid rgba(0, 0, 0, 0.1);
   background: #fff;
+  white-space: nowrap;
 }
 
 .header button.setLocalStorage:focus {
@@ -73,10 +74,10 @@ input:focus {
   box-sizing: border-box;
   width: 48px;
   margin-left: 5px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-  background-color: transparent;
   font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: #fff;
   white-space: nowrap;
 }
 
@@ -206,10 +207,10 @@ input:focus {
   width: 48px;
   margin-left: 2px;
   padding: 0.3rem;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 3px;
-  background-color: transparent;
   font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: #fff;
   white-space: nowrap;
 }
 
@@ -241,14 +242,14 @@ input:focus {
 }
 
 .tracker .__checkboxTracker {
-  position: fixed;
+  position: absolute;
   top: -20000rem;
 }
 
 .tracker .__dateTracker {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   width: 48px;
   height: 30px;
   border-radius: 7px;
@@ -258,17 +259,17 @@ input:focus {
   color: rgba(117, 117, 117, 0.3);
 }
 
-.tracker .__checkboxTracker:focus + .__date {
+.tracker .__checkboxTracker:focus + .__dateTracker {
   border-color: rgba(117, 117, 117, 0.5);
 }
 
-.tracker .__checkboxTracker:checked + .__date {
+.tracker .__checkboxTracker:checked + .__dateTracker {
   border-color: rgba(0, 128, 0, 0.2);
   background-color: rgba(0, 128, 0, 0.3);
   color: rgba(100, 123, 101, 0.9);
 }
 
-.tracker .__checkboxTracker:checked:focus + .__date {
+.tracker .__checkboxTracker:checked:focus + .__dateTracker {
   border-color: rgba(0, 128, 0, 0.5);
 }
 
@@ -303,8 +304,8 @@ input:focus {
 
 .localStorage-actions {
   position: relative;
-  width: 80%;
-  margin: 0 auto;
+  width: 100%;
+  margin: 1rem;
   padding: 3rem 2rem 2rem;
   border-radius: 5px;
   background: #fff;
@@ -317,7 +318,7 @@ input:focus {
   box-sizing: border-box;
   margin: 5px 0;
   padding: 10px;
-  border-radius: 7px;
+  border-radius: 5px;
   border: 1px solid rgba(0, 128, 0, 0.05);
   background-color: rgba(0, 128, 0, 0.05);
 }

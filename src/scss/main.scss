@@ -1,18 +1,6 @@
 
-body{
-    margin: 0;
-    padding: 1rem;
-}
-ul, p{
-    margin: 0;
-    padding: 0;
-}
-li{
-    list-style: none
-}
-input:focus{
-    outline: none;
-}
+@import './_mixins.scss';
+@import './_reset.scss';
 
 .header {
     display: flex;
@@ -24,19 +12,8 @@ input:focus{
     button.setLocalStorage{
         flex: none;
         padding: 5px 10px;
-        border-radius: 5px;
-        border: 1px solid #ddd;
-        background: #fff;
-        &:focus{
-            outline-color: rgba(0, 128, 0, 0.5);
-            background-color: rgba(0, 128, 0, 0.1);
-        }
-        &:hover{
-            background-color: rgba(0, 128, 0, 0.1);
-        }
-        &:active{
-            background-color: rgba(0, 128, 0, 0.2);
-        }
+        @include button-default;        
+        @include button-state;
     }
 }
 
@@ -60,21 +37,9 @@ input:focus{
             box-sizing: border-box;
             width: 48px;
             margin-left: 5px;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            border-radius: 5px;
-            background-color: transparent;
             font-size: 1rem;
-            white-space: nowrap;
-            &:focus{
-                outline-color: rgba(0, 128, 0, 0.5);
-                background-color: rgba(0, 128, 0, 0.1);
-            }
-            &:hover{
-                background-color: rgba(0, 128, 0, 0.1)
-            }
-            &:active{
-                background-color: rgba(0, 128, 0, 0.2)
-            }
+            @include button-default;
+            @include button-state;
         }
     }
     &-actions {
@@ -115,9 +80,7 @@ input:focus{
         // }
     }
     &-navs{
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        @include flexCenterAll;
         .__buttonNav{
             width: 48px; height: 30px;
             border-radius: 3px;
@@ -126,16 +89,7 @@ input:focus{
             text-align: center;
             font-size: 1rem;
             color: rgba(0, 0, 0, 0.5);
-            &:focus{
-                outline-color: rgba(0, 128, 0, 0.5);
-                background-color: rgba(0, 128, 0, 0.1);
-            }
-            &:hover{
-                background-color: rgba(0, 128, 0, 0.1);
-            }
-            &:active{
-                background-color: rgba(0, 128, 0, 0.2);
-            }
+            @include button-state;
         }
         .__titleNav{
             margin: 0 10px;
@@ -150,8 +104,7 @@ input:focus{
             position: relative;
         }
         .__checkboxFold{
-            position: absolute;
-            top: -20000rem;
+            @include formElementHidden;
         }
         .__textFold{
             display: inline-block;
@@ -209,21 +162,9 @@ input:focus{
         width: 48px;
         margin-left: 2px;
         padding: 0.3rem;
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        border-radius: 3px;
-        background-color: transparent;
         font-size: 1rem;
-        white-space: nowrap;
-        &:focus{
-            outline-color: rgba(0, 128, 0, 0.5);
-            background-color: rgba(0, 128, 0, 0.1);
-        }
-        &:hover{
-            background-color: rgba(0, 128, 0, 0.1);
-        }
-        &:active{
-            background-color: rgba(0, 128, 0, 0.2);
-        }
+        @include button-default;
+        @include button-state;
     }
 }
 
@@ -240,13 +181,10 @@ input:focus{
 .tracker{
     margin: 2px;
     .__checkboxTracker{
-        position: fixed;
-        top: -20000rem;
+        @include formElementHidden;
     }
     .__dateTracker{
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        @include flexCenterAll;
         width: 48px;
         height: 30px;
         border-radius: 7px;
@@ -256,32 +194,22 @@ input:focus{
         color: rgba(117, 117, 117, 0.3);
     }
     .__checkboxTracker{
-        &:focus + .__date{
+        &:focus + .__dateTracker{
             border-color: rgba(117, 117, 117, 0.5);
         }
-        &:checked + .__date{
+        &:checked + .__dateTracker{
             border-color: rgba(0, 128, 0, 0.2);
             background-color: rgba(0, 128, 0, 0.3);
             color: rgba(100, 123, 101, 0.9);
         }
-        &:checked:focus + .__date{
+        &:checked:focus + .__dateTracker{
             border-color: rgba(0, 128, 0, 0.5);
         }
     }
-    
-}
-
-.dimmed{
-    position: fixed;
-    top: 0; right: 0; bottom: 0; left: 0;
-    background-color: rgba(12, 53, 12, 0.9);
-    pointer-events: none;
-    &[data-hidden=true]{
-        display: none;
-    }
 }
 
 
+@import '_dimmed.scss';
 @import '_localStorage.scss';
 
 
