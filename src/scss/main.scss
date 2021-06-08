@@ -21,7 +21,7 @@ input:focus{
     h1 {
         margin: 0;
     }
-    .setLocalStorage{
+    button.setLocalStorage{
         flex: none;
         padding: 5px 10px;
         border-radius: 5px;
@@ -41,11 +41,10 @@ input:focus{
 }
 
 .habits {
-    margin-top: 2rem;
-    &-inputs{
+    margin-top: 1rem;
+    &-enters{
         display: flex;
-        margin-top: 10px;
-        input[name="name"]{
+        .__inputEnter{
             flex: auto;
             height: 48px;
             box-sizing: border-box;
@@ -57,7 +56,7 @@ input:focus{
                 background-color: rgba(0, 128, 0, 0.1);
             }
         }
-        .__button{
+        .__buttonEnter{
             box-sizing: border-box;
             width: 48px;
             margin-left: 5px;
@@ -115,11 +114,11 @@ input:focus{
         //     }
         // }
     }
-    &-dates{
+    &-navs{
         display: flex;
         justify-content: center;
         align-items: center;
-        .__button{
+        .__buttonNav{
             width: 48px; height: 30px;
             border-radius: 3px;
             border: 1px solid rgba(0, 0, 0, 0.1);
@@ -138,7 +137,7 @@ input:focus{
                 background-color: rgba(0, 128, 0, 0.2);
             }
         }
-        .__title{
+        .__titleNav{
             margin: 0 10px;
             font-size: 1.5rem;
         }
@@ -147,14 +146,14 @@ input:focus{
         display: flex;
         justify-content: flex-end;
         margin-top: 10px;
-        label{
+        .__labelFold{
             position: relative;
         }
-        input[type="checkbox"]{
+        .__checkboxFold{
             position: absolute;
             top: -20000rem;
         }
-        .__text{
+        .__textFold{
             display: inline-block;
             padding: 5px 10px;
             border-radius: 5px;
@@ -164,16 +163,16 @@ input:focus{
             color: #999;
 
         }
-        input[type="checkbox"]{
-            &:focus + .__text{
+        .__checkboxFold{
+            &:focus + .__textFold{
                 border-color: rgba(0, 0, 0, 0.3);
             }
-            &:checked + .__text{
+            &:checked + .__textFold{
                 border-color: rgba(0, 125, 0, 0.1);
                 background-color: rgba(0, 125, 0, 0.3);
                 color: #222;
             }
-            &:checked:focus + .__text{
+            &:checked:focus + .__textFold{
                 border-color: rgba(0, 125, 0, 0.5);
             }
         }
@@ -191,39 +190,39 @@ input:focus{
     list-style: none;
     &-header{
         display: flex;
-        input[name="name"]{
-            flex: auto;
-            min-width: 50%;
-            margin-right: 5px;
-            padding: 7px 10px;
-            border-radius: 5px;
-            border: none;
-            text-overflow: ellipsis;
-            font-size: 1.5rem;
-            &:focus{
-                background-color: rgba(0, 128, 0, 0.1);
-            }
+    }
+    .__nameHabiker{
+        flex: auto;
+        min-width: 50%;
+        margin-right: 5px;
+        padding: 7px 10px;
+        border-radius: 5px;
+        border: none;
+        text-overflow: ellipsis;
+        font-size: 1.5rem;
+        &:focus{
+            background-color: rgba(0, 128, 0, 0.1);
         }
-        .__button{
-            box-sizing: border-box;
-            width: 48px;
-            margin-left: 2px;
-            padding: 0.3rem;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            border-radius: 3px;
-            background-color: transparent;
-            font-size: 1rem;
-            white-space: nowrap;
-            &:focus{
-                outline-color: rgba(0, 128, 0, 0.5);
-                background-color: rgba(0, 128, 0, 0.1);
-            }
-            &:hover{
-                background-color: rgba(0, 128, 0, 0.1);
-            }
-            &:active{
-                background-color: rgba(0, 128, 0, 0.2);
-            }
+    }
+    .__buttonHabiker{
+        box-sizing: border-box;
+        width: 48px;
+        margin-left: 2px;
+        padding: 0.3rem;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 3px;
+        background-color: transparent;
+        font-size: 1rem;
+        white-space: nowrap;
+        &:focus{
+            outline-color: rgba(0, 128, 0, 0.5);
+            background-color: rgba(0, 128, 0, 0.1);
+        }
+        &:hover{
+            background-color: rgba(0, 128, 0, 0.1);
+        }
+        &:active{
+            background-color: rgba(0, 128, 0, 0.2);
         }
     }
 }
@@ -240,11 +239,11 @@ input:focus{
 
 .tracker{
     margin: 2px;
-    input[type=checkbox]{
+    .__checkboxTracker{
         position: fixed;
         top: -20000rem;
     }
-    .__date{
+    .__dateTracker{
         display: flex;
         align-items: center;
         justify-content: center;
@@ -256,7 +255,7 @@ input:focus{
         font-size: 1rem;
         color: rgba(117, 117, 117, 0.3);
     }
-    input[type=checkbox]{
+    .__checkboxTracker{
         &:focus + .__date{
             border-color: rgba(117, 117, 117, 0.5);
         }

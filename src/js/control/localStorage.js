@@ -4,25 +4,25 @@ export default (getStorage, events) => {
     const dimmedComponent = document
         .querySelector('[data-component=dimmed]')
 
-    const localStrageComponent = document
+    const localStorageComponent = document
         .querySelector('[data-component=localStorage]')
 
     const setLocalStorageButton = document
         .querySelector('[data-button=setLocalStorage]')
 
     const closeLocalStorageButton = document
-        .querySelector('[data-button=closeLocalStorage]')
+        .querySelector('[data-button=closeStorage]')
 
     setLocalStorageButton
         .addEventListener('click', function(){
-            localStrageComponent.dataset.hidden = false
+            localStorageComponent.dataset.hidden = false
             dimmedComponent.dataset.hidden = false
             closeLocalStorageButton.focus()
         })
 
     closeLocalStorageButton
         .addEventListener('click', function(){
-            localStrageComponent.dataset.hidden = true
+            localStorageComponent.dataset.hidden = true
             dimmedComponent.dataset.hidden = true
             setLocalStorageButton.focus()
         })
@@ -51,7 +51,7 @@ export default (getStorage, events) => {
             const str = window.prompt('Local Storage를 입력하세요.')
             if(str){
                 events.updateStorage(str)
-                localStrageComponent.dataset.hidden = true
+                localStorageComponent.dataset.hidden = true
                 dimmedComponent.dataset.hidden = true
             }
         })

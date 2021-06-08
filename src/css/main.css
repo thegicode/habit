@@ -26,7 +26,7 @@ input:focus {
   margin: 0;
 }
 
-.header .setLocalStorage {
+.header button.setLocalStorage {
   flex: none;
   padding: 5px 10px;
   border-radius: 5px;
@@ -34,29 +34,28 @@ input:focus {
   background: #fff;
 }
 
-.header .setLocalStorage:focus {
+.header button.setLocalStorage:focus {
   outline-color: rgba(0, 128, 0, 0.5);
   background-color: rgba(0, 128, 0, 0.1);
 }
 
-.header .setLocalStorage:hover {
+.header button.setLocalStorage:hover {
   background-color: rgba(0, 128, 0, 0.1);
 }
 
-.header .setLocalStorage:active {
+.header button.setLocalStorage:active {
   background-color: rgba(0, 128, 0, 0.2);
 }
 
 .habits {
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
-.habits-inputs {
+.habits-enters {
   display: flex;
-  margin-top: 10px;
 }
 
-.habits-inputs input[name="name"] {
+.habits-enters .__inputEnter {
   flex: auto;
   height: 48px;
   box-sizing: border-box;
@@ -66,11 +65,11 @@ input:focus {
   font-size: 1.2rem;
 }
 
-.habits-inputs input[name="name"]:focus {
+.habits-enters .__inputEnter:focus {
   background-color: rgba(0, 128, 0, 0.1);
 }
 
-.habits-inputs .__button {
+.habits-enters .__buttonEnter {
   box-sizing: border-box;
   width: 48px;
   margin-left: 5px;
@@ -81,16 +80,16 @@ input:focus {
   white-space: nowrap;
 }
 
-.habits-inputs .__button:focus {
+.habits-enters .__buttonEnter:focus {
   outline-color: rgba(0, 128, 0, 0.5);
   background-color: rgba(0, 128, 0, 0.1);
 }
 
-.habits-inputs .__button:hover {
+.habits-enters .__buttonEnter:hover {
   background-color: rgba(0, 128, 0, 0.1);
 }
 
-.habits-inputs .__button:active {
+.habits-enters .__buttonEnter:active {
   background-color: rgba(0, 128, 0, 0.2);
 }
 
@@ -98,13 +97,13 @@ input:focus {
   margin-top: 1.5rem;
 }
 
-.habits-dates {
+.habits-navs {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.habits-dates .__button {
+.habits-navs .__buttonNav {
   width: 48px;
   height: 30px;
   border-radius: 3px;
@@ -115,20 +114,20 @@ input:focus {
   color: rgba(0, 0, 0, 0.5);
 }
 
-.habits-dates .__button:focus {
+.habits-navs .__buttonNav:focus {
   outline-color: rgba(0, 128, 0, 0.5);
   background-color: rgba(0, 128, 0, 0.1);
 }
 
-.habits-dates .__button:hover {
+.habits-navs .__buttonNav:hover {
   background-color: rgba(0, 128, 0, 0.1);
 }
 
-.habits-dates .__button:active {
+.habits-navs .__buttonNav:active {
   background-color: rgba(0, 128, 0, 0.2);
 }
 
-.habits-dates .__title {
+.habits-navs .__titleNav {
   margin: 0 10px;
   font-size: 1.5rem;
 }
@@ -139,16 +138,16 @@ input:focus {
   margin-top: 10px;
 }
 
-.habits-options label {
+.habits-options .__labelFold {
   position: relative;
 }
 
-.habits-options input[type="checkbox"] {
+.habits-options .__checkboxFold {
   position: absolute;
   top: -20000rem;
 }
 
-.habits-options .__text {
+.habits-options .__textFold {
   display: inline-block;
   padding: 5px 10px;
   border-radius: 5px;
@@ -158,17 +157,17 @@ input:focus {
   color: #999;
 }
 
-.habits-options input[type="checkbox"]:focus + .__text {
+.habits-options .__checkboxFold:focus + .__textFold {
   border-color: rgba(0, 0, 0, 0.3);
 }
 
-.habits-options input[type="checkbox"]:checked + .__text {
+.habits-options .__checkboxFold:checked + .__textFold {
   border-color: rgba(0, 125, 0, 0.1);
   background-color: rgba(0, 125, 0, 0.3);
   color: #222;
 }
 
-.habits-options input[type="checkbox"]:checked:focus + .__text {
+.habits-options .__checkboxFold:checked:focus + .__textFold {
   border-color: rgba(0, 125, 0, 0.5);
 }
 
@@ -187,7 +186,7 @@ input:focus {
   display: flex;
 }
 
-.habiker-header input[name="name"] {
+.habiker .__nameHabiker {
   flex: auto;
   min-width: 50%;
   margin-right: 5px;
@@ -198,11 +197,11 @@ input:focus {
   font-size: 1.5rem;
 }
 
-.habiker-header input[name="name"]:focus {
+.habiker .__nameHabiker:focus {
   background-color: rgba(0, 128, 0, 0.1);
 }
 
-.habiker-header .__button {
+.habiker .__buttonHabiker {
   box-sizing: border-box;
   width: 48px;
   margin-left: 2px;
@@ -214,16 +213,16 @@ input:focus {
   white-space: nowrap;
 }
 
-.habiker-header .__button:focus {
+.habiker .__buttonHabiker:focus {
   outline-color: rgba(0, 128, 0, 0.5);
   background-color: rgba(0, 128, 0, 0.1);
 }
 
-.habiker-header .__button:hover {
+.habiker .__buttonHabiker:hover {
   background-color: rgba(0, 128, 0, 0.1);
 }
 
-.habiker-header .__button:active {
+.habiker .__buttonHabiker:active {
   background-color: rgba(0, 128, 0, 0.2);
 }
 
@@ -241,12 +240,12 @@ input:focus {
   margin: 2px;
 }
 
-.tracker input[type=checkbox] {
+.tracker .__checkboxTracker {
   position: fixed;
   top: -20000rem;
 }
 
-.tracker .__date {
+.tracker .__dateTracker {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -259,17 +258,17 @@ input:focus {
   color: rgba(117, 117, 117, 0.3);
 }
 
-.tracker input[type=checkbox]:focus + .__date {
+.tracker .__checkboxTracker:focus + .__date {
   border-color: rgba(117, 117, 117, 0.5);
 }
 
-.tracker input[type=checkbox]:checked + .__date {
+.tracker .__checkboxTracker:checked + .__date {
   border-color: rgba(0, 128, 0, 0.2);
   background-color: rgba(0, 128, 0, 0.3);
   color: rgba(100, 123, 101, 0.9);
 }
 
-.tracker input[type=checkbox]:checked:focus + .__date {
+.tracker .__checkboxTracker:checked:focus + .__date {
   border-color: rgba(0, 128, 0, 0.5);
 }
 
@@ -314,7 +313,7 @@ input:focus {
   flex-direction: column;
 }
 
-.localStorage .__button {
+.localStorage .__buttonStorage {
   box-sizing: border-box;
   margin: 5px 0;
   padding: 10px;
@@ -323,20 +322,20 @@ input:focus {
   background-color: rgba(0, 128, 0, 0.05);
 }
 
-.localStorage .__button:focus {
+.localStorage .__buttonStorage:focus {
   outline-color: rgba(0, 128, 0, 0.5);
   background-color: rgba(0, 128, 0, 0.1);
 }
 
-.localStorage .__button:hover {
+.localStorage .__buttonStorage:hover {
   background-color: rgba(0, 128, 0, 0.1);
 }
 
-.localStorage .__button:active {
+.localStorage .__buttonStorage:active {
   background-color: rgba(0, 128, 0, 0.2);
 }
 
-.localStorage .__closeButton {
+.localStorage button.__closeStorage {
   position: absolute;
   top: 10px;
   right: 10px;

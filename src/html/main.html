@@ -14,6 +14,7 @@
         <h1>Habits</h1>
         <button type="button" class="setLocalStorage" data-button="setLocalStorage">Set LocalStorage</button>
     </header>
+
     <main class="contents" data-component="app">
     </main>
 
@@ -21,10 +22,10 @@
 
     <div class="localStorage" data-component="localStorage" data-hidden="true">
         <div class="localStorage-actions">
-            <button type="button" class="__closeButton" data-button="closeLocalStorage">Close</button>
-            <button type="button" class="__button" data-button="saveStorage">Save LocalStorage</button>
-            <button type="button" class="__button" data-button="sendStorage">Send LocalStorage</button>
-            <button type="button" class="__button" data-button="setStorage">Set LocalStorage</button>
+            <button type="button" class="__closeStorage" data-button="closeStorage">Close</button>
+            <button type="button" class="__buttonStorage" data-button="saveStorage">Save LocalStorage</button>
+            <button type="button" class="__buttonStorage" data-button="sendStorage">Send LocalStorage</button>
+            <button type="button" class="__buttonStorage" data-button="setStorage">Set LocalStorage</button>
         </div>
     </div>
 
@@ -32,9 +33,9 @@
 
 <template data-template="app">
     <section class="habits">
-        <div class="habits-inputs">
-            <input type="text" name="name" placeholder="습관명을 입력하세요." title="습관명 입력" autofocus>
-            <button type="button" class="__button" data-button="input">입력</button>
+        <div class="habits-enters">
+            <input type="text" name="name" placeholder="습관명을 입력하세요." title="습관명 입력" autofocus class="__inputEnter">
+            <button type="button" class="__buttonEnter" data-button="input">입력</button>
         </div>
         <div class="habits-actions">
             <!-- <nav>
@@ -47,15 +48,15 @@
                     <span class="__label">주간</span>
                 </label>
             </nav> -->
-            <div class="habits-dates">
-                <button type="button" class="__button" data-button="month-prev" title="이전">&lt;</button>
-                <p class="__title" data-text="month"></p>
-                <button type="button" class="__button" data-button="month-next" title="다음">></button>
+            <div class="habits-navs">
+                <button type="button" class="__buttonNav" data-button="month-prev" title="이전">&lt;</button>
+                <p class="__titleNav" data-text="month"></p>
+                <button type="button" class="__buttonNav" data-button="month-next" title="다음">></button>
             </div>
             <div class="habits-options">
-                <label>
-                    <input type="checkbox" data-checkbox="fold">
-                    <span class="__text" data-text="fold">트래커 보이기</span>
+                <label class="__labelFold">
+                    <input type="checkbox" class="__checkboxFold" data-checkbox="fold">
+                    <span class="__textFold" data-text="fold">트래커 보이기</span>
                 </label>
             </div>
         </div>
@@ -66,9 +67,9 @@
 <template data-template="habiker">
     <li class="habiker">
         <header class="habiker-header">
-            <input type="text" name="name" title="습관명">
-            <button type="button" class="__button" data-button="delete">삭제</button>
-            <button type="button" class="__button" data-button="drag" draggable="true" title="Drag and drop">=</button>
+            <input type="text" name="name" title="습관명" class="__nameHabiker">
+            <button type="button" class="__buttonHabiker" data-button="delete">삭제</button>
+            <button type="button" class="__buttonHabiker" data-button="drag" draggable="true" title="Drag and drop">=</button>
         </header>
         <div class="trackers" data-component="trackers"></div>
 
@@ -78,10 +79,11 @@
 
 <template data-template="tracker">
     <label class="tracker">
-        <input type="checkbox" name="check">
-        <span class="__date" data-text="date"></span>
+        <input type="checkbox" name="check" class="__checkboxTracker">
+        <span class="__dateTracker" data-text="date"></span>
     </label>
 </template>
+
 <script type="module" src="../js/main.js"></script>
 
 </body>
