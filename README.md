@@ -1,12 +1,15 @@
 # habits
 
 # Constructure
-Habiker [ app ]
-    > Habikers [ habiker ]
-        > trackers [ tracker ]
-Habiker : Habit and tracker
-Habikers : Habikers items
-tarckers : trackers items
+- Habiker 
+    - template: app
+    - Habit and tracker
+- Habikers 
+    - template:h abiker
+    - Habikers items
+- trackers 
+    - template: tracker
+    - trackers items
 
 
 # [data-attribute]
