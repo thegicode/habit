@@ -42,7 +42,7 @@ export default (getStorage, events) => {
         .querySelector('[data-button=sendStorage]')
         .addEventListener('click', function(e){
             const storage = JSON.stringify( getStorage() )
-            window.location.href = `mailto:thegicode@gmail.com?subject=Habits Get LocalStorage&body=${storage}`
+            window.location.href = `mailto:thegi.code@gmail.com?subject=Habits Get LocalStorage&body=${storage}`
         })
 
     document
