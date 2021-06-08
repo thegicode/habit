@@ -1,4 +1,10 @@
 
+@mixin flexCenterAll{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 @mixin button-default{
     border-radius: 5px;
     border: 1px solid rgba(0, 0, 0, 0.1);
@@ -20,12 +26,6 @@
 }
 
 @mixin formElementHidden{
-    position: absolute;
+    position: fixed;
     top: -20000rem;
-}
-
-@mixin flexCenterAll{
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }

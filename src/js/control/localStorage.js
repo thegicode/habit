@@ -1,30 +1,30 @@
 
 export default (getStorage, events) => {
-    
-    const dimmedComponent = document
+
+    const dimmed = document
         .querySelector('[data-component=dimmed]')
 
-    const localStorageComponent = document
+    const component = document
         .querySelector('[data-component=localStorage]')
 
-    const setLocalStorageButton = document
+    const launcherButton = document
         .querySelector('[data-button=setLocalStorage]')
 
-    const closeLocalStorageButton = document
+    const closeButton = document
         .querySelector('[data-button=closeStorage]')
 
-    setLocalStorageButton
+    launcherButton
         .addEventListener('click', function(){
-            localStorageComponent.dataset.hidden = false
-            dimmedComponent.dataset.hidden = false
-            closeLocalStorageButton.focus()
+            component.dataset.hidden = false
+            dimmed.dataset.hidden = false
+            closeButton.focus()
         })
 
-    closeLocalStorageButton
+    closeButton
         .addEventListener('click', function(){
-            localStorageComponent.dataset.hidden = true
-            dimmedComponent.dataset.hidden = true
-            setLocalStorageButton.focus()
+            component.dataset.hidden = true
+            dimmed.dataset.hidden = true
+            launcherButton.focus()
         })
 
     document
@@ -46,13 +46,21 @@ export default (getStorage, events) => {
         })
 
     document
-        .querySelector('[data-button=setStorage]')
+        .querySelector('[data-button=EnterStorage]')
         .addEventListener('click', function(){
             const str = window.prompt('Local Storage를 입력하세요.')
             if(str){
                 events.updateStorage(str)
-                localStorageComponent.dataset.hidden = true
-                dimmedComponent.dataset.hidden = true
+                component.dataset.hidden = true
+                dimmed.dataset.hidden = true
+            }
+        })
+
+    dimmed
+        .addEventListener('click', function(){
+            if (component.dataset.hidden === "false") {
+                component.dataset.hidden = true
+                this.dataset.hidden = true;
             }
         })
 }
