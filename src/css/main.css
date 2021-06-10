@@ -34,6 +34,7 @@ input:focus {
   border: 1px solid rgba(0, 0, 0, 0.1);
   background: #fff;
   white-space: nowrap;
+  cursor: pointer;
 }
 
 .header button.setLocalStorage:focus {
@@ -82,6 +83,7 @@ input:focus {
   border: 1px solid rgba(0, 0, 0, 0.1);
   background: #fff;
   white-space: nowrap;
+  cursor: pointer;
 }
 
 .habits-enters .__buttonEnter:focus {
@@ -103,21 +105,43 @@ input:focus {
 
 .habits-navs {
   display: flex;
-  justify-content: center;
-  align-items: center;
+}
+
+.habits-navs .__buttonCurrent {
+  margin-left: 10px;
+  padding: 0 10px;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: #fff;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.habits-navs .__buttonCurrent:focus {
+  outline-color: rgba(0, 128, 0, 0.5);
+  background-color: rgba(0, 128, 0, 0.1);
+}
+
+.habits-navs .__buttonCurrent:hover {
+  background-color: rgba(0, 128, 0, 0.1);
+}
+
+.habits-navs .__buttonCurrent:active {
+  background-color: rgba(0, 128, 0, 0.2);
 }
 
 .habits-navs .__buttonNav {
   box-sizing: border-box;
-  width: 48px;
+  width: 30px;
   height: 30px;
   margin: 0;
   padding: 0;
-  border-radius: 3px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border: none;
   background-color: transparent;
   font-size: 1rem;
   color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
 }
 
 .habits-navs .__buttonNav:focus {
@@ -139,6 +163,7 @@ input:focus {
 }
 
 .habits-navs .__titleNav {
+  width: 85px;
   margin: 0 10px;
   font-size: 1.5rem;
 }
@@ -222,6 +247,7 @@ input:focus {
   border: 1px solid rgba(0, 0, 0, 0.1);
   background: #fff;
   white-space: nowrap;
+  cursor: pointer;
 }
 
 .habiker .__buttonHabiker:focus {

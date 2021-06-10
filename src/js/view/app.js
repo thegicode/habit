@@ -86,6 +86,13 @@ const addEventsDate = (newCpnt, activeMonth, monthEl) => {
             }
             setActiveMonth()
         })
+    newCpnt.querySelector('[data-button=month-current]')
+        .addEventListener('click', function(){
+            year = new Date().getFullYear()
+            month = new Date().getMonth()+1
+            setActiveMonth()
+        })
+
 }
 
 const addEvents = (newCpnt, events) => {

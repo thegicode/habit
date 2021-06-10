@@ -82,25 +82,35 @@
         // }
     }
     &-navs{
-        @include flexCenterAll;
+        display: flex;
+        .__buttonCurrent{
+            margin-left: 10px;
+            padding: 0 10px;
+
+            @include button-default;
+            @include button-state;
+        }
         .__buttonNav{
             box-sizing: border-box;
-            width: 48px; 
+            width: 30px; 
             height: 30px;
             margin: 0;
             padding: 0;
-            border-radius: 3px;
-            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border: none;
             background-color: transparent;
             font-size: 1rem;
             color: rgba(0, 0, 0, 0.5);
+            cursor: pointer;
             @include button-state;
+
         }
         .__textButton{
             position: relative;
             top: -2px;
         }
         .__titleNav{
+            width: 85px;
             margin: 0 10px;
             font-size: 1.5rem;
         }

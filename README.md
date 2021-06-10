@@ -34,3 +34,5 @@
 
 ## To Do
 - scss 정리
+- Lighthouse
+- eslint
