@@ -3,6 +3,12 @@
   "version": "1.0.0",
   "description": "habits check ",
   "main": "index.js",
+  "scripts": {
+    "start": "node server",
+    "watch:css": "node-sass --watch --output-style expanded ./src/scss --output ./src/css --source-map true ",
+    "eslint": "eslint src/js/**",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/thegicode/habits.git"
@@ -13,17 +19,9 @@
     "url": "https://github.com/thegicode/habits/issues"
   },
   "homepage": "https://github.com/thegicode/habits#readme",
-  "dependencies": {
-    "express": "^4.17.1"
-  },
   "devDependencies": {
     "eslint": "^6.6.0",
+    "express": "^4.17.1",
     "node-sass": "^4.13.0"
-  },
-  "scripts": {
-    "start": "node server",
-    "watch:css": "node-sass --watch --output-style expanded ./src/scss --output ./src/css --source-map true ",
-    "eslint": "eslint src/js/**",
-    "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
