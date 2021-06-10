@@ -156,8 +156,8 @@
     .__nameHabiker{
         flex: auto;
         min-width: 50%;
-        margin-right: 5px;
-        padding: 7px 10px;
+        margin: 0 5px 0 0;
+        padding: 7px;
         border-radius: 5px;
         border: none;
         text-overflow: ellipsis;
@@ -170,7 +170,7 @@
         box-sizing: border-box;
         width: 48px;
         margin-left: 2px;
-        padding: 0.3rem;
+        padding: 0.3rem 0.5rem;
         font-size: 14px;
         @include button-default;
         @include button-state;
