@@ -133,7 +133,7 @@ input:focus {
   background-color: rgba(0, 128, 0, 0.2);
 }
 
-.habits-navs .__buttonNav .__text {
+.habits-navs .__textButton {
   position: relative;
   top: -2px;
 }
@@ -217,7 +217,7 @@ input:focus {
   width: 48px;
   margin-left: 2px;
   padding: 0.3rem;
-  font-size: 1rem;
+  font-size: 14px;
   border-radius: 5px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   background: #fff;
