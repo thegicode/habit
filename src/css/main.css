@@ -65,7 +65,7 @@ input:focus {
   border-radius: 5px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   font-size: 1.2rem;
-  appearance: none;
+  -webkit-appearance: none;
 }
 
 .habits-enters .__inputEnter:focus {
@@ -75,7 +75,8 @@ input:focus {
 .habits-enters .__buttonEnter {
   box-sizing: border-box;
   width: 48px;
-  margin-left: 5px;
+  margin: 0 0 0 2px;
+  padding: 0;
   font-size: 1rem;
   border-radius: 5px;
   border: 1px solid rgba(0, 0, 0, 0.1);
