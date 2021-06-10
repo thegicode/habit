@@ -108,12 +108,14 @@ input:focus {
 }
 
 .habits-navs .__buttonNav {
+  box-sizing: border-box;
   width: 48px;
   height: 30px;
+  margin: 0;
+  padding: 0;
   border-radius: 3px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   background-color: transparent;
-  text-align: center;
   font-size: 1rem;
   color: rgba(0, 0, 0, 0.5);
 }
@@ -129,6 +131,11 @@ input:focus {
 
 .habits-navs .__buttonNav:active {
   background-color: rgba(0, 128, 0, 0.2);
+}
+
+.habits-navs .__buttonNav .__text {
+  position: relative;
+  top: -2px;
 }
 
 .habits-navs .__titleNav {

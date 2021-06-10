@@ -84,14 +84,22 @@
     &-navs{
         @include flexCenterAll;
         .__buttonNav{
-            width: 48px; height: 30px;
+            box-sizing: border-box;
+            width: 48px; 
+            height: 30px;
+            margin: 0;
+            padding: 0;
             border-radius: 3px;
             border: 1px solid rgba(0, 0, 0, 0.1);
             background-color: transparent;
-            text-align: center;
+            // text-align: center;
             font-size: 1rem;
             color: rgba(0, 0, 0, 0.5);
             @include button-state;
+            .__text{
+                position: relative;
+                top: -2px;
+            }
         }
         .__titleNav{
             margin: 0 10px;
