@@ -37,3 +37,9 @@
 - Lighthouse
 - eslint
 - localStorage -> Web SQL
+- Enters : Add reset button, Update search button with icon
+- Update trackker button text content
+- Add today tag
+- Add tooltip
+- Add mixin: color
+
