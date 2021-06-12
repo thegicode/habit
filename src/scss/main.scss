@@ -97,11 +97,9 @@
             margin: 0;
             padding: 0;
             border-radius: 50%;
-            border: none;
-            background-color: transparent;
             font-size: 1rem;
             color: rgba(0, 0, 0, 0.5);
-            cursor: pointer;
+            @include button-default-circle;
             @include button-state;
 
         }

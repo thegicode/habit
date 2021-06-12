@@ -30,6 +30,7 @@ input:focus {
 .header button.setLocalStorage {
   flex: none;
   padding: 5px 10px;
+  outline: none;
   border-radius: 5px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   background: #fff;
@@ -37,16 +38,15 @@ input:focus {
   cursor: pointer;
 }
 
-.header button.setLocalStorage:focus {
-  outline-color: rgba(0, 128, 0, 0.5);
+.header button.setLocalStorage:hover, .header button.setLocalStorage:focus {
   background-color: rgba(0, 128, 0, 0.1);
 }
 
-.header button.setLocalStorage:hover {
-  background-color: rgba(0, 128, 0, 0.1);
+.header button.setLocalStorage:hover:focus {
+  background-color: rgba(0, 128, 0, 0.15);
 }
 
-.header button.setLocalStorage:active {
+.header button.setLocalStorage:hover:active {
   background-color: rgba(0, 128, 0, 0.2);
 }
 
@@ -79,6 +79,7 @@ input:focus {
   margin: 0 0 0 2px;
   padding: 0;
   font-size: 1rem;
+  outline: none;
   border-radius: 5px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   background: #fff;
@@ -86,16 +87,15 @@ input:focus {
   cursor: pointer;
 }
 
-.habits-enters .__buttonEnter:focus {
-  outline-color: rgba(0, 128, 0, 0.5);
+.habits-enters .__buttonEnter:hover, .habits-enters .__buttonEnter:focus {
   background-color: rgba(0, 128, 0, 0.1);
 }
 
-.habits-enters .__buttonEnter:hover {
-  background-color: rgba(0, 128, 0, 0.1);
+.habits-enters .__buttonEnter:hover:focus {
+  background-color: rgba(0, 128, 0, 0.15);
 }
 
-.habits-enters .__buttonEnter:active {
+.habits-enters .__buttonEnter:hover:active {
   background-color: rgba(0, 128, 0, 0.2);
 }
 
@@ -110,6 +110,7 @@ input:focus {
 .habits-navs .__buttonCurrent {
   margin-left: 10px;
   padding: 0 10px;
+  outline: none;
   border-radius: 5px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   background: #fff;
@@ -117,16 +118,15 @@ input:focus {
   cursor: pointer;
 }
 
-.habits-navs .__buttonCurrent:focus {
-  outline-color: rgba(0, 128, 0, 0.5);
+.habits-navs .__buttonCurrent:hover, .habits-navs .__buttonCurrent:focus {
   background-color: rgba(0, 128, 0, 0.1);
 }
 
-.habits-navs .__buttonCurrent:hover {
-  background-color: rgba(0, 128, 0, 0.1);
+.habits-navs .__buttonCurrent:hover:focus {
+  background-color: rgba(0, 128, 0, 0.15);
 }
 
-.habits-navs .__buttonCurrent:active {
+.habits-navs .__buttonCurrent:hover:active {
   background-color: rgba(0, 128, 0, 0.2);
 }
 
@@ -137,23 +137,25 @@ input:focus {
   margin: 0;
   padding: 0;
   border-radius: 50%;
-  border: none;
-  background-color: transparent;
   font-size: 1rem;
   color: rgba(0, 0, 0, 0.5);
+  outline: none;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  background: #fff;
+  white-space: nowrap;
   cursor: pointer;
 }
 
-.habits-navs .__buttonNav:focus {
-  outline-color: rgba(0, 128, 0, 0.5);
+.habits-navs .__buttonNav:hover, .habits-navs .__buttonNav:focus {
   background-color: rgba(0, 128, 0, 0.1);
 }
 
-.habits-navs .__buttonNav:hover {
-  background-color: rgba(0, 128, 0, 0.1);
+.habits-navs .__buttonNav:hover:focus {
+  background-color: rgba(0, 128, 0, 0.15);
 }
 
-.habits-navs .__buttonNav:active {
+.habits-navs .__buttonNav:hover:active {
   background-color: rgba(0, 128, 0, 0.2);
 }
 
@@ -243,6 +245,7 @@ input:focus {
   margin-left: 2px;
   padding: 0.3rem 0.5rem;
   font-size: 14px;
+  outline: none;
   border-radius: 5px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   background: #fff;
@@ -250,16 +253,15 @@ input:focus {
   cursor: pointer;
 }
 
-.habiker .__buttonHabiker:focus {
-  outline-color: rgba(0, 128, 0, 0.5);
+.habiker .__buttonHabiker:hover, .habiker .__buttonHabiker:focus {
   background-color: rgba(0, 128, 0, 0.1);
 }
 
-.habiker .__buttonHabiker:hover {
-  background-color: rgba(0, 128, 0, 0.1);
+.habiker .__buttonHabiker:hover:focus {
+  background-color: rgba(0, 128, 0, 0.15);
 }
 
-.habiker .__buttonHabiker:active {
+.habiker .__buttonHabiker:hover:active {
   background-color: rgba(0, 128, 0, 0.2);
 }
 
@@ -315,7 +317,7 @@ input:focus {
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgba(0, 0, 0, 0.7);
   pointer-events: initial;
 }
 
@@ -343,36 +345,33 @@ input:focus {
   position: relative;
   width: 100%;
   padding: 4rem 2rem 2rem;
-  background: green;
+  background: #fff;
   box-shadow: 7px 10px 20px -5px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
 }
 
 .localStorage .__buttonStorage {
-  box-sizing: border-box;
-  margin: 5px 0;
+  margin-bottom: 7px;
   padding: 10px;
-  border-radius: 5px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background-color: rgba(255, 255, 255, 0.1);
-  font-size: 1rem;
-}
-
-.localStorage .__buttonStorage:hover {
-  border-color: rgba(255, 255, 255, 0.2);
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
-.localStorage .__buttonStorage:focus {
   outline: none;
-  border-color: rgba(255, 255, 255, 0.3);
-  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: #fff;
+  white-space: nowrap;
+  cursor: pointer;
 }
 
-.localStorage .__buttonStorage:active {
-  border-color: rgba(255, 255, 255, 0.4);
-  background-color: rgba(255, 255, 255, 0.4);
+.localStorage .__buttonStorage:hover, .localStorage .__buttonStorage:focus {
+  background-color: rgba(0, 128, 0, 0.1);
+}
+
+.localStorage .__buttonStorage:hover:focus {
+  background-color: rgba(0, 128, 0, 0.15);
+}
+
+.localStorage .__buttonStorage:hover:active {
+  background-color: rgba(0, 128, 0, 0.2);
 }
 
 .localStorage button.__closeStorage {
@@ -381,16 +380,24 @@ input:focus {
   left: 5px;
   width: 45px;
   height: 45px;
-  box-sizing: border-box;
-  border-radius: 5px;
-  border: none;
-  background: transparent;
-  font-size: 1.5rem;
+  outline: none;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  background: #fff;
+  white-space: nowrap;
+  cursor: pointer;
 }
 
-.localStorage button.__closeStorage:focus {
-  outline: none;
-  border: solid 1px rgba(255, 255, 255, 0.1);
+.localStorage button.__closeStorage:hover, .localStorage button.__closeStorage:focus {
+  background-color: rgba(0, 128, 0, 0.1);
+}
+
+.localStorage button.__closeStorage:hover:focus {
+  background-color: rgba(0, 128, 0, 0.15);
+}
+
+.localStorage button.__closeStorage:hover:active {
+  background-color: rgba(0, 128, 0, 0.2);
 }
 
 /*# sourceMappingURL=main.css.map */
