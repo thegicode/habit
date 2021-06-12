@@ -315,22 +315,22 @@ li {
   font-size: 1rem;
   border-style: solid;
   border-width: 1px;
-  border-color: rgba(117, 117, 117, 0.05);
-  background-color: rgba(117, 117, 117, 0.05);
-  color: rgba(117, 117, 117, 0.3);
-}
-
-.tracker .__checkboxTracker:hover + .__dateTracker,
-.tracker .__checkboxTracker:focus + .__dateTracker {
-  border-color: rgba(117, 117, 117, 0.1);
-  background-color: rgba(117, 117, 117, 0.1);
+  border-color: rgba(117, 117, 117, 0.07);
+  background-color: rgba(117, 117, 117, 0.07);
   color: rgba(117, 117, 117, 0.4);
 }
 
-.tracker .__checkboxTracker:focus:hover + .__dateTracker {
+.tracker .__checkboxTracker:enabled:hover + .__dateTracker,
+.tracker .__checkboxTracker:enabled:focus + .__dateTracker {
+  border-color: rgba(117, 117, 117, 0.1);
+  background-color: rgba(117, 117, 117, 0.1);
+  color: rgba(117, 117, 117, 0.5);
+}
+
+.tracker .__checkboxTracker:enabled:focus:hover + .__dateTracker {
   border-color: rgba(117, 117, 117, 0.15);
   background-color: rgba(117, 117, 117, 0.15);
-  color: rgba(117, 117, 117, 0.45);
+  color: rgba(117, 117, 117, 0.55);
 }
 
 .tracker .__checkboxTracker:checked + .__dateTracker {
@@ -341,15 +341,19 @@ li {
 
 .tracker .__checkboxTracker:checked:hover + .__dateTracker,
 .tracker .__checkboxTracker:checked:focus + .__dateTracker {
+  border-color: rgba(0, 128, 0, 0.25);
+  background-color: rgba(0, 128, 0, 0.25);
+  color: rgba(100, 123, 101, 0.65);
+}
+
+.tracker .__checkboxTracker:checked:focus:hover + .__dateTracker {
   border-color: rgba(0, 128, 0, 0.3);
   background-color: rgba(0, 128, 0, 0.3);
   color: rgba(100, 123, 101, 0.7);
 }
 
-.tracker .__checkboxTracker:checked:focus:hover + .__dateTracker {
-  border-color: rgba(0, 128, 0, 0.35);
-  background-color: rgba(0, 128, 0, 0.35);
-  color: rgba(100, 123, 101, 0.75);
+.tracker .__checkboxTracker:disabled + .__dateTracker {
+  opacity: 0.5;
 }
 
 .dimmed {
@@ -395,6 +399,7 @@ li {
 .localStorage .__buttonStorage {
   margin-bottom: 7px;
   padding: 10px;
+  font-size: 1rem;
   outline: none;
   border-radius: 5px;
   border: 1px solid rgba(0, 0, 0, 0.1);

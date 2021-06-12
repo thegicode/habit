@@ -26,6 +26,7 @@
     .__buttonStorage{
         margin-bottom: 7px;
         padding: 10px;
+        font-size: 1rem;
         @include button-default;
         @include button-state;
     }
