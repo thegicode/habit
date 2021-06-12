@@ -134,7 +134,6 @@ input:focus {
   box-sizing: border-box;
   width: 30px;
   height: 30px;
-  margin: 0;
   padding: 0;
   border-radius: 50%;
   font-size: 1rem;
@@ -291,24 +290,44 @@ input:focus {
   width: 48px;
   height: 30px;
   border-radius: 7px;
-  border: 1px solid rgba(117, 117, 117, 0.1);
-  background-color: rgba(117, 117, 117, 0.1);
   font-size: 1rem;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgba(117, 117, 117, 0.05);
+  background-color: rgba(117, 117, 117, 0.05);
   color: rgba(117, 117, 117, 0.3);
 }
 
+.tracker .__checkboxTracker:hover + .__dateTracker,
 .tracker .__checkboxTracker:focus + .__dateTracker {
-  border-color: rgba(117, 117, 117, 0.5);
+  border-color: rgba(117, 117, 117, 0.1);
+  background-color: rgba(117, 117, 117, 0.1);
+  color: rgba(117, 117, 117, 0.4);
+}
+
+.tracker .__checkboxTracker:focus:hover + .__dateTracker {
+  border-color: rgba(117, 117, 117, 0.15);
+  background-color: rgba(117, 117, 117, 0.15);
+  color: rgba(117, 117, 117, 0.45);
 }
 
 .tracker .__checkboxTracker:checked + .__dateTracker {
   border-color: rgba(0, 128, 0, 0.2);
-  background-color: rgba(0, 128, 0, 0.3);
-  color: rgba(100, 123, 101, 0.9);
+  background-color: rgba(0, 128, 0, 0.2);
+  color: rgba(100, 123, 101, 0.6);
 }
 
+.tracker .__checkboxTracker:checked:hover + .__dateTracker,
 .tracker .__checkboxTracker:checked:focus + .__dateTracker {
-  border-color: rgba(0, 128, 0, 0.5);
+  border-color: rgba(0, 128, 0, 0.3);
+  background-color: rgba(0, 128, 0, 0.3);
+  color: rgba(100, 123, 101, 0.7);
+}
+
+.tracker .__checkboxTracker:checked:focus:hover + .__dateTracker {
+  border-color: rgba(0, 128, 0, 0.35);
+  background-color: rgba(0, 128, 0, 0.35);
+  color: rgba(100, 123, 101, 0.75);
 }
 
 .dimmed {

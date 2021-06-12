@@ -94,7 +94,6 @@
             box-sizing: border-box;
             width: 30px; 
             height: 30px;
-            margin: 0;
             padding: 0;
             border-radius: 50%;
             font-size: 1rem;
@@ -196,6 +195,26 @@
 }
 
 .tracker{
+    @mixin __getBorderColor($val){
+        border-color: rgba(117, 117, 117, $val);
+    }
+    @mixin __getBGolor($val){
+        background-color: rgba(117, 117, 117, $val);
+    }
+    @mixin __getColor($val){
+        color: rgba(117, 117, 117, $val);
+    }
+
+    @mixin __getBorderColor--on($val){
+        border-color: rgba(0, 128, 0, $val);
+    }
+    @mixin __getBGColor--on($val){
+        background-color: rgba(0, 128, 0, $val);
+    }
+    @mixin __getColor--on($val){
+        color: rgba(100, 123, 101, $val);
+    }
+
     margin: 2px;
     .__checkboxTracker{
         @include formElementHidden;
@@ -205,26 +224,43 @@
         width: 48px;
         height: 30px;
         border-radius: 7px;
-        border: 1px solid rgba(117, 117, 117, 0.1);
-        background-color: rgba(117, 117, 117, 0.1);
         font-size: 1rem;
-        color: rgba(117, 117, 117, 0.3);
+        border-style: solid; border-width: 1px;
+        @include __getBorderColor(0.05);
+        @include __getBGolor(0.05);
+        @include __getColor(0.3);
     }
     .__checkboxTracker{
+        &:hover + .__dateTracker,
         &:focus + .__dateTracker{
-            border-color: rgba(117, 117, 117, 0.5);
+            @include __getBorderColor(0.1);
+            @include __getBGolor(0.1);
+            @include __getColor(0.4);
         }
+        &:focus:hover + .__dateTracker{
+            @include __getBorderColor(0.15);
+            @include __getBGolor(0.15);
+            @include __getColor(0.45);
+        }
+
         &:checked + .__dateTracker{
-            border-color: rgba(0, 128, 0, 0.2);
-            background-color: rgba(0, 128, 0, 0.3);
-            color: rgba(100, 123, 101, 0.9);
+            @include __getBorderColor--on(0.2);
+            @include __getBGColor--on( 0.2);
+            @include __getColor--on(0.6);
         }
+        &:checked:hover + .__dateTracker,
         &:checked:focus + .__dateTracker{
-            border-color: rgba(0, 128, 0, 0.5);
+            @include __getBorderColor--on(0.3);
+            @include __getBGColor--on( 0.3);
+            @include __getColor--on(0.7);
+        }
+        &:checked:focus:hover + .__dateTracker{
+            @include __getBorderColor--on(0.35);
+            @include __getBGColor--on( 0.35);
+            @include __getColor--on(0.75);
         }
     }
 }
-
 
 @import '_dimmed.scss';
 @import '_localStorage.scss';

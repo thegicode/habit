@@ -23,16 +23,19 @@
     cursor: pointer;
 }
 
+@mixin __getButtonStateBG($val){
+    background-color: rgba(0, 128, 0, $val);
+}
 @mixin button-state{
     &:hover,
     &:focus{
-        background-color: rgba(0, 128, 0, 0.1);
+        @include __getButtonStateBG(0.1);
     }
     &:hover:focus{
-        background-color: rgba(0, 128, 0, 0.15);
+        @include __getButtonStateBG(0.15);
     }
     &:hover:active{
-        background-color: rgba(0, 128, 0, 0.2);
+        @include __getButtonStateBG(0.2);
     }
 }
 
