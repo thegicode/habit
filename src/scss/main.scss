@@ -22,22 +22,27 @@
     &-enters{
         display: flex;
         .__inputEnter{
+            -webkit-appearance: none;
             flex: auto;
             height: 48px;
             box-sizing: border-box;
             padding: 0 10px;
+            outline: none;
             border-radius: 5px;
             border: 1px solid rgba(0, 0, 0, 0.1);
             font-size: 1.2rem;
-            -webkit-appearance: none;
+            &:hover,
             &:focus{
-                background-color: rgba(0, 128, 0, 0.1);
+                border-color: rgba(0, 128, 0, 0.5);
+            }
+            &:focus:hover{
+                border-color: rgba(0, 128, 0, 0.7);
             }
         }
         .__buttonEnter{
             box-sizing: border-box;
             width: 48px;
-            margin: 0 0 0 2px;
+            margin: 0 0 0 5px;
             padding: 0;
             font-size: 1rem;
             @include button-default;
@@ -113,6 +118,23 @@
         }
     }
     &-options{
+        @mixin __getBorderColor($val){
+            border-color: rgba(0, 0, 0, $val);
+        }
+        @mixin __getBGColor($val){
+            background-color: rgba(0, 0, 0, $val);
+        }
+        @mixin __getColor($val){
+            color: rgba(0, 0, 0, $val);
+        }
+
+        @mixin __getBorderColor--on($val){
+            border-color: rgba(0, 128, 0, $val);
+        }
+        @mixin __getBGColor--on($val){
+            background-color: rgba(0, 128, 0, $val);
+        }
+
         display: flex;
         justify-content: flex-end;
         margin-top: 10px;
@@ -126,23 +148,41 @@
             display: inline-block;
             padding: 5px 10px;
             border-radius: 5px;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            background-color: rgba(0, 0, 0, 0.05);
+            border-style: solid;
+            border-width: 1px;
             font-size: 13px;
-            color: #999;
-
+            @include __getBorderColor(0.05);
+            @include __getBGColor(0.05);
+            @include __getColor(0.4);
         }
         .__checkboxFold{
+            &:hover + .__textFold,
             &:focus + .__textFold{
-                border-color: rgba(0, 0, 0, 0.3);
+                @include __getBorderColor(0.07);
+                @include __getBGColor(0.07);
+                @include __getColor(0.5);
             }
+            &:hover:focus + .__textFold{
+                @include __getBorderColor(0.1);
+                @include __getBGColor(0.1);
+                @include __getColor(0.5);
+            }
+
             &:checked + .__textFold{
-                border-color: rgba(0, 125, 0, 0.1);
-                background-color: rgba(0, 125, 0, 0.3);
-                color: #222;
+                @include __getBorderColor--on(0.2);
+                @include __getBGColor--on(0.2);
+                @include __getColor(0.5);
             }
+            &:checked:hover + .__textFold,
             &:checked:focus + .__textFold{
-                border-color: rgba(0, 125, 0, 0.5);
+                @include __getBorderColor--on(0.25);
+                @include __getBGColor--on(0.25);
+                @include __getColor(0.55);
+            }
+            &:checked:hover:focus + .__textFold{
+                @include __getBorderColor--on(0.3);
+                @include __getBGColor--on(0.3);
+                @include __getColor(0.6);
             }
         }
     }
@@ -150,28 +190,29 @@
 
 .habikers{
     margin-top: 1rem;
-    border-top: 1px solid #ddd;
 }
 
 .habiker {
     padding: 10px 0;
-    border-bottom: 1px solid #ddd;
     list-style: none;
     &-header{
         display: flex;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        padding-bottom: 5px;
+        &:hover{
+            border-color: rgba(0, 0, 0, 0.2);
+        }
     }
     .__nameHabiker{
         flex: auto;
         min-width: 50%;
         margin: 0 5px 0 0;
         padding: 7px;
+        outline: none;
         border-radius: 5px;
         border: none;
         text-overflow: ellipsis;
         font-size: 1.5rem;
-        &:focus{
-            background-color: rgba(0, 128, 0, 0.1);
-        }
     }
     .__buttonHabiker{
         box-sizing: border-box;
@@ -223,7 +264,7 @@
         @include flexCenterAll;
         width: 48px;
         height: 30px;
-        border-radius: 7px;
+        border-radius: 20px;
         font-size: 1rem;
         border-style: solid; border-width: 1px;
         @include __getBorderColor(0.05);

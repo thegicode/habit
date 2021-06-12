@@ -36,3 +36,4 @@
 - scss 정리
 - Lighthouse
 - eslint
+- localStorage -> Web SQL
