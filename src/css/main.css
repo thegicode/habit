@@ -51,7 +51,18 @@ li {
 }
 
 .habits-enters {
+  overflow: hidden;
   display: flex;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.habits-enters:hover, .habits-enters:focus {
+  border-color: rgba(0, 128, 0, 0.5);
+}
+
+.habits-enters:focus:hover {
+  border-color: rgba(0, 128, 0, 0.7);
 }
 
 .habits-enters .__inputEnter {
@@ -61,17 +72,57 @@ li {
   box-sizing: border-box;
   padding: 0 10px;
   outline: none;
-  border-radius: 5px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: none;
   font-size: 1.2rem;
 }
 
-.habits-enters .__inputEnter:hover, .habits-enters .__inputEnter:focus {
-  border-color: rgba(0, 128, 0, 0.5);
+.habits-enters button[type="reset"] {
+  align-self: center;
+  width: 25px;
+  height: 25px;
+  outline: none;
+  border-radius: 50%;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.habits-enters .__inputEnter:focus:hover {
-  border-color: rgba(0, 128, 0, 0.7);
+.habits-enters button[type="reset"]:hover, .habits-enters button[type="reset"]:focus {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.habits-enters button[type="reset"]:focus:hover {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+.habits-enters .__inputEnter:invalid + button[type="reset"] {
+  display: none;
+}
+
+.habits-enters .__clearIcon {
+  display: flex;
+  justify-content: center;
+  width: 25px;
+  height: 10px;
+  opacity: 0.3;
+}
+
+.habits-enters .__clearIcon:before, .habits-enters .__clearIcon:after {
+  position: absolute;
+  content: ' ';
+  height: 10px;
+  width: 2px;
+  background-color: #333;
+}
+
+.habits-enters .__clearIcon:before {
+  transform: rotate(45deg);
+}
+
+.habits-enters .__clearIcon:after {
+  transform: rotate(-45deg);
 }
 
 .habits-enters .__buttonEnter {
@@ -81,11 +132,8 @@ li {
   padding: 0;
   font-size: 1rem;
   outline: none;
-  border-radius: 5px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  background: #fff;
-  white-space: nowrap;
-  cursor: pointer;
+  border: none;
+  background-color: transparent;
 }
 
 .habits-enters .__buttonEnter:hover, .habits-enters .__buttonEnter:focus {
