@@ -7,7 +7,8 @@ const getElements = (checkedDate, index, events) => {
 
     const newDate = new Date(),
         getFullYear = newDate.getFullYear(),
-        getMonth = newDate.getMonth() + 1;
+        getMonth = newDate.getMonth() + 1,
+        today = newDate.getDate();
 
     const arr = activeMonth.value.split('.'),
         year = Number(arr[0]),
@@ -37,6 +38,9 @@ const getElements = (checkedDate, index, events) => {
         }
 
         textEl.textContent = date
+        if (month === getMonth && date === today) {
+            textEl.dataset.today = true
+        }
 
         inputEl
             .addEventListener('change', function() {
