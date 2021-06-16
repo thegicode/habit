@@ -45,6 +45,7 @@
             @mixin getBGcolor($val){
                 background-color: rgba(0, 0, 0, $val);
             }
+            
             align-self: center;
 
             width: 25px;
@@ -52,6 +53,7 @@
             outline: none;
             border-radius: 50%;
             border: none;
+            cursor: pointer;
             @include getBGcolor(0.05);
             
             display: flex;
@@ -103,6 +105,7 @@
             outline: none;
             border: none;
             background-color: transparent;
+            cursor: pointer;
             @include button-state;
         }
     }
@@ -316,6 +319,7 @@
     margin: 2px;
     .__checkboxTracker{
         @include formElementHidden;
+
     }
     .__dateTracker{
         @include flexCenterAll;
@@ -330,6 +334,9 @@
         @include __getColor(0.4);
     }
     .__checkboxTracker{
+        &:enabled + .__dateTracker{
+            cursor: pointer;
+        }
         &:enabled:hover + .__dateTracker,
         &:enabled:focus + .__dateTracker{
             @include __getBorderColor(0.1);

@@ -83,6 +83,7 @@ li {
   outline: none;
   border-radius: 50%;
   border: none;
+  cursor: pointer;
   background-color: rgba(0, 0, 0, 0.05);
   display: flex;
   align-items: center;
@@ -134,6 +135,7 @@ li {
   outline: none;
   border: none;
   background-color: transparent;
+  cursor: pointer;
 }
 
 .habits-enters .__buttonEnter:hover, .habits-enters .__buttonEnter:focus {
@@ -366,6 +368,10 @@ li {
   border-color: rgba(117, 117, 117, 0.07);
   background-color: rgba(117, 117, 117, 0.07);
   color: rgba(117, 117, 117, 0.4);
+}
+
+.tracker .__checkboxTracker:enabled + .__dateTracker {
+  cursor: pointer;
 }
 
 .tracker .__checkboxTracker:enabled:hover + .__dateTracker,
