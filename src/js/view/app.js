@@ -23,6 +23,10 @@ const checkIncludes = (includes, inputEl) => {
     return false
 }
 
+const getFoldText = boolean => {
+    return boolean ? '제목만 보기' : '날짜 보이기'
+}
+
 const addContents = (newCpnt, events) => {
     const { activeMonth, fold } = events
 
@@ -46,6 +50,8 @@ const addContents = (newCpnt, events) => {
 
     newCpnt.querySelector('[data-checkbox=fold]')
         .checked = fold.value
+    newCpnt.querySelector('[data-text=fold]')
+        .textContent = getFoldText(fold.value)
     newCpnt.querySelector('[data-component=habikers]')
         .dataset.fold = fold.value
 
@@ -129,10 +135,13 @@ const addEvents = (newCpnt, events) => {
     })
 
     newCpnt.querySelector('[data-checkbox=fold]')
-        .addEventListener('change', function(){
+        .addEventListener('change', function(e){
+            const boolean = this.checked
+            document.querySelector('[data-text=fold]')
+                .textContent = getFoldText(boolean)
             document.querySelector('[data-component=habikers]')
-                .dataset.fold = this.checked
-            fold.value = Boolean(this.checked)
+                .dataset.fold = boolean
+            fold.value = boolean
         })
 }
 
