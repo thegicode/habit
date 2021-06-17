@@ -197,7 +197,7 @@
 
         display: flex;
         justify-content: flex-end;
-        margin-top: 10px;
+        margin-top: 20px;
         .__labelFold{
             position: relative;
         }
@@ -205,17 +205,19 @@
             @include formElementHidden;
         }
         .__textFold{
-            display: inline-block;
+            // display: inline-block;
             padding: 5px 10px;
-            border-radius: 5px;
-            border-style: solid;
-            border-width: 1px;
+            // border-radius: 5px;
+            // border-style: solid;
+            // border-width: 1px;
             font-size: 13px;
-            @include __getBorderColor(0.05);
-            @include __getBGColor(0.05);
-            @include __getColor(0.4);
+            @include button-default;
+            @include button-state;
+            // @include __getBorderColor(0.05);
+            // @include __getBGColor(0.05);
+            // @include __getColor(0.4);
         }
-        .__checkboxFold{
+        /* .__checkboxFold{
             &:hover + .__textFold,
             &:focus + .__textFold{
                 @include __getBorderColor(0.07);
@@ -244,7 +246,7 @@
                 @include __getBGColor--on(0.3);
                 @include __getColor(0.6);
             }
-        }
+        } */
     }
 }
 

@@ -24,7 +24,7 @@ const checkIncludes = (includes, inputEl) => {
 }
 
 const getFoldText = boolean => {
-    return boolean ? '제목만 보기' : '날짜 보이기'
+    return boolean ? '타이틀만 보기' : '타이틀과 날짜 함께 보기'
 }
 
 const addContents = (newCpnt, events) => {

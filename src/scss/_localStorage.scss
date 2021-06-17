@@ -1,6 +1,7 @@
 .localStorage{
     position: fixed;
     top: 0; right: 0; 
+    z-index: 100;
     width: 90%; height: 100%;
 
     transform: translate3d(100%,0,0) scale(1);

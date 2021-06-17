@@ -223,7 +223,37 @@ li {
 .habits-options {
   display: flex;
   justify-content: flex-end;
-  margin-top: 10px;
+  margin-top: 20px;
+  /* .__checkboxFold{
+            &:hover + .__textFold,
+            &:focus + .__textFold{
+                @include __getBorderColor(0.07);
+                @include __getBGColor(0.07);
+                @include __getColor(0.5);
+            }
+            &:hover:focus + .__textFold{
+                @include __getBorderColor(0.1);
+                @include __getBGColor(0.1);
+                @include __getColor(0.5);
+            }
+
+            &:checked + .__textFold{
+                @include __getBorderColor--on(0.2);
+                @include __getBGColor--on(0.2);
+                @include __getColor(0.5);
+            }
+            &:checked:hover + .__textFold,
+            &:checked:focus + .__textFold{
+                @include __getBorderColor--on(0.25);
+                @include __getBGColor--on(0.25);
+                @include __getColor(0.55);
+            }
+            &:checked:hover:focus + .__textFold{
+                @include __getBorderColor--on(0.3);
+                @include __getBGColor--on(0.3);
+                @include __getColor(0.6);
+            }
+        } */
 }
 
 .habits-options .__labelFold {
@@ -236,47 +266,26 @@ li {
 }
 
 .habits-options .__textFold {
-  display: inline-block;
   padding: 5px 10px;
-  border-radius: 5px;
-  border-style: solid;
-  border-width: 1px;
   font-size: 13px;
-  border-color: rgba(0, 0, 0, 0.05);
-  background-color: rgba(0, 0, 0, 0.05);
-  color: rgba(0, 0, 0, 0.4);
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: #fff;
+  white-space: nowrap;
+  cursor: pointer;
 }
 
-.habits-options .__checkboxFold:hover + .__textFold,
-.habits-options .__checkboxFold:focus + .__textFold {
-  border-color: rgba(0, 0, 0, 0.07);
-  background-color: rgba(0, 0, 0, 0.07);
-  color: rgba(0, 0, 0, 0.5);
+.habits-options .__textFold:hover, .habits-options .__textFold:focus {
+  background-color: rgba(0, 128, 0, 0.1);
 }
 
-.habits-options .__checkboxFold:hover:focus + .__textFold {
-  border-color: rgba(0, 0, 0, 0.1);
-  background-color: rgba(0, 0, 0, 0.1);
-  color: rgba(0, 0, 0, 0.5);
+.habits-options .__textFold:hover:focus {
+  background-color: rgba(0, 128, 0, 0.15);
 }
 
-.habits-options .__checkboxFold:checked + .__textFold {
-  border-color: rgba(0, 128, 0, 0.2);
+.habits-options .__textFold:hover:active {
   background-color: rgba(0, 128, 0, 0.2);
-  color: rgba(0, 0, 0, 0.5);
-}
-
-.habits-options .__checkboxFold:checked:hover + .__textFold,
-.habits-options .__checkboxFold:checked:focus + .__textFold {
-  border-color: rgba(0, 128, 0, 0.25);
-  background-color: rgba(0, 128, 0, 0.25);
-  color: rgba(0, 0, 0, 0.55);
-}
-
-.habits-options .__checkboxFold:checked:hover:focus + .__textFold {
-  border-color: rgba(0, 128, 0, 0.3);
-  background-color: rgba(0, 128, 0, 0.3);
-  color: rgba(0, 0, 0, 0.6);
 }
 
 .habikers {
@@ -441,6 +450,7 @@ li {
   position: fixed;
   top: 0;
   right: 0;
+  z-index: 100;
   width: 90%;
   height: 100%;
   transform: translate3d(100%, 0, 0) scale(1);
