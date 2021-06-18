@@ -36,7 +36,7 @@ const checkIncludes = (includes, inputEl) => {
 }
 
 const getExpandText = boolean => {
-    return boolean ? '타이틀만 보기' : '타이틀과 날짜 함께 보기'
+    return boolean ? '타이틀만 보기' : '모두 보기'
 }
 
 const addContents = (newCpnt, events) => {
