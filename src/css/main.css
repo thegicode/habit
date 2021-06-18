@@ -181,10 +181,6 @@ li {
   background-color: rgba(0, 128, 0, 0.2);
 }
 
-.habits-navs .__buttonCurrent[data-current=true] {
-  display: none;
-}
-
 .habits-navs .__buttonNav {
   box-sizing: border-box;
   width: 30px;

@@ -49,7 +49,7 @@ const addContents = (newCpnt, events) => {
     const monthEl = newCpnt.querySelector('[data-text=month]')
     monthEl.textContent = activeMonth.value
     if (activeMonth.value === currentMonth) {
-        newCpnt.querySelector('[data-button=month-current]').dataset.current = true
+        newCpnt.querySelector('[data-button=month-current]').hidden = true
     }
 
     newCpnt.querySelector('[data-checkbox=expand]')

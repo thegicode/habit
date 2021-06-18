@@ -154,10 +154,6 @@
 
             @include button-default;
             @include button-state;
-
-            &[data-current=true]{
-                display: none;
-            }
         }
         .__buttonNav{
             box-sizing: border-box;
