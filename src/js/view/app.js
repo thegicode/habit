@@ -48,12 +48,12 @@ const addContents = (newCpnt, events) => {
 
     addEventsDate(newCpnt, activeMonth, monthEl)
 
-    newCpnt.querySelector('[data-checkbox=fold]')
+    newCpnt.querySelector('[data-checkbox=expand]')
         .checked = fold.value
-    newCpnt.querySelector('[data-text=fold]')
+    newCpnt.querySelector('[data-text=expand]')
         .textContent = getFoldText(fold.value)
     newCpnt.querySelector('[data-component=habikers]')
-        .dataset.fold = fold.value
+        .dataset.expanded = fold.value
 
 }
 
@@ -134,13 +134,13 @@ const addEvents = (newCpnt, events) => {
         listener(inputEl)
     })
 
-    newCpnt.querySelector('[data-checkbox=fold]')
+    newCpnt.querySelector('[data-checkbox=expand]')
         .addEventListener('change', function(e){
             const boolean = this.checked
-            document.querySelector('[data-text=fold]')
+            document.querySelector('[data-text=expand]')
                 .textContent = getFoldText(boolean)
             document.querySelector('[data-component=habikers]')
-                .dataset.fold = boolean
+                .dataset.expanded = boolean
             fold.value = boolean
         })
 }

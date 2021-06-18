@@ -224,31 +224,31 @@ li {
   display: flex;
   justify-content: flex-end;
   margin-top: 20px;
-  /* .__checkboxFold{
-            &:hover + .__textFold,
-            &:focus + .__textFold{
+  /* .__checkboxExpand{
+            &:hover + .__textExpand,
+            &:focus + .__textExpand{
                 @include __getBorderColor(0.07);
                 @include __getBGColor(0.07);
                 @include __getColor(0.5);
             }
-            &:hover:focus + .__textFold{
+            &:hover:focus + .__textExpand{
                 @include __getBorderColor(0.1);
                 @include __getBGColor(0.1);
                 @include __getColor(0.5);
             }
 
-            &:checked + .__textFold{
+            &:checked + .__textExpand{
                 @include __getBorderColor--on(0.2);
                 @include __getBGColor--on(0.2);
                 @include __getColor(0.5);
             }
-            &:checked:hover + .__textFold,
-            &:checked:focus + .__textFold{
+            &:checked:hover + .__textExpand,
+            &:checked:focus + .__textExpand{
                 @include __getBorderColor--on(0.25);
                 @include __getBGColor--on(0.25);
                 @include __getColor(0.55);
             }
-            &:checked:hover:focus + .__textFold{
+            &:checked:hover:focus + .__textExpand{
                 @include __getBorderColor--on(0.3);
                 @include __getBGColor--on(0.3);
                 @include __getColor(0.6);
@@ -256,16 +256,16 @@ li {
         } */
 }
 
-.habits-options .__labelFold {
+.habits-options .__labelExpand {
   position: relative;
 }
 
-.habits-options .__checkboxFold {
+.habits-options .__checkboxExpand {
   position: fixed;
   top: -20000rem;
 }
 
-.habits-options .__textFold {
+.habits-options .__textExpand {
   padding: 5px 10px;
   font-size: 13px;
   outline: none;
@@ -276,15 +276,15 @@ li {
   cursor: pointer;
 }
 
-.habits-options .__textFold:hover, .habits-options .__textFold:focus {
+.habits-options .__textExpand:hover, .habits-options .__textExpand:focus {
   background-color: rgba(0, 128, 0, 0.1);
 }
 
-.habits-options .__textFold:hover:focus {
+.habits-options .__textExpand:hover:focus {
   background-color: rgba(0, 128, 0, 0.15);
 }
 
-.habits-options .__textFold:hover:active {
+.habits-options .__textExpand:hover:active {
   background-color: rgba(0, 128, 0, 0.2);
 }
 
@@ -351,7 +351,7 @@ li {
   margin-top: 5px;
 }
 
-.habikers[data-fold="false"] .trackers {
+.habikers[data-expanded="false"] .trackers {
   display: none;
 }
 

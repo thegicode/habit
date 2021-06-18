@@ -198,13 +198,13 @@
         display: flex;
         justify-content: flex-end;
         margin-top: 20px;
-        .__labelFold{
+        .__labelExpand{
             position: relative;
         }
-        .__checkboxFold{
+        .__checkboxExpand{
             @include formElementHidden;
         }
-        .__textFold{
+        .__textExpand{
             // display: inline-block;
             padding: 5px 10px;
             // border-radius: 5px;
@@ -217,31 +217,31 @@
             // @include __getBGColor(0.05);
             // @include __getColor(0.4);
         }
-        /* .__checkboxFold{
-            &:hover + .__textFold,
-            &:focus + .__textFold{
+        /* .__checkboxExpand{
+            &:hover + .__textExpand,
+            &:focus + .__textExpand{
                 @include __getBorderColor(0.07);
                 @include __getBGColor(0.07);
                 @include __getColor(0.5);
             }
-            &:hover:focus + .__textFold{
+            &:hover:focus + .__textExpand{
                 @include __getBorderColor(0.1);
                 @include __getBGColor(0.1);
                 @include __getColor(0.5);
             }
 
-            &:checked + .__textFold{
+            &:checked + .__textExpand{
                 @include __getBorderColor--on(0.2);
                 @include __getBGColor--on(0.2);
                 @include __getColor(0.5);
             }
-            &:checked:hover + .__textFold,
-            &:checked:focus + .__textFold{
+            &:checked:hover + .__textExpand,
+            &:checked:focus + .__textExpand{
                 @include __getBorderColor--on(0.25);
                 @include __getBGColor--on(0.25);
                 @include __getColor(0.55);
             }
-            &:checked:hover:focus + .__textFold{
+            &:checked:hover:focus + .__textExpand{
                 @include __getBorderColor--on(0.3);
                 @include __getBGColor--on(0.3);
                 @include __getColor(0.6);
@@ -292,7 +292,7 @@
     flex-flow: row wrap;
     margin-top: 5px;
 
-    .habikers[data-fold="false"] & {
+    .habikers[data-expanded="false"] & {
         display: none;
     }
 }
