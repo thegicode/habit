@@ -24,7 +24,7 @@ const INITIAL_STATE = {
         // ],
     },
     activeMonth: '',
-    expanded: false,
+    expand: true,
     other: false
 }
 

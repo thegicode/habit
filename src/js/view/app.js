@@ -2,6 +2,18 @@ import { createNewNode } from './helpers.js'
 
 const template = document.querySelector('[data-template=app')
 
+const currentMonth = ( () => {
+    const date = new Date()
+    const getMonth = () => {
+        let month = date.getMonth() + 1
+        if(parseInt(month) < 10) {
+            month =  `0${month}`
+        }
+        return month
+    }
+    return `${date.getFullYear()}.${getMonth()}`
+})()
+
 const isNotEmpty = inputEl => {
     if (inputEl.value.length === 0) {
         window.alert('습관명을 입력하세요.')
@@ -31,22 +43,14 @@ const addContents = (newCpnt, events) => {
     const { activeMonth, expand } = events
 
     if (!activeMonth.value) {
-        const date = new Date()
-        const getMonth = () => {
-            let month = date.getMonth() + 1
-            if(parseInt(month) < 10) {
-                month =  `0${month}`
-            }
-            return month
-        }
-        const yearMonth = `${date.getFullYear()}.${getMonth()}`
-        activeMonth.value = yearMonth
+        activeMonth.value = currentMonth
     }
     
     const monthEl = newCpnt.querySelector('[data-text=month]')
     monthEl.textContent = activeMonth.value
-
-    addEventsDate(newCpnt, activeMonth, monthEl)
+    if (activeMonth.value === currentMonth) {
+        newCpnt.querySelector('[data-button=month-current]').dataset.current = true
+    }
 
     newCpnt.querySelector('[data-checkbox=expand]')
         .checked = expand.value
@@ -55,9 +59,11 @@ const addContents = (newCpnt, events) => {
     newCpnt.querySelector('[data-component=habikers]')
         .dataset.expanded = expand.value
 
+    addDates(newCpnt, activeMonth, monthEl)
+
 }
 
-const addEventsDate = (newCpnt, activeMonth, monthEl) => {
+const addDates = (newCpnt, activeMonth, monthEl) => {
     let year, month
     const getMonth = function(){
         const arr = activeMonth.value.split('.')
