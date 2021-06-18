@@ -23,12 +23,12 @@ const checkIncludes = (includes, inputEl) => {
     return false
 }
 
-const getFoldText = boolean => {
+const getExpandText = boolean => {
     return boolean ? '타이틀만 보기' : '타이틀과 날짜 함께 보기'
 }
 
 const addContents = (newCpnt, events) => {
-    const { activeMonth, fold } = events
+    const { activeMonth, expand } = events
 
     if (!activeMonth.value) {
         const date = new Date()
@@ -49,11 +49,11 @@ const addContents = (newCpnt, events) => {
     addEventsDate(newCpnt, activeMonth, monthEl)
 
     newCpnt.querySelector('[data-checkbox=expand]')
-        .checked = fold.value
+        .checked = expand.value
     newCpnt.querySelector('[data-text=expand]')
-        .textContent = getFoldText(fold.value)
+        .textContent = getExpandText(expand.value)
     newCpnt.querySelector('[data-component=habikers]')
-        .dataset.expanded = fold.value
+        .dataset.expanded = expand.value
 
 }
 
@@ -102,7 +102,7 @@ const addEventsDate = (newCpnt, activeMonth, monthEl) => {
 }
 
 const addEvents = (newCpnt, events) => {
-    const { addItem, includes, fold } = events
+    const { addItem, includes, expand } = events
 
     const inputEl = newCpnt.querySelector('input[name=name]')
     const button = newCpnt.querySelector('[data-button=input]')
@@ -138,10 +138,10 @@ const addEvents = (newCpnt, events) => {
         .addEventListener('change', function(e){
             const boolean = this.checked
             document.querySelector('[data-text=expand]')
-                .textContent = getFoldText(boolean)
+                .textContent = getExpandText(boolean)
             document.querySelector('[data-component=habikers]')
                 .dataset.expanded = boolean
-            fold.value = boolean
+            expand.value = boolean
         })
 }
 

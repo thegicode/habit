@@ -175,12 +175,12 @@ export default (initialState = INITIAL_STATE) => {
         }
     }
 
-    const fold = {
+    const expand = {
         get value() {
-            return state.fold
+            return state.expand
         },
         set value(boolean) {
-            state.fold = boolean
+            state.expand = boolean
             updateStorage()
         }
     }
@@ -194,6 +194,6 @@ export default (initialState = INITIAL_STATE) => {
         updateItemChecked,
         includes,
         activeMonth,
-        fold
+        expand
     }
 }

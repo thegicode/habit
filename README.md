@@ -44,7 +44,6 @@
 - Add aria
 - 영구 작업 추가
 - 몇 일 만에 완료했어요.
-- rename fold
 - 개별 fold
 
 
