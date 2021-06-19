@@ -3,13 +3,16 @@
 @import './_reset.scss';
 
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    // display: flex;
+    // justify-content: space-between;
+    // align-items: center;
     h1 {
         margin: 0;
     }
-    button.setLocalStorage{
+    &-actions{
+        margin-top: 10px;
+    }
+    .__button{
         flex: none;
         padding: 5px 10px;
         @include button-default;        
@@ -34,6 +37,7 @@
         .__inputEnter{
             -webkit-appearance: none;
             flex: auto;
+            width: 60%;
             height: 48px;
             box-sizing: border-box;
             padding: 0 10px;
@@ -386,6 +390,7 @@
 
 @import '_dimmed.scss';
 @import '_localStorage.scss';
+@import '_permanent.scss';
 
 
 

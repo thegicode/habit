@@ -1,0 +1,64 @@
+.permanent{
+    position: fixed;
+    top: 0; right: 0; 
+    z-index: 100;
+    width: 90%; height: 100%;
+    
+    box-shadow: 7px 10px 20px -5px rgba(0,0,0,0.3);
+
+    transform: translate3d(0,0,0) scale(1);
+    transition: transform .3s ease-out 0s;
+
+    box-sizing: border-box;
+    padding: 2rem 1rem 1rem;
+
+    background: #fff;
+
+    // display: flex;
+
+    &[hidden]{
+        transform: translate3d(100%,0,0) scale(1);
+    }
+
+    &-actions{
+        button.__closePermanent{
+            position: absolute;
+            top: 5px; left: 5px;
+            width: 45px; height: 45px;
+            @include button-default-circle;
+            @include button-state;
+        }
+    }
+
+    .permanents{
+        margin-top: 1rem;
+        .item{
+            display: flex;
+            align-items: center;
+            padding: 5px 0;
+            border-bottom: 1px dashed #ddd;
+        }
+        .__name{
+            flex: auto;
+            min-width: 50%;
+            margin: 0 5px 0 0;
+            padding: 7px;
+            outline: none;
+            border-radius: 5px;
+            border: none;
+            text-overflow: ellipsis;
+            font-size: 1.3rem;
+        }
+        .__button{
+            box-sizing: border-box;
+            width: 48px;
+            margin-left: 2px;
+            padding: 7px 0.5rem;
+            font-size: 14px;
+            @include button-default;
+            @include button-state;
+        }
+    }
+
+}
+

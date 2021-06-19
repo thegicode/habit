@@ -12,8 +12,12 @@
 <div class="root" id="root">
     <header class="header">
         <h1>Habits</h1>
-        <button type="button" class="setLocalStorage" data-button="setLocalStorage">Set LocalStorage</button>
+        <div class="header-actions">
+            <button type="button" class="__button" data-button="setPermanent">Set Fixed Habits</button>
+            <button type="button" class="__button" data-button="setLocalStorage">Set LocalStorage</button>
+        </div>
     </header>
+
 
     <main class="contents" data-component="app">
     </main>
@@ -31,9 +35,38 @@
     </div>
 </div>
 
+<div class="permanent" data-component="permanent" hidden>
+
+    <h2>고정 습관</h2>
+
+    <div class="permanent-actions">
+        <button type="button" class="__closePermanent" data-button="closePermanent" title="닫기"><</button>
+    </div>
+
+    <div class="habits-enters">
+        <input type="text" name="fixHabitName" placeholder="고정 습관명을 입력하세요." title="고정 습관명 입력" autofocus class="__inputEnter" required="">
+        <button type="reset">
+            <span class="__clearIcon"></span>
+        </button>
+        <button type="button" class="__buttonEnter" data-button="input">입력</button>
+    </div>
+
+    <ul class="permanents" data-component="permanents">
+    </ul>
+</div>
+
+<template data-template="permanent">
+    <li class="item">
+        <input type="text" name="name" title="고정 습관명" class="__name" >
+        <button type="button" class="__button" data-button="delete">삭제</button>
+    </li>
+</template>
+
 <template data-template="app">
     <section class="habits">
+        
         <form class="habits-enters">
+            
             <input type="text" name="name" placeholder="습관명을 입력하세요." title="습관명 입력" autofocus class="__inputEnter" required="">
             <button type="reset">
                 <span class="__clearIcon"></span>

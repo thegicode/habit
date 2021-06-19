@@ -1,40 +1,46 @@
 
 export default (getStorage, events) => {
 
+    const launcherButton = document
+        .querySelector('[data-button=setPermanent]')
+
     const dimmed = document
         .querySelector('[data-component=dimmed]')
 
     const component = document
-        .querySelector('[data-component=localStorage]')
-
-    const launcherButton = document
-        .querySelector('[data-button=setLocalStorage]')
+        .querySelector('[data-component=permanent]')
 
     const closeButton = document
-        .querySelector('[data-button=closeStorage]')
+        .querySelector('[data-button=closePermanent]')
+
+
+    const show = function() {
+        component.hidden = false
+        dimmed.dataset.hidden = false
+        closeButton.focus()
+    }
+
+    const hide = function() {
+        component.hidden = true
+        dimmed.dataset.hidden = true
+        launcherButton.focus()
+    }
+
 
     launcherButton
-        .addEventListener('click', function(){
-            component.dataset.hidden = false
-            dimmed.dataset.hidden = false
-            closeButton.focus()
-        })
+        .addEventListener('click', show)
 
     closeButton
-        .addEventListener('click', function(){
-            component.dataset.hidden = true
-            dimmed.dataset.hidden = true
-            launcherButton.focus()
-        })
+        .addEventListener('click', hide)
+
     dimmed
         .addEventListener('click', function(){
-            if (component.dataset.hidden === "false") {
-                component.dataset.hidden = true
-                this.dataset.hidden = true;
+            if (!component.hidden) {
+                hide()
             }
         })
 
-    document
+    /*document
         .querySelector('[data-button=saveStorage]')
         .addEventListener('click', function(e){
             const storage = JSON.stringify( getStorage() )
@@ -62,6 +68,6 @@ export default (getStorage, events) => {
                 dimmed.dataset.hidden = true
             }
         })
-
+*/
     
 }
