@@ -521,7 +521,7 @@ li {
   background-color: rgba(0, 128, 0, 0.2);
 }
 
-.permanent {
+.setPermanent {
   position: fixed;
   top: 0;
   right: 0;
@@ -529,18 +529,18 @@ li {
   width: 90%;
   height: 100%;
   box-shadow: 7px 10px 20px -5px rgba(0, 0, 0, 0.3);
-  transform: translate3d(0, 0, 0) scale(1);
+  transform: translate3d(100%, 0, 0) scale(1);
   transition: transform .3s ease-out 0s;
   box-sizing: border-box;
   padding: 2rem 1rem 1rem;
   background: #fff;
 }
 
-.permanent[hidden] {
-  transform: translate3d(100%, 0, 0) scale(1);
+.setPermanent[data-hidden=false] {
+  transform: translate3d(0, 0, 0) scale(1);
 }
 
-.permanent-actions button.__closePermanent {
+.setPermanent .__closeButton {
   position: absolute;
   top: 5px;
   left: 5px;
@@ -554,30 +554,30 @@ li {
   cursor: pointer;
 }
 
-.permanent-actions button.__closePermanent:hover, .permanent-actions button.__closePermanent:focus {
+.setPermanent .__closeButton:hover, .setPermanent .__closeButton:focus {
   background-color: rgba(0, 128, 0, 0.1);
 }
 
-.permanent-actions button.__closePermanent:hover:focus {
+.setPermanent .__closeButton:hover:focus {
   background-color: rgba(0, 128, 0, 0.15);
 }
 
-.permanent-actions button.__closePermanent:hover:active {
+.setPermanent .__closeButton:hover:active {
   background-color: rgba(0, 128, 0, 0.2);
 }
 
-.permanent .permanents {
+.setPermanent .permanents {
   margin-top: 1rem;
 }
 
-.permanent .permanents .item {
+.setPermanent .permanent {
   display: flex;
   align-items: center;
   padding: 5px 0;
   border-bottom: 1px dashed #ddd;
 }
 
-.permanent .permanents .__name {
+.setPermanent .__namePermanent {
   flex: auto;
   min-width: 50%;
   margin: 0 5px 0 0;
@@ -589,7 +589,7 @@ li {
   font-size: 1.3rem;
 }
 
-.permanent .permanents .__button {
+.setPermanent .__buttonPermanent {
   box-sizing: border-box;
   width: 48px;
   margin-left: 2px;
@@ -603,15 +603,15 @@ li {
   cursor: pointer;
 }
 
-.permanent .permanents .__button:hover, .permanent .permanents .__button:focus {
+.setPermanent .__buttonPermanent:hover, .setPermanent .__buttonPermanent:focus {
   background-color: rgba(0, 128, 0, 0.1);
 }
 
-.permanent .permanents .__button:hover:focus {
+.setPermanent .__buttonPermanent:hover:focus {
   background-color: rgba(0, 128, 0, 0.15);
 }
 
-.permanent .permanents .__button:hover:active {
+.setPermanent .__buttonPermanent:hover:active {
   background-color: rgba(0, 128, 0, 0.2);
 }
 

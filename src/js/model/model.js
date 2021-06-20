@@ -23,6 +23,7 @@ const INITIAL_STATE = {
         //     }
         // ],
     },
+    permanents: [],
     activeMonth: '',
     expand: true,
     other: false
@@ -31,6 +32,7 @@ const INITIAL_STATE = {
 export default (initialState = INITIAL_STATE) => {
     let state = cloneDeep(initialState)
     let listeners = []
+    let listeners2 = []
 
     const addChangeListener = listener => {
         listeners.push(listener)
@@ -185,6 +187,89 @@ export default (initialState = INITIAL_STATE) => {
         }
     }
 
+    const addChangeListener2 = listener => {
+        listeners2.push(listener)
+
+        listener(freeze(state))
+
+        return () => {
+            listeners2 = listeners2.filter(l => l !== listener)
+        }
+    }
+
+    const invokeListeners2 = () => {
+        const data = freeze(state)
+
+        listeners2.forEach(l => {
+            l(data)
+         })
+    }
+
+    const addItemPermanent = text => {
+        if (!text) {
+            return 
+        }
+
+        state.permanents.push(text)
+
+        invokeListeners2()
+        updateStorage()
+    }
+
+    const updateItemPermanent = (index, text) => {
+        if ( !text || index < 0) {
+            return false
+        }
+
+        const _pn = state.permanents
+
+        if (!_pn[index]) {
+            return false
+        }
+
+        _pn[index] = text
+
+        updateStorage()
+
+        return true
+    }
+
+    const includesPermanent = (text, index) => {
+        if (!text) {
+            return
+        }
+        const _pn = state.permanents
+        if (Object.keys(_pn).length < 1) {
+            return
+        }
+
+        const is = _pn
+                    .some( (item, idx) => {
+                        if( idx === index ){
+                            return
+                        }
+                        return item === text
+                    })
+        return is
+    }
+
+    const deleteItemPermanent = index => {
+        if ( index < 0) {
+            return
+        }
+
+        const _pn = state.permanents
+
+        if (!_pn[index]) {
+            return
+        }
+
+        _pn.splice(index, 1)
+
+        invokeListeners2()
+        updateStorage()
+    }
+
     return {
         addChangeListener,
         updateStorage,
@@ -194,6 +279,12 @@ export default (initialState = INITIAL_STATE) => {
         updateItemChecked,
         includes,
         activeMonth,
-        expand
+        expand,
+        
+        addChangeListener2,
+        addItemPermanent,
+        updateItemPermanent,
+        includesPermanent,
+        deleteItemPermanent
     }
 }

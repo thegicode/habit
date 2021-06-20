@@ -1,5 +1,7 @@
 
-export default (getStorage, events) => {
+const addControls = (renderPermanents, events) => {
+
+    const { addChangeListener2 } = events
 
     const launcherButton = document
         .querySelector('[data-button=setPermanent]')
@@ -13,19 +15,18 @@ export default (getStorage, events) => {
     const closeButton = document
         .querySelector('[data-button=closePermanent]')
 
-
     const show = function() {
-        component.hidden = false
+        addChangeListener2(renderPermanents)
+        component.dataset.hidden = false
         dimmed.dataset.hidden = false
         closeButton.focus()
     }
 
     const hide = function() {
-        component.hidden = true
+        component.dataset.hidden = true
         dimmed.dataset.hidden = true
         launcherButton.focus()
     }
-
 
     launcherButton
         .addEventListener('click', show)
@@ -35,39 +36,63 @@ export default (getStorage, events) => {
 
     dimmed
         .addEventListener('click', function(){
-            if (!component.hidden) {
+            if (component.dataset.hidden === "false") {
                 hide()
             }
         })
-
-    /*document
-        .querySelector('[data-button=saveStorage]')
-        .addEventListener('click', function(e){
-            const storage = JSON.stringify( getStorage() )
-            const file = new Blob([storage], {type: 'text/plain'})
-            let a = document.createElement("a")
-            a.href = URL.createObjectURL(file)
-            a.download = 'habits.txt'
-            a.click()
-        })
-
-    document
-        .querySelector('[data-button=sendStorage]')
-        .addEventListener('click', function(e){
-            const storage = JSON.stringify( getStorage() )
-            window.location.href = `mailto:thegi.code@gmail.com?subject=Habits Get LocalStorage&body=${storage}`
-        })
-
-    document
-        .querySelector('[data-button=EnterStorage]')
-        .addEventListener('click', function(){
-            const str = window.prompt('Local Storage를 입력하세요.')
-            if(str){
-                events.updateStorage(str)
-                component.dataset.hidden = true
-                dimmed.dataset.hidden = true
-            }
-        })
-*/
-    
 }
+
+const isEmpty = inputEl => {
+    if (inputEl.value.length === 0) {
+        window.alert('고정 습관명을 입력하세요.')
+        inputEl.focus()
+        return true
+    }
+    return false
+}
+
+const isInclues = (includesPermanent, inputEl) => {
+    if(includesPermanent(inputEl.value)) {
+        window.alert('이미 있는 습관명입니다.')
+        inputEl.focus()
+        inputEl.value = ''
+        return true
+    }
+    return false
+}
+
+const addEvents = (events) => {
+    const { includesPermanent, addItemPermanent } = events
+    const inputEl = document.querySelector('input[name=pnEnter]')
+    const button = document.querySelector('[data-button=pnEnter]')
+
+    const listener = function (inputEl) {
+        const str = inputEl.value
+        
+        if (isEmpty(inputEl)) {
+            return 
+        }
+        if (isInclues(includesPermanent, inputEl)) {
+            return
+        }
+
+        addItemPermanent(str)
+        inputEl.value = ''
+        inputEl.focus()
+    }
+
+    inputEl.addEventListener('keypress', function(e){
+        if (e.key === 'Enter') {
+            listener(inputEl)
+        }
+    })
+    button.addEventListener('click', function(e) {
+        listener(inputEl)
+    })
+}
+
+export default (renderPermanents, events) => {
+    addControls(renderPermanents, events)
+    addEvents(events)
+}
+

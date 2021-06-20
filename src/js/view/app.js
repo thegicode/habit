@@ -14,7 +14,7 @@ const currentMonth = ( () => {
     return `${date.getFullYear()}.${getMonth()}`
 })()
 
-const isNotEmpty = inputEl => {
+const isEmpty = inputEl => {
     if (inputEl.value.length === 0) {
         window.alert('습관명을 입력하세요.')
         inputEl.focus()
@@ -116,7 +116,7 @@ const addEvents = (newCpnt, events) => {
     const listener = function (inputEl) {
         const nameText = inputEl.value
         
-        if (isNotEmpty(inputEl)) {
+        if (isEmpty(inputEl)) {
             return 
         }
         if (checkIncludes(includes, inputEl)) {
