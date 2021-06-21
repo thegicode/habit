@@ -5,8 +5,8 @@ const template = document.querySelector('[data-template=permanent]')
 const addEvents = (element, index, events) => {
 
     const { 
-        updateItemPermanent, 
         includesPermanent, 
+        updateItemPermanent, 
         deleteItemPermanent 
         } = events
     
@@ -14,7 +14,6 @@ const addEvents = (element, index, events) => {
         .querySelector('input[name=pnName]')
         .addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
-                e.preventDefault()
                 if (isInputEmpty(this)) {
                     window.alert('고정 습관명을 입력하세요.')
                     return
@@ -24,7 +23,7 @@ const addEvents = (element, index, events) => {
                     return
                 }
                 if (updateItemPermanent(index, this.value)) {
-                    this.blur()
+                    console.log('이름 변경 완료')
                 }
             }
         })
@@ -34,7 +33,6 @@ const addEvents = (element, index, events) => {
         .addEventListener('click', function(e) {
             deleteItemPermanent(index)
         })
-
 }
 
 const getElements = (permanent, index, events) => {

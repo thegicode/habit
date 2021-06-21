@@ -25,7 +25,7 @@ class Handler {
     }
 
     confirm () {
-        const { includes } =  this.events
+        const { includes, updateItemName } =  this.events
         // const targetEl = this.e.target
         // const el = targetEl.closest('.habiker')
         // const inputElement = el.querySelector('[data-input=name]')
@@ -41,10 +41,7 @@ class Handler {
             return
         }
 
-        const result = this.events.updateItemName(
-                            this.index, 
-                            inputElement.value)
-
+        const result = updateItemName(this.index, inputElement.value)
         if (!result) {
             inputElement.value = this.oldName
             console.log('이름이 변경되지 않았습니다.')

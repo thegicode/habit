@@ -1,3 +1,4 @@
+import { isInputEmpty, isInputInclues } from '../view/helpers.js'
 
 const addControls = (renderPermanents, events) => {
 
@@ -42,26 +43,7 @@ const addControls = (renderPermanents, events) => {
         })
 }
 
-const isEmpty = inputEl => {
-    if (inputEl.value.length === 0) {
-        window.alert('고정 습관명을 입력하세요.')
-        inputEl.focus()
-        return true
-    }
-    return false
-}
-
-const isInclues = (includesPermanent, inputEl) => {
-    if(includesPermanent(inputEl.value)) {
-        window.alert('이미 있는 습관명입니다.')
-        inputEl.focus()
-        inputEl.value = ''
-        return true
-    }
-    return false
-}
-
-const addEvents = (events) => {
+const addEvents = events => {
     const { includesPermanent, addItemPermanent } = events
     const inputEl = document.querySelector('input[name=pnEnter]')
     const button = document.querySelector('[data-button=pnEnter]')
@@ -69,10 +51,12 @@ const addEvents = (events) => {
     const listener = function (inputEl) {
         const str = inputEl.value
         
-        if (isEmpty(inputEl)) {
+        if (isInputEmpty(inputEl)) {
+            window.alert('고정 습관명을 입력하세요.')
             return 
         }
-        if (isInclues(includesPermanent, inputEl)) {
+        if (isInputInclues(includesPermanent, inputEl)) {
+            window.alert('이미 있는 습관명입니다.')
             return
         }
 
@@ -83,6 +67,7 @@ const addEvents = (events) => {
 
     inputEl.addEventListener('keypress', function(e){
         if (e.key === 'Enter') {
+            e.preventDefault()
             listener(inputEl)
         }
     })

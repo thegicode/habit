@@ -44,8 +44,6 @@
 - 몇 일 만에 완료했어요.
 - 개별 expand
 - root div rename: dimmed, localStorage, permanent
-- localStorage : edit naming, edit js
-- Add helper function
 - 고정 습관 각 달에 추가
 
 
