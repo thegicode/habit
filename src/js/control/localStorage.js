@@ -1,36 +1,42 @@
 
 export default (getStorage, events) => {
 
+    const { updateStorage } = events
+
+    const launcherButton = document
+        .querySelector('[data-button=setLocalStorage]')
+
     const dimmed = document
         .querySelector('[data-component=dimmed]')
 
     const component = document
         .querySelector('[data-component=localStorage]')
 
-    const launcherButton = document
-        .querySelector('[data-button=setLocalStorage]')
-
     const closeButton = document
         .querySelector('[data-button=closeStorage]')
 
+    const show = function() {
+        component.dataset.hidden = false
+        dimmed.dataset.hidden = false
+        closeButton.focus()
+    }
+
+    const hide = function() {
+        component.dataset.hidden = true
+        dimmed.dataset.hidden = true
+        launcherButton.focus()
+    }
+
     launcherButton
-        .addEventListener('click', function(){
-            component.dataset.hidden = false
-            dimmed.dataset.hidden = false
-            closeButton.focus()
-        })
+        .addEventListener('click',show)
 
     closeButton
-        .addEventListener('click', function(){
-            component.dataset.hidden = true
-            dimmed.dataset.hidden = true
-            launcherButton.focus()
-        })
+        .addEventListener('click', hide)
+        
     dimmed
         .addEventListener('click', function(){
             if (component.dataset.hidden === "false") {
-                component.dataset.hidden = true
-                this.dataset.hidden = true;
+                hide()
             }
         })
 
@@ -57,9 +63,8 @@ export default (getStorage, events) => {
         .addEventListener('click', function(){
             const str = window.prompt('Local Storage를 입력하세요.')
             if(str){
-                events.updateStorage(str)
-                component.dataset.hidden = true
-                dimmed.dataset.hidden = true
+                updateStorage(str)
+                hide()
             }
         })
 

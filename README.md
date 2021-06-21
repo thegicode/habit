@@ -46,6 +46,6 @@
 - root div rename: dimmed, localStorage, permanent
 - localStorage : edit naming, edit js
 - Add helper function
-
+- 고정 습관 각 달에 추가
 
 
