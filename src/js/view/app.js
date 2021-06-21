@@ -1,4 +1,4 @@
-import { createNewNode } from './helpers.js'
+import { createNewNode, isInputEmpty } from './helpers.js'
 
 const template = document.querySelector('[data-template=app')
 
@@ -13,15 +13,6 @@ const currentMonth = ( () => {
     }
     return `${date.getFullYear()}.${getMonth()}`
 })()
-
-const isEmpty = inputEl => {
-    if (inputEl.value.length === 0) {
-        window.alert('습관명을 입력하세요.')
-        inputEl.focus()
-        return true
-    }
-    return false
-}
 
 const checkIncludes = (includes, inputEl) => {
     const text = inputEl.value
@@ -115,9 +106,10 @@ const addEvents = (newCpnt, events) => {
 
     const listener = function (inputEl) {
         const nameText = inputEl.value
-        
-        if (isEmpty(inputEl)) {
-            return 
+
+        if (isInputEmpty(inputEl)) {
+            window.alert('습관명을 입력하세요.')
+            return
         }
         if (checkIncludes(includes, inputEl)) {
             return
@@ -132,6 +124,7 @@ const addEvents = (newCpnt, events) => {
 
     inputEl.addEventListener('keypress', function(e){
         if (e.key === 'Enter') {
+            e.preventDefault()
             listener(inputEl)
         }
     })

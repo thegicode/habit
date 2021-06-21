@@ -8,3 +8,11 @@ export function createNewNode(tempalte) {
         .firstElementChild
         .cloneNode(true)
 }
+
+export function isInputEmpty(inputEl) {
+    if (inputEl.value.length === 0) {
+        inputEl.focus()
+        return true
+    }
+    return false
+}

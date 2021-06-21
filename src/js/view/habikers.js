@@ -1,4 +1,4 @@
-import { createNewNode } from './helpers.js'
+import { createNewNode, isInputEmpty } from './helpers.js'
 
 const template = document.querySelector('[data-template=habiker]')
 
@@ -12,15 +12,6 @@ class Handler {
             cpnt: document.querySelector('[data-component=habikers').parentElement,
             parent: document.querySelector('[data-component=app]')
         }
-    }
-
-    isNotEmpty (inputElement) {
-        if (inputElement.value.length === 0) {
-            window.alert('습관명을 입력하세요.')
-            inputElement.focus()
-            return true
-        }
-        return false
     }
 
     includes (inputElement) {
@@ -52,7 +43,8 @@ class Handler {
         // const inputElement = el.querySelector('[data-input=name]')
         const inputElement = this.e.target
 
-        if (this.isNotEmpty(inputElement)) {
+        if (isInputEmpty(inputElement)) {
+            window.alert('습관명을 입력하세요.')
             return 
         }
         if (this.includes(inputElement)) {

@@ -1,15 +1,6 @@
-import { createNewNode } from './helpers.js'
+import { createNewNode, isInputEmpty } from './helpers.js'
 
 const template = document.querySelector('[data-template=permanent]')
-
-const isEmpty = inputEl => {
-    if (inputEl.value.length === 0) {
-        window.alert('고정 습관명을 입력하세요.')
-        inputEl.focus()
-        return true
-    }
-    return false
-}
 
 const isInclues = (includesPermanent, inputEl, index) => {
     if(includesPermanent(inputEl.value, index)) {
@@ -33,7 +24,9 @@ const addEvents = (element, index, events) => {
         .querySelector('input[name=pnName]')
         .addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
-                if (isEmpty(this)) {
+                e.preventDefault()
+                if (isInputEmpty(this)) {
+                    window.alert('고정 습관명을 입력하세요.')
                     return
                 }
                 if (isInclues(includesPermanent, this, index)) {
