@@ -445,7 +445,7 @@ li {
   pointer-events: none;
 }
 
-.localStorage {
+.setLocalStorage {
   position: fixed;
   top: 0;
   right: 0;
@@ -457,11 +457,11 @@ li {
   display: flex;
 }
 
-.localStorage[data-hidden=false] {
+.setLocalStorage[data-hidden=false] {
   transform: translate3d(0, 0, 0) scale(1);
 }
 
-.localStorage-actions {
+.setLocalStorage-actions {
   position: relative;
   width: 100%;
   padding: 4rem 2rem 2rem;
@@ -471,7 +471,7 @@ li {
   flex-direction: column;
 }
 
-.localStorage .__buttonStorage {
+.setLocalStorage .__buttonStorage {
   margin-bottom: 7px;
   padding: 10px;
   font-size: 1rem;
@@ -483,19 +483,19 @@ li {
   cursor: pointer;
 }
 
-.localStorage .__buttonStorage:hover, .localStorage .__buttonStorage:focus {
+.setLocalStorage .__buttonStorage:hover, .setLocalStorage .__buttonStorage:focus {
   background-color: rgba(0, 128, 0, 0.1);
 }
 
-.localStorage .__buttonStorage:hover:focus {
+.setLocalStorage .__buttonStorage:hover:focus {
   background-color: rgba(0, 128, 0, 0.15);
 }
 
-.localStorage .__buttonStorage:hover:active {
+.setLocalStorage .__buttonStorage:hover:active {
   background-color: rgba(0, 128, 0, 0.2);
 }
 
-.localStorage button.__closeStorage {
+.setLocalStorage button.__closeStorage {
   position: absolute;
   top: 5px;
   left: 5px;
@@ -509,15 +509,15 @@ li {
   cursor: pointer;
 }
 
-.localStorage button.__closeStorage:hover, .localStorage button.__closeStorage:focus {
+.setLocalStorage button.__closeStorage:hover, .setLocalStorage button.__closeStorage:focus {
   background-color: rgba(0, 128, 0, 0.1);
 }
 
-.localStorage button.__closeStorage:hover:focus {
+.setLocalStorage button.__closeStorage:hover:focus {
   background-color: rgba(0, 128, 0, 0.15);
 }
 
-.localStorage button.__closeStorage:hover:active {
+.setLocalStorage button.__closeStorage:hover:active {
   background-color: rgba(0, 128, 0, 0.2);
 }
 

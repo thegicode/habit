@@ -10,6 +10,9 @@ export function createNewNode(tempalte) {
 }
 
 export function isInputEmpty(inputEl) {
+    if (!inputEl) {
+        return
+    }
     if (inputEl.value.length === 0) {
         inputEl.focus()
         return true
@@ -18,6 +21,9 @@ export function isInputEmpty(inputEl) {
 }
 
 export function isInputInclues(isIncludes, inputEl, index) {
+    if (!isIncludes || !inputEl) {
+        return
+    }
     if(isIncludes(inputEl.value, index)) {
         inputEl.focus()
         inputEl.value = ''

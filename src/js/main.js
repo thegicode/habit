@@ -28,7 +28,6 @@ const model = modelFactory( getStorage() )
 
 const {
     addChangeListener,
-    // addChangeListener2,
     ...events
     } = model
 
