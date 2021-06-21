@@ -97,7 +97,7 @@ li {
   background-color: rgba(0, 0, 0, 0.15);
 }
 
-.habits-enters .__inputEnter:invalid + button[type="reset"] {
+.habits-enters .__inputEnter:placeholder-shown + button[type="reset"] {
   display: none;
 }
 

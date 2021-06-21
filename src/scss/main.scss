@@ -73,9 +73,13 @@
             }
 
         }
-        .__inputEnter:invalid + button[type="reset"] {
+
+        .__inputEnter:not(:placeholder-shown) + button[type="reset"]{
+        }
+        .__inputEnter:placeholder-shown + button[type="reset"] {
             display: none;
         }
+        
         .__clearIcon {
             display: flex;
             justify-content: center;

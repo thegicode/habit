@@ -45,6 +45,7 @@
 - 개별 expand
 - root div rename: dimmed, localStorage, permanent
 - localStorage : edit naming, edit js
+- Add helper function
 
 
 
