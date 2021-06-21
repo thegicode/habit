@@ -1,16 +1,6 @@
-import { createNewNode, isInputEmpty } from './helpers.js'
+import { createNewNode, isInputEmpty, isInputInclues } from './helpers.js'
 
 const template = document.querySelector('[data-template=permanent]')
-
-const isInclues = (includesPermanent, inputEl, index) => {
-    if(includesPermanent(inputEl.value, index)) {
-        window.alert('이미 있는 습관명입니다.')
-        inputEl.focus()
-        inputEl.value = ''
-        return true
-    }
-    return false
-}
 
 const addEvents = (element, index, events) => {
 
@@ -29,7 +19,8 @@ const addEvents = (element, index, events) => {
                     window.alert('고정 습관명을 입력하세요.')
                     return
                 }
-                if (isInclues(includesPermanent, this, index)) {
+                if (isInputInclues(includesPermanent, this, index)) {
+                    window.alert('이미 있는 습관명입니다.')
                     return
                 }
                 if (updateItemPermanent(index, this.value)) {

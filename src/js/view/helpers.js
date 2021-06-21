@@ -16,3 +16,12 @@ export function isInputEmpty(inputEl) {
     }
     return false
 }
+
+export function isInputInclues(isIncludes, inputEl, index) {
+    if(isIncludes(inputEl.value, index)) {
+        inputEl.focus()
+        inputEl.value = ''
+        return true
+    }
+    return false
+}

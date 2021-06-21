@@ -1,4 +1,4 @@
-import { createNewNode, isInputEmpty } from './helpers.js'
+import { createNewNode, isInputEmpty, isInputInclues } from './helpers.js'
 
 const template = document.querySelector('[data-template=app')
 
@@ -13,18 +13,6 @@ const currentMonth = ( () => {
     }
     return `${date.getFullYear()}.${getMonth()}`
 })()
-
-const checkIncludes = (includes, inputEl) => {
-    const text = inputEl.value
-
-    if (includes(text, '2021.06')) {
-        window.alert('이미 있는 습관명입니다.')
-        inputEl.focus()
-        inputEl.value = ''
-        return true
-    }
-    return false
-}
 
 const getExpandText = boolean => {
     return boolean ? '타이틀만 보기' : '모두 보기'
@@ -111,7 +99,8 @@ const addEvents = (newCpnt, events) => {
             window.alert('습관명을 입력하세요.')
             return
         }
-        if (checkIncludes(includes, inputEl)) {
+        if (isInputInclues(includes, inputEl)) {
+            window.alert('이미 있는 습관명입니다.')
             return
         }
 

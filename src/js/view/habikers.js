@@ -1,4 +1,4 @@
-import { createNewNode, isInputEmpty } from './helpers.js'
+import { createNewNode, isInputEmpty, isInputInclues } from './helpers.js'
 
 const template = document.querySelector('[data-template=habiker]')
 
@@ -14,19 +14,6 @@ class Handler {
         }
     }
 
-    includes (inputElement) {
-        const nameText = inputElement.value
-        const includes = this.events.includes(nameText, this.index)
-
-        if (includes) {
-            window.alert('이미 있는 습관명입니다.')
-            inputElement.focus()
-            inputElement.value = ''
-            return true
-        }
-        return false
-    }
-
     edit () {
         const targetEl = this.e.target
         const el = targetEl.closest('.habiker')
@@ -38,6 +25,7 @@ class Handler {
     }
 
     confirm () {
+        const { includes } =  this.events
         // const targetEl = this.e.target
         // const el = targetEl.closest('.habiker')
         // const inputElement = el.querySelector('[data-input=name]')
@@ -47,7 +35,9 @@ class Handler {
             window.alert('습관명을 입력하세요.')
             return 
         }
-        if (this.includes(inputElement)) {
+
+        if (isInputInclues(includes, inputElement, this.index)) {
+            window.alert('이미 있는 습관명입니다.')
             return
         }
 
