@@ -9,7 +9,6 @@ const addControls = (component, renderPermanents, events) => {
 
     const launcherButton = document
         .querySelector('#root [data-button=permanents]')
-
     
     const closeButton = component
         .querySelector('[data-button=close]')

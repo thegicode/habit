@@ -3,11 +3,11 @@ export default (getStorage, events) => {
 
     const { updateStorage, resetStorage } = events
 
-    const backdrop = document
-        .querySelector('#backdrop')
-
     const component = document
         .querySelector('#localStorage')
+
+    const backdrop = document
+        .querySelector('#backdrop')
 
     const launcherButton = document
         .querySelector('#root [data-button=localStorage]')
