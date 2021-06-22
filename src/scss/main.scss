@@ -11,13 +11,14 @@
     }
     &-actions{
         margin-top: 10px;
+        .__button{
+            flex: none;
+            padding: 5px 10px;
+            @include button-default;        
+            @include button-state;
+        }
     }
-    .__button{
-        flex: none;
-        padding: 5px 10px;
-        @include button-default;        
-        @include button-state;
-    }
+    
 }
 
 .habits {

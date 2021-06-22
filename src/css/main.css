@@ -21,7 +21,7 @@ li {
   margin-top: 10px;
 }
 
-.header .__button {
+.header-actions .__button {
   flex: none;
   padding: 5px 10px;
   outline: none;
@@ -32,15 +32,15 @@ li {
   cursor: pointer;
 }
 
-.header .__button:hover, .header .__button:focus {
+.header-actions .__button:hover, .header-actions .__button:focus {
   background-color: rgba(0, 128, 0, 0.1);
 }
 
-.header .__button:hover:focus {
+.header-actions .__button:hover:focus {
   background-color: rgba(0, 128, 0, 0.15);
 }
 
-.header .__button:hover:active {
+.header-actions .__button:hover:active {
   background-color: rgba(0, 128, 0, 0.2);
 }
 

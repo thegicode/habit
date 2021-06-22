@@ -83,7 +83,7 @@ const getElements = (habit, index, events) => {
     const { name } = habit
     const element = createNewNode(template)
     const inputEl = element.querySelector('input[name=name]')
-    const trackersEl = element.querySelector('.trackers')
+    const trackersEl = element.querySelector('[data-component=trackers]')
 
     element.dataset.index = index
     inputEl.value = name

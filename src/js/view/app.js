@@ -38,11 +38,11 @@ const addContents = (newCpnt, events) => {
     newCpnt.querySelector('[data-component=habikers]')
         .dataset.expanded = expand.value
 
-    addDates(newCpnt, activeMonth, monthEl)
+    addMonths(newCpnt, activeMonth, monthEl)
 
 }
 
-const addDates = (newCpnt, activeMonth, monthEl) => {
+const addMonths = (newCpnt, activeMonth, monthEl) => {
     let year, month
     const getMonth = function(){
         const arr = activeMonth.value.split('.')
