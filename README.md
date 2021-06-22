@@ -46,6 +46,5 @@
 - 고정 습관 각 달에 추가
 - helpers position(use control, view)
 - app rename ? habits
-- Add setLocalStorage Makrup
 
 

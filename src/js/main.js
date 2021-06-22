@@ -9,7 +9,7 @@ import registry from './registry.js'
 import modelFactory from './model/model.js'
 
 import controlLocalStorage from './control/localStorage.js'
-import controlPermanent from './control/permanent.js'
+import controlPermanent from './control/permanents.js'
 
 registry.add('app', appView)
 registry.add('habikers', habikersView)
@@ -42,7 +42,7 @@ const render = (state, cpnt, parent) => {
 
 const renderPermanents = state => {
     window.requestAnimationFrame(() => {
-        const cpnt = document.querySelector('[data-component=permanent')
+        const cpnt = document.querySelector('#permanents')
         const parent = document.body
         const newCpnt = registry.renderRoot(cpnt, state, events)
         applyDiff(parent, cpnt, newCpnt)

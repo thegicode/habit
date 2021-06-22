@@ -4,15 +4,16 @@ const addControls = (renderPermanents, events) => {
 
     const { addChangeListener2 } = events
 
+    const backdrop = document
+        .querySelector('#backdrop')
+
+    const component = document
+        .querySelector('#permanents')
+
     const launcherButton = document
         .querySelector('[data-button=setPermanent]')
 
-    const backdrop = document
-        .querySelector('[data-component=backdrop]')
-
-    const component = document
-        .querySelector('[data-component=permanent]')
-
+    
     const closeButton = document
         .querySelector('[data-button=closePermanent]')
 

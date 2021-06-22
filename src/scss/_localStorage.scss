@@ -1,4 +1,4 @@
-.setLocalStorage{
+.localStorage{
     position: fixed;
     top: 0; right: 0; 
     z-index: 100;
@@ -17,8 +17,6 @@
     }
 
     &-actions{
-        display: flex;
-        flex-direction: column;
     }
 
     .__closeButton{
@@ -29,6 +27,11 @@
         @include button-state;
     }
 
+    &-contents{
+        display: flex;
+        flex-direction: column;
+    }
+
     .__buttonStorage{
         margin-bottom: 7px;
         padding: 10px;
@@ -36,8 +39,6 @@
         @include button-default;
         @include button-state;
     }
-
-    
 
 }
 

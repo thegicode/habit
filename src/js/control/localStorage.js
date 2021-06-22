@@ -3,14 +3,14 @@ export default (getStorage, events) => {
 
     const { updateStorage, resetStorage } = events
 
-    const launcherButton = document
-        .querySelector('[data-button=setLocalStorage]')
-
     const backdrop = document
-        .querySelector('[data-component=backdrop]')
+        .querySelector('#backdrop')
 
     const component = document
-        .querySelector('[data-component=localStorage]')
+        .querySelector('#localStorage')
+
+    const launcherButton = document
+        .querySelector('[data-button=setLocalStorage]')
 
     const closeButton = document
         .querySelector('[data-button=closeStorage]')
@@ -55,7 +55,8 @@ export default (getStorage, events) => {
         .querySelector('[data-button=sendStorage]')
         .addEventListener('click', function(e){
             const storage = JSON.stringify( getStorage() )
-            window.location.href = `mailto:thegi.code@gmail.com?subject=Habits Get LocalStorage&body=${storage}`
+            const email = window.prompt('이메일 주소를 입력하세요.')
+            window.location.href = `mailto:${email}?subject=Habits LocalStorage&body=${storage}`
         })
 
     document
@@ -74,6 +75,5 @@ export default (getStorage, events) => {
             resetStorage()
             hide()
         })
-
     
 }

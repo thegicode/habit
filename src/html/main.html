@@ -13,19 +13,19 @@
     <header class="header">
         <h1>Habits</h1>
         <div class="header-actions">
-            <button type="button" class="__button" data-button="setPermanent">Set Fixed Habits</button>
-            <button type="button" class="__button" data-button="setLocalStorage">Set LocalStorage</button>
+            <button type="button" class="__button" data-button="setPermanent">Manage Permanent</button>
+            <button type="button" class="__button" data-button="setLocalStorage">Manage LocalStorage</button>
         </div>
     </header>
     <main class="contents" data-component="app">
     </main>
 </div>
 
-<div class="backdrop" data-component="backdrop" data-hidden="true"></div>
+<div class="backdrop" id="backdrop" data-hidden="true"></div>
 
-<div class="setPermanent" data-component="permanent" data-hidden="true">
+<div class="permanents" id="permanents" data-hidden="true">
     <h2>고정 습관</h2>
-    <div class="setPermanent-actions">
+    <div class="permanents-actions">
         <button type="button" class="__closeButton" data-button="closePermanent" title="닫기"><</button>
     </div>
     <form class="habits-enters">
@@ -35,21 +35,22 @@
         </button>
         <button type="button" class="__buttonEnter" data-button="pnEnter">입력</button>
     </form>
-    <ul class="permanents" data-component="permanents">
+    <ul class="permanents-names" data-component="permanents">
     </ul>
 </div>
 
-<div class="setLocalStorage" data-component="localStorage" data-hidden="true">
-    <h2>Set LocalStorage</h2>
-    <div class="setLocalStorage-actions">
+<div class="localStorage" id="localStorage" data-hidden="true">
+    <h2>LocalStorage</h2>
+    <div class="localStorage-actions">
         <button type="button" class="__closeButton" data-button="closeStorage" title="닫기"><</button>
-        <button type="button" class="__buttonStorage" data-button="saveStorage">Save LocalStorage</button>
-        <button type="button" class="__buttonStorage" data-button="sendStorage">Send LocalStorage</button>
-        <button type="button" class="__buttonStorage" data-button="enterStorage">Enter LocalStorage</button>
-        <button type="button" class="__buttonStorage" data-button="resetStorage">Reset LocalStorage</button>
+    </div>
+    <div class="localStorage-contents">
+        <button type="button" class="__buttonStorage" data-button="saveStorage">Save File</button>
+        <button type="button" class="__buttonStorage" data-button="sendStorage">Send Email</button>
+        <button type="button" class="__buttonStorage" data-button="enterStorage">Enter string</button>
+        <button type="button" class="__buttonStorage" data-button="resetStorage">Reset</button>
     </div>
 </div>
-
 
 <template data-template="app">
     <section class="habits">

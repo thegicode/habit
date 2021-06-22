@@ -445,7 +445,7 @@ li {
   pointer-events: none;
 }
 
-.setLocalStorage {
+.localStorage {
   position: fixed;
   top: 0;
   right: 0;
@@ -460,16 +460,11 @@ li {
   transition: transform .3s ease-out 0s;
 }
 
-.setLocalStorage[data-hidden=false] {
+.localStorage[data-hidden=false] {
   transform: translate3d(0, 0, 0) scale(1);
 }
 
-.setLocalStorage-actions {
-  display: flex;
-  flex-direction: column;
-}
-
-.setLocalStorage .__closeButton {
+.localStorage .__closeButton {
   position: absolute;
   top: 5px;
   left: 5px;
@@ -483,19 +478,24 @@ li {
   cursor: pointer;
 }
 
-.setLocalStorage .__closeButton:hover, .setLocalStorage .__closeButton:focus {
+.localStorage .__closeButton:hover, .localStorage .__closeButton:focus {
   background-color: rgba(0, 128, 0, 0.1);
 }
 
-.setLocalStorage .__closeButton:hover:focus {
+.localStorage .__closeButton:hover:focus {
   background-color: rgba(0, 128, 0, 0.15);
 }
 
-.setLocalStorage .__closeButton:hover:active {
+.localStorage .__closeButton:hover:active {
   background-color: rgba(0, 128, 0, 0.2);
 }
 
-.setLocalStorage .__buttonStorage {
+.localStorage-contents {
+  display: flex;
+  flex-direction: column;
+}
+
+.localStorage .__buttonStorage {
   margin-bottom: 7px;
   padding: 10px;
   font-size: 1rem;
@@ -507,19 +507,19 @@ li {
   cursor: pointer;
 }
 
-.setLocalStorage .__buttonStorage:hover, .setLocalStorage .__buttonStorage:focus {
+.localStorage .__buttonStorage:hover, .localStorage .__buttonStorage:focus {
   background-color: rgba(0, 128, 0, 0.1);
 }
 
-.setLocalStorage .__buttonStorage:hover:focus {
+.localStorage .__buttonStorage:hover:focus {
   background-color: rgba(0, 128, 0, 0.15);
 }
 
-.setLocalStorage .__buttonStorage:hover:active {
+.localStorage .__buttonStorage:hover:active {
   background-color: rgba(0, 128, 0, 0.2);
 }
 
-.setPermanent {
+.permanents {
   position: fixed;
   top: 0;
   right: 0;
@@ -534,11 +534,11 @@ li {
   transition: transform .3s ease-out 0s;
 }
 
-.setPermanent[data-hidden=false] {
+.permanents[data-hidden=false] {
   transform: translate3d(0, 0, 0) scale(1);
 }
 
-.setPermanent .__closeButton {
+.permanents .__closeButton {
   position: absolute;
   top: 5px;
   left: 5px;
@@ -552,30 +552,30 @@ li {
   cursor: pointer;
 }
 
-.setPermanent .__closeButton:hover, .setPermanent .__closeButton:focus {
+.permanents .__closeButton:hover, .permanents .__closeButton:focus {
   background-color: rgba(0, 128, 0, 0.1);
 }
 
-.setPermanent .__closeButton:hover:focus {
+.permanents .__closeButton:hover:focus {
   background-color: rgba(0, 128, 0, 0.15);
 }
 
-.setPermanent .__closeButton:hover:active {
+.permanents .__closeButton:hover:active {
   background-color: rgba(0, 128, 0, 0.2);
 }
 
-.setPermanent .permanents {
+.permanents-names {
   margin-top: 1rem;
 }
 
-.setPermanent .permanent {
+.permanents .permanent {
   display: flex;
   align-items: center;
   padding: 5px 0;
   border-bottom: 1px dashed #ddd;
 }
 
-.setPermanent .__namePermanent {
+.permanents .__namePermanent {
   flex: auto;
   min-width: 50%;
   margin: 0 5px 0 0;
@@ -587,7 +587,7 @@ li {
   font-size: 1.3rem;
 }
 
-.setPermanent .__buttonPermanent {
+.permanents .__buttonPermanent {
   box-sizing: border-box;
   width: 48px;
   margin-left: 2px;
@@ -601,15 +601,15 @@ li {
   cursor: pointer;
 }
 
-.setPermanent .__buttonPermanent:hover, .setPermanent .__buttonPermanent:focus {
+.permanents .__buttonPermanent:hover, .permanents .__buttonPermanent:focus {
   background-color: rgba(0, 128, 0, 0.1);
 }
 
-.setPermanent .__buttonPermanent:hover:focus {
+.permanents .__buttonPermanent:hover:focus {
   background-color: rgba(0, 128, 0, 0.15);
 }
 
-.setPermanent .__buttonPermanent:hover:active {
+.permanents .__buttonPermanent:hover:active {
   background-color: rgba(0, 128, 0, 0.2);
 }
 
