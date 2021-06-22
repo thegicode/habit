@@ -10,10 +10,11 @@ export default (getStorage, events) => {
         .querySelector('#localStorage')
 
     const launcherButton = document
-        .querySelector('[data-button=setLocalStorage]')
+        .querySelector('#root')
+        .querySelector('[data-button=localStorage]')
 
-    const closeButton = document
-        .querySelector('[data-button=closeStorage]')
+    const closeButton = component
+        .querySelector('[data-button=close]')
 
     const show = function() {
         component.dataset.hidden = false
@@ -40,8 +41,8 @@ export default (getStorage, events) => {
             }
         })
 
-    document
-        .querySelector('[data-button=saveStorage]')
+    component
+        .querySelector('[data-button=save]')
         .addEventListener('click', function(e){
             const storage = JSON.stringify( getStorage() )
             const file = new Blob([storage], {type: 'text/plain'})
@@ -51,16 +52,16 @@ export default (getStorage, events) => {
             a.click()
         })
 
-    document
-        .querySelector('[data-button=sendStorage]')
+    component
+        .querySelector('[data-button=email]')
         .addEventListener('click', function(e){
             const storage = JSON.stringify( getStorage() )
             const email = window.prompt('이메일 주소를 입력하세요.')
             window.location.href = `mailto:${email}?subject=Habits LocalStorage&body=${storage}`
         })
 
-    document
-        .querySelector('[data-button=enterStorage]')
+    component
+        .querySelector('[data-button=enter]')
         .addEventListener('click', function(){
             const str = window.prompt('Local Storage를 입력하세요.')
             if(str){
@@ -69,8 +70,8 @@ export default (getStorage, events) => {
             }
         })
 
-    document
-        .querySelector('[data-button=resetStorage]')
+    component
+        .querySelector('[data-button=reset]')
         .addEventListener('click', function(){
             resetStorage()
             hide()

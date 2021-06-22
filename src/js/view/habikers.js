@@ -18,17 +18,12 @@ class Handler {
         const targetEl = this.e.target
         const el = targetEl.closest('.habiker')
         const inputElement = el.querySelector('input')
-        // inputElement.removeAttribute('readonly')
         inputElement.focus()
         targetEl.dataset.hidden = true
-        // el.querySelector('[data-button=confirm]').dataset.hidden = false
     }
 
     confirm () {
         const { includes, updateItemName } =  this.events
-        // const targetEl = this.e.target
-        // const el = targetEl.closest('.habiker')
-        // const inputElement = el.querySelector('[data-input=name]')
         const inputElement = this.e.target
 
         if (isInputEmpty(inputElement)) {
@@ -47,10 +42,7 @@ class Handler {
             console.log('이름이 변경되지 않았습니다.')
         } 
 
-        // el.querySelector('[data-button=confirm]').dataset.hidden = true
-        // el.querySelector('[data-button=edit]').dataset.hidden = false
         inputElement.blur()
-        // inputElement.setAttribute('readonly', 'readonly')
     }
 
     delete(){
@@ -63,19 +55,6 @@ class Handler {
 }
 
 const addEvents = (element, index, events) => {
-    // element
-    //     .querySelector('[data-button=edit]')
-    //     .addEventListener('click', function(e) {
-    //         const handler = new Handler(e, index, events)
-    //         handler.edit()
-    //     })
-    // element
-    //     .querySelector('[data-button=confirm]')
-    //     .addEventListener('click', function(e) {
-    //         const handler = new Handler(e, index, events)
-    //         handler.confirm()
-    //     })
-    
     element
         .querySelector('input[name=name]')
         .addEventListener('keypress', function(e) {
@@ -94,11 +73,9 @@ const addEvents = (element, index, events) => {
     const dragButton = element.querySelector('[data-button=drag]')
     dragButton
         .addEventListener('dragstart', function(e) {
-            // console.log(e)
         })
     dragButton
         .addEventListener('dragend', function(e) {
-            // console.log(e)
         })
 }
 
@@ -110,7 +87,6 @@ const getElements = (habit, index, events) => {
 
     element.dataset.index = index
     inputEl.value = name
-    // inputEl.setAttribute('readonly', 'readonly')
     trackersEl.dataset.index = index
      
     addEvents(element, index, events)

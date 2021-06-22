@@ -11,11 +11,12 @@ const addControls = (renderPermanents, events) => {
         .querySelector('#permanents')
 
     const launcherButton = document
-        .querySelector('[data-button=setPermanent]')
+        .querySelector('#root')
+        .querySelector('[data-button=permanents]')
 
     
-    const closeButton = document
-        .querySelector('[data-button=closePermanent]')
+    const closeButton = component
+        .querySelector('[data-button=close]')
 
     const show = function() {
         addChangeListener2(renderPermanents)

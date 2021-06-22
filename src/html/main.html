@@ -13,8 +13,8 @@
     <header class="header">
         <h1>Habits</h1>
         <div class="header-actions">
-            <button type="button" class="__button" data-button="setPermanent">Manage Permanent</button>
-            <button type="button" class="__button" data-button="setLocalStorage">Manage LocalStorage</button>
+            <button type="button" class="__button" data-button="permanents">Manage Permanent</button>
+            <button type="button" class="__button" data-button="localStorage">Manage LocalStorage</button>
         </div>
     </header>
     <main class="contents" data-component="app">
@@ -26,7 +26,7 @@
 <div class="permanents" id="permanents" data-hidden="true">
     <h2>고정 습관</h2>
     <div class="permanents-actions">
-        <button type="button" class="__closeButton" data-button="closePermanent" title="닫기"><</button>
+        <button type="button" class="__closeButton" data-button="close" title="닫기"><</button>
     </div>
     <form class="habits-enters">
         <input type="text" name="pnEnter" placeholder="고정 습관명을 입력하세요." title="고정 습관명 입력" autofocus class="__inputEnter">
@@ -42,13 +42,13 @@
 <div class="localStorage" id="localStorage" data-hidden="true">
     <h2>LocalStorage</h2>
     <div class="localStorage-actions">
-        <button type="button" class="__closeButton" data-button="closeStorage" title="닫기"><</button>
+        <button type="button" class="__closeButton" data-button="close" title="닫기"><</button>
     </div>
     <div class="localStorage-contents">
-        <button type="button" class="__buttonStorage" data-button="saveStorage">Save File</button>
-        <button type="button" class="__buttonStorage" data-button="sendStorage">Send Email</button>
-        <button type="button" class="__buttonStorage" data-button="enterStorage">Enter string</button>
-        <button type="button" class="__buttonStorage" data-button="resetStorage">Reset</button>
+        <button type="button" class="__buttonStorage" data-button="save">Save File</button>
+        <button type="button" class="__buttonStorage" data-button="email">Send Email</button>
+        <button type="button" class="__buttonStorage" data-button="enter">Enter String</button>
+        <button type="button" class="__buttonStorage" data-button="reset">Reset</button>
     </div>
 </div>
 
