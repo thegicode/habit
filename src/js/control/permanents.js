@@ -1,18 +1,14 @@
 import { isInputEmpty, isInputInclues } from '../view/helpers.js'
 
-const addControls = (renderPermanents, events) => {
+const addControls = (component, renderPermanents, events) => {
 
     const { addChangeListener2 } = events
 
     const backdrop = document
         .querySelector('#backdrop')
 
-    const component = document
-        .querySelector('#permanents')
-
     const launcherButton = document
-        .querySelector('#root')
-        .querySelector('[data-button=permanents]')
+        .querySelector('#root [data-button=permanents]')
 
     
     const closeButton = component
@@ -45,10 +41,10 @@ const addControls = (renderPermanents, events) => {
         })
 }
 
-const addEvents = events => {
+const addEvents = (component, events) => {
     const { includesPermanent, addItemPermanent } = events
-    const inputEl = document.querySelector('input[name=pnEnter]')
-    const button = document.querySelector('[data-button=pnEnter]')
+    const inputEl = component.querySelector('input[name=pnEnter]')
+    const button = component.querySelector('[data-button=pnEnter]')
 
     const listener = function (inputEl) {
         const str = inputEl.value
@@ -79,7 +75,8 @@ const addEvents = events => {
 }
 
 export default (renderPermanents, events) => {
-    addControls(renderPermanents, events)
-    addEvents(events)
+    const component = document.querySelector('#permanents')
+    addControls(component, renderPermanents, events)
+    addEvents(component, events)
 }
 

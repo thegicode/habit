@@ -10,8 +10,7 @@ export default (getStorage, events) => {
         .querySelector('#localStorage')
 
     const launcherButton = document
-        .querySelector('#root')
-        .querySelector('[data-button=localStorage]')
+        .querySelector('#root [data-button=localStorage]')
 
     const closeButton = component
         .querySelector('[data-button=close]')
