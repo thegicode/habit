@@ -2,10 +2,8 @@
 @import './_mixins.scss';
 @import './_reset.scss';
 
+
 .header {
-    // display: flex;
-    // justify-content: space-between;
-    // align-items: center;
     h1 {
         margin: 0;
     }
@@ -18,105 +16,12 @@
             @include button-state;
         }
     }
-    
+    &-enters{
+        @include enters;
+    }
 }
 
 .habits {
-    margin-top: 1rem;
-    &-enters{
-        overflow: hidden;
-        display: flex;
-        border-radius: 5px;
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        &:hover,
-        &:focus{
-            border-color: rgba(0, 128, 0, 0.5);
-        }
-        &:focus:hover{
-            border-color: rgba(0, 128, 0, 0.7);
-        }
-        .__inputEnter{
-            -webkit-appearance: none;
-            flex: auto;
-            width: 60%;
-            height: 48px;
-            box-sizing: border-box;
-            padding: 0 10px;
-            outline: none;
-            border: none;
-            font-size: 1.2rem;
-        }
-        button[type="reset"]{
-            @mixin getBGcolor($val){
-                background-color: rgba(0, 0, 0, $val);
-            }
-            
-            align-self: center;
-
-            width: 25px;
-            height: 25px;
-            outline: none;
-            border-radius: 50%;
-            border: none;
-            cursor: pointer;
-            @include getBGcolor(0.05);
-            
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            &:hover,
-            &:focus {
-                @include getBGcolor(0.1);
-            }
-            &:focus:hover {
-                @include getBGcolor(0.15);
-            }
-        }
-
-        .__inputEnter:not(:placeholder-shown) + button[type="reset"]{
-        }
-        .__inputEnter:placeholder-shown + button[type="reset"] {
-            display: none;
-        }
-        
-        .__clearIcon {
-            display: flex;
-            justify-content: center;
-            width: 25px;
-            height: 10px;
-            opacity: 0.3;
-            &:hover {
-                // opacity: 1;
-            }
-            &:before, &:after {
-                position: absolute;
-                content: ' ';
-                height: 10px;
-                width: 2px;
-                background-color: #333;
-            }
-            &:before {
-                transform: rotate(45deg);
-            }
-            &:after {
-                transform: rotate(-45deg);
-            }
-        }
-        
-        .__buttonEnter{
-            box-sizing: border-box;
-            width: 48px;
-            margin: 0 0 0 5px;
-            padding: 0;
-            font-size: 1rem;
-            outline: none;
-            border: none;
-            background-color: transparent;
-            cursor: pointer;
-            @include button-state;
-        }
-    }
     &-actions {
         margin-top: 1.5rem;
         // nav {
@@ -392,10 +297,9 @@
     }
 }
 
-@import '_backdrop.scss';
-@import '_localStorage.scss';
 @import '_permanent.scss';
-
+@import '_localStorage.scss';
+@import '_backdrop.scss';
 
 
 

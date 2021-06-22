@@ -10,6 +10,7 @@ import modelFactory from './model/model.js'
 
 import controlLocalStorage from './control/localStorage.js'
 import controlPermanent from './control/permanents.js'
+import controlEnters from './control/enters.js'
 
 registry.add('app', appView)
 registry.add('habikers', habikersView)
@@ -53,6 +54,7 @@ addChangeListener(render)
 
 controlLocalStorage(getStorage, events)
 controlPermanent(renderPermanents, events)
+controlEnters(events)
 
 
 

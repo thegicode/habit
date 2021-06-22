@@ -17,14 +17,13 @@
     }
 
     &-actions{
-    }
-
-    .__closeButton{
-        position: absolute;
-        top: 5px; left: 5px;
-        width: 45px; height: 45px;
-        @include button-default-circle;
-        @include button-state;
+        .__closeButton{
+            position: absolute;
+            top: 5px; left: 5px;
+            width: 45px; height: 45px;
+            @include button-default-circle;
+            @include button-state;
+        }
     }
 
     &-contents{

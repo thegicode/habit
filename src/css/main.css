@@ -44,26 +44,23 @@ li {
   background-color: rgba(0, 128, 0, 0.2);
 }
 
-.habits {
-  margin-top: 1rem;
-}
-
-.habits-enters {
+.header-enters {
   overflow: hidden;
   display: flex;
+  margin-top: 1rem;
   border-radius: 5px;
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.habits-enters:hover, .habits-enters:focus {
+.header-enters:hover, .header-enters:focus {
   border-color: rgba(0, 128, 0, 0.5);
 }
 
-.habits-enters:focus:hover {
+.header-enters:focus:hover {
   border-color: rgba(0, 128, 0, 0.7);
 }
 
-.habits-enters .__inputEnter {
+.header-enters .__inputEnter {
   -webkit-appearance: none;
   flex: auto;
   width: 60%;
@@ -75,7 +72,7 @@ li {
   font-size: 1.2rem;
 }
 
-.habits-enters button[type="reset"] {
+.header-enters button[type="reset"] {
   align-self: center;
   width: 25px;
   height: 25px;
@@ -89,19 +86,19 @@ li {
   justify-content: center;
 }
 
-.habits-enters button[type="reset"]:hover, .habits-enters button[type="reset"]:focus {
+.header-enters button[type="reset"]:hover, .header-enters button[type="reset"]:focus {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-.habits-enters button[type="reset"]:focus:hover {
+.header-enters button[type="reset"]:focus:hover {
   background-color: rgba(0, 0, 0, 0.15);
 }
 
-.habits-enters .__inputEnter:placeholder-shown + button[type="reset"] {
+.header-enters .__inputEnter:placeholder-shown + button[type="reset"] {
   display: none;
 }
 
-.habits-enters .__clearIcon {
+.header-enters .__clearIcon {
   display: flex;
   justify-content: center;
   width: 25px;
@@ -109,7 +106,7 @@ li {
   opacity: 0.3;
 }
 
-.habits-enters .__clearIcon:before, .habits-enters .__clearIcon:after {
+.header-enters .__clearIcon:before, .header-enters .__clearIcon:after {
   position: absolute;
   content: ' ';
   height: 10px;
@@ -117,15 +114,15 @@ li {
   background-color: #333;
 }
 
-.habits-enters .__clearIcon:before {
+.header-enters .__clearIcon:before {
   transform: rotate(45deg);
 }
 
-.habits-enters .__clearIcon:after {
+.header-enters .__clearIcon:after {
   transform: rotate(-45deg);
 }
 
-.habits-enters .__buttonEnter {
+.header-enters .__buttonEnter {
   box-sizing: border-box;
   width: 48px;
   margin: 0 0 0 5px;
@@ -137,15 +134,15 @@ li {
   cursor: pointer;
 }
 
-.habits-enters .__buttonEnter:hover, .habits-enters .__buttonEnter:focus {
+.header-enters .__buttonEnter:hover, .header-enters .__buttonEnter:focus {
   background-color: rgba(0, 128, 0, 0.1);
 }
 
-.habits-enters .__buttonEnter:hover:focus {
+.header-enters .__buttonEnter:hover:focus {
   background-color: rgba(0, 128, 0, 0.15);
 }
 
-.habits-enters .__buttonEnter:hover:active {
+.header-enters .__buttonEnter:hover:active {
   background-color: rgba(0, 128, 0, 0.2);
 }
 
@@ -430,95 +427,6 @@ li {
   opacity: 0.5;
 }
 
-.backdrop {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  pointer-events: initial;
-}
-
-.backdrop[data-hidden=true] {
-  display: none;
-  pointer-events: none;
-}
-
-.localStorage {
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: 100;
-  width: 90%;
-  height: 100%;
-  box-sizing: border-box;
-  box-shadow: 7px 10px 20px -5px rgba(0, 0, 0, 0.3);
-  padding: 3rem 1rem 1rem;
-  background: #fff;
-  transform: translate3d(100%, 0, 0) scale(1);
-  transition: transform .3s ease-out 0s;
-}
-
-.localStorage[data-hidden=false] {
-  transform: translate3d(0, 0, 0) scale(1);
-}
-
-.localStorage .__closeButton {
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  width: 45px;
-  height: 45px;
-  outline: none;
-  border-radius: 50%;
-  border: 1px solid transparent;
-  background: #fff;
-  white-space: nowrap;
-  cursor: pointer;
-}
-
-.localStorage .__closeButton:hover, .localStorage .__closeButton:focus {
-  background-color: rgba(0, 128, 0, 0.1);
-}
-
-.localStorage .__closeButton:hover:focus {
-  background-color: rgba(0, 128, 0, 0.15);
-}
-
-.localStorage .__closeButton:hover:active {
-  background-color: rgba(0, 128, 0, 0.2);
-}
-
-.localStorage-contents {
-  display: flex;
-  flex-direction: column;
-}
-
-.localStorage .__buttonStorage {
-  margin-bottom: 7px;
-  padding: 10px;
-  font-size: 1rem;
-  outline: none;
-  border-radius: 5px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  background: #fff;
-  white-space: nowrap;
-  cursor: pointer;
-}
-
-.localStorage .__buttonStorage:hover, .localStorage .__buttonStorage:focus {
-  background-color: rgba(0, 128, 0, 0.1);
-}
-
-.localStorage .__buttonStorage:hover:focus {
-  background-color: rgba(0, 128, 0, 0.15);
-}
-
-.localStorage .__buttonStorage:hover:active {
-  background-color: rgba(0, 128, 0, 0.2);
-}
-
 .permanents {
   position: fixed;
   top: 0;
@@ -538,7 +446,7 @@ li {
   transform: translate3d(0, 0, 0) scale(1);
 }
 
-.permanents .__closeButton {
+.permanents-actions .__closeButton {
   position: absolute;
   top: 5px;
   left: 5px;
@@ -552,15 +460,117 @@ li {
   cursor: pointer;
 }
 
-.permanents .__closeButton:hover, .permanents .__closeButton:focus {
+.permanents-actions .__closeButton:hover, .permanents-actions .__closeButton:focus {
   background-color: rgba(0, 128, 0, 0.1);
 }
 
-.permanents .__closeButton:hover:focus {
+.permanents-actions .__closeButton:hover:focus {
   background-color: rgba(0, 128, 0, 0.15);
 }
 
-.permanents .__closeButton:hover:active {
+.permanents-actions .__closeButton:hover:active {
+  background-color: rgba(0, 128, 0, 0.2);
+}
+
+.permanents-enters {
+  overflow: hidden;
+  display: flex;
+  margin-top: 1rem;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.permanents-enters:hover, .permanents-enters:focus {
+  border-color: rgba(0, 128, 0, 0.5);
+}
+
+.permanents-enters:focus:hover {
+  border-color: rgba(0, 128, 0, 0.7);
+}
+
+.permanents-enters .__inputEnter {
+  -webkit-appearance: none;
+  flex: auto;
+  width: 60%;
+  height: 48px;
+  box-sizing: border-box;
+  padding: 0 10px;
+  outline: none;
+  border: none;
+  font-size: 1.2rem;
+}
+
+.permanents-enters button[type="reset"] {
+  align-self: center;
+  width: 25px;
+  height: 25px;
+  outline: none;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.permanents-enters button[type="reset"]:hover, .permanents-enters button[type="reset"]:focus {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.permanents-enters button[type="reset"]:focus:hover {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+.permanents-enters .__inputEnter:placeholder-shown + button[type="reset"] {
+  display: none;
+}
+
+.permanents-enters .__clearIcon {
+  display: flex;
+  justify-content: center;
+  width: 25px;
+  height: 10px;
+  opacity: 0.3;
+}
+
+.permanents-enters .__clearIcon:before, .permanents-enters .__clearIcon:after {
+  position: absolute;
+  content: ' ';
+  height: 10px;
+  width: 2px;
+  background-color: #333;
+}
+
+.permanents-enters .__clearIcon:before {
+  transform: rotate(45deg);
+}
+
+.permanents-enters .__clearIcon:after {
+  transform: rotate(-45deg);
+}
+
+.permanents-enters .__buttonEnter {
+  box-sizing: border-box;
+  width: 48px;
+  margin: 0 0 0 5px;
+  padding: 0;
+  font-size: 1rem;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.permanents-enters .__buttonEnter:hover, .permanents-enters .__buttonEnter:focus {
+  background-color: rgba(0, 128, 0, 0.1);
+}
+
+.permanents-enters .__buttonEnter:hover:focus {
+  background-color: rgba(0, 128, 0, 0.15);
+}
+
+.permanents-enters .__buttonEnter:hover:active {
   background-color: rgba(0, 128, 0, 0.2);
 }
 
@@ -611,6 +621,94 @@ li {
 
 .permanents .__buttonPermanent:hover:active {
   background-color: rgba(0, 128, 0, 0.2);
+}
+
+.localStorage {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 100;
+  width: 90%;
+  height: 100%;
+  box-sizing: border-box;
+  box-shadow: 7px 10px 20px -5px rgba(0, 0, 0, 0.3);
+  padding: 3rem 1rem 1rem;
+  background: #fff;
+  transform: translate3d(100%, 0, 0) scale(1);
+  transition: transform .3s ease-out 0s;
+}
+
+.localStorage[data-hidden=false] {
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+.localStorage-actions .__closeButton {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 45px;
+  height: 45px;
+  outline: none;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  background: #fff;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.localStorage-actions .__closeButton:hover, .localStorage-actions .__closeButton:focus {
+  background-color: rgba(0, 128, 0, 0.1);
+}
+
+.localStorage-actions .__closeButton:hover:focus {
+  background-color: rgba(0, 128, 0, 0.15);
+}
+
+.localStorage-actions .__closeButton:hover:active {
+  background-color: rgba(0, 128, 0, 0.2);
+}
+
+.localStorage-contents {
+  display: flex;
+  flex-direction: column;
+}
+
+.localStorage .__buttonStorage {
+  margin-bottom: 7px;
+  padding: 10px;
+  font-size: 1rem;
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: #fff;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.localStorage .__buttonStorage:hover, .localStorage .__buttonStorage:focus {
+  background-color: rgba(0, 128, 0, 0.1);
+}
+
+.localStorage .__buttonStorage:hover:focus {
+  background-color: rgba(0, 128, 0, 0.15);
+}
+
+.localStorage .__buttonStorage:hover:active {
+  background-color: rgba(0, 128, 0, 0.2);
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  pointer-events: initial;
+}
+
+.backdrop[data-hidden=true] {
+  display: none;
 }
 
 /*# sourceMappingURL=main.css.map */

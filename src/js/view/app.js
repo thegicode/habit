@@ -25,24 +25,30 @@ const addContents = (newCpnt, events) => {
         activeMonth.value = currentMonth
     }
     
-    const monthEl = newCpnt.querySelector('[data-text=month]')
-    monthEl.textContent = activeMonth.value
+    newCpnt
+        .querySelector('[data-text=month]')
+        .textContent = activeMonth.value
     if (activeMonth.value === currentMonth) {
-        newCpnt.querySelector('[data-button=month-current]').hidden = true
+        newCpnt
+            .querySelector('[data-button=month-current]')
+            .hidden = true
     }
 
-    newCpnt.querySelector('[data-checkbox=expand]')
+    newCpnt
+        .querySelector('[data-checkbox=expand]')
         .checked = expand.value
-    newCpnt.querySelector('[data-text=expand]')
+    newCpnt
+        .querySelector('[data-text=expand]')
         .textContent = getExpandText(expand.value)
-    newCpnt.querySelector('[data-component=habikers]')
+    newCpnt
+        .querySelector('[data-component=habikers]')
         .dataset.expanded = expand.value
-
-    addMonths(newCpnt, activeMonth, monthEl)
-
 }
 
-const addMonths = (newCpnt, activeMonth, monthEl) => {
+
+const addEvents = (newCpnt, events) => {
+    const { activeMonth, expand } = events
+
     let year, month
     const getMonth = function(){
         const arr = activeMonth.value.split('.')
@@ -55,7 +61,6 @@ const addMonths = (newCpnt, activeMonth, monthEl) => {
         }
         const str = `${year}.${month}`
         activeMonth.value = str
-        monthEl.textContent = str
     }
     newCpnt.querySelector('[data-button=month-prev]')
         .addEventListener('click', function(){
@@ -83,44 +88,6 @@ const addMonths = (newCpnt, activeMonth, monthEl) => {
             month = new Date().getMonth()+1
             setActiveMonth()
         })
-
-}
-
-const addEvents = (newCpnt, events) => {
-    const { addItem, includes, expand } = events
-
-    const inputEl = newCpnt.querySelector('input[name=name]')
-    const button = newCpnt.querySelector('[data-button=input]')
-
-    const listener = function (inputEl) {
-        const nameText = inputEl.value
-
-        if (isInputEmpty(inputEl)) {
-            window.alert('습관명을 입력하세요.')
-            return
-        }
-        if (isInputInclues(includes, inputEl)) {
-            window.alert('이미 있는 습관명입니다.')
-            return
-        }
-
-        const cpnt = document.querySelector['[data-component=habikers]']
-        const parent = document.querySelector['[data-component=app]']
-        addItem(nameText, cpnt, parent)
-        inputEl.value = ''
-        inputEl.focus()
-    }
-
-    inputEl.addEventListener('keypress', function(e){
-        if (e.key === 'Enter') {
-            e.preventDefault()
-            listener(inputEl)
-        }
-    })
-
-    button.addEventListener('click', function(e) {
-        listener(inputEl)
-    })
 
     newCpnt.querySelector('[data-checkbox=expand]')
         .addEventListener('change', function(e){

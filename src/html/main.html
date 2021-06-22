@@ -16,6 +16,13 @@
             <button type="button" class="__button" data-button="permanents">Manage Permanent</button>
             <button type="button" class="__button" data-button="localStorage">Manage LocalStorage</button>
         </div>
+        <form class="header-enters">
+            <input type="text" name="name" placeholder="습관명을 입력하세요." title="습관명 입력" autofocus class="__inputEnter">
+            <button type="reset">
+                <span class="__clearIcon"></span>
+            </button>
+            <button type="button" class="__buttonEnter" data-button="input">입력</button>
+        </form>
     </header>
     <main class="contents" data-component="app">
     </main>
@@ -28,7 +35,7 @@
     <div class="permanents-actions">
         <button type="button" class="__closeButton" data-button="close" title="닫기"><</button>
     </div>
-    <form class="habits-enters">
+    <form class="permanents-enters">
         <input type="text" name="pnEnter" placeholder="고정 습관명을 입력하세요." title="고정 습관명 입력" autofocus class="__inputEnter">
         <button type="reset">
             <span class="__clearIcon"></span>
@@ -54,13 +61,6 @@
 
 <template data-template="app">
     <section class="habits">
-        <form class="habits-enters">
-            <input type="text" name="name" placeholder="습관명을 입력하세요." title="습관명 입력" autofocus class="__inputEnter">
-            <button type="reset">
-                <span class="__clearIcon"></span>
-            </button>
-            <button type="button" class="__buttonEnter" data-button="input">입력</button>
-        </form>
         <div class="habits-actions">
             <div class="habits-navs">
                 <p class="__titleNav" data-text="month"></p>
