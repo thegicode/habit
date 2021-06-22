@@ -1,4 +1,4 @@
-import appView from './view/app.js'
+import habitsView from './view/habits.js'
 import habikersView from './view/habikers.js'
 import trackersView from './view/trackers.js'
 import permanentsView from './view/permanents.js'
@@ -12,7 +12,7 @@ import controlLocalStorage from './control/localStorage.js'
 import controlPermanent from './control/permanents.js'
 import controlEnters from './control/enters.js'
 
-registry.add('app', appView)
+registry.add('habits', habitsView)
 registry.add('habikers', habikersView)
 registry.add('trackers', trackersView)
 registry.add('permanents', permanentsView)

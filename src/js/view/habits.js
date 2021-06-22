@@ -1,6 +1,6 @@
 import { createNewNode, isInputEmpty, isInputInclues } from './helpers.js'
 
-const template = document.querySelector('[data-template=app')
+const template = document.querySelector('[data-template=habits')
 
 const currentMonth = ( () => {
     const date = new Date()
