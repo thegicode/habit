@@ -17,31 +17,17 @@
             <button type="button" class="__button" data-button="setLocalStorage">Set LocalStorage</button>
         </div>
     </header>
-
     <main class="contents" data-component="app">
     </main>
-
 </div>
 
-<div class="dimmed" data-component="dimmed" data-hidden="true"></div>
-
-<div class="setLocalStorage" data-component="localStorage" data-hidden="true">
-    <div class="setLocalStorage-actions">
-        <button type="button" class="__closeStorage" data-button="closeStorage" title="닫기"><</button>
-        <button type="button" class="__buttonStorage" data-button="saveStorage">Save LocalStorage</button>
-        <button type="button" class="__buttonStorage" data-button="sendStorage">Send LocalStorage</button>
-        <button type="button" class="__buttonStorage" data-button="EnterStorage">Enter LocalStorage</button>
-    </div>
-</div>
+<div class="backdrop" data-component="backdrop" data-hidden="true"></div>
 
 <div class="setPermanent" data-component="permanent" data-hidden="true">
-
     <h2>고정 습관</h2>
-
     <div class="setPermanent-actions">
         <button type="button" class="__closeButton" data-button="closePermanent" title="닫기"><</button>
     </div>
-
     <form class="habits-enters">
         <input type="text" name="pnEnter" placeholder="고정 습관명을 입력하세요." title="고정 습관명 입력" autofocus class="__inputEnter">
         <button type="reset">
@@ -49,23 +35,25 @@
         </button>
         <button type="button" class="__buttonEnter" data-button="pnEnter">입력</button>
     </form>
-
     <ul class="permanents" data-component="permanents">
     </ul>
 </div>
 
-<template data-template="permanent">
-    <li class="permanent">
-        <input type="text" name="pnName" title="고정 습관명" class="__namePermanent" >
-        <button type="button" class="__buttonPermanent" data-button="pnDelete">삭제</button>
-    </li>
-</template>
+<div class="setLocalStorage" data-component="localStorage" data-hidden="true">
+    <h2>Set LocalStorage</h2>
+    <div class="setLocalStorage-actions">
+        <button type="button" class="__closeButton" data-button="closeStorage" title="닫기"><</button>
+        <button type="button" class="__buttonStorage" data-button="saveStorage">Save LocalStorage</button>
+        <button type="button" class="__buttonStorage" data-button="sendStorage">Send LocalStorage</button>
+        <button type="button" class="__buttonStorage" data-button="enterStorage">Enter LocalStorage</button>
+        <button type="button" class="__buttonStorage" data-button="resetStorage">Reset LocalStorage</button>
+    </div>
+</div>
+
 
 <template data-template="app">
     <section class="habits">
-        
         <form class="habits-enters">
-            
             <input type="text" name="name" placeholder="습관명을 입력하세요." title="습관명 입력" autofocus class="__inputEnter">
             <button type="reset">
                 <span class="__clearIcon"></span>
@@ -86,7 +74,6 @@
                 <button type="button" class="__buttonCurrent" data-button="month-current">
                     이번 달
                 </button>
-
             </div>
             <div class="habits-options">
                 <label class="__labelExpand">
@@ -117,7 +104,6 @@
             <button type="button" class="__buttonHabiker" data-button="drag" draggable="true" title="Drag and drop">=</button>
         </header>
         <div class="trackers" data-component="trackers"></div>
-
         <!-- <div role="textbox" contenteditable="true" spellcheck="true" aria-multiline="false" aria-required="true" aria-readonly="true" class="name"></div> -->
     </li>
 </template>
@@ -127,6 +113,13 @@
         <input type="checkbox" name="check" class="__checkboxTracker">
         <span class="__dateTracker" data-text="date"></span>
     </label>
+</template>
+
+<template data-template="permanent">
+    <li class="permanent">
+        <input type="text" name="pnName" title="고정 습관명" class="__namePermanent" >
+        <button type="button" class="__buttonPermanent" data-button="pnDelete">삭제</button>
+    </li>
 </template>
 
 <script type="module" src="../js/main.js"></script>

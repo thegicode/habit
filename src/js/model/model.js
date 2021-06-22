@@ -52,12 +52,18 @@ export default (initialState = INITIAL_STATE) => {
          })
     }
 
-    const updateStorage = (str) => {
+    const updateStorage = str => {
         window.localStorage.setItem('HABITS', str || JSON.stringify(state))
         if(str) {
             state = JSON.parse(str)
             invokeListeners()
         }
+    }
+
+    const resetStorage = () => {
+        state = INITIAL_STATE
+        updateStorage()
+        invokeListeners()
     }
 
     const addItem = (text, cpnt, parent) => {
@@ -273,6 +279,7 @@ export default (initialState = INITIAL_STATE) => {
     return {
         addChangeListener,
         updateStorage,
+        resetStorage,
         addItem,
         updateItemName,
         deleteItem,

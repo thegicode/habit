@@ -430,7 +430,7 @@ li {
   opacity: 0.5;
 }
 
-.dimmed {
+.backdrop {
   position: fixed;
   top: 0;
   right: 0;
@@ -440,7 +440,7 @@ li {
   pointer-events: initial;
 }
 
-.dimmed[data-hidden=true] {
+.backdrop[data-hidden=true] {
   display: none;
   pointer-events: none;
 }
@@ -452,9 +452,12 @@ li {
   z-index: 100;
   width: 90%;
   height: 100%;
+  box-sizing: border-box;
+  box-shadow: 7px 10px 20px -5px rgba(0, 0, 0, 0.3);
+  padding: 3rem 1rem 1rem;
+  background: #fff;
   transform: translate3d(100%, 0, 0) scale(1);
   transition: transform .3s ease-out 0s;
-  display: flex;
 }
 
 .setLocalStorage[data-hidden=false] {
@@ -462,13 +465,34 @@ li {
 }
 
 .setLocalStorage-actions {
-  position: relative;
-  width: 100%;
-  padding: 4rem 2rem 2rem;
-  background: #fff;
-  box-shadow: 7px 10px 20px -5px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
+}
+
+.setLocalStorage .__closeButton {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 45px;
+  height: 45px;
+  outline: none;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  background: #fff;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.setLocalStorage .__closeButton:hover, .setLocalStorage .__closeButton:focus {
+  background-color: rgba(0, 128, 0, 0.1);
+}
+
+.setLocalStorage .__closeButton:hover:focus {
+  background-color: rgba(0, 128, 0, 0.15);
+}
+
+.setLocalStorage .__closeButton:hover:active {
+  background-color: rgba(0, 128, 0, 0.2);
 }
 
 .setLocalStorage .__buttonStorage {
@@ -495,32 +519,6 @@ li {
   background-color: rgba(0, 128, 0, 0.2);
 }
 
-.setLocalStorage button.__closeStorage {
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  width: 45px;
-  height: 45px;
-  outline: none;
-  border-radius: 50%;
-  border: 1px solid transparent;
-  background: #fff;
-  white-space: nowrap;
-  cursor: pointer;
-}
-
-.setLocalStorage button.__closeStorage:hover, .setLocalStorage button.__closeStorage:focus {
-  background-color: rgba(0, 128, 0, 0.1);
-}
-
-.setLocalStorage button.__closeStorage:hover:focus {
-  background-color: rgba(0, 128, 0, 0.15);
-}
-
-.setLocalStorage button.__closeStorage:hover:active {
-  background-color: rgba(0, 128, 0, 0.2);
-}
-
 .setPermanent {
   position: fixed;
   top: 0;
@@ -528,12 +526,12 @@ li {
   z-index: 100;
   width: 90%;
   height: 100%;
+  box-sizing: border-box;
   box-shadow: 7px 10px 20px -5px rgba(0, 0, 0, 0.3);
+  padding: 3rem 1rem 1rem;
+  background: #fff;
   transform: translate3d(100%, 0, 0) scale(1);
   transition: transform .3s ease-out 0s;
-  box-sizing: border-box;
-  padding: 2rem 1rem 1rem;
-  background: #fff;
 }
 
 .setPermanent[data-hidden=false] {

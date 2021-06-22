@@ -7,8 +7,8 @@ const addControls = (renderPermanents, events) => {
     const launcherButton = document
         .querySelector('[data-button=setPermanent]')
 
-    const dimmed = document
-        .querySelector('[data-component=dimmed]')
+    const backdrop = document
+        .querySelector('[data-component=backdrop]')
 
     const component = document
         .querySelector('[data-component=permanent]')
@@ -19,13 +19,13 @@ const addControls = (renderPermanents, events) => {
     const show = function() {
         addChangeListener2(renderPermanents)
         component.dataset.hidden = false
-        dimmed.dataset.hidden = false
+        backdrop.dataset.hidden = false
         closeButton.focus()
     }
 
     const hide = function() {
         component.dataset.hidden = true
-        dimmed.dataset.hidden = true
+        backdrop.dataset.hidden = true
         launcherButton.focus()
     }
 
@@ -35,7 +35,7 @@ const addControls = (renderPermanents, events) => {
     closeButton
         .addEventListener('click', hide)
 
-    dimmed
+    backdrop
         .addEventListener('click', function(){
             if (component.dataset.hidden === "false") {
                 hide()

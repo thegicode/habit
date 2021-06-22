@@ -1,13 +1,13 @@
 
 export default (getStorage, events) => {
 
-    const { updateStorage } = events
+    const { updateStorage, resetStorage } = events
 
     const launcherButton = document
         .querySelector('[data-button=setLocalStorage]')
 
-    const dimmed = document
-        .querySelector('[data-component=dimmed]')
+    const backdrop = document
+        .querySelector('[data-component=backdrop]')
 
     const component = document
         .querySelector('[data-component=localStorage]')
@@ -17,13 +17,13 @@ export default (getStorage, events) => {
 
     const show = function() {
         component.dataset.hidden = false
-        dimmed.dataset.hidden = false
+        backdrop.dataset.hidden = false
         closeButton.focus()
     }
 
     const hide = function() {
         component.dataset.hidden = true
-        dimmed.dataset.hidden = true
+        backdrop.dataset.hidden = true
         launcherButton.focus()
     }
 
@@ -33,7 +33,7 @@ export default (getStorage, events) => {
     closeButton
         .addEventListener('click', hide)
         
-    dimmed
+    backdrop
         .addEventListener('click', function(){
             if (component.dataset.hidden === "false") {
                 hide()
@@ -59,13 +59,20 @@ export default (getStorage, events) => {
         })
 
     document
-        .querySelector('[data-button=EnterStorage]')
+        .querySelector('[data-button=enterStorage]')
         .addEventListener('click', function(){
             const str = window.prompt('Local Storage를 입력하세요.')
             if(str){
                 updateStorage(str)
                 hide()
             }
+        })
+
+    document
+        .querySelector('[data-button=resetStorage]')
+        .addEventListener('click', function(){
+            resetStorage()
+            hide()
         })
 
     

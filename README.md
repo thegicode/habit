@@ -40,12 +40,12 @@
 - Add tooltip
 - 목록 이동
 - Add aria
-- 영구 작업 추가
 - 몇 일 만에 완료했어요.
 - 개별 expand
 - root div rename: dimmed, localStorage, permanent
 - 고정 습관 각 달에 추가
 - helpers position(use control, view)
 - app rename ? habits
+- Add setLocalStorage Makrup
 
 

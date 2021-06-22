@@ -3,15 +3,14 @@
     top: 0; right: 0; 
     z-index: 100;
     width: 90%; height: 100%;
-    
+
+    box-sizing: border-box;
     box-shadow: 7px 10px 20px -5px rgba(0,0,0,0.3);
+    padding: 3rem 1rem 1rem;
+    background: #fff;
 
     transform: translate3d(100%, 0, 0) scale(1);
     transition: transform .3s ease-out 0s;
-
-    box-sizing: border-box;
-    padding: 2rem 1rem 1rem;
-    background: #fff;
 
     &[data-hidden=false]{
         transform: translate3d(0, 0, 0) scale(1);
