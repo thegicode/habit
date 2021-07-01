@@ -53,9 +53,17 @@ export default (targetElement, state, events) => {
 
     newCpnt.innerHTML = ''
 
-    permanents && permanents.length > 0 && permanents
-        .map( (permanent, index) => getElements(permanent, index, events))
-        .forEach( element => {
+    if (!permanents) {
+        return
+    }
+
+    if (permanents.length < 0) {
+        return
+    }
+
+    permanents
+        .map ((permanent, index) => getElements(permanent, index, events))
+        .forEach (element => {
             newCpnt.appendChild(element)
         })
 
