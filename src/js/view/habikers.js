@@ -1,79 +1,70 @@
 import { createNewNode, isInputEmpty, isInputInclues } from './helpers.js'
 
 const template = document.querySelector('[data-template=habiker]')
+let showedAlert = false
 
-class Handler {
-    constructor (e, index, events, oldName) {
-        this.e = e
-        this.index = index
-        this.events = events
-        this.oldName = oldName
-        this.param = {
-            cpnt: document.querySelector('[data-component=habikers').parentElement,
-            parent: document.querySelector('[data-component=app]')
-        }
-    }
+const updateName = (inputEl, index, events, oldName) => {
+    const { includes, updateItemName } =  events
 
-    edit () {
-        const targetEl = this.e.target
-        const el = targetEl.closest('.habiker')
-        const inputElement = el.querySelector('input')
-        inputElement.focus()
-        targetEl.dataset.hidden = true
-    }
-
-    confirm () {
-        const { includes, updateItemName } =  this.events
-        const inputElement = this.e.target
-
-        if (isInputEmpty(inputElement)) {
-            window.alert('습관명을 입력하세요.')
-            return 
-        }
-
-        if (isInputInclues(includes, inputElement, this.index)) {
-            window.alert('이미 있는 습관명입니다.')
+    if (isInputEmpty(inputEl)) {
+        if(showedAlert) {
             return
         }
-
-        const result = updateItemName(this.index, inputElement.value)
-        if (!result) {
-            inputElement.value = this.oldName
-            console.log('이름이 변경되지 않았습니다.')
-        } 
-
-        inputElement.blur()
+        window.alert('습관명을 입력하세요.')
+        showedAlert = true
+        return 
     }
 
-    delete(){
-        this.events.deleteItem(
-            this.index, 
-            this.param.cpnt, 
-            this.param.parent)
+    if (isInputInclues(includes, inputEl, index)) {
+        window.alert('이미 있는 습관명입니다.')
+        return
     }
 
+    const isUpdate = updateItemName(index, inputEl.value)
+    if (!isUpdate) {
+        inputEl.value = oldName
+        console.log('이름이 변경되지 않았습니다.')
+    } 
+
+    inputEl.blur()
 }
 
+
+
 const addEvents = (element, index, events) => {
-    element
-        .querySelector('input[name=name]')
+
+    const { deleteItem } = events
+
+    const inputEl = element.querySelector('input[name=name]')
+
+    inputEl
         .addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
-                const handler = new Handler(e, index, events, this.value)
-                handler.confirm()
+                updateName(this, index, events, this.value)
             }
         })
+
+    inputEl.addEventListener('focus', function(e){
+        showedAlert = false
+    })
+
+    inputEl.addEventListener('blur', function(e){
+        updateName(this, index, events, this.value)
+    })
+
     element
         .querySelector('[data-button=delete]')
         .addEventListener('click', function(e) {
-            const handler = new Handler(e, index, events)
-            handler.delete()
+            deleteItem(index)
         })
 
+
     const dragButton = element.querySelector('[data-button=drag]')
+
     dragButton
         .addEventListener('dragstart', function(e) {
         })
+
     dragButton
         .addEventListener('dragend', function(e) {
         })
