@@ -31,3 +31,15 @@ export function isInputInclues(isIncludes, inputEl, index) {
     }
     return false
 }
+
+export function getCurrentMonth() {
+    const date = new Date()
+    const getMonth = () => {
+        let month = date.getMonth() + 1
+        if(parseInt(month) < 10) {
+            month =  `0${month}`
+        }
+        return month
+    }
+    return `${date.getFullYear()}.${getMonth()}`
+}

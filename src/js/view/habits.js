@@ -1,18 +1,6 @@
-import { createNewNode, isInputEmpty, isInputInclues } from './helpers.js'
+import { createNewNode, isInputEmpty, isInputInclues, getCurrentMonth } from './helpers.js'
 
 const template = document.querySelector('[data-template=habits')
-
-const currentMonth = ( () => {
-    const date = new Date()
-    const getMonth = () => {
-        let month = date.getMonth() + 1
-        if(parseInt(month) < 10) {
-            month =  `0${month}`
-        }
-        return month
-    }
-    return `${date.getFullYear()}.${getMonth()}`
-})()
 
 const getExpandText = boolean => {
     return boolean ? '타이틀만 보기' : '모두 보기'
@@ -20,6 +8,7 @@ const getExpandText = boolean => {
 
 const addContents = (newCpnt, events) => {
     const { activeMonth, expand } = events
+    const currentMonth = getCurrentMonth()
 
     if (!activeMonth.value) {
         activeMonth.value = currentMonth

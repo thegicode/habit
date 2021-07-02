@@ -1,4 +1,4 @@
-import { isInputEmpty, isInputInclues } from '../view/helpers.js'
+import { isInputEmpty, isInputInclues, getCurrentMonth } from '../view/helpers.js'
 
 const addControls = (component, renderPermanents, events) => {
 
@@ -45,7 +45,7 @@ const addEvents = (component, events) => {
     const inputEl = component.querySelector('input[name=pnEnter]')
     const button = component.querySelector('[data-button=pnEnter]')
 
-    const listener = function (inputEl) {
+    const addItem = function (inputEl) {
         const str = inputEl.value
         
         if (isInputEmpty(inputEl)) {
@@ -57,7 +57,7 @@ const addEvents = (component, events) => {
             return
         }
 
-        addItemPermanent(str)
+        addItemPermanent(str, getCurrentMonth())
         inputEl.value = ''
         inputEl.focus()
     }
@@ -65,11 +65,11 @@ const addEvents = (component, events) => {
     inputEl.addEventListener('keypress', function(e){
         if (e.key === 'Enter') {
             e.preventDefault()
-            listener(inputEl)
+            addItem(this)
         }
     })
     button.addEventListener('click', function(e) {
-        listener(inputEl)
+        addItem(inputEl)
     })
 }
 

@@ -24,6 +24,7 @@ const INITIAL_STATE = {
         // ],
     },
     permanents: [],
+    permanents2: {},
     activeMonth: '',
     expand: true,
     other: false
@@ -211,12 +212,16 @@ export default (initialState = INITIAL_STATE) => {
          })
     }
 
-    const addItemPermanent = text => {
+    const addItemPermanent = (text, month) => {
         if (!text) {
             return 
         }
 
-        state.permanents.push(text)
+        const obj = {
+            [month]: []
+        }
+
+        state.permanents2[text] = obj
 
         invokeListeners2()
         updateStorage()
@@ -244,12 +249,14 @@ export default (initialState = INITIAL_STATE) => {
         if (!text) {
             return
         }
-        const _pn = state.permanents
-        if (Object.keys(_pn).length < 1) {
+
+        const data = Object.keys(state.permanents2)
+        
+        if (data.length < 1) {
             return
         }
 
-        const is = _pn
+        const is = data
                     .some( (item, idx) => {
                         if( idx === index ){
                             return

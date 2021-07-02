@@ -27,10 +27,8 @@ const updateName = (inputEl, index, events, oldName) => {
     } 
 
     inputEl.blur()
-    /*if (updateItemPermanent(index, this.value)) {
-        console.log('이름 변경 완료')
-    }*/
 }
+
 const addEvents = (element, index, events) => {
 
     const { 
@@ -74,17 +72,19 @@ const getElements = (permanent, index, events) => {
 }
 
 export default (targetElement, state, events) => {
-    const { permanents } = state
+    const { permanents2 } = state
     const newCpnt = targetElement.cloneNode(true)
 
     newCpnt.innerHTML = ''
 
-    if (!permanents) {
+    if (!permanents2) {
         return targetElement
     }
-    if (permanents.length < 1) {
+    if (permanents2.length < 1) {
         return targetElement
     }
+
+    const permanents = Object.keys(permanents2)
 
     permanents
         .map ((permanent, index) => getElements(permanent, index, events))
