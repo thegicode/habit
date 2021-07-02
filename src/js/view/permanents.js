@@ -1,32 +1,58 @@
 import { createNewNode, isInputEmpty, isInputInclues } from './helpers.js'
 
 const template = document.querySelector('[data-template=permanent]')
+let showedAlert = false
 
+const updateName = (inputEl, index, events, oldName) => {
+    const { includesPermanent, updateItemPermanent } =  events
+
+    if (isInputEmpty(inputEl)) {
+        if(showedAlert) {
+            return
+        }
+        window.alert('고정 습관명을 입력하세요.')
+        showedAlert = true
+        return
+    }
+
+    if (isInputInclues(includesPermanent, inputEl, index)) {
+        window.alert('이미 있는 습관명입니다.')
+        return
+    }
+
+    const isUpdate = updateItemPermanent(index, inputEl.value)
+    if (!updateItemPermanent) {
+        inputEl.value = oldName
+        console.log('이름이 변경되지 않았습니다.')
+    } 
+
+    inputEl.blur()
+    /*if (updateItemPermanent(index, this.value)) {
+        console.log('이름 변경 완료')
+    }*/
+}
 const addEvents = (element, index, events) => {
 
     const { 
-        includesPermanent, 
-        updateItemPermanent, 
         deleteItemPermanent 
         } = events
     
-    element
-        .querySelector('input[name=pnName]')
+    const inputEl = element.querySelector('input[name=pnName]')
+
+    inputEl
         .addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
-                if (isInputEmpty(this)) {
-                    window.alert('고정 습관명을 입력하세요.')
-                    return
-                }
-                if (isInputInclues(includesPermanent, this, index)) {
-                    window.alert('이미 있는 습관명입니다.')
-                    return
-                }
-                if (updateItemPermanent(index, this.value)) {
-                    console.log('이름 변경 완료')
-                }
+                updateName(this, index, events, this.value)
             }
         })
+
+    inputEl.addEventListener('focus', function(e){
+        showedAlert = false
+    })
+
+    inputEl.addEventListener('blur', function(e){
+        updateName(this, index, events, this.value)
+    })
 
     element
         .querySelector('[data-button=pnDelete]')
