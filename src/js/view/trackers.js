@@ -65,12 +65,16 @@ export default (targetElement, state, events) => {
     newTrackerList.innerHTML = ''
 
     let activeHabits = habits[activeMonth.value]
-    if( !activeHabits  || activeHabits.length < 1 ) {
+
+    if (!activeHabits) {
+        return targetElement
+    }
+    if (activeHabits.length < 1) {
         return targetElement
     }
 
     const index = targetElement.dataset.index
-    if( !activeHabits[index] ) {
+    if (!activeHabits[index]) {
         return targetElement
     }
 

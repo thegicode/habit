@@ -80,11 +80,10 @@ export default (targetElement, state, events) => {
     newCpnt.innerHTML = ''
 
     if (!permanents) {
-        return
+        return targetElement
     }
-
-    if (permanents.length < 0) {
-        return
+    if (permanents.length < 1) {
+        return targetElement
     }
 
     permanents
