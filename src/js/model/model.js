@@ -218,10 +218,11 @@ export default (initialState = INITIAL_STATE) => {
         }
 
         const obj = {
-            [month]: []
+            [text]: {
+                [month]: []
+            } 
         }
-
-        state.permanents2[text] = obj
+        state.permanents2 = { ...state.permanents2, ...obj}
 
         invokeListeners2()
         updateStorage()
@@ -270,7 +271,7 @@ export default (initialState = INITIAL_STATE) => {
         if (!text) {
             return
         }
-        
+
         const obj = state.permanents2
         delete obj[text]
         state.permanents2 = obj
