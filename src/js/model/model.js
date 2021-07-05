@@ -266,18 +266,14 @@ export default (initialState = INITIAL_STATE) => {
         return is
     }
 
-    const deleteItemPermanent = index => {
-        if ( index < 0) {
+    const deleteItemPermanent = text => {
+        if (!text) {
             return
         }
-
-        const _pn = state.permanents
-
-        if (!_pn[index]) {
-            return
-        }
-
-        _pn.splice(index, 1)
+        
+        const obj = state.permanents2
+        delete obj[text]
+        state.permanents2 = obj
 
         invokeListeners2()
         updateStorage()

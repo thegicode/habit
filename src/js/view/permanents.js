@@ -31,9 +31,7 @@ const updateName = (inputEl, index, events, oldName) => {
 
 const addEvents = (element, index, events) => {
 
-    const { 
-        deleteItemPermanent 
-        } = events
+    const { deleteItemPermanent } = events
     
     const inputEl = element.querySelector('input[name=pnName]')
 
@@ -55,7 +53,7 @@ const addEvents = (element, index, events) => {
     element
         .querySelector('[data-button=pnDelete]')
         .addEventListener('click', function(e) {
-            deleteItemPermanent(index)
+            deleteItemPermanent(inputEl.value)
         })
 }
 
