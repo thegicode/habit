@@ -34,11 +34,12 @@ const addEvents = (element, index, events) => {
     const { deleteItemPermanent } = events
     
     const inputEl = element.querySelector('input[name=pnName]')
+    const name = inputEl.value
 
     inputEl
         .addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
-                updateName(this, index, events, this.value)
+                updateName(this, index, events, name)
             }
         })
 
@@ -47,13 +48,13 @@ const addEvents = (element, index, events) => {
     })
 
     inputEl.addEventListener('blur', function(e){
-        updateName(this, index, events, this.value)
+        updateName(this, index, events, name)
     })
 
     element
         .querySelector('[data-button=pnDelete]')
         .addEventListener('click', function(e) {
-            deleteItemPermanent(inputEl.value)
+            deleteItemPermanent(index)
         })
 }
 
@@ -62,7 +63,7 @@ const getElements = (permanent, index, events) => {
     const inputEl = element.querySelector('input[name=pnName]')
 
     element.dataset.index = index
-    inputEl.value = permanent
+    inputEl.value = permanent.name
      
     addEvents(element, index, events)
 
@@ -70,19 +71,17 @@ const getElements = (permanent, index, events) => {
 }
 
 export default (targetElement, state, events) => {
-    const { permanents2 } = state
+    const { permanents } = state
     const newCpnt = targetElement.cloneNode(true)
 
     newCpnt.innerHTML = ''
 
-    if (!permanents2) {
+    if (!permanents) {
         return targetElement
     }
-    if (permanents2.length < 1) {
+    if (permanents.length < 0) {
         return targetElement
     }
-
-    const permanents = Object.keys(permanents2)
 
     permanents
         .map ((permanent, index) => getElements(permanent, index, events))

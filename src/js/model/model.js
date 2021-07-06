@@ -23,8 +23,17 @@ const INITIAL_STATE = {
         //     }
         // ],
     },
-    permanents: [],
-    permanents2: {},
+    permanents: [
+        // {
+        //     name: 'Reading',
+        //     data: [
+        //         {
+        //             date:'2021.07',
+        //             checked: []
+        //         }
+        //     ]
+        // }
+    ],
     activeMonth: '',
     expand: true,
     other: false
@@ -65,6 +74,7 @@ export default (initialState = INITIAL_STATE) => {
         state = INITIAL_STATE
         updateStorage()
         invokeListeners()
+        invokeListeners2()
     }
 
     const addItem = (text, cpnt, parent) => {
@@ -218,28 +228,35 @@ export default (initialState = INITIAL_STATE) => {
         }
 
         const obj = {
-            [text]: {
-                [month]: []
-            } 
+            name: text,
+            data:[
+                { 
+                    date: month,
+                    checked: []
+                }
+            ]
         }
-        state.permanents2 = { ...state.permanents2, ...obj}
+        state.permanents.push(obj)
 
         invokeListeners2()
         updateStorage()
     }
 
     const updateItemPermanent = (index, text) => {
-        if ( !text || index < 0) {
+        if (index < 0) {
+            return false
+        }
+        if (!text) {
             return false
         }
 
-        const _pn = state.permanents
+        const permanents = state.permanents
 
-        if (!_pn[index]) {
+        if (!permanents[index]) {
             return false
         }
 
-        _pn[index] = text
+        permanents[index][name] = text
 
         updateStorage()
 
@@ -251,30 +268,33 @@ export default (initialState = INITIAL_STATE) => {
             return
         }
 
-        const data = Object.keys(state.permanents2)
-        
-        if (data.length < 1) {
-            return
+        if (!state.permanents) {
+            return 
+        }
+        if (state.permanents.length < 1) {
+            return false
         }
 
-        const is = data
+        const is = state.permanents
                     .some( (item, idx) => {
                         if( idx === index ){
                             return
                         }
-                        return item === text
+                        return item.name === text
                     })
         return is
     }
 
-    const deleteItemPermanent = text => {
-        if (!text) {
+    const deleteItemPermanent = (index) => {
+        if (index === undefined || index < 0) {
             return
         }
 
-        const obj = state.permanents2
-        delete obj[text]
-        state.permanents2 = obj
+        const permanents = state.permanents
+        if (!permanents[index]) {
+            return
+        }
+        permanents.splice(index, 1)
 
         invokeListeners2()
         updateStorage()
