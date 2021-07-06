@@ -29,6 +29,19 @@ const INITIAL_STATE = {
         //     data: [
         //         {
         //             date:'2021.07',
+        //             checked: [1, 2, 3]
+        //         },
+        //         {
+        //             date:'2021.08',
+        //             checked: []
+        //         }
+        //     ]
+        // },
+        // {
+        //     name: 'Cooking',
+        //     data: [
+        //         {
+        //             date:'2021.07',
         //             checked: []
         //         }
         //     ]
@@ -256,7 +269,7 @@ export default (initialState = INITIAL_STATE) => {
             return false
         }
 
-        permanents[index][name] = text
+        permanents[index].name = text
 
         updateStorage()
 

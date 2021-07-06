@@ -85,6 +85,21 @@ const getElements = (habit, index, events) => {
     return element
 }
 
+const getElementsP = (permanent, index, events) => {
+    const { name } = permanent
+    const element = createNewNode(template)
+    const inputEl = element.querySelector('input[name=name]')
+    const trackersEl = element.querySelector('[data-component=trackers]')
+
+    element.dataset.pIndex = index
+    inputEl.value = name
+    trackersEl.dataset.index = index
+     
+    addEvents(element, index, events)
+
+    return element
+}
+
 export default (targetElement, state, events) => {
     const { habits, permanents } = state
     const { activeMonth } = events
@@ -104,6 +119,12 @@ export default (targetElement, state, events) => {
     if (activeHabits.length < 1) {
         return targetElement
     }
+
+    permanents
+        .map( (permanent, index) => getElementsP(permanent, index, events))
+        .forEach( element => {
+            newHabikerList.appendChild(element)
+        })
 
     activeHabits
         .map( (habit, index) => getElements(habit, index, events))
