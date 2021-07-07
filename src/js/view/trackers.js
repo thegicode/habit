@@ -3,7 +3,9 @@ import { createNewNode } from './helpers.js'
 const template = document.querySelector('[data-template=tracker]')
 
 const getElements = (checkedDate, index, events, pindex) => {
-    const { activeMonth, updateItemChecked, updateItemCheckedPermanent } = events
+    const { activeMonth, 
+            updateItemChecked, 
+            updateItemCheckedPermanent } = events
 
     const newDate = new Date(),
         getFullYear = newDate.getFullYear(),
@@ -65,7 +67,7 @@ const getElements = (checkedDate, index, events, pindex) => {
 
 export default (targetElement, state, events) => {
     const { habits, permanents } = state
-    const { activeMonth, updateItemChecked, addItemPermanent, addPermanent } = events
+    const { activeMonth } = events
     const newTrackerList = targetElement.cloneNode(true)
 
     const pIndex = targetElement.dataset.pIndex
@@ -76,25 +78,10 @@ export default (targetElement, state, events) => {
 
     const permanent = permanents[pIndex]
     if (permanent && permanent.data.length > 0) {
-        
-        // const hasMonth = permanent.data.some( (item, index) => {
-        //     return item.date === month
-        // })
-        // if (!hasMonth) {
-        //     addPermanent(pIndex, month)
-        // }
-
-        // if (!permanent.dates.includes(month)) {
-        //     console.log('must add', month)
-        //     addPermanent(pIndex, month)
-        // }
-
         permanent.data.forEach( (item, index) => {
-
             if (item.date !== month) {
                 return
             }
-
             const els = getElements(item.checked, pIndex, events, index)
             els.forEach( el => {
                 newTrackerList.appendChild(el)

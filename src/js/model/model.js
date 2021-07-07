@@ -278,6 +278,7 @@ export default (initialState = INITIAL_STATE) => {
         state.permanents[index].dates.push(month)
         state.permanents[index].data.push(obj)
 
+        invokeListeners()
         invokeListeners2()
         updateStorage()
     }

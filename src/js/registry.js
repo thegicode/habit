@@ -2,7 +2,6 @@ const registry = {}
 
 const renderWrapper = component => {
     return (targetElement, state, events) => {
-        // console.log('targetElement', targetElement)
         const element = component(targetElement, state, events)
         const children = element.querySelectorAll('[data-component]')
 
@@ -18,8 +17,6 @@ const renderWrapper = component => {
             target.replaceWith(childElement)
 
         })
-
-        // console.log('    element', element)
 
         return element
     }

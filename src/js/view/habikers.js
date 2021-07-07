@@ -1,10 +1,13 @@
-import { createNewNode, isInputEmpty, isInputInclues } from './helpers.js'
+import { createNewNode, isInputEmpty, isInputInclues, getCurrentMonth } from './helpers.js'
 
 const template = document.querySelector('[data-template=habiker]')
 let showedAlert = false
 
 const updateName = (inputEl, index, events, oldName, isPermanent) => {
-    const { includes, includesPermanent, updateItemName, updateItemPermanent } =  events
+    const { includes, 
+            includesPermanent, 
+            updateItemName, 
+            updateItemPermanent } =  events
 
     if (isInputEmpty(inputEl)) {
         if(showedAlert) {
@@ -32,10 +35,10 @@ const updateName = (inputEl, index, events, oldName, isPermanent) => {
 }
 
 
-
 const addEvents = (element, index, events, isPermanent) => {
 
-    const { deleteItem, deleteItemPermanent } = events
+    const { deleteItem, 
+            deleteItemPermanent } = events
 
     const inputEl = element.querySelector('input[name=name]')
 
@@ -89,8 +92,8 @@ const getElements = (habit, index, events) => {
 }
 
 const getElementsPermanent = (permanent, index, events) => {
-    const { name } = permanent
     const element = createNewNode(template)
+    const { name } = permanent
     const inputEl = element.querySelector('input[name=name]')
     const trackersEl = element.querySelector('[data-component=trackers]')
 
@@ -110,18 +113,22 @@ export default (targetElement, state, events) => {
 
     newHabikerList.innerHTML = ''
 
-    permanents
-        .map( (permanent, index) => 
-            getElementsPermanent(permanent, index, events)
-        )
-        .forEach( element => {
-            newHabikerList.appendChild(element)
-        })
+    const month = activeMonth.value
+
+    if (month >= getCurrentMonth()) {
+        permanents
+            .map( (permanent, index) => 
+                getElementsPermanent(permanent, index, events)
+            )
+            .forEach( element => {
+                newHabikerList.appendChild(element)
+            })
+    }
 
     if (!habits) {
         return newHabikerList
     }
-    const thisHabits = habits[activeMonth.value]
+    const thisHabits = habits[month]
 
     if (!thisHabits) {
         return newHabikerList

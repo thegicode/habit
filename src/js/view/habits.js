@@ -6,6 +6,20 @@ const getExpandText = boolean => {
     return boolean ? '타이틀만 보기' : '모두 보기'
 }
 
+const addPermanents = (permanents, events) => {
+    const { activeMonth, addPermanent } = events
+    const month = activeMonth.value
+    if (month < getCurrentMonth()) {
+        return
+    }
+    permanents.map( (permanent, index) => {
+        if (permanent.dates.includes(month)) {
+            return
+        }
+        addPermanent(index, month)
+    })
+}
+
 const addContents = (newCpnt, events) => {
     const { activeMonth, expand } = events
     const currentMonth = getCurrentMonth()
@@ -90,11 +104,13 @@ const addEvents = (newCpnt, events) => {
 }
 
 export default (targetElement, state, events) => {
+    const {permanents} = state
     const newApp = targetElement.cloneNode(true)
 
     newApp.innerHTML = ''
     newApp.appendChild(createNewNode(template))
 
+    addPermanents(permanents, events)
     addContents(newApp, events)
     addEvents(newApp, events)
 
