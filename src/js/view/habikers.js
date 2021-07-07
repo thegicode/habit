@@ -3,8 +3,8 @@ import { createNewNode, isInputEmpty, isInputInclues } from './helpers.js'
 const template = document.querySelector('[data-template=habiker]')
 let showedAlert = false
 
-const updateName = (inputEl, index, events, oldName) => {
-    const { includes, updateItemName } =  events
+const updateName = (inputEl, index, events, oldName, isPermanent) => {
+    const { includes, includesPermanent, updateItemName, updateItemPermanent } =  events
 
     if (isInputEmpty(inputEl)) {
         if(showedAlert) {
@@ -15,12 +15,14 @@ const updateName = (inputEl, index, events, oldName) => {
         return 
     }
 
-    if (isInputInclues(includes, inputEl, index)) {
+    const isIncludes = isPermanent ? includesPermanent : includes;
+    if (isInputInclues(isIncludes, inputEl, index)) {
         window.alert('이미 있는 습관명입니다.')
         return
     }
 
-    const isUpdate = updateItemName(index, inputEl.value)
+    const updateFn = isPermanent ? updateItemPermanent : updateItemName;
+    const isUpdate = updateFn(index, inputEl.value)
     if (!isUpdate) {
         inputEl.value = oldName
         console.log('이름이 변경되지 않았습니다.')
@@ -31,16 +33,16 @@ const updateName = (inputEl, index, events, oldName) => {
 
 
 
-const addEvents = (element, index, events) => {
+const addEvents = (element, index, events, isPermanent) => {
 
-    const { deleteItem } = events
+    const { deleteItem, deleteItemPermanent } = events
 
     const inputEl = element.querySelector('input[name=name]')
 
     inputEl
         .addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
-                updateName(this, index, events, this.value)
+                updateName(this, index, events, this.value, isPermanent)
             }
         })
 
@@ -49,13 +51,14 @@ const addEvents = (element, index, events) => {
     })
 
     inputEl.addEventListener('blur', function(e){
-        updateName(this, index, events, this.value)
+        updateName(this, index, events, this.value, isPermanent)
     })
 
     element
         .querySelector('[data-button=delete]')
         .addEventListener('click', function(e) {
-            deleteItem(index)
+            const deleteFn = isPermanent ? deleteItemPermanent : deleteItem
+            deleteFn(index)
         })
 
 
@@ -85,7 +88,7 @@ const getElements = (habit, index, events) => {
     return element
 }
 
-const getElementsP = (permanent, index, events) => {
+const getElementsPermanent = (permanent, index, events) => {
     const { name } = permanent
     const element = createNewNode(template)
     const inputEl = element.querySelector('input[name=name]')
@@ -95,7 +98,7 @@ const getElementsP = (permanent, index, events) => {
     inputEl.value = name
     trackersEl.dataset.pIndex = index
      
-    addEvents(element, index, events)
+    addEvents(element, index, events, true)
 
     return element
 }
@@ -107,26 +110,26 @@ export default (targetElement, state, events) => {
 
     newHabikerList.innerHTML = ''
 
-    if (!habits) {
-        return targetElement
-    }
-
-    const activeHabits = habits[activeMonth.value]
-
     permanents
-        .map( (permanent, index) => getElementsP(permanent, index, events))
+        .map( (permanent, index) => 
+            getElementsPermanent(permanent, index, events)
+        )
         .forEach( element => {
             newHabikerList.appendChild(element)
         })
 
-    if (!activeHabits) {
+    if (!habits) {
         return newHabikerList
     }
-    if (activeHabits.length < 1) {
-        return newHabikerList
-    }
+    const thisHabits = habits[activeMonth.value]
 
-    activeHabits
+    if (!thisHabits) {
+        return newHabikerList
+    }
+    if (thisHabits.length < 1) {
+        return newHabikerList
+    }
+    thisHabits
         .map( (habit, index) => getElements(habit, index, events))
         .forEach( element => {
             newHabikerList.appendChild(element)

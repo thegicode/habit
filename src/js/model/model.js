@@ -26,6 +26,7 @@ const INITIAL_STATE = {
     permanents: [
         // {
         //     name: 'Reading',
+        //     dates: ['2021.07', '2021.08']
         //     data: [
         //         {
         //             date:'2021.07',
@@ -39,6 +40,7 @@ const INITIAL_STATE = {
         // },
         // {
         //     name: 'Cooking',
+        //     dates: ['2021.07']
         //     data: [
         //         {
         //             date:'2021.07',
@@ -79,7 +81,7 @@ export default (initialState = INITIAL_STATE) => {
         window.localStorage.setItem('HABITS', str || JSON.stringify(state))
         if(str) {
             state = JSON.parse(str)
-            invokeListeners()
+            // invokeListeners()
         }
     }
 
@@ -239,9 +241,13 @@ export default (initialState = INITIAL_STATE) => {
         if (!text) {
             return 
         }
+        if (!month) {
+            return 
+        }
 
         const obj = {
             name: text,
+            dates: [month],
             data:[
                 { 
                     date: month,
@@ -251,6 +257,7 @@ export default (initialState = INITIAL_STATE) => {
         }
         state.permanents.push(obj)
 
+        invokeListeners()
         invokeListeners2()
         updateStorage()
     }
@@ -268,6 +275,7 @@ export default (initialState = INITIAL_STATE) => {
             checked: []
         }
 
+        state.permanents[index].dates.push(month)
         state.permanents[index].data.push(obj)
 
         invokeListeners2()
@@ -290,6 +298,7 @@ export default (initialState = INITIAL_STATE) => {
 
         permanents[index].name = text
 
+        invokeListeners()
         updateStorage()
 
         return true
@@ -328,6 +337,7 @@ export default (initialState = INITIAL_STATE) => {
         }
         permanents.splice(index, 1)
 
+        invokeListeners()
         invokeListeners2()
         updateStorage()
     }

@@ -76,15 +76,21 @@ export default (targetElement, state, events) => {
 
     const permanent = permanents[pIndex]
     if (permanent && permanent.data.length > 0) {
+        
+        // const hasMonth = permanent.data.some( (item, index) => {
+        //     return item.date === month
+        // })
+        // if (!hasMonth) {
+        //     addPermanent(pIndex, month)
+        // }
 
-        const hasMonth = permanent.data.some( (item, index) => {
-            return item.date === month
-        })
-        if (!hasMonth) {
-            addPermanent(pIndex, month)
-        }
+        // if (!permanent.dates.includes(month)) {
+        //     console.log('must add', month)
+        //     addPermanent(pIndex, month)
+        // }
 
         permanent.data.forEach( (item, index) => {
+
             if (item.date !== month) {
                 return
             }
