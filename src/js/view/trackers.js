@@ -2,8 +2,8 @@ import { createNewNode } from './helpers.js'
 
 const template = document.querySelector('[data-template=tracker]')
 
-const getElements = (checkedDate, index, events) => {
-    const { activeMonth, updateItemChecked } = events
+const getElements = (checkedDate, index, events, pindex) => {
+    const { activeMonth, updateItemChecked, updateItemCheckedPermanent } = events
 
     const newDate = new Date(),
         getFullYear = newDate.getFullYear(),
@@ -44,7 +44,13 @@ const getElements = (checkedDate, index, events) => {
 
         inputEl
             .addEventListener('change', function() {
-                const isUpdated = updateItemChecked(date, this.checked, index)
+                let isUpdated
+                if(pindex > -1){
+                    isUpdated = updateItemCheckedPermanent(date, this.checked, index, pindex)
+                } else {
+                    isUpdated = updateItemChecked(date, this.checked, index)
+                }
+                
                 if (!isUpdated) {
                     console.log('Not changed')
                     this.checked = oldChecked
@@ -58,30 +64,54 @@ const getElements = (checkedDate, index, events) => {
 }
 
 export default (targetElement, state, events) => {
-    const { habits } = state
-    const { activeMonth, updateItemChecked } = events
+    const { habits, permanents } = state
+    const { activeMonth, updateItemChecked, addItemPermanent, addPermanent } = events
     const newTrackerList = targetElement.cloneNode(true)
+
+    const pIndex = targetElement.dataset.pIndex
+    const index = targetElement.dataset.index
+    const month = activeMonth.value
 
     newTrackerList.innerHTML = ''
 
-    let activeHabits = habits[activeMonth.value]
+    const permanent = permanents[pIndex]
+    if (permanent && permanent.data.length > 0) {
 
+        const hasMonth = permanent.data.some( (item, index) => {
+            return item.date === month
+        })
+        if (!hasMonth) {
+            addPermanent(pIndex, month)
+        }
+
+        permanent.data.forEach( (item, index) => {
+            if (item.date !== month) {
+                return
+            }
+
+            const els = getElements(item.checked, pIndex, events, index)
+            els.forEach( el => {
+                newTrackerList.appendChild(el)
+            })
+        })
+    }
+
+    const activeHabits = habits[month]
     if (!activeHabits) {
-        return targetElement
+        return newTrackerList
     }
     if (activeHabits.length < 1) {
-        return targetElement
+        return newTrackerList
     }
 
-    const index = targetElement.dataset.index
     if (!activeHabits[index]) {
-        return targetElement
+        return newTrackerList
     }
 
     const checkedDate = activeHabits[index].checked
-    const elements = getElements(checkedDate, index, events)
-    elements.forEach( el => {
-         newTrackerList.appendChild(el)
+    const labelEls = getElements(checkedDate, index, events)
+    labelEls.forEach( el => {
+        newTrackerList.appendChild(el)
     })
 
     return newTrackerList

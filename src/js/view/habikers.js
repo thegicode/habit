@@ -93,7 +93,7 @@ const getElementsP = (permanent, index, events) => {
 
     element.dataset.pIndex = index
     inputEl.value = name
-    trackersEl.dataset.index = index
+    trackersEl.dataset.pIndex = index
      
     addEvents(element, index, events)
 
@@ -113,18 +113,18 @@ export default (targetElement, state, events) => {
 
     const activeHabits = habits[activeMonth.value]
 
-    if (!activeHabits) {
-        return targetElement
-    }
-    if (activeHabits.length < 1) {
-        return targetElement
-    }
-
     permanents
         .map( (permanent, index) => getElementsP(permanent, index, events))
         .forEach( element => {
             newHabikerList.appendChild(element)
         })
+
+    if (!activeHabits) {
+        return newHabikerList
+    }
+    if (activeHabits.length < 1) {
+        return newHabikerList
+    }
 
     activeHabits
         .map( (habit, index) => getElements(habit, index, events))

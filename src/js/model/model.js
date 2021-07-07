@@ -255,6 +255,25 @@ export default (initialState = INITIAL_STATE) => {
         updateStorage()
     }
 
+    const addPermanent = (index, month) => {
+        if (index < 0) {
+            return 
+        }
+        if (!month) {
+            return
+        }
+
+        const obj = {
+            date: month,
+            checked: []
+        }
+
+        state.permanents[index].data.push(obj)
+
+        invokeListeners2()
+        updateStorage()
+    }
+
     const updateItemPermanent = (index, text) => {
         if (index < 0) {
             return false
@@ -313,6 +332,31 @@ export default (initialState = INITIAL_STATE) => {
         updateStorage()
     }
 
+    const updateItemCheckedPermanent = (date, checked, index, pindex) => {
+        if ( !date || index < 0 || pindex < 0 ) {
+            return false
+        }
+
+        if (!state.permanents[index] && !state.permanents[index].data[pindex]) {
+            return false
+        }
+
+        const _arr = state.permanents[index].data[pindex].checked
+        if (checked === true) {
+            _arr.push(date)
+            _arr.sort( (a, b) => {
+                return a - b
+            })
+        } else {
+            const idx = _arr.indexOf(date)
+            _arr.splice(idx, 1)
+        }
+
+        updateStorage()
+
+        return true
+    }
+
     return {
         addChangeListener,
         updateStorage,
@@ -327,8 +371,11 @@ export default (initialState = INITIAL_STATE) => {
         
         addChangeListener2,
         addItemPermanent,
+        addPermanent,
         updateItemPermanent,
         includesPermanent,
-        deleteItemPermanent
+        deleteItemPermanent,
+        updateItemCheckedPermanent
+
     }
 }
