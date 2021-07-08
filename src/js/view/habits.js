@@ -13,7 +13,7 @@ const addPermanents = (permanents, events) => {
         return
     }
     permanents.map( (permanent, index) => {
-        if (permanent.dates.includes(month)) {
+        if (Object.keys(permanent.data).includes(month)) {
             return
         }
         addPermanent(index, month)

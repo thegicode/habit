@@ -315,6 +315,10 @@ li {
   font-size: 1.5rem;
 }
 
+.habiker .__nameHabiker[readonly=true] {
+  cursor: default;
+}
+
 .habiker .__buttonHabiker {
   box-sizing: border-box;
   width: 48px;
@@ -339,6 +343,15 @@ li {
 
 .habiker .__buttonHabiker:hover:active {
   background-color: rgba(0, 128, 0, 0.2);
+}
+
+.habiker[data-p-index] .__nameHabiker {
+  color: #007d00;
+}
+
+.habiker[data-index="0"] {
+  padding-top: 1rem;
+  border-top: solid 1px rgba(0, 0, 0, 0.1);
 }
 
 .trackers {

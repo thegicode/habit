@@ -24,30 +24,20 @@ const INITIAL_STATE = {
         // ],
     },
     permanents: [
-        // {
-        //     name: 'Reading',
-        //     dates: ['2021.07', '2021.08']
-        //     data: [
-        //         {
-        //             date:'2021.07',
-        //             checked: [1, 2, 3]
-        //         },
-        //         {
-        //             date:'2021.08',
-        //             checked: []
-        //         }
-        //     ]
-        // },
-        // {
-        //     name: 'Cooking',
-        //     dates: ['2021.07']
-        //     data: [
-        //         {
-        //             date:'2021.07',
-        //             checked: []
-        //         }
-        //     ]
-        // }
+        /*{
+            name: 'Reading',
+            data: {
+                '2021.06' : [1, 2, 3],
+                '2021.07' : [1, 2, 3],
+            }
+        },
+        {
+            name: 'Cooking',
+            data: {
+                '2021.06' : [1, 2, 3],
+                '2021.07' : [1, 2, 3],
+            }
+        }*/
     ],
     activeMonth: '',
     expand: true,
@@ -247,13 +237,16 @@ export default (initialState = INITIAL_STATE) => {
 
         const obj = {
             name: text,
-            dates: [month],
-            data:[
-                { 
-                    date: month,
-                    checked: []
-                }
-            ]
+            data: {
+                [month]: []
+            }
+            // dates: [month],
+            // data:[
+            //     { 
+            //         date: month,
+            //         checked: []
+            //     }
+            // ]
         }
         state.permanents.push(obj)
 
@@ -270,14 +263,11 @@ export default (initialState = INITIAL_STATE) => {
             return
         }
 
-        const obj = {
-            date: month,
-            checked: []
+        state.permanents[index].data = {
+            ...state.permanents[index].data, 
+            ...{[month]: []}
         }
-
-        state.permanents[index].dates.push(month)
-        state.permanents[index].data.push(obj)
-
+       
         invokeListeners()
         invokeListeners2()
         updateStorage()
@@ -343,24 +333,24 @@ export default (initialState = INITIAL_STATE) => {
         updateStorage()
     }
 
-    const updateItemCheckedPermanent = (date, checked, index, pindex) => {
-        if ( !date || index < 0 || pindex < 0 ) {
+    const updateItemCheckedPermanent = (date, checked, index) => {
+        if (!date || index < 0) {
             return false
         }
 
-        if (!state.permanents[index] && !state.permanents[index].data[pindex]) {
+        if (!state.permanents[index] && !state.permanents[index].data[activeMonth.value]) {
             return false
         }
 
-        const _arr = state.permanents[index].data[pindex].checked
+        const arr = state.permanents[index].data[activeMonth.value]
         if (checked === true) {
-            _arr.push(date)
-            _arr.sort( (a, b) => {
+            arr.push(date)
+            arr.sort( (a, b) => {
                 return a - b
             })
         } else {
-            const idx = _arr.indexOf(date)
-            _arr.splice(idx, 1)
+            const idx = arr.indexOf(date)
+            arr.splice(idx, 1)
         }
 
         updateStorage()

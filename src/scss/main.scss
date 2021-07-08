@@ -188,6 +188,9 @@
         border: none;
         text-overflow: ellipsis;
         font-size: 1.5rem;
+        &[readonly=true]{
+            cursor: default;
+        }
     }
     .__buttonHabiker{
         box-sizing: border-box;
@@ -197,6 +200,14 @@
         font-size: 14px;
         @include button-default;
         @include button-state;
+    }
+    &[data-p-index] .__nameHabiker{
+        // background: rgba(0, 125, 0, 0.05);
+        color: rgba(0, 125, 0, 1);
+    }
+    &[data-index="0"]{
+        padding-top: 1rem;
+        border-top: solid 1px rgba(0, 0, 0, 0.1);
     }
 }
 

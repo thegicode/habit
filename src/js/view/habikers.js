@@ -42,6 +42,11 @@ const addEvents = (element, index, events, isPermanent) => {
 
     const inputEl = element.querySelector('input[name=name]')
 
+    if (isPermanent) {
+        inputEl.setAttribute('readonly', true)
+        return
+    }
+
     inputEl
         .addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
@@ -64,9 +69,7 @@ const addEvents = (element, index, events, isPermanent) => {
             deleteFn(index)
         })
 
-
     const dragButton = element.querySelector('[data-button=drag]')
-
     dragButton
         .addEventListener('dragstart', function(e) {
         })
@@ -100,7 +103,10 @@ const getElementsPermanent = (permanent, index, events) => {
     element.dataset.pIndex = index
     inputEl.value = name
     trackersEl.dataset.pIndex = index
-     
+
+    element.querySelector('[data-button=delete]').remove()
+    element.querySelector('[data-button=drag]').remove()
+
     addEvents(element, index, events, true)
 
     return element

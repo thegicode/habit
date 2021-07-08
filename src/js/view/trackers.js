@@ -2,7 +2,7 @@ import { createNewNode } from './helpers.js'
 
 const template = document.querySelector('[data-template=tracker]')
 
-const getElements = (checkedDate, index, events, pindex) => {
+const getElements = (checkedDate, index, events, isPermanent) => {
     const { activeMonth, 
             updateItemChecked, 
             updateItemCheckedPermanent } = events
@@ -47,8 +47,8 @@ const getElements = (checkedDate, index, events, pindex) => {
         inputEl
             .addEventListener('change', function() {
                 let isUpdated
-                if(pindex > -1){
-                    isUpdated = updateItemCheckedPermanent(date, this.checked, index, pindex)
+                if(isPermanent){
+                    isUpdated = updateItemCheckedPermanent(date, this.checked, index)
                 } else {
                     isUpdated = updateItemChecked(date, this.checked, index)
                 }
@@ -71,24 +71,20 @@ export default (targetElement, state, events) => {
     const newTrackerList = targetElement.cloneNode(true)
 
     const pIndex = targetElement.dataset.pIndex
-    const index = targetElement.dataset.index
     const month = activeMonth.value
 
     newTrackerList.innerHTML = ''
 
     const permanent = permanents[pIndex]
-    if (permanent && permanent.data.length > 0) {
-        permanent.data.forEach( (item, index) => {
-            if (item.date !== month) {
-                return
-            }
-            const els = getElements(item.checked, pIndex, events, index)
-            els.forEach( el => {
-                newTrackerList.appendChild(el)
-            })
+    if (permanent && permanent.data[month]) {
+        const checked = permanent.data[month]
+        const els = getElements(checked, pIndex, events, true)
+        els.forEach( el => {
+            newTrackerList.appendChild(el)
         })
     }
 
+    const index = targetElement.dataset.index
     const activeHabits = habits[month]
     if (!activeHabits) {
         return newTrackerList
