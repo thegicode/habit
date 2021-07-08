@@ -349,9 +349,9 @@ li {
   color: #007d00;
 }
 
-.habiker[data-index="0"] {
+.habiker + .habiker[data-index="0"] {
+  margin-top: 1rem;
   padding-top: 1rem;
-  border-top: solid 1px rgba(0, 0, 0, 0.1);
 }
 
 .trackers {
