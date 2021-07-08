@@ -24,20 +24,20 @@ const INITIAL_STATE = {
         // ],
     },
     permanents: [
-        /*{
-            name: 'Reading',
-            data: {
-                '2021.06' : [1, 2, 3],
-                '2021.07' : [1, 2, 3],
-            }
-        },
-        {
-            name: 'Cooking',
-            data: {
-                '2021.06' : [1, 2, 3],
-                '2021.07' : [1, 2, 3],
-            }
-        }*/
+        // {
+        //     name: 'Reading',
+        //     data: {
+        //         '2021.06' : [1, 2, 3],
+        //         '2021.07' : [1, 2, 3],
+        //     }
+        // },
+        // {
+        //     name: 'Cooking',
+        //     data: {
+        //         '2021.06' : [1, 2, 3],
+        //         '2021.07' : [1, 2, 3],
+        //     }
+        // }
     ],
     activeMonth: '',
     expand: true,
@@ -71,7 +71,6 @@ export default (initialState = INITIAL_STATE) => {
         window.localStorage.setItem('HABITS', str || JSON.stringify(state))
         if(str) {
             state = JSON.parse(str)
-            // invokeListeners()
         }
     }
 
@@ -240,13 +239,6 @@ export default (initialState = INITIAL_STATE) => {
             data: {
                 [month]: []
             }
-            // dates: [month],
-            // data:[
-            //     { 
-            //         date: month,
-            //         checked: []
-            //     }
-            // ]
         }
         state.permanents.push(obj)
 
@@ -338,7 +330,8 @@ export default (initialState = INITIAL_STATE) => {
             return false
         }
 
-        if (!state.permanents[index] && !state.permanents[index].data[activeMonth.value]) {
+        if (!state.permanents[index] && 
+            !state.permanents[index].data[activeMonth.value]) {
             return false
         }
 

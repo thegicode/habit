@@ -46,13 +46,8 @@ const getElements = (checkedDate, index, events, isPermanent) => {
 
         inputEl
             .addEventListener('change', function() {
-                let isUpdated
-                if(isPermanent){
-                    isUpdated = updateItemCheckedPermanent(date, this.checked, index)
-                } else {
-                    isUpdated = updateItemChecked(date, this.checked, index)
-                }
-                
+                const thisFn = isPermanent ? updateItemCheckedPermanent : updateItemChecked
+                const isUpdated = thisFn(date, this.checked, index)
                 if (!isUpdated) {
                     console.log('Not changed')
                     this.checked = oldChecked
