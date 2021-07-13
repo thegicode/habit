@@ -2,6 +2,7 @@ import { createNewNode, isInputEmpty, isInputInclues, getCurrentMonth } from './
 
 const template = document.querySelector('[data-template=habiker]')
 let showedAlert = false
+let activeIndex;
 
 const updateName = (inputEl, index, events, oldName, isPermanent) => {
     const { includes, 
@@ -26,7 +27,9 @@ const updateName = (inputEl, index, events, oldName, isPermanent) => {
 
     const updateFn = isPermanent ? updateItemPermanent : updateItemName;
     const isUpdate = updateFn(index, inputEl.value)
-    if (!isUpdate) {
+    if (isUpdate) {
+        inputEl.setAttribute('readonly', true)
+    } else {
         inputEl.value = oldName
         console.log('이름이 변경되지 않았습니다.')
     } 
@@ -43,9 +46,29 @@ const addEvents = (element, index, events, isPermanent) => {
     const inputEl = element.querySelector('input[name=name]')
 
     if (isPermanent) {
-        inputEl.setAttribute('readonly', true)
+        // inputEl.setAttribute('readonly', true)
         return
     }
+
+    element
+        .querySelector('[data-header=habiker]')
+        .addEventListener('dblclick', function(e) {
+            inputEl.removeAttribute('readonly')
+            inputEl.focus()
+
+            if( activeIndex === index) {
+                return
+            }
+
+            if (activeIndex > -1){
+                document
+                    .querySelectorAll('[data-item=habiker')[activeIndex]
+                    .querySelector('input[type=text]')
+                    .setAttribute('readonly', true)
+            }
+
+            activeIndex = index
+        });
 
     inputEl
         .addEventListener('keypress', function(e) {
@@ -69,13 +92,19 @@ const addEvents = (element, index, events, isPermanent) => {
             deleteFn(index)
         })
 
-    const dragButton = element.querySelector('[data-button=drag]')
-    dragButton
-        .addEventListener('dragstart', function(e) {
-        })
+    // const dragButton = element.querySelector('[data-button=drag]')
 
-    dragButton
-        .addEventListener('dragend', function(e) {
+    // dragButton
+    //     .addEventListener('dragstart', function(e) {
+    //     })
+
+    // dragButton
+    //     .addEventListener('dragend', function(e) {
+    //     })
+
+    element
+        .addEventListener('dragend', function(e){
+            console.log(this, e)
         })
 }
 

@@ -313,10 +313,12 @@ li {
   border: none;
   text-overflow: ellipsis;
   font-size: 1.5rem;
+  background: rgba(0, 125, 0, 0.05);
 }
 
-.habiker .__nameHabiker[readonly=true] {
+.habiker .__nameHabiker[readonly] {
   cursor: default;
+  background: none;
 }
 
 .habiker .__buttonHabiker {

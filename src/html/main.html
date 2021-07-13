@@ -98,11 +98,11 @@
 </template>
 
 <template data-template="habiker">
-    <li class="habiker">
-        <header class="habiker-header">
-            <input type="text" name="name" title="습관명" class="__nameHabiker">
+    <li class="habiker" data-item="habiker" draggable="true">
+        <header class="habiker-header" data-header="habiker">
+            <input type="text" name="name" title="습관명" class="__nameHabiker" readonly>
             <button type="button" class="__buttonHabiker" data-button="delete">삭제</button>
-            <button type="button" class="__buttonHabiker" data-button="drag" draggable="true" title="Drag and drop">=</button>
+            <!-- <button type="button" class="__buttonHabiker" data-button="drag" draggable="true" title="Drag and drop">=</button> -->
         </header>
         <div class="trackers" data-component="trackers"></div>
         <!-- <div role="textbox" contenteditable="true" spellcheck="true" aria-multiline="false" aria-required="true" aria-readonly="true" class="name"></div> -->
